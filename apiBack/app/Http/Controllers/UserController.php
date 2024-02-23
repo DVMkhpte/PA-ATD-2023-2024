@@ -49,7 +49,12 @@ public function update(Request $request, $id)
         $data = $request->validate([
             'name' => 'string|max:255',
             'email' => 'string|email|max:255|unique:users,email,' . $id,
+            'code_postal'=> 'integer',
+            'ville' => 'string|max:255',
+            'adresse' => 'string|max:255',
+            'num_telephone'=> 'integer',
             'password' => 'string|min:8',
+            'role' => 'string',
         ]);
 
         $user->update($data);

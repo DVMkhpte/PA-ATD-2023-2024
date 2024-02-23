@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formation;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+
 
 class FormationController extends Controller
 {
@@ -14,7 +16,7 @@ class FormationController extends Controller
     public function index()
     {
         $adminUser = Auth::user();
-        $formation = Formation::all();
+        $formation = Formation::with('supervisor')->get();
         
         Log::channel('admin_activity')->info("Index formation by " . $adminUser->name);
         return response()->json($formation);
@@ -23,7 +25,7 @@ class FormationController extends Controller
     public function show($id)
     {
         $adminUser = Auth::user();
-        $formation = Formation::find($id);
+        $formation = Formation::with('supervisor')->find($id);
 
         if (!$formation) {
             Log::channel('admin_activity')->info("Show formation by: " . $adminUser->name . "but the formation was not found");
@@ -43,7 +45,14 @@ class FormationController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'nb_place' => 'required|integer',
+            'supervise_par' => 'integer',
         ]);
+
+        $supervisor = User::findOrFail($data['supervise_par']);
+
+        if (!$supervisor->hasRole('bénévole')) {
+            return response()->json(['message' => 'The supervisor is not a volunteer'], 400);
+        }
 
         $formation = Formation::create($data);
 
@@ -67,6 +76,7 @@ class FormationController extends Controller
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'nb_place' => 'required|integer',
+            'supervise_par' => 'integer',
         ]);
 
         $formation->update($data);

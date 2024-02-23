@@ -6,26 +6,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Evenement extends Model
+class Demandes extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-    'nom',
-    'description',
-    'date_debut', 
-    'date_fin',
     'type',
-    'etat',
-    'adresse',
-    'ville',
-
+    'demande',
+    'id_user',
     ];
 
+    public function user()
+    {
+    return $this->belongsTo(User::class, 'id_user');
+    }
 
-    protected $attributes = [
-        'etat' => 'ouvert',
-    ];
+
 }
 
 ?>
