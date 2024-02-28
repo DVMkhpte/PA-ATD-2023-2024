@@ -24,7 +24,7 @@ class MissionsController extends Controller
     public function show($id)
     {
         $adminUser = Auth::user();
-        $participations = Missions::with('user', 'mission')->find($id);
+        $participations = Missions::with('user', 'demande')->find($id);
 
         if (!$participations) {
             Log::channel('admin_activity')->info("Show mission participation by: " . $adminUser->name . " but the mission participation was not found");
@@ -36,24 +36,27 @@ class MissionsController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $User = Auth::user();
-        
+{
+        $user = Auth::user();
+    
         try {
+            DB::beginTransaction();
+
             $data = $request->validate([
                 'id_demande' => 'required|integer', 
             ]);
 
-            $data['realiser_par'] = $User->id;
-    
+            $data['realiser_par'] = $user->id;
+
             $participation = Missions::create($data);
 
+            DB::commit();
 
-           Log::channel('user_activity')->info("Create mission participation by " . $User->name);
+            Log::channel('user_activity')->info("Create mission participation by " . $user->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'An error occurred while creating the participation.'], 500);
+            return response()->json(['message' => 'An error occurred while creating the participation.', 'error' => $e->getMessage()], 500);
         }
     }
 
@@ -82,3 +85,5 @@ class MissionsController extends Controller
     
 }
 }
+
+?>

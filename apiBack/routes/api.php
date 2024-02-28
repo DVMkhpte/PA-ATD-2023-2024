@@ -57,11 +57,9 @@ Route::get('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'
 Route::patch('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
 Route::delete('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
-
 Route::get('/participef',[App\Http\Controllers\ParticipationFController::class,'index']);
 Route::get('/participef/{id}',[App\Http\Controllers\ParticipationFController::class,'show']);
 Route::delete('/participef/{id}',[App\Http\Controllers\ParticipationFController::class,'destroy']);
-
 
 Route::get('/participee',[App\Http\Controllers\ParticipationEController::class,'index']);
 Route::get('/participee/{id}',[App\Http\Controllers\ParticipationEController::class,'show']);
