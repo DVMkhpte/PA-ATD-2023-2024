@@ -51,6 +51,12 @@ Route::get('/formations/{id}',[\App\Http\Controllers\FormationController::class,
 Route::patch('/formations/{id}',[\App\Http\Controllers\FormationController::class,'update']);
 Route::delete('/formations/{id}',[\App\Http\Controllers\FormationController::class,'destroy']);
 
+Route::post('/activitees/add',[\App\Http\Controllers\ActiviteController::class,'store'] );
+Route::get('/activitees',[\App\Http\Controllers\ActiviteController::class,'index']);
+Route::get('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'show']);
+Route::patch('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
+Route::delete('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+
 
 Route::get('/participef',[App\Http\Controllers\ParticipationFController::class,'index']);
 Route::get('/participef/{id}',[App\Http\Controllers\ParticipationFController::class,'show']);
@@ -60,6 +66,14 @@ Route::delete('/participef/{id}',[App\Http\Controllers\ParticipationFController:
 Route::get('/participee',[App\Http\Controllers\ParticipationEController::class,'index']);
 Route::get('/participee/{id}',[App\Http\Controllers\ParticipationEController::class,'show']);
 Route::delete('/participee/{id}',[App\Http\Controllers\ParticipationEController::class,'destroy']);
+
+Route::get('/participea',[App\Http\Controllers\ParticipationAController::class,'index']);
+Route::get('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'show']);
+Route::delete('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'destroy']);
+
+Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
+Route::get('/missions/{id}',[App\Http\Controllers\MissionsController::class,'show']);
+Route::delete('/missions/{id}',[App\Http\Controllers\MissionsController::class,'destroy']);
 
 Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
 Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
@@ -74,6 +88,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
     Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
+    Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
+    Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
 
 });
 
