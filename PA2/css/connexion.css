@@ -1,0 +1,197 @@
+/*
+    default element
+*/
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    color: #707070;
+}
+
+a{
+    text-decoration: none;
+}
+
+strong{
+    color: #38A7A6;
+}
+
+/*
+    container & global élément of container
+*/
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+#connexion, #inscription{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 2.7em;
+    padding-top: 10px;
+}
+.paragraphe{
+    margin: 20px 0;
+}
+.paragraphe{
+    opacity: 0.81;
+    font-size: 18px;
+}
+.btn-link, input[type="submit"]{
+    display: block;
+    line-height: 60px;
+    border: 1px solid  #fff;
+    width: 230px;
+    height: 60px;
+    text-align: center;
+    border-radius: 9999px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: lighter;
+    transition: .2s;
+    cursor: pointer;
+}
+/*
+    connexion
+*/
+#connexion{
+    background: #38A7A6;
+    text-align: center;
+}
+
+#connexion .title{
+    color: #fff;
+}
+
+#connexion .paragraphe{
+    color: #fff;
+    
+}
+#connexion .connexion:hover{
+    background-color: #fff;
+    color: #38A7A6;
+}
+/*
+    inscription
+*/
+
+#inscription .title{
+    color: #38A7A6;
+}
+
+.paragraphe > a{
+    color: #38A7A6;
+}
+
+.accueil > a{
+    color: white;
+    position: absolute;
+    top: 15px;
+    left: 50px;
+    font-size: 16px;
+}
+
+.accueil > img{
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    top: 0;
+    left: 0;
+}
+
+
+.group-form {
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: row; 
+}
+
+.group-form > div{
+    position: absolute;
+    width: 40px;
+    height: 40px; 
+    top: 2px;
+    left: 3px;
+    
+}
+
+
+.group-form input[type="text"],
+.group-form input[type="email"],
+.group-form input[type="password"] {
+    width: 330px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Nom"],
+.group-form input[placeholder="Prenom"] {
+    width: 150px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Code Postal"]{
+    width: 100px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Ville"]{
+    width: 200px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+#inscription .inscription{
+    background: #38A7A6;
+    margin: 0 auto;
+}
+
+#inscription .inscription:hover{
+    background: #fff;
+    color: #38A7A6;
+    border: 1px solid #38A7A6;
+}
+
+@media (min-width: 992px){
+    .container{
+        flex-direction: row;
+    }
+
+    #connexion{
+        width: 45%;
+        text-align: center;
+    }
+
+    #inscription{
+        width: 55%;
+    }
+}
