@@ -1,0 +1,17 @@
+body {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+  
+  
+  footer {
+    background-color: #38A7A6;
+    padding: 10px 0; /* Ajoutez un peu d'espace en haut et en bas du footer si nécessaire */
+    height: 100px;
+    color: white;
+    margin-top: auto; /* Mettez le footer en bas */
+    width: 100%;
+  }
+  

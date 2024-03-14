@@ -1,0 +1,47 @@
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Garantit que le contenu prend au moins la hauteur de la fenêtre */
+    margin: 0; /* Supprime la marge par défaut du corps pour éviter un espace inutile en bas */
+}
+
+.container {
+    flex: 1; /* Fait en sorte que le contenu pousse vers le bas pour remplir l'espace disponible */
+}
+
+footer {
+    background-color: #38A7A6;
+    padding: 10px;
+    color: white;
+    width: 100%;
+}
+
+
+
+.btn-primary {
+    background-color: #38A7A6;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    border-radius: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #225B7C;
+}
+
+.btn-primary:active {
+    background-color: #38A7A6;
+}
+
+.text-display {
+    width: 60%;
+}
+
+.image-display {
+    width: 40%;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,182 @@
+body {
+  background-color: #F6F5F4;
+  padding-top: 0;
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #191919;
+  line-height: 1.5;
+  padding-top: 0px;
+  min-height: 100%; 
+  position: relative;  
+}
+
+footer {
+  background-color: #38A7A6;
+  padding-top: 0px;
+  height: auto;
+  color: white;
+  position: fixed;
+  bottom: 0;
+  width: 100%; 
+}
+
+
+.navbar-brand {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.features {
+  padding: 50px 0;
+}
+
+.btn-primary {
+  background-color: #38A7A6;
+  color: #FFFFFF;
+  font-size: 1.2em;
+  border-radius: 10px;
+}
+
+.btn-primary:hover {
+  background-color: #225B7C;
+}
+
+.btn-primary:active {
+  background-color: #38A7A6;
+}
+
+h1 {
+  font-size: 2rem;
+  line-height: 45px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.header {
+  padding: 20px;
+}
+
+form {
+  background-color: #fff;
+  width: 90%;
+  padding: 20px;
+  line-height: 30px;
+  box-sizing: border-box;
+  margin-top: 10px;
+}
+
+b {
+  font-weight: 800;
+}
+
+a {
+  color: #59CD97;
+  text-decoration: none;
+}
+
+.fast-action {
+  font-size: 9px;
+  line-height: 15px;
+  margin-bottom: 20px;
+}
+
+.minimum {
+  color: #a2abb4;
+}
+
+input[name="gift-type"] {
+  margin-bottom: 20px;
+}
+
+.amount {
+  display: block;
+  color: white;
+  background-color: #59CD97;
+  margin: 10px auto;
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px 8px;
+  font-size: 20px;
+}
+
+.undefined-amount {
+  display: block;
+  color: white;
+  background-color: #38A7A6;
+  margin: 10px auto;
+  border-radius: 25px;
+  text-align: center;
+  padding: 10px;
+}
+
+.undefined-amount input {
+  background-color: #38A7A6;
+  border: none;
+  color: #fff;
+  font-size: 20px;
+  width: 90%;
+}
+
+.undefined-amount input:focus {
+  outline: none;
+}
+
+.amount:hover {
+  background-color: #225B7C;
+}
+
+.amount input {
+  visibility: hidden;
+  position: absolute;
+}
+
+.amount:active {
+  background-color: #59CD97;
+}
+
+@media screen and (min-width: 480px) {
+  .amount-options {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .amount {
+    width: 44%;
+  }
+
+  .undefined-amount {
+    clear: both;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .amount {
+    width: 19%;
+  }
+}
+
+@media screen and (min-width: 940px) {
+  form {
+    width: 45%;
+    float: right;
+    margin-top: 50px;
+  }
+
+  .header {
+    width: 45%;
+    float: left;
+  }
+
+  section {
+    padding: 0 20px;
+  }
+
+  p {
+    font-size: 19px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+}

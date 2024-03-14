@@ -1,0 +1,26 @@
+body {
+  padding-top: 0px; 
+}
+
+.jumbotron {
+  background-size: cover;
+  text-align: center;
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  z-index: 1;
+  margin-top: 400px;
+  background-color: transparent; 
+  font-weight: bold;
+  color: white;
+  
+}
+
+
+footer {
+  background-color: #38A7A6;
+  padding-top: 0px; 
+  height: auto;
+  color: white;
+}
