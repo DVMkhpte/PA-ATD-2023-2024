@@ -1,5 +1,8 @@
 body {
-  padding-top: 0px; 
+  padding-top: 0px;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .jumbotron {
@@ -18,9 +21,4 @@ body {
 }
 
 
-footer {
-  background-color: #38A7A6;
-  padding-top: 0px; 
-  height: auto;
-  color: white;
-}
+

@@ -9,14 +9,6 @@ body {
     flex: 1; /* Fait en sorte que le contenu pousse vers le bas pour remplir l'espace disponible */
 }
 
-footer {
-    background-color: #38A7A6;
-    padding: 10px;
-    color: white;
-    width: 100%;
-}
-
-
 
 .btn-primary {
     background-color: #38A7A6;
