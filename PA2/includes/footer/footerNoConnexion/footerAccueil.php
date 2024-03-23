@@ -29,8 +29,8 @@
         <p class="copyright">© 2024 Au Temps Donné. Tous droits réservés</p>
         <div class="legal">
           <a href="contact.php">Contact</a>
-          <a>Terms</a>
-          <a>Privacy</a>
+          <a>Mention légales</a>
+          <a>Politique de données</a>
         </div>
       </section>
     </footer>

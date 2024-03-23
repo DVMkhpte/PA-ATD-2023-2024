@@ -15,9 +15,9 @@
             <form id="recherche" action="verif_modif_profil.php" method="post">
                 <div class="profil">
                     <div class="profil1">        
-                        <h1 class="nom_prenom" id="nom" onclick="modif(1)">Nom : nom</h2> 
+                        <h1 class="nom_prenom" id="nom" onclick="modif(1)">Nom : nom</h1>
                             <input id="input-1" type="text" name="nom" placeholder="nom">
-                        <h1 class="nom_prenom" id="prenom" onclick="modif(2)">Prenom : prenom</h2> 
+                        <h1 class="nom_prenom" id="prenom" onclick="modif(2)">Prenom : prenom</h1>
                             <input id="input-2" type="text" name="prenom" placeholder="prenom">
 
                     </div>

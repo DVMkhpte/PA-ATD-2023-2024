@@ -12,27 +12,7 @@
 <body>
     
 
-<nav class="navbar navbar-dark" style="background-color: #38A7A6;">
-    <div class="container">
-        <a href="index.php" class="navbar-brand">
-            <img src="../img/logo.png" alt="Logo Au Temps Donné" class="logo" width="70" height="70"> </a>
-        
-            <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-</button>
-
-<div class="collapse navbar-collapse custom-navbar-collapse" id="navbarResponsive">
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a class="nav-link" href="about.php">Qui sommes-nous</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="contact.php">Nous contacter</a>
-        </li>
-    </ul>
-</div>
-    </div>
-</nav>
+<?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
 <div class="container mt-5">
     <div class="text-display">
