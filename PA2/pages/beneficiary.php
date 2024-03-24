@@ -21,7 +21,7 @@
             </div>
 
             <div class="titre">
-                <h1 id="titre">Activitées</h1>
+                <h1 id="titre">Demande</h1>
             </div>
         </div>
 
@@ -69,9 +69,12 @@
 
         <div class="nav_profil">
             <button class="modif" onclick="modifProfil()">Modifier</button>
-            <button class="voir" onclick="affichageBenevole('Mes missions')">Mes missions</button>
-            <button class="voir" onclick="affichagebenevole('Mes Formations')">Mes Formations</button>
-            <button class="aide" onclick="">Aides ??</button>
+            <button class="voir" onclick="affichageBeneficiaire('Mes demande')">Mes demande</button>
+            <button class="voir" onclick="affichageBeneficiaire('Mes Activité')">Activité</button>
+            <div class="aide_profil">
+                <button class="aide" onclick="">Aides ?</button>
+                <button class="benevole" onclick=""><a href="become_volunteer.php" class="a_button">Devenir bénévole</a></button>
+            </div>
         </div>
 
         
