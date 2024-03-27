@@ -22,7 +22,7 @@ async function affichageBenevole(affichage) {
     
     const gestionInfos = document.getElementById('container_2');
     gestionInfos.innerHTML = "";
-    const resBox = await fetch('../api/benevole_api.php?affichage=' + affichage);
+    const resBox = await fetch('../fetch/benevole_api.php?affichage=' + affichage);
     const strBox = await resBox.text();
     gestionInfos.innerHTML = strBox;
     
