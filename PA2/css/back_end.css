@@ -5,6 +5,8 @@ main{
     margin-top: 10%;
     margin-bottom: 10%;
     height: 100%;
+
+    overflow: hidden;
 }
 
 
@@ -138,36 +140,48 @@ select:hover, input:hover{
     border-radius: 10px;
 }
 
-.description{
+.description1_users, .description2_users, .description3_users{
     display: flex;
     flex-direction: row;
     color: white;
-    font-size: 150%;
+    font-size: 115%;
     margin: 1%;
     width: 100%;
 }
 
-.description div{
+.description1_users div, .description2_users div, .description3_users div{
   padding: 1%;
   margin-right: 2%;
   margin-left: 2%;
 }
 
-.description1, .description2{
+.description_activitee{
+    display: flex;
+    flex-direction: row;
+    color: white;
+    font-size: 115%;
+    margin: 1%;
+    width: 100%;
+}
+
+.description1_1_activitee{
+    display: flex;
+    flex-direction: row;
+}
+
+.description1_activitee div{
+    padding: 1%;
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+.description1_activitee, .description2_activitee{
     width: 50%;
     padding: 1%;
     margin-right: 2%;
     margin-left: 2%;
 }
 
-.description1{
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.nom, .type, .lieu{
-    width: 40%;
-}
 
 
 .option{

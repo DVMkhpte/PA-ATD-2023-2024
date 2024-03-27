@@ -53,10 +53,6 @@
             <img src="../img/demande.png" />
             <span style="animation-delay: 0.2s">Demandes</span>
           </button>
-          <button type="button" onclick="affichageBackEnd('Stock')">
-            <img src="../img/stock.png"/>
-            <span style="animation-delay: 0.3s">Stock</span>
-          </button>
           <button type="button" onclick="affichageBackEnd('Planning')">
             <img src="../img/planning.png" />
             <span style="animation-delay: 0.3s">Planning</span>
@@ -65,6 +61,10 @@
             <img src="../img/mission.png" />
             <span style="animation-delay: 0.3s">Missions</span>
           </button>
+          <button type="button" onclick="affichageBackEnd('Stock')">
+            <img src="../img/stock.png"/>
+          <span style="animation-delay: 0.3s">Stock</span>
+        </button>
         </nav>
       </div>
     </aside>
@@ -100,16 +100,17 @@
 
     <div class="contener_1">
         <div class="contener_2">
-          <div class="description">
-
-            <div class="description1">
-                <div class="nom">Nom</div>
-                <div class="type">Type</div>
-                <div class="lieu">Lieu</div>
+          <div class="description_activitee">
+            <div class="description1_activitee">
+                <div class="description1_1_activitee">
+                    <div class="nom">Nom</div>
+                    <div class="type">Type</div>
+                </div>
+                <div class="adresse">Adresse : </div>
                 <div class="superviserPar">Superviser Par</div>
                 <div class="date">Du date1 au date2</div>
             </div>
-            <div class="description1">
+            <div class="description2_activitee">
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi explicabo impedit minima esse, accusantium iste modi quisquam asperiores iure vero soluta odit quas veniam mollitia reprehenderit laudantium necessitatibus sapiente qui.</p>
             </div>
             

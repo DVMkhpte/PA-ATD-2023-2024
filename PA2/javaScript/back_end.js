@@ -8,7 +8,7 @@ async function affichageBackEnd(affichage) {
 
     const retirerBoxAdmin = document.getElementById('box');
     retirerBoxAdmin.innerHTML = "";
-    const resBox = await fetch('../api/back_end_api.php?affichage=' + affichage);
+    const resBox = await fetch('../fetch/back_end_api.php?affichage=' + affichage);
     const strBox = await resBox.text();
     const affichageBoxAdmin = document.getElementById('box');
     affichageBoxAdmin.innerHTML = strBox;
