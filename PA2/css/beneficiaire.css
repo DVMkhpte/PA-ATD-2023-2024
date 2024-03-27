@@ -127,6 +127,32 @@ button{
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.aide_profil{
+    display: flex;
+    flex-direction: row;
+
+    
+}
+
+.aide_profil button{
+    height: 80%;
+    font-size: 80%;
+
+}
+
+.a_button{
+    color: white;
+    text-decoration: none;
+}
+
+.aide{
+    width: 25%;
+}
+
+.benevole{
+    width: 75%;
+}
+
 .nav_profil .modif, .nav_profil .aide{
     margin-bottom: 5%;
     width: 50%;
@@ -348,6 +374,11 @@ select, input{
     border-radius: 10px;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    vertical-align: top; /* Alignement vertical en haut */
+        width: 100%; /* Largeur de l'élément */
+        box-sizing: border-box; /* Pour inclure la bordure dans la largeur */
+        word-wrap: break-word;
 }
 
 #description_form{

@@ -73,7 +73,7 @@
             <button class="voir" onclick="affichageBeneficiaire('Mes Activité')">Activité</button>
             <div class="aide_profil">
                 <button class="aide" onclick="">Aides ?</button>
-                <button class="benevole" onclick=""><a href="become_volunteer.php" class="a_button">Devenir bénévole</a></button>
+                <button class="benevole" onclick=""><a href="contact.php" class="a_button">Devenir bénévole</a></button>
             </div>
         </div>
 
