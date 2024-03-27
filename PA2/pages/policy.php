@@ -8,9 +8,10 @@
 </head>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-    
+
+    <div class="container">
     <h1>Politiques de Confidentialité</h1>
-<p>Le site web www.autempsdonne.com est détenu par Au Temps Donné, qui est un contrôleur de données de vos données personnelles.</p>
+<br> <p>Le site web www.autempsdonne.com est détenu par Au Temps Donné, qui est un contrôleur de données de vos données personnelles.</p>
 
 <p>Nous avons adopté cette politique de confidentialité, qui détermine la manière dont nous traitons les informations collectées par 
     www.autempsdonne.com, qui fournit également
@@ -119,7 +120,7 @@ uniquement dans la mesure où cela est absolument nécessaire pour maintenir le 
     <p>Si vous souhaitez nous contacter pour comprendre davantage la présente politique ou si vous souhaitez nous contacter concernant toute question relative aux droits individuels et à vos informations personnelles, vous pouvez envoyer un courriel à contact@autempsdonne.com.
     </p>
 
-
+</div>
 
     <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 

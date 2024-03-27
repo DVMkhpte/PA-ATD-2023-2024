@@ -5,10 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Mentions légales</title>
+    <style>
+
+        p {
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+        }
+        h2 {
+          margin-top: 20px;
+          margin-bottom: 10px;
+        }
+      </style>
 </head>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
     
+
+    <div class="container">
     <h1>Mentions légales</h1>
     <p>
         
@@ -41,6 +55,7 @@
     <p>
         Le site peut contenir des liens hypertextes vers d'autres sites. L'éditeur du site n'est pas responsable du contenu de ces sites et ne peut être tenu responsable des dommages directs ou indirects consécutifs à la consultation de ces sites.
     </p>
+    </div>
     <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 
 </body>
