@@ -17,7 +17,7 @@
         <a href="index.php"><u>Retour à l'accueil</u></a>
     </div>
     <h1 class="title">Connectez-vous</h1>
-    <a href="#" class="btn-link connexion">Se connecter</a>
+    <a href="login.php" class="btn-link connexion">Se connecter</a>
   </div>
   <div id="inscription">
     <h1 class="title">Créer un compte</h1>

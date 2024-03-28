@@ -13,7 +13,7 @@ a{
 }
 
 strong{
-    color: #38A7A6;
+    color: #225B7C;
 }
 
 /*
@@ -61,7 +61,7 @@ strong{
     connexion
 */
 #connexion{
-    background: #38A7A6;
+    background: #225B7C;
     text-align: center;
 }
 
@@ -75,18 +75,18 @@ strong{
 }
 #connexion .connexion:hover{
     background-color: #fff;
-    color: #38A7A6;
+    color: #225B7C;
 }
 /*
     inscription
 */
 
 #inscription .title{
-    color: #38A7A6;
+    color: #225B7C;
 }
 
 .paragraphe > a{
-    color: #38A7A6;
+    color: #225B7C;
 }
 
 .accueil > a{
@@ -171,14 +171,14 @@ strong{
 }
 
 #inscription .inscription{
-    background: #38A7A6;
+    background: #225B7C;
     margin: 0 auto;
 }
 
 #inscription .inscription:hover{
     background: #fff;
-    color: #38A7A6;
-    border: 1px solid #38A7A6;
+    color: #225B7C;
+    border: 1px solid #225B7C;
 }
 
 @media (min-width: 992px){

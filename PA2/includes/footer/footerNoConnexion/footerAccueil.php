@@ -7,7 +7,6 @@
       referrerpolicy="no-referrer"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
       rel="stylesheet"
@@ -29,8 +28,8 @@
         <p class="copyright">© 2024 Au Temps Donné. Tous droits réservés</p>
         <div class="legal">
           <a href="contact.php">Contact</a>
-          <a>Mention légales</a>
-          <a>Politique de données</a>
+          <a href="legal_mention.php">Mention légales</a>
+          <a href="policy.php">Politique de données</a>
         </div>
       </section>
     </footer>

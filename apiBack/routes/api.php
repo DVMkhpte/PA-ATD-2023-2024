@@ -7,7 +7,7 @@ use Laravel\Sanctum\Http\Controllers\{
     LoginController,
     LogoutController,
     CurrentUserController,
-    
+
 };
 
 /*
@@ -27,7 +27,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
- 
+
     return ['token' => $token->plainTextToken];
 });
 
@@ -80,8 +80,8 @@ Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    
-    Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
+
+
     Route::post('/user/logout', [\App\Http\Controllers\LogoutController::class, 'store']);
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
@@ -92,3 +92,4 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
+Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
