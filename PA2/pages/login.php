@@ -49,7 +49,7 @@ headers: {
 body: JSON.stringify(formData)
 });
 
-if (response.ok) {
+if (response.ok) { 
 const data = await response.json();
 console.log('Réponse de l\'API :', data);
 

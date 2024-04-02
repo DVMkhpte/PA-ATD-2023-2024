@@ -18,10 +18,12 @@
     <div class="text-display">
         <h1>Pourquoi faire un don ?</h1>
         <p>
-            Bienvenue chez Au Temps Donné ! Chaque don compte, même les plus petits ! En soutenant notre cause, vous transformez des heures en espoir. Votre contribution finance des projets concrets pour améliorer des vies. Ensemble, créons un impact positif. Faites un don maintenant et partagez votre temps pour un monde meilleur. Merci pour votre générosité !
+            Bienvenue chez Au Temps Donné ! Chaque don compte, même les plus petits ! En soutenant notre cause, vous transformez des
+            heures en espoir. Votre contribution finance des projets concrets pour améliorer des vies. Ensemble, créons un impact positif.
+            Faites un don maintenant et partagez votre temps pour un monde meilleur. Merci pour votre générosité !
         </p>
         
-        <button type="button" class="btn btn-primary" onclick="window.location.href='don.php'">Faites un don</button>
+        <button type="button" class="btn btn-primary" onclick="window.location.href='donation.php'">Faites un don</button>
 
     </div>
     <div class="image-display">

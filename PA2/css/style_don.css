@@ -2,24 +2,13 @@ body {
   background-color: #F6F5F4;
   padding-top: 0;
   margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
+  font-family: "Euclid Circular A", "Poppins";
   color: #191919;
   line-height: 1.5;
   padding-top: 0px;
   min-height: 100%; 
   position: relative;  
 }
-
-footer {
-  background-color: #38A7A6;
-  padding-top: 0px;
-  height: auto;
-  color: white;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
 
 .navbar-brand {
   font-size: 1.5em;
@@ -52,9 +41,7 @@ h1 {
   margin-bottom: 10px;
 }
 
-.header {
-  padding: 20px;
-}
+
 
 form {
   background-color: #fff;

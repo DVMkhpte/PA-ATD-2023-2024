@@ -7,6 +7,10 @@
     <title>Mentions légales</title>
     <style>
 
+        body {
+            font-family: "Euclid Circular A", "Poppins";
+        }
+
         p {
           padding: 10px;
           border: 1px solid #ccc;

@@ -1,12 +1,13 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garantit que le contenu prend au moins la hauteur de la fenêtre */
-    margin: 0; /* Supprime la marge par défaut du corps pour éviter un espace inutile en bas */
+    min-height: 100vh;
+    margin: 0;
+    font-family: "Euclid Circular A", "Poppins";
 }
 
 .container {
-    flex: 1; /* Fait en sorte que le contenu pousse vers le bas pour remplir l'espace disponible */
+    flex: 1;
 }
 
 

@@ -5,7 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Au Temps Donné - Accueil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+<style>
+    section{
+        font-family: "Euclid Circular A", "Poppins";
+    }
+</style>
 
 </head>
 <body>
@@ -24,7 +28,7 @@
         <img src="../img/cash.png" alt="halouf" class="logo" width="200" height="200">
         <form>
           <div class="form-group">
-            <a href="#" class="btn btn-link">Connectez-vous</a> ou <a href="#" class="btn btn-link">Inscrivez-vous</a> en tant que bénévole.
+            <a href="login.php" class="btn btn-link">Connectez-vous</a> ou <a href="createAccount.php" class="btn btn-link">Inscrivez-vous</a> en tant que bénévole.
           </div>
           <div class="form-group">
             <strong>Information</strong><br/>

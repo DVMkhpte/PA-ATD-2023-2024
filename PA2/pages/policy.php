@@ -6,6 +6,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <title>Mentions légales</title>
 </head>
+
+<style>
+    body{
+        font-family: "Euclid Circular A", "Poppins";
+    }
+</style>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
