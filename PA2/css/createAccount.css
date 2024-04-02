@@ -181,6 +181,14 @@ strong{
     border: 1px solid #225B7C;
 }
 
+#password-error-msg {
+    position: absolute;
+    top: -20px;
+    left: 0;
+    color: red;
+    display: none;
+}
+
 @media (min-width: 992px){
     .container{
         flex-direction: row;

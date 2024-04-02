@@ -1,4 +1,3 @@
-<?php header("Access-Control-Allow-Origin: *"); ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -21,7 +20,7 @@
       </form>
         <footer>
             Pas de compte? Creer-en un
-            <a href="createAccount.php">içi</a>
+            <a href="createAccount.php">ici</a>
         </footer>
     </div>
   </body>
@@ -29,7 +28,7 @@
 
 <script>
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
-event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+event.preventDefault();
 
 const email = document.getElementById('email').value;
 const password = document.getElementById('password').value;
@@ -39,15 +38,14 @@ email: email,
 password: password
 };
 
-try {
-const response = await fetch('http://localhost:8000/api/user/login', {
-method: 'post',
-mode: 'no-cors',
-headers: {
-'Content-Type': 'application/json',
-},
-body: JSON.stringify(formData)
-});
+    const response = await fetch('http://localhost:8000/api/user/login', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    });
 
 if (response.ok) { 
 const data = await response.json();
@@ -55,12 +53,7 @@ console.log('Réponse de l\'API :', data);
 
 } else {
 throw new Error('Erreur lors de la requête à l\'API');
-}
-} catch (error) {
-console.error('Erreur :', error.message);
-
-}
-});
+}})
 </script>
 
 <style>

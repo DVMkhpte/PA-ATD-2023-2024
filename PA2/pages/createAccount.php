@@ -5,6 +5,14 @@
     <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <link rel="stylesheet" type="text/css" href="../css/createAccount.css">
+    <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500&display=swap"
+            rel="stylesheet"
+    />
+    <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+            rel="stylesheet"
+    />
     
 </head>
 
@@ -37,13 +45,14 @@
         <input type="text" placeholder="Adresse">
     </div>
     <div class="group-form">
-        <input type="text" placeholder="Numero de telephone">
+        <input type="text" id="phone" placeholder="Numero de telephone">
     </div>
     <div class="group-form">
         <input type="email" placeholder="Mail">
       </div>
       <div class="group-form"> 
-        <input type="password" placeholder="Mot de passe">
+        <input type="password" id="password" placeholder="Mot de passe">
+          <p id="password-error-msg" style="color: red; display: none;">Le mot de passe doit avoir au moins 8 caractères et inclure au moins un chiffre</p>
       </div>
       <div class="group-form">
         <input type="submit" class="inscription" value="S'inscrire">
@@ -58,5 +67,30 @@
 </body>
 
 
-<script src="../javaScriptphone.js">
+<script>
+    document.getElementById("phone").addEventListener("input", function(event) {
+        var input = event.target.value;
+        console.log(input);
+        var sanitizedInput = input.replace(/\D/g, '');
+        event.target.value = sanitizedInput;
+        if (sanitizedInput.length > 10) {
+            event.target.value = sanitizedInput.slice(0, 10);
+        }
+    });
+
+    document.getElementById("password").addEventListener("input", function(event) {
+        var password = event.target.value;
+        var minLength = 8;
+        var hasNumber = /\d/.test(password);
+
+        if (password.length < minLength || !hasNumber) {
+
+            document.getElementById("password-error-msg").style.display = "block";
+            submitButton.disabled = true;
+        } else {
+            document.getElementById("password-error-msg").style.display = "none";
+            submitButton.disabled = false;
+        }
+    });
+</script>
 </html>
