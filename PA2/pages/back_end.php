@@ -53,13 +53,13 @@
             <img src="../img/demande.png" />
             <span style="animation-delay: 0.2s">Demandes</span>
           </button>
-          <button type="button" onclick="affichageBackEnd('Planning')">
-            <img src="../img/planning.png" />
-            <span style="animation-delay: 0.3s">Planning</span>
-          </button>
           <button type="button" onclick="affichageBackEnd('Missions')">
             <img src="../img/mission.png" />
             <span style="animation-delay: 0.3s">Missions</span>
+          </button>
+          <button type="button" onclick="affichageBackEnd('Planning')">
+            <img src="../img/planning.png" />
+            <span style="animation-delay: 0.3s">Planning</span>
           </button>
           <button type="button" onclick="affichageBackEnd('Stock')">
             <img src="../img/stock.png"/>
@@ -76,53 +76,7 @@
   </div>
 
   <div id="box">
-    <div class="filtre">
-        
-        <div  class="barre_de_recherche">
-            <input type="text" id="search-article-input" placeholder="Formation">
-        </div>
 
-        <div  class="tout_les_filtre">
-            <select class="boutton" name="trie" id="trie">
-                <option selected disabled hidden id="choix">Trier par</option>
-                <option value="nom" onclick="trie('nom')">Nom</option>
-                <option value="prenom" onclick="trie('prenom')">Prénom</option>
-                <option value="acces" onclick="trie('acces')">Accés</option>
-                <option value="acces" onclick="trie('statut')">Statut</option>
-            </select>
-        </div>
-
-        <div class="button_filtre">
-            <button class="button_new">Nouveau</button>
-        </div>
-    
-    </div>
-
-    <div class="contener_1">
-        <div class="contener_2">
-          <div class="description_activitee">
-            <div class="description1_activitee">
-                <div class="description1_1_activitee">
-                    <div class="nom">Nom</div>
-                    <div class="type">Type</div>
-                </div>
-                <div class="adresse">Adresse : </div>
-                <div class="superviserPar">Superviser Par</div>
-                <div class="date">Du date1 au date2</div>
-            </div>
-            <div class="description2_activitee">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi explicabo impedit minima esse, accusantium iste modi quisquam asperiores iure vero soluta odit quas veniam mollitia reprehenderit laudantium necessitatibus sapiente qui.</p>
-            </div>
-            
-          </div>
-          <div class="option">
-              <button class="modif_acces">Modifier accé</button>
-              <button class="passer_admin">Passer admin</button>
-              <button class="bannir">Bannir</button>
-              <button class="supp">Supprimer</button>
-          </div>
-        </div>
-    </div>
   </div>
    
 </main>      
