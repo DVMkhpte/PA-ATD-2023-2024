@@ -12,7 +12,10 @@ async function requestApi(formData, method, link){
 
     if (response.ok) {
         const data = await response.json();
-        return data
+
+        if(data){
+            return data
+        }
 
     } else {
         throw new Error('Erreur lors de la requête à l\'API');
