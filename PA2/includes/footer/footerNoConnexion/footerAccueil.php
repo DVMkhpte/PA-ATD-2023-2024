@@ -18,8 +18,8 @@
         <div class="links">
           <div class="links-column">
             <h2>Slogan de l'Association</h2>
-            <a href="createAccount.php">Se connecter</a>
-            <a href="login.php">Creer un compte</a>
+            <a href="login.php">Se connecter</a>
+            <a href="createAccount.php">Creer un compte</a>
             <a href="about_donation.php">Faire un don</a>
             <a href="about.php">Qui somme nous</a>
         </div>

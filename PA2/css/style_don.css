@@ -10,6 +10,16 @@ body {
   position: relative;  
 }
 
+btn-link {
+  color:#225B7C;
+  text-decoration: none;
+ }
+
+btn-link :hover {
+  color: inherit;
+  text-decoration: none;
+}
+
 .navbar-brand {
   font-size: 1.5em;
   font-weight: bold;
@@ -54,11 +64,6 @@ form {
 
 b {
   font-weight: 800;
-}
-
-a {
-  color: #59CD97;
-  text-decoration: none;
 }
 
 .fast-action {

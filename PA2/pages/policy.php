@@ -11,6 +11,10 @@
     body{
         font-family: "Euclid Circular A", "Poppins";
     }
+
+    .container{
+        padding-top: 20px;
+    }
 </style>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>

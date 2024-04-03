@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Au Temps Donné - Accueil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <style>
     section{
         font-family: "Euclid Circular A", "Poppins";
+    }
+
+    .container{
+        padding-top:20px ;
     }
 </style>
 
@@ -31,53 +36,7 @@
           <div class="form-group">
             <a href="login.php" class="btn btn-link">Connectez-vous</a> ou <a href="createAccount.php" class="btn btn-link">Inscrivez-vous</a> en tant que bénévole.
           </div>
-
-
-          <div class="form-group">
-            <strong>Information</strong><br/>
-            Type de don :
-
-            <div class="form-check custom-checkbox">
-              <input type="checkbox" value="one-time" id="one-time" class="form-check-input"/>
-              <label for="one-time" class="form-check-label">En une fois</label>
-            </div>
-
-            <div class="form-check custom-checkbox">
-              <input type="checkbox" value="weekly" id="weekly" class="form-check-input"/>
-              <label for="weekly" class="form-check-label">Hebdomadaire</label>
-            </div>
-
-
-            <div class="form-check custom-checkbox">
-              <input type="checkbox" value="monthly" id="monthly" class="form-check-input"/>
-              <label for="monthly" class="form-check-label">Mensuel</label>
-            </div>
-            
-
-            <div class="form-check custom-checkbox">
-              <input type="checkbox" value="yearly" id="yearly" class="form-check-input"/>
-              <label for="yearly" class="form-check-label">Annuel</label>
-            </div>
-            <script>
-const checkboxElements = document.querySelectorAll('.custom-checkbox input[type="checkbox"]');
-
-checkboxElements.forEach(checkbox => {
-  checkbox.addEventListener('change', function() {
-    const clickedCheckbox = this;
-    checkboxElements.forEach(otherCheckbox => {
-      if (clickedCheckbox !== otherCheckbox && clickedCheckbox.checked) {
-        otherCheckbox.disabled = true;
-        otherCheckbox.classList.add('disabled'); // Add class for styling (optional)
-      } else {
-        otherCheckbox.disabled = false;
-        otherCheckbox.classList.remove('disabled'); // Remove class for styling (optional)
-      }
-    });
-  });
-});
-</script>
-
-          </div>
+        </div>
 
             <form action="../stripe/checkout.php" method="post" onsubmit="redirectToCheckout()">
               <div class="form-group">
@@ -85,12 +44,12 @@ checkboxElements.forEach(checkbox => {
                   <input type="number" min="0" step="0.01" name="amount" placeholder="0.00€" class="form-control"/>
                 </label>
               </div>
-              <button type="submit" class="btn btn-primary">Faites un don</button>
+              <button type="submit" class="btn btn-primary" style="background-color:#38A6A7">Faites un don</button>
             </form>
 
             <script>
             function redirectToCheckout() {
-              window.location.href = "../stripe/checkout.php";
+                window.location.href = "../stripe/checkout.php";
             }
             </script>
 
@@ -111,9 +70,8 @@ checkboxElements.forEach(checkbox => {
 <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 
 <script>
-  
 
-  // Fonction pour la validation du formulaire
+
   const validateForm = () => {
     const errorMessageElement = document.querySelector('.error-message');
     errorMessageElement.textContent = ""; // Réinitialiser le message d'erreur

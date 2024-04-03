@@ -48,6 +48,9 @@
           </div>
         </div>
       </div>
+        <div class="img-logo">
+            <img src="../img/logo.png">
+        </div>
     </nav>
   </header>
 
