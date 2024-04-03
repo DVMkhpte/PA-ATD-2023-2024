@@ -3,6 +3,7 @@
     if(isset($_GET['affichage'])) {
         $affichage = $_GET['affichage'];
 
+
         switch($affichage){
             case 'Bénévoles':
                 
@@ -31,18 +32,14 @@
                 ';
 
 
-                $json = '[{"id":"1", "nom":"John1", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénéficiaire", "email_verified_at": false},
-                           {"id":"2", "nom":"John2", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénévole", "email_verified_at": true},
-                           {"id":"1", "nom":"John3", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénéficiaire", "email_verified_at": false}
-                        ]';
+                $formData = "";
+                $path = "users/";
+                $json = requestApi($formData, "GET", $path);
 
-                // Conversion en données PHP
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
-
-                foreach($data as $row) {
-                    if($row["role"]=="bénévole") {
+                foreach ($data as $row) {
+                    if ($row["role"] == "bénévole") {
                         echo '
                             <div class="contener_1">
                                 <div class="contener_2">
@@ -78,6 +75,8 @@
 
             case 'Bénéficiaires':
 
+
+
                 echo'
                     <div class="filtre">
             
@@ -103,18 +102,14 @@
                 ';
 
 
-                $json = '[{"id":"1", "nom":"John1", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénéficiaire", "email_verified_at": false},
-                           {"id":"2", "nom":"John2", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénéficiaire", "email_verified_at": true},
-                           {"id":"1", "nom":"John3", "prenom":"Titoaun", "code_postal":"91330", "ville":"New York", "adresse" : "5 rue jules ferry", "email":"test@test.gmail", "role": "bénéficiaire", "email_verified_at": false}
-                        ]';
+                $formData = "";
+                $path = "users/";
+                $json = requestApi($formData, "GET", $path);
 
-                // Conversion en données PHP
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
-
-                foreach($data as $row) {
-                    if($row["role"]=="bénéficiaire") {
+                foreach ($data as $row) {
+                    if ($row["role"] == "bénéficiaire") {
                         echo '
                             <div class="contener_1">
                                 <div class="contener_2">
@@ -173,30 +168,29 @@
                         </div>
                     ';
 
-                 $json = '[{"id":"1", "nom":"Activitée 1","description":"Ceci est l\'activitée numéro 1","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","superviser_par":"4"},
-                           {"id":"2", "nom":"Activité 2", "description":"Ceci est l\'activitée numéro 1","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","superviser_par":"4"},
-                           {"id":"3", "nom":"Activité 2", "description":"Ceci est l\'activitée numéro 1","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","superviser_par":"4"}]';
 
-                // Conversion en données PHP
+                $formData = "";
+                $path = "activitees/";
+                $json = requestApi($formData, "GET", $path);
+
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
-                foreach($data as $row) {
+                foreach ($data as $row) {
                     echo '
                         <div class="contener_1">
                             <div class="contener_2">
                               <div class="description_activitee">
                                 <div class="description1_activitee">
                                     <div class="description1_1_activitee">
-                                        <div class="nom">'.$row["nom"].'</div>
+                                        <div class="nom">' . $row["nom"] . '</div>
                                     </div>
                                     <div class="adresse"> Au .$row["adresse"].</div>
-                                    <div class="date">Du '.$row["date_debut"].' au '.$row["date_fin"].'</div>
+                                    <div class="date">Du ' . $row["date_debut"] . ' au ' . $row["date_fin"] . '</div>
                                 </div>
                                 <div class="description2_activitee">
-                                    <p>'.$row["description"].'</p>
-                                    <div class="superviserPar">Superviser Par : '.$row["superviser_par"].'</div>
-                                    <div class="nb_plae">Place restante : '.$row["nb_place"].'</div>
+                                    <p>' . $row["description"] . '</p>
+                                    <div class="superviserPar">Superviser Par : ' . $row["supervisor"]["name"] . '</div>
+                                    <div class="nb_plae">Place restante : ' . $row["nb_place"] . '</div>
                                 </div>
                                 
                               </div>
@@ -209,6 +203,7 @@
                         </div>
                     ';
                 }
+
                 break;
 
 
@@ -237,15 +232,13 @@
                         </div>
                     ';
 
-                $json = '[{"id":"1", "nom":"Formation 3","description":"Ceci est la formation numéro 3","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","supervise_par":"1"},
-                        {"id":"2", "nom":"Formation 3","description":"Ceci est la formation numéro 3","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","supervise_par":"1"},
-                        {"id":"2", "nom":"Formation 3","description":"Ceci est la formation numéro 3","date_debut": "2024-02-15T10:00:00","date_fin": "2024-02-15T18:00:00","nb_place": "10","supervise_par":"1"}
-                ]';
 
-                // Conversion en données PHP
+                $formData = "";
+                $path = "formations";
+                $json = requestApi($formData, "GET", $path);
+
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
                 foreach($data as $row) {
                     echo '
                         <div class="contener_1">
@@ -261,7 +254,7 @@
                                 </div>
                                 <div class="description2_activitee">
                                     <p>'.$row["description"].'</p>
-                                    <div class="superviserPar">Superviser Par : '.$row["supervise_par"].'</div>
+                                    <div class="superviserPar">Superviser Par : '.$row["supervisor"]["name"].'</div>
                                     <div class="nb_plae">Place restante : '.$row["nb_place"].'</div>
                                 </div>
                                 
@@ -301,15 +294,12 @@
                     </div>
                 ';
 
-                $json = '[{"id":"1", "type": "typetest", "created_at":"2024" ,"demande": "Bonjour"},
-                        {"id":"2", "type": "typetest", "created_at":"2024", "demande": "Bonjour"},
-                        {"id":"3", "type": "typetest", "created_at":"2024", "demande": "Bonjour"}
-                ]';
+                $formData = "";
+                $path = "demande";
+                $json = requestApi($formData, "GET", $path);
 
-                // Conversion en données PHP
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
                 foreach($data as $row) {
 
                     echo '
@@ -359,21 +349,14 @@
                     </div>
                 ';
 
-                $json = '[{"id":"1", "id_demande":"1", "id_benevole":1, "date":2025},
-                        {"id":"2", "id_demande":"1", "id_benevole":1, "date":2025},
-                        {"id":"3", "id_demande":"1", "id_benevole":1, "date":2025}
-                ]';
 
-                // Conversion en données PHP
+                $formData = "";
+                $path = "missions";
+                $json = requestApi($formData, "GET", $path);
+
                 $data = json_decode($json, true);
 
-                // Affichage des données PHP
                 foreach($data as $row) {
-                    $json_demande = '{"id":"1", "type": "typetest", "created_at":"2024" ,"demande": "Bonjour"}';
-                    $data_demande = json_decode($json_demande, true);
-
-                    $json_benevole = '{"id":"1", "nom":"John1", "prenom":"Titoaun"}';
-                    $data_benevole = json_decode($json_benevole, true);
 
                     echo '
                             <div class="contener_1">
