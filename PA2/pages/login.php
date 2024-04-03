@@ -39,8 +39,8 @@ password: password
 };
 
     const response = await fetch('http://localhost:8000/api/user/login', {
+        redirect: 'manual',
         method: 'POST',
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
         },
