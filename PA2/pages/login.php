@@ -16,7 +16,8 @@
       <form method="post" class="form" id="loginForm">
         <input type="email" id="email" placeholder="Email" />
         <input type="password" id="password" placeholder="Mot de passe" />
-        <button>Se connecter</button>
+          <div id="errorMessage" style="display: none; color: red;">Erreur : Identifiants incorrects</div>
+          <button>Se connecter</button>
       </form>
         <footer>
             Pas de compte? Creer-en un
@@ -25,35 +26,44 @@
     </div>
   </body>
 </html>
-
+<script src="../javaScript/function_api.js"></script>
 <script>
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
-event.preventDefault();
+    event.preventDefault();
 
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-const formData = {
-email: email,
-password: password
-};
+    const formData = {
+        email: email,
+        password: password
+    };
 
-    const response = await fetch('http://localhost:8000/api/user/login', {
-        redirect: 'manual',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    });
+    try {
+        const data = await requestApi(formData, "POST", "/user/login");
+        if (data && data.role === "admin") {
+            await stockToken(data);
+            window.location.href = "back_end.php";
+        } else if (data && data.role === "benevole") {
+            await stockToken(data);
+            window.location.href = "benevole.php";
+        } else if(data && data.role === "beneficiaire") {
+            await stockToken(data);
+            window.location.href = "beneficiary.php";
+        } else {
+            document.getElementById('errorMessage').innerText = "Identifiants incorrects";
+            document.getElementById('errorMessage').style.display = 'block';
+        }
+    } catch (error) {
+        if (error.response && error.response.status === 401) {
+            document.getElementById('errorMessage').innerText = "Erreur d'authentification : identifiants incorrects";
+            document.getElementById('errorMessage').style.display = 'block';
+        } else {
+            console.error('Erreur lors de la requête à l\'API :', error.message);
+        }
+    }
+});
 
-if (response.ok) { 
-const data = await response.json();
-console.log('Réponse de l\'API :', data);
-
-} else {
-throw new Error('Erreur lors de la requête à l\'API');
-}})
 </script>
 
 <style>
@@ -183,6 +193,7 @@ throw new Error('Erreur lors de la requête à l\'API');
     }
 
     .form > button {
+        margin-top: 20px;
         border: 0;
         color: #f9f9f9;
         background: #225B7C;
@@ -199,5 +210,12 @@ throw new Error('Erreur lors de la requête à l\'API');
     .card > footer > a {
         color: #216ce7;
     }
+
+    #errorMessage {
+        display: none;
+        color: red;
+    }
+
+
 
 </style>

@@ -1,9 +1,9 @@
 
 
 async function requestApi(formData, method, link){
-    const response = await fetch('http://localhost:8000/api/'+ link, {
+    const response = await fetch('http://localhost:8000/api'+ link, {
+        redirect: 'manual',
         method: method,
-        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json',
         },
@@ -16,9 +16,10 @@ async function requestApi(formData, method, link){
         if(data){
             return data
         }
-
-    } else {
-        throw new Error('Erreur lors de la requête à l\'API');
     }
+}
 
+async function stockToken(data){
+    const token = data.token
+    localStorage.setItem('token', token);
 }
