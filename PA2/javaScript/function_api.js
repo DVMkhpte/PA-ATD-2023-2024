@@ -1,5 +1,3 @@
-
-
 async function requestApi(formData, method, link) {
     const response = await fetch('http://localhost:8000/api' + link, {
         redirect: 'manual',
@@ -21,8 +19,6 @@ async function requestApi(formData, method, link) {
     }
 }
 
-
-
 async function requestApiNoBody(method, link) {
     const response = await fetch('http://localhost:8000/api' + link, {
         redirect: 'manual',
@@ -35,10 +31,9 @@ async function requestApiNoBody(method, link) {
 
     if (response.ok) {
         const data = await response.json();
-
-        if(data){
-            return data
-        }
+        return data;
+    } else {
+        throw new Error('Erreur lors de la récupération des données : ' + response.status); // Lancer une exception en cas d'erreur de réponse
     }
 }
 

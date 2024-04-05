@@ -1,5 +1,5 @@
 
-function affichageFormation(data) {
+async function affichageFormation(data) {
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div  class=\"barre_de_recherche\">\n" +
@@ -28,14 +28,14 @@ function affichageFormation(data) {
             "           <div class=\"description1_activitee\">\n" +
             "               <div class=\"description1_1_activitee\">\n" +
             "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
-            "                   <div class=\"type\"> + data[i].type + </div>\n" +
+            "                   <div class=\"type\">" + data[i].type + "</div>\n" +
             "               </div>\n" +
-            "               <div class=\"adresse\"> Au  + data[i].adresse + </div>\n" +
-            "               <div class=\"date\">Du " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
+            "               <div class=\"adresse\"> Au  "+ data[i].adresse + "</div>\n" +
+            "               <div class=\"date\"> Du  " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
             "           </div>\n" +
             "           <div class=\"description2_activitee\">\n" +
-            "               <p>'.$row[\"description\"].'</p>\n" +
-            "               <div class=\"superviserPar\">Superviser Par : " + data[i].supervise_par.name + "</div>\n" +
+            "               <p>Description: " + data[i].description + "</p>\n" +
+            "               <div class=\"superviserPar\">Superviser Par : " + data[2].supervisor.name + "</div>\n" +
             "               <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
             "           </div>\n" +
             "       </div>\n" +
