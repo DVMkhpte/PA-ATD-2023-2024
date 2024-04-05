@@ -46,3 +46,13 @@ async function stockToken(data){
     const token = data.token
     localStorage.setItem('token', token);
 }
+
+function showAlert(message) {
+    const popup = document.createElement('div');
+    popup.textContent = message;
+    popup.classList.add('popup');
+    document.body.appendChild(popup);
+    setTimeout(() => {
+        popup.remove();
+    }, 3000);
+}

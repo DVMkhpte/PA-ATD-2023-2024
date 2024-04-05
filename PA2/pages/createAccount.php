@@ -32,23 +32,23 @@
     <p class="paragraphe">
       Veuillez remplir tous les champs
     </p>
-    <form class="formulaire">
+    <form class="formulaire" id="createForm">
     <div class="group-form">
-        <input type="text" placeholder="Prenom">
-        <input type="text" placeholder="Nom">
+        <input type="text" id="prenom" placeholder="Prenom">
+        <input type="text" id="nom" placeholder="Nom">
     </div>  
     <div class="group-form">
-        <input type="text" placeholder="Code Postal">
-        <input type="text" placeholder="Ville">
+        <input type="text" id="code_postal" placeholder="Code Postal">
+        <input type="text" id="ville" placeholder="Ville">
     </div>
     <div class="group-form">
-        <input type="text" placeholder="Adresse">
+        <input type="text" id="adresse" placeholder="Adresse">
     </div>
     <div class="group-form">
         <input type="text" id="phone" placeholder="Numero de telephone">
     </div>
     <div class="group-form">
-        <input type="email" placeholder="Mail">
+        <input type="email" id="email" placeholder="Mail">
       </div>
       <div class="group-form"> 
         <input type="password" id="password" placeholder="Mot de passe">
@@ -66,7 +66,7 @@
 </div>
 </body>
 
-
+<script src="../javaScript/function_api.js"></script>
 <script>
     document.getElementById("phone").addEventListener("input", function(event) {
         var input = event.target.value;
@@ -92,5 +92,44 @@
             submitButton.disabled = false;
         }
     });
+
+    document.getElementById('createForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const prenom = document.getElementById('prenom').value;
+        const nom = document.getElementById('nom').value;
+        const code_postal = document.getElementById('code_postal').value;
+        const ville = document.getElementById('ville').value;
+        const adresse = document.getElementById('adresse').value;
+        const phone = document.getElementById('phone').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        const name = prenom + ' ' + nom;
+        const role = 'beneficiaire';
+
+        const formData = {
+            name: name,
+            code_postal: code_postal,
+            ville: ville,
+            adresse: adresse,
+            num_telephone: phone,
+            email: email,
+            password: password,
+            role: role
+        };
+
+        try {
+            const response = await requestApi(formData, "POST", "/user/create");
+            if (response.status === 200) {
+                showAlert("Création de l'utilisateur réussie !");
+            } else {
+                showAlert("Erreur lors de la création de l'utilisateur : " + response.status);
+            }
+        } catch (error) {
+            showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+        }
+    });
+
 </script>
 </html>
