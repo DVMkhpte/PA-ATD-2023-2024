@@ -15,7 +15,7 @@ function affichageBackEnd(affichage) {
     switch (affichage) {
         case 'Bénévoles':
             var formData = "";
-            //var data = requestApi(formData, "GET", "users/")
+            //var data = requestApi(formData, "GET", "/users/")
             var data = [ {"id":1, "name":"ff", "code_postal":91330, "ville":"yerres", "adresse":"affichage", "num_phone":"1234567891", "email":"test@test.fr", "role": "benevole", "email_verified":"False",},
                                                     {"id":2, "name":"ff", "code_postal":91330, "ville":"yerres", "adresse":"affichage", "num_phone":"1234567891", "email":"test@test.fr", "role": "benevole", "email_verified":"False",}
                                                   ];
@@ -25,7 +25,7 @@ function affichageBackEnd(affichage) {
 
         case 'Bénéficiaires':
             var formData = "";
-            //var data = requestApi(formData, "GET", "users/");
+            //var data = requestApi(formData, "GET", "/users/");
             var data = [ {"id":1, "name":"ff", "code_postal":91330, "ville":"yerres", "adresse":"affichage", "num_phone":"1234567891", "email":"test@test.fr", "role": "beneficiaire", "email_verified":"False",},
                                                     {"id":2, "name":"ff", "code_postal":91330, "ville":"yerres", "adresse":"affichage", "num_phone":"1234567891", "email":"test@test.fr", "role": "beneficiaire", "email_verified":"False",}
                                                     ];
@@ -35,25 +35,25 @@ function affichageBackEnd(affichage) {
 
         case 'Activitées':
             var formData = "";
-            //var data = requestApi(formData, "GET", "activitees/");
+            var data = requestApi(formData, "GET", "/activitees/");
             strBox = affichageActivitee(data);
             break;
 
         case 'Formations':
             var formData = "";
-            var data = requestApi(formData, "GET", "formations");
+            var data = requestApi(formData, "GET", "/formations");
             strBox = affichageFormation(data);
             break;
 
         case 'Demandes':
             var formData = "";
-            var data = requestApi(formData, "GET", "demande");
+            var data = requestApi(formData, "GET", "/demande");
             strBox = affichageDemande(data);
             break;
 
         case 'Missions':
             var formData = "";
-            //var data = requestApi(formData, "GET", "demande");
+            //var data = requestApi(formData, "GET", "/missions");
             var data = [
                                                             {
                                                                 "id": 1,
