@@ -47,6 +47,7 @@
               <button><a href="policy.php">Politique de données</a></button>
           </div>
         </div>
+
       </div>
         <div class="img-logo">
             <img src="../img/logo.png">

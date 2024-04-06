@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Au Temps Donné - Accueil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
+    <script src="../javaScript/trad.js"></script>
 <style>
     section{
         font-family: "Euclid Circular A", "Poppins";
@@ -23,7 +23,7 @@
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
 <section>
-  <div class="container">
+  <div class="container" id="donation">
     <div class="card">
       <div class="card-header">
         <h1 class="card-title">Faites un don.</h1>
@@ -54,7 +54,7 @@
             </script>
 
 
-          
+
           </div>
           <div class="form-group">
             <p><a href="about_donation.php">Pourquoi faire un don ?</a></p>
@@ -77,13 +77,8 @@
     errorMessageElement.textContent = ""; // Réinitialiser le message d'erreur
 
     const amountInput = document.querySelector('input[name="amount"]');
-    const isCheckboxChecked = document.querySelector('input[name="gift-type"]:checked');
 
-    if (!isCheckboxChecked) {
-      errorMessageElement.textContent = "Veuillez choisir une option de don.";
-      errorMessageElement.style.display = "block";
-      return false;
-    }
+
 
     if (!amountInput.value || isNaN(amountInput.value) || amountInput.value <= 0) {
       errorMessageElement.textContent = "Veuillez entrer un montant de don valide.";
@@ -110,7 +105,7 @@
     }
 
     redirectToCheckout();
-    
+
   });
 
   handleCheckboxChange();
