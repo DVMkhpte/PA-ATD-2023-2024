@@ -15,10 +15,10 @@ class FormationController extends Controller
 
     public function index()
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $formation = Formation::with('supervisor')->get();
-        
-        Log::channel('admin_activity')->info("Index formation by " . $adminUser->name);
+
+        //Log::channel('admin_activity')->info("Index formation by " . $adminUser->name);
         return response()->json($formation);
     }
 

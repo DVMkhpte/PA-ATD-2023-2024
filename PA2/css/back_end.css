@@ -33,7 +33,7 @@ main{
 }
 
 #box{
-    background-color: #CBFACF;
+    background-color: #59CD97;
     border-radius: 10px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     height: 100%;
@@ -61,7 +61,7 @@ main{
 }
 
 .button_filtre{
-    background-color: #59CD97;
+    background-color: #38A7A6;
     border-radius: 5px;
     padding: 1%;
     padding-left: 3%;
@@ -74,7 +74,7 @@ main{
 }
 
 .tout_les_filtre {
-    background-color: #59CD97; 
+    background-color: #38A7A6;
     color: white;
     padding: 1%;
     padding-left: 3%;
@@ -95,14 +95,14 @@ select:hover, input:hover{
 
 
 .tout_les_filtre select {
-    background-color: #59CD97;
+    background-color: #38A7A6;
     color: white;
     border: none;
     
 }
 
 .barre_de_recherche {
-    background-color: #59CD97; 
+    background-color: #38A7A6;
     color: white;
     padding: 1%;
     padding-left: 3%;
@@ -112,7 +112,7 @@ select:hover, input:hover{
 }
 
 .barre_de_recherche input{
-    background-color: #59CD97; 
+    background-color: #38A7A6;
     color: white;
     border: none;
 
@@ -135,7 +135,7 @@ select:hover, input:hover{
 
     display: flex;
     flex-direction: column;
-    background-color: #59CD97;
+    background-color: #38A7A6;
 
     border-radius: 10px;
 }
@@ -207,7 +207,7 @@ select:hover, input:hover{
     background-color: #ED5252;
 }
 
-.modif_acces, .passer_admin, .voir, .modif, .accepter{
+.modif_acces, .passer_admin, .voir, .modif, .accepter, .changer_benevole{
     background-color: #83EE99;
 }
 

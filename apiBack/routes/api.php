@@ -46,7 +46,7 @@ Route::patch('/evenements/{id}',[\App\Http\Controllers\EvenementController::clas
 Route::delete('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'destroy']);
 
 Route::post('/formations/add',[\App\Http\Controllers\FormationController::class,'store'] );
-Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
+
 Route::get('/formations/{id}',[\App\Http\Controllers\FormationController::class,'show']);
 Route::patch('/formations/{id}',[\App\Http\Controllers\FormationController::class,'update']);
 Route::delete('/formations/{id}',[\App\Http\Controllers\FormationController::class,'destroy']);
@@ -93,3 +93,4 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
 Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
+Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);

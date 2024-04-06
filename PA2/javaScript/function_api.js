@@ -1,13 +1,13 @@
-
-
-async function requestApi(formData, method, link){
-    const response = await fetch('http://localhost:8000/api'+ link, {
+async function requestApi(formData, method, link) {
+    const response = await fetch('http://localhost:8000/api' + link, {
         redirect: 'manual',
         method: method,
         headers: {
             'Content-Type': 'application/json',
         },
+
         body: JSON.stringify(formData)
+
     });
 
     if (response.ok) {
@@ -19,7 +19,35 @@ async function requestApi(formData, method, link){
     }
 }
 
+async function requestApiNoBody(method, link) {
+    const response = await fetch('http://localhost:8000/api' + link, {
+        redirect: 'manual',
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        throw new Error('Erreur lors de la récupération des données : ' + response.status); // Lancer une exception en cas d'erreur de réponse
+    }
+}
+
 async function stockToken(data){
     const token = data.token
     localStorage.setItem('token', token);
+}
+
+function showAlert(message) {
+    const popup = document.createElement('div');
+    popup.textContent = message;
+    popup.classList.add('popup');
+    document.body.appendChild(popup);
+    setTimeout(() => {
+        popup.remove();
+    }, 3000);
 }

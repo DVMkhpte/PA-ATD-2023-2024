@@ -85,6 +85,14 @@
 <script type="text/javascript">
     const toggleSidebar = () => document.body.classList.toggle("open");
 </script>
-<script src="../javaScript/back_end.js"></script>
+<script src="../javaScript/back_end.js" ></script>
+<script src="../javaScript/function_api.js" ></script>
+<script src="../javaScript/back_end_function/benevole.js" ></script>
+<script src="../javaScript/back_end_function/beneficiaire.js" ></script>
+<script src="../javaScript/back_end_function/activitee.js" ></script>
+<script src="../javaScript/back_end_function/formation.js" ></script>
+<script src="../javaScript/back_end_function/demande.js" ></script>
+<script src="../javaScript/back_end_function/mission.js" ></script>
+
 </body>
 </html>
