@@ -1,18 +1,14 @@
 async function requestApi(formData, method, link) {
     const response = await fetch('http://localhost:8000/api' + link, {
-        redirect: 'manual',
         method: method,
         headers: {
             'Content-Type': 'application/json',
         },
-
         body: JSON.stringify(formData)
-
     });
-
+    console.log(response)
     if (response.ok) {
         const data = await response.json();
-
         if(data){
             return data
         }
@@ -26,14 +22,12 @@ async function requestApiNoBody(method, link) {
         headers: {
             'Content-Type': 'application/json',
         },
-
     });
-
     if (response.ok) {
         const data = await response.json();
         return data;
     } else {
-        throw new Error('Erreur lors de la récupération des données : ' + response.status); // Lancer une exception en cas d'erreur de réponse
+        throw new Error('Erreur lors de la récupération des données : ' + response.status);
     }
 }
 

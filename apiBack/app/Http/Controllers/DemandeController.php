@@ -20,6 +20,15 @@ class DemandeController extends Controller
         return response()->json($demandes);
     }
 
+    public function getUserDemandes()
+    {
+        $user = Auth::user();
+        $demandes = $user->demandes()->get();
+
+        Log::channel('user_activity')->info("Show all demande by " . $user->name);
+        return response()->json($demandes);
+    }
+
     public function show($id)
     {
         $adminUser = Auth::user();
@@ -37,26 +46,26 @@ class DemandeController extends Controller
     public function store(Request $request)
     {
         $User = Auth::user();
-        
+
         try {
             $data = $request->validate([
                 'type' => 'required|string|in:demande_bénévole,aide_service_administratif,demande_navette,demande_visite,autre',
-                'demande' => 'required|string', 
+                'demande' => 'required|string',
             ]);
-    
+
             $data['id_user'] = $User->id;
-            
+
             $demande = Demandes::create($data);
 
             Log::channel('user_activity')->info("Create demande demande by " . $User->name);
             return response()->json($demande, 201);
-        
+
             }catch (\Exception $e) {
-                
+
                 return response()->json(['message' => 'An error occurred while creating the demande.', 'error' => $e->getMessage()], 500);
             }
         }
-    
+
 
     public function destroy($id)
     {

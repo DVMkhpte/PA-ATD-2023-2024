@@ -37,7 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
-        
+
     ];
 
     /**
@@ -49,7 +49,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-   
+
 
     public function hasRole($role)
 {
@@ -59,5 +59,10 @@ class User extends Authenticatable implements MustVerifyEmail
 public function participations()
     {
         return $this->hasMany(ParticipeF::class, 'id_user');
+    }
+
+    public function demandes()
+    {
+        return $this->hasMany(Demandes::class, 'id_user');
     }
 }

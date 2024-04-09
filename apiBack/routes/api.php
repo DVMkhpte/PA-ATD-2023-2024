@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CreateController;
+use App\Http\Controllers\FormationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +29,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/tokens/create', function (Request $request) {
     $token = $request->user()->createToken($request->token_name);
-
     return ['token' => $token->plainTextToken];
 });
 
@@ -45,11 +46,11 @@ Route::get('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,
 Route::patch('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'update']);
 Route::delete('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'destroy']);
 
-Route::post('/formations/add',[\App\Http\Controllers\FormationController::class,'store'] );
+Route::post('/formations/add',[FormationController::class,'store'] );
 
-Route::get('/formations/{id}',[\App\Http\Controllers\FormationController::class,'show']);
-Route::patch('/formations/{id}',[\App\Http\Controllers\FormationController::class,'update']);
-Route::delete('/formations/{id}',[\App\Http\Controllers\FormationController::class,'destroy']);
+Route::get('/formations/{id}',[FormationController::class,'show']);
+Route::patch('/formations/{id}',[FormationController::class,'update']);
+Route::delete('/formations/{id}',[FormationController::class,'destroy']);
 
 Route::post('/activitees/add',[\App\Http\Controllers\ActiviteController::class,'store'] );
 Route::get('/activitees',[\App\Http\Controllers\ActiviteController::class,'index']);
@@ -84,6 +85,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/user/logout', [\App\Http\Controllers\LogoutController::class, 'store']);
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
+    Route::get('/my-demande', [\App\Http\Controllers\DemandeController::class, 'getUserDemandes']);
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
     Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);

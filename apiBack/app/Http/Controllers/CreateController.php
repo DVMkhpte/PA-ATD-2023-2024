@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 
-use Illuminate\Auth\Events\Registered;
+
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Log;
@@ -23,7 +22,7 @@ class CreateController extends Controller
             'adresse' => 'required|string|max:255',
             'num_telephone'=> 'required|integer',
             'password' => 'required|string|min:8',
-            'role' => 'string|in:bénévole,bénéficiaire,admin',
+            'role' => 'string|in:benevole,beneficiaire,admin',
         ]);
 
         $user = User::create([
@@ -35,7 +34,7 @@ class CreateController extends Controller
             'num_telephone'=> $data['num_telephone'],
             'password' => Hash::make($data['password']),
             'role' => $data['role'],
-        ]);
+            ]);
 
         //$user->notify(new VerifyEmail($user));
 

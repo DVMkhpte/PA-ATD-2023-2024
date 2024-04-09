@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>Logins</title>
+    <title>Connection</title>
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
@@ -41,7 +41,21 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     try {
         const data = await requestApi(formData, "POST", "/user/login");
-        if (data && data.role === "admin") {
+        if (data && data.role === "beneficiaire" && localStorage.getItem('become_benevole') === "True") {
+            await stockToken(data);
+            localStorage.set()
+            localStorage.removeItem('become_benevole');
+            window.location.href = "become_benevole.php";
+        } else if (data && data.role === "benevole" && localStorage.getItem('become_benevole') === "True") {
+            document.getElementById('errorMessage').innerText = "Vous etes deja bénévole";
+            document.getElementById('errorMessage').style.display = 'block';
+
+            setTimeout(function() {
+                localStorage.removeItem('become_benevole');
+                window.location.href = 'benevole.php';
+            }, 3000);
+
+        } else if (data && data.role === "admin") {
             await stockToken(data);
             window.location.href = "back_end.php";
         } else if (data && data.role === "benevole") {

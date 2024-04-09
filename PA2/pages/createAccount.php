@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <title>Creer votre compte</title>
     <meta charset="UTF-8" >
     <meta name="viewport" content="width=device-width, initial-scale=1.0" >
     <link rel="stylesheet" type="text/css" href="../css/createAccount.css">
@@ -13,7 +14,6 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
             rel="stylesheet"
     />
-    
 </head>
 
 
@@ -55,12 +55,12 @@
           <p id="password-error-msg" style="color: red; display: none;">Le mot de passe doit avoir au moins 8 caractères et inclure au moins un chiffre</p>
       </div>
       <div class="group-form">
-        <input type="submit" class="inscription" value="S'inscrire">
+        <input type="submit" id="submitButton" class="inscription" value="S'inscrire">
       </div>
     </form>
     <div class="benevole">
     <p class="paragraphe">
-      Vous voulez nous aider ? Devenez <strong>bénévole</strong> en <a href="">cliquant ici.</a>
+      Vous voulez nous aider ? Devenez <strong>bénévole</strong> en <a href="login.php" onclick="become_benevole()">cliquant ici.</a>
     </p>
   </div>
 </div>
@@ -70,7 +70,6 @@
 <script>
     document.getElementById("phone").addEventListener("input", function(event) {
         var input = event.target.value;
-        console.log(input);
         var sanitizedInput = input.replace(/\D/g, '');
         event.target.value = sanitizedInput;
         if (sanitizedInput.length > 10) {
@@ -79,12 +78,12 @@
     });
 
     document.getElementById("password").addEventListener("input", function(event) {
+        var submitButton = document.getElementById('submitButton');
         var password = event.target.value;
         var minLength = 8;
         var hasNumber = /\d/.test(password);
 
         if (password.length < minLength || !hasNumber) {
-
             document.getElementById("password-error-msg").style.display = "block";
             submitButton.disabled = true;
         } else {
@@ -110,26 +109,31 @@
 
         const formData = {
             name: name,
+            email: email,
             code_postal: code_postal,
             ville: ville,
             adresse: adresse,
             num_telephone: phone,
-            email: email,
             password: password,
             role: role
         };
 
         try {
-            const response = await requestApi(formData, "POST", "/user/create");
-            if (response.status === 200) {
+            const data = await requestApi(formData, "POST", "/user/create");
+            if (data && data.status === 200) {
                 showAlert("Création de l'utilisateur réussie !");
-            } else {
-                showAlert("Erreur lors de la création de l'utilisateur : " + response.status);
-            }
+            } /*else {
+                showAlert("Erreur lors de la création de l'utilisateur : " + (data ? data.status : 'Response is undefined'));
+            }*/
         } catch (error) {
             showAlert('Erreur lors de la requête à l\'API : ' + error.message);
         }
     });
+
+    function become_benevole(){
+        localStorage.setItem('become_benevole', "True");
+
+    }
 
 </script>
 </html>
