@@ -1,0 +1,178 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Euclid Circular A", "Poppins";
+    color: #707070;
+}
+
+a{
+    text-decoration: none;
+}
+
+strong{
+    color: #225B7C;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+#leftPart, #add{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.title{
+    font-size: 2.7em;
+    padding-top: 10px;
+}
+
+.btn-link, input[type="submit"]{
+    display: block;
+    line-height: 60px;
+    border: 1px solid  #fff;
+    width: 230px;
+    height: 60px;
+    text-align: center;
+    border-radius: 9999px;
+    color: #fff;
+    font-size: 20px;
+    font-weight: lighter;
+    transition: .2s;
+    cursor: pointer;
+}
+/*
+    connexion
+*/
+#leftPart{
+    background: #225B7C;
+    text-align: center;
+}
+
+#leftPart .title{
+    color: #fff;
+}
+
+#leftPart .paragraphe{
+    color: #fff;
+
+}
+#leftPart .leftPart:hover{
+    background-color: #fff;
+    color: #225B7C;
+}
+
+
+.group-form input[type="text"],
+.group-form input[type="number"],
+.group-form input[type="date"],
+.group-form input[type="email"],
+.group-form input[type="password"]{
+    width: 330px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Date de debut"],
+.group-form input[placeholder="Date de fin"],
+.group-form input[placeholder="Nom"],
+.group-form input[placeholder="Prenom"]{
+    width: 150px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Description"],
+.group-form input[placeholder="Code Postal"]{
+    width: 330px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Nombres de places"]{
+    width: 150px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form #user{
+    color: white;
+    background-color: #225B7C;
+    width: 165px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+
+#add .add{
+    background: #225B7C;
+    margin: 0 auto;
+}
+
+#add .add:hover{
+    background: #fff;
+    color: #225B7C;
+    border: 1px solid #225B7C;
+}
+
+@media (min-width: 992px){
+    .container{
+        flex-direction: row;
+    }
+
+
+    #leftPart{
+        width: 45%;
+        text-align: center;
+    }
+
+
+    #add{
+        width: 55%;
+    }
+
+    .popup {
+        position: fixed;
+        top: 85%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #225B7C;
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        color: whitesmoke;
+        font-family: "Euclid Circular A", "Poppins";
+    }
+}
+

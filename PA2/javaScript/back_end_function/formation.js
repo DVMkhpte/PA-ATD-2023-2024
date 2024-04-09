@@ -40,7 +40,7 @@ async function affichageFormation(data) {
             "           </div>\n" +
             "       </div>\n" +
             "       <div class=\"option\">\n" +
-            "           <button class=\"modif\">Modifier l\'activité</button>\n" +
+            "           <button class=\"modif\">Lodifier l\\'activité</button>\n" +
             "           <button class=\"voir\">Voir les participants</button>\n" +
             "           <button class=\"supp\">Supprimer</button>\n" +
             "       </div>\n" +
