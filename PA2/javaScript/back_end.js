@@ -14,8 +14,7 @@ async function affichageBackEnd(affichage) {
     //requestApi(formData, method, link)
     switch (affichage) {
         case 'Bénévoles':
-            var formData = "";
-            //var data = requestApi(formData, "GET", "/users/")
+            //var data = await requestApiNoBody("GET", "/users/")
             var data = [{
                 "id": 1,
                 "name": "ff",
@@ -39,13 +38,12 @@ async function affichageBackEnd(affichage) {
                     "email_verified": "False",
                 }
             ];
-            strBox = affichageBenevole(data);
+            strBox = await affichageBenevole(data);
 
             break;
 
         case 'Bénéficiaires':
-            var formData = "";
-            //var data = requestApi(formData, "GET", "/users/");
+            //var data = await requestApiNoBody(, "GET", "/users/");
             var data = [{
                 "id": 1,
                 "name": "ff",
@@ -69,30 +67,55 @@ async function affichageBackEnd(affichage) {
                     "email_verified": "False",
                 }
             ];
-            strBox = affichageBeneficiaire(data);
+            strBox = await affichageBeneficiaire(data);
 
             break;
 
         case 'Activitées':
-            var formData = "";
-            var data = requestApiNoBody("GET", "/activitees/");
-            strBox = affichageActivitee(data);
+            var data = await requestApiNoBody("GET", "/activitees/");
+            strBox = await affichageActivitee(data);
             break;
 
         case 'Formations':
-            var data = await requestApiNoBody("GET", "/formations");
+            //var data = await requestApiNoBody("GET", "/formations");
+            var data = [
+                {
+                    id: "1",
+                    nom: "si mais",
+                    type: "Type 1",
+                    adresse: "123 Rue de la Rue",
+                    date_debut: "01/04/2024",
+                    date_fin: "03/04/2024",
+                    description: "Ceci est la description de l'activité 1",
+                    nb_place: 20,
+                    supervisor: {
+                        name: "Superviseur 1"
+                    }
+                },
+                {
+                    id: "2",
+                    nom: "mais non",
+                    type: "Type 2",
+                    adresse: "456 Avenue de l'Avenue",
+                    date_debut: "05/04/2024",
+                    date_fin: "07/04/2024",
+                    description: "Ceci est la description de l'activité 2",
+                    nb_place: 15,
+                    supervisor: {
+                        name: "Superviseur 2"
+                    }
+                }
+            ]
             var strBox = await affichageFormation(data);
             break;
 
         case 'Demandes':
-            var formData = "";
-            var data = requestApi(formData, "GET", "/demande");
-            strBox = affichageDemande(data);
+            var data = await requestApiNoBody("GET", "/demande");
+            strBox = await affichageDemande(data);
             break;
 
         case 'Missions':
-            var formData = "";
-            //var data = requestApi(formData, "GET", "/missions");
+            //var data = await requestApiNoBody("GET", "/missions");
             var data = [
                 {
                     "id": 1,
@@ -123,7 +146,7 @@ async function affichageBackEnd(affichage) {
                     }
                 }
             ]
-            strBox = affichageMission(data);
+            strBox = await affichageMission(data);
             break;
 
         default:
@@ -139,6 +162,78 @@ async function affichageBackEnd(affichage) {
 
 function trie(filtre, affichage) {
     console.log(filtre);
+}
+
+
+async function voirParticipant(id, link){
+    var fetchLink = link + id
+    //var data = await requestApiNoBody("GET", fetchLink);
+
+    let idEvent = "participation"+id
+    const participation = document.getElementById(idEvent)
+    participation.innerHTML = ""
+
+    var head =
+        "<div class=\"all_participants\">" +
+        "   <div class=\"title\">"+
+        "       <h3>Participants</h3>" +
+        "       <button class='hide' onclick='hide(\"participation" +id +"\")'>Cacher</button>" +
+        "   </div>" +
+        "   <div class=\"tabParticipants\">" +
+        "       <table>" +
+        "           <thead>" +
+        "               <tr>" +
+        "                   <th>Nom</th>" +
+        "                  <th>Prenom</th>" +
+        "                <th>Role</th>" +
+        "                 <th>Options</th>" +
+        "               </tr>" +
+        "         </thead>"
+
+    var allParticipants ="<tbody>"
+    var participant =""
+    for (i = 0; i < 10; i++) {
+
+        participant =
+            "<tr>" +
+            "   <td>Chauche</td>" +
+            "   <td>Titoaun</td>" +
+            "   <td>Admin</td>" +
+            "   <td>" +
+            "       <button class='suppParticipants' onclick=\"suppParticipants(" + id + ", " + link + ")\">Supp</button>" +
+            "   </td>" +
+            "</tr>"
+
+        allParticipants = allParticipants.concat(participant)
+    }
+    allParticipants = allParticipants.concat(
+        "           </tbody>"+
+        "       </table>" +
+        "</div>" +
+        "</div>")
+
+    var affichage = head.concat(allParticipants)
+    participation.innerHTML = affichage
+
+
+
+}
+
+
+async function suppParticipants(id, link){
+    var fetchlink = link + id
+
+    //var data = await requestApiNoBody("DEL", fetchLink);
+
+}
+
+function add(link){
+    window.location.href ="../pages/newPage/" + link
+}
+
+function hide(id){
+    const hideDive = document.getElementById(id)
+    hideDive.innerHTML = ""
 }
 
 

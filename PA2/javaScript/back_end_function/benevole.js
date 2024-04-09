@@ -15,7 +15,7 @@ function affichageBenevole(data){
         "       </select>" +
         "   </div>" +
         "   <div class=\"button_filtre\">\n" +
-        "       <button class=\"button_new\">Nouveau</button>" +
+        "       <button class=\"button_new\" onclick='add(\"addUser.php\")'>Nouveau</button>" +
         "   </div>" +
         "</div>";
 

@@ -14,7 +14,7 @@ function affichageActivitee(data) {
         "       </select>\n" +
         "   </div>\n" +
         "   <div class=\"button_filtre\">\n" +
-        "       <button class=\"button_new\">Nouveau</button>\n" +
+        "       <button class=\"button_new\" onclick='add(\"addActivitee.php\")'>Nouveau</button>\n" +
         "   </div>\n" +
         "</div>"
 
@@ -39,8 +39,8 @@ function affichageActivitee(data) {
             "               </div>\n" +
             "           </div>\n" +
             "           <div class=\"option\">\n" +
-            "               <button class=\"modif\">Modifier l\\'activité</button>\n" +
-            "               <button class=\"voir\">Voir les participants</button>\n" +
+            "               <button class=\"modif\">Modifier l'activité</button>\n" +
+            "               <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participea/')\">Voir les participants</button>\n" +
             "               <button class=\"supp\">Supprimer</button>\n" +
             "           </div>\n" +
             "       </div>\n" +
