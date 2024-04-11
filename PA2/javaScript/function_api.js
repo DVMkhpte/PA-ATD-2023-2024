@@ -31,9 +31,10 @@ async function requestApiNoBody(method, link) {
     }
 }
 
-async function stockToken(data){
-    const token = data.token
-    localStorage.setItem('token', token);
+async function stockData(data){
+    localStorage.setItem('token', data.token);
+    localStorage.setItem('role', data.role);
+    localStorage.setItem('id', data.id);
 }
 
 function showAlert(message) {

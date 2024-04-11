@@ -41,9 +41,10 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     try {
         const data = await requestApi(formData, "POST", "/user/login");
+
         if (data && data.role === "beneficiaire" && localStorage.getItem('become_benevole') === "True") {
-            await stockToken(data);
-            localStorage.set()
+            await stockData(data);
+            localStorage.setItem("email", email);
             localStorage.removeItem('become_benevole');
             window.location.href = "become_benevole.php";
         } else if (data && data.role === "benevole" && localStorage.getItem('become_benevole') === "True") {
@@ -56,13 +57,13 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
             }, 3000);
 
         } else if (data && data.role === "admin") {
-            await stockToken(data);
+            await stockData(data);
             window.location.href = "back_end.php";
         } else if (data && data.role === "benevole") {
-            await stockToken(data);
+            await stockData(data);
             window.location.href = "benevole.php";
         } else if(data && data.role === "beneficiaire") {
-            await stockToken(data);
+            await stockData(data);
             window.location.href = "beneficiary.php";
         } else {
             document.getElementById('errorMessage').innerText = "Identifiants incorrects";

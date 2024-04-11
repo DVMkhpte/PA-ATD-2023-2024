@@ -45,19 +45,20 @@ class DemandeController extends Controller
 
     public function store(Request $request)
     {
-        $User = Auth::user();
+        /*$User = Auth::user();*/
 
         try {
             $data = $request->validate([
-                'type' => 'required|string|in:demande_bénévole,aide_service_administratif,demande_navette,demande_visite,autre',
+                'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
                 'demande' => 'required|string',
+                'permis' => 'string',
             ]);
 
-            $data['id_user'] = $User->id;
+           /* $data['id_user'] = $User->id;*/
 
             $demande = Demandes::create($data);
 
-            Log::channel('user_activity')->info("Create demande demande by " . $User->name);
+            Log::channel('user_activity')->info("Create demande demande by "/* . $User->name*/);
             return response()->json($demande, 201);
 
             }catch (\Exception $e) {

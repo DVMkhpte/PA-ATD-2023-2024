@@ -10,20 +10,22 @@
         rel="stylesheet"
     />
     <style>
-        .popup {
-            position: fixed;
-            top: 85%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: #225B7C;
-            padding: 20px;
-            border: 2px solid white;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            color: whitesmoke;
-            font-family: "Euclid Circular A", "Poppins";
-        }
+
+            .popup {
+                position: fixed;
+                top: 10%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background-color: #225B7C;
+                padding: 20px;
+                border: 2px solid white;
+                border-radius: 10px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+                z-index: 1000;
+                color: whitesmoke;
+                font-family: "Euclid Circular A", "Poppins";
+            }
+
     </style>
 </head>
 <body>

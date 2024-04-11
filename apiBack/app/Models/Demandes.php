@@ -11,9 +11,11 @@ class Demandes extends Model
     use HasFactory;
 
     protected $fillable = [
-    'type',
-    'demande',
-    'id_user',
+        'type',
+        'demande',
+        'permis',
+        'id_user',
+
     ];
 
     public function user()

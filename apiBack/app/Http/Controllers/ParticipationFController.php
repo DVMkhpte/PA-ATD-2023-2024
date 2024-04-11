@@ -35,25 +35,34 @@ class ParticipationFController extends Controller
         return response()->json($participations);
     }
 
+    public function getUserParticipations($userId)
+    {
+        try {
+            $participations = ParticipeF::with('formation')->where('id_user', $userId)->get();
+            return response()->json($participations);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.'], 500);
+        }
+    }
     public function store(Request $request)
     {
         $User = Auth::user();
-        
+
         try {
             $data = $request->validate([
-                'id_formation' => 'required|integer', 
+                'id_formation' => 'required|integer',
             ]);
-    
+
             $data['id_user'] = $User->id;
-            
+
             DB::beginTransaction();
-            
+
             $participation = ParticipeF::create($data);
-    
+
             DB::table('formations')->where('id', $data['id_formation'])->decrement('nb_place');
-    
+
             DB::commit();
-    
+
             Log::channel('admin_activity')->info("Create formation participation by " . $User->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
@@ -67,7 +76,7 @@ class ParticipationFController extends Controller
         $adminUser = Auth::user();
         try {
             DB::beginTransaction();
-            
+
             $participation = ParticipeF::findOrFail($id);
 
             $formation = Formation::findOrFail($participation->id_formation);
@@ -80,13 +89,13 @@ class ParticipationFController extends Controller
 
             Log::channel('admin_activity')->info("Delete formation participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'Formation participation delete']);
-    
 
-       
+
+
     } catch (\Exception $e) {
         DB::rollBack();
         return response()->json(['message' => 'An error occurred while deleting the participation.'], 500);
     }
-    
+
 }
 }

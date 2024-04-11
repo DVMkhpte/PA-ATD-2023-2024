@@ -88,11 +88,16 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/my-demande', [\App\Http\Controllers\DemandeController::class, 'getUserDemandes']);
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
     Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
+    Route::get('/user/{userId}/participations',[App\Http\Controllers\ParticipationFController::class, 'getUserParticipations']);
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
     Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
+    Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
+
 
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
 Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
-Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
+Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
+
+

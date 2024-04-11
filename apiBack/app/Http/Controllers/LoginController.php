@@ -30,7 +30,7 @@ class LoginController extends Controller
             }
 
             Log::channel('user_activity')->info("User with email {$user->email} logged in successfully");
-            return response()->json(['token' => $token,'role' => $user->role], 200);
+            return response()->json(['token' => $token,'role' => $user->role,'id' => $user->id], 200);
         }
 
 

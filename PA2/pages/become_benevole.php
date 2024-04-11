@@ -9,35 +9,63 @@
 </head>
 <body>
 
+<style>
+    .form-check-label{
+        margin-right: 25px;
+        margin-left: 25px;
+    }
+
+    .form-check-check-inline{
+        padding-bottom: 10px;
+    }
+
+    .popup {
+        position: fixed;
+        top: 10%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #225B7C;
+        padding: 20px;
+        border: 2px solid white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        color: whitesmoke;
+        font-family: "Euclid Circular A", "Poppins";
+    }
+
+
+
+</style>
+
 <div class="container mt-5">
     <h2>Devenir bénévole</h2>
-    <form onsubmit="return validateForm()">
+    <form id ="demandeForm">
         <div class="form-group">
-            <label for="nom">Nom :</label>
-            <input type="text" class="form-control" id="nom" placeholder="Mamoru" pattern="[A-Za-zÀ-ÿ\s]+" required>
-        </div>
-
-        <div class="form-group">
-            <label for="prenom">Prenom :</label>
-            <input type="text" class="form-control" id="prenom" placeholder="Takamura" pattern="[A-Za-zÀ-ÿ\s]+" required>
+            <label for="name">Nom et Prenom :</label>
+            <input type="text" class="form-control" id="name">
         </div>
 
         <div class="form-group">
             <label for="email">Adresse Email :</label>
-            <input type="email" class="form-control" id="email" placeholder="takamura@ippo.fr" required>
+            <input type="email" class="form-control" id="email">
         </div>
 
-        <select class="form-select custom-select" aria-label="Default select example" required>
-            <option selected>Choisissez une catégorie</option>
-            <option value="1">Devenir Bénévole</option>
-            <option value="2">Signaler un problème</option>
-            <option value="3">Formation</option>
-            <option value="4">Autre</option>
-        </select>
-
         <div class="form-group">
-            <label for="message">Message :</label>
-            <textarea class="form-control" id="message" rows="4" placeholder="Entrez votre message" required></textarea>
+            <label for="demande">Pourquoi voulez vous nous rejoindre ? (Parlez-vous des langues ? Des connaisances en particulier ?) :</label>
+            <textarea class="form-control" id="demande" rows="10"  required></textarea>
+        </div>
+
+        <div class="form-check-check-inline">
+            <label class="form-check-label" for="flexCheckDefault">Avez-vous le permis ?</label>
+            <label class="form-check-label" for="inlineCheckbox1">Non :</label>
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Non">
+            <label class="form-check-label" for="inlineCheckbox2">Permis A (moto) :</label>
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="A">
+            <label class="form-check-label" for="inlineCheckbox3">Permis B (voiture) :</label>
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="B">
+            <label class="form-check-label" for="inlineCheckbox4">Permis C (camions) :</label>
+            <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="C">
         </div>
 
         <button type="submit" class="btn btn-primary">Envoyer</button>
@@ -46,30 +74,70 @@
 
 <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 
+<script src="../javaScript/function_api.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <script>
-    function validateForm() {
 
-        var nom = document.getElementById("nom").value;
-        if (!/^[A-Za-zÀ-ÿ\s]+$/.test(nom)) {
-            alert("Veuillez saisir un nom valide (sans chiffres).");
-            return false;
+    document.getElementById('inlineCheckbox1').addEventListener('change', function(event) {
+        var nonCheckbox = document.getElementById('inlineCheckbox1');
+        var otherCheckboxes = document.querySelectorAll('input[type="checkbox"]:not(#inlineCheckbox1)');
+
+        if (nonCheckbox.checked) {
+            otherCheckboxes.forEach(function(checkbox) {
+                checkbox.disabled = true;
+            });
+        } else {
+            otherCheckboxes.forEach(function(checkbox) {
+                checkbox.disabled = false;
+            });
         }
+    });
 
 
-        var email = document.getElementById("email").value;
-        if (!/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,4}$/.test(email)) {
-            alert("Veuillez saisir une adresse email valide (au format takamura@example.fr).");
-            return false;
-        }
+    const storedEmail = localStorage.getItem('email');
+    const storedId = localStorage.getItem('id');
 
 
-
-        return true;
+    if (storedEmail) {
+        document.getElementById('email').value = storedEmail;
+        localStorage.removeItem('email');
     }
+
+    document.getElementById('demandeForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        var nom = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var demande = document.getElementById("demande").value;
+        var permis = [];
+        var checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        checkboxes.forEach(function(checkbox) {
+            permis.push(checkbox.value);
+        });
+        var type = "demande_benevole"
+        var permisString = permis.join(',');
+
+        var formData = {
+            type: type,
+            demande: demande,
+            permis: permisString,
+        };
+
+        try {
+            const data = await requestApi(formData, "POST", "/demande/add");
+            if (data && data.status === 201) {
+                showAlert("Création de l'utilisateur réussie !");
+            }else{
+                showAlert("Erreur:" + data.status )
+            }
+        }catch (error) {
+            console.error('Erreur lors de la requête à l\'API :', error.message);
+        }
+    })
+
 </script>
 
 </body>

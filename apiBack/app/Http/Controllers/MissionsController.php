@@ -38,12 +38,12 @@ class MissionsController extends Controller
     public function store(Request $request)
 {
         $user = Auth::user();
-    
+
         try {
             DB::beginTransaction();
 
             $data = $request->validate([
-                'id_demande' => 'required|integer', 
+                'id_demande' => 'required|integer',
             ]);
 
             $data['realiser_par'] = $user->id;
@@ -65,25 +65,51 @@ class MissionsController extends Controller
         $adminUser = Auth::user();
         try {
             DB::beginTransaction();
-            
+
             $participation = Missions::findOrFail($id);
 
            $participation->delete();
-            
+
 
            DB::commit();
 
             Log::channel('admin_activity')->info("Delete mission participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'Mission participation delete']);
-    
 
-       
+
+
     } catch (\Exception $e) {
         DB::rollBack();
         return response()->json(['message' => 'An error occurred while deleting the participation.'], 500);
     }
-    
+
 }
+
+    public function update(Request $request, $id)
+    {
+        $user = Auth::user();
+
+        try {
+            DB::beginTransaction();
+
+            $participation = Missions::findOrFail($id);
+
+            $data = $request->validate([
+                'id_demande' => 'integer',
+                'realiser_par' => 'integer',
+            ]);
+
+            $participation->update($data);
+
+            DB::commit();
+
+            Log::channel('user_activity')->info("Update mission participation " . $id . " by " . $user->name);
+            return response()->json($participation, 200);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'An error occurred while updating the participation.', 'error' => $e->getMessage()], 500);
+        }
+    }
 }
 
 ?>
