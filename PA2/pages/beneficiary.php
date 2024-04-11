@@ -28,23 +28,6 @@
 
         <div id="container_2">
 
-            <div class="form_demande">
-                <form action="demande.php" method="post">
-                    
-                    <select class="input_form" name="trie" id="trie">
-                            <option selected disabled hidden id="choix">Choix du type de demande</option>
-                            <option value="type1">Type 1</option>
-                            <option value="type2">Type 2</option>
-                            <option value="type3">Type 3</option>
-                            <option value="type4">Type 4</option>
-                    </select>        
-
-                    <input  class="input_form" id="description_form" type="text" name="description" placeholder="Description">            
-                        
-                    <input class="input_form" id="valid" type="submit" value="Valider">
-                </form>
-            </div>   
-
         </div>
 
     </div>
@@ -85,5 +68,9 @@
 <?php // include("../includes/footer.php") ?>
 
 <script src="../javaScript/beneficiare.js"></script>
+<script src="../javaScript/beneficiare_function/activity.js"></script>
+<script src="../javaScript/beneficiare_function/ask.js"></script>
+<script> affichageBeneficiaire("Activitée") </script>
+
 </body>
 </html>
