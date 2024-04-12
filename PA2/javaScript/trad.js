@@ -1,33 +1,25 @@
-const apiKey = "f1a9fd87-1d87-4b0a-a917-7f0f4e6fb920:fx";
-function translateText(text, sourceLang, targetLang) {
+function traduirePage() {
+  console.log('Fonction traduirePage() appelée avec succès!');
 
-  fetch("https://api.deepl.com/v2/translate", {
+  const $ = jQuery; // Assurez-vous que jQuery est bien chargé
+  const ajax = $.ajax;
 
-    method: "POST",
-    headers: {
-      "Authorization": `DeepL-Auth-Key ${apiKey}`,
-      "Content-Type": "application/json",
+  ajax({
+    dataType: 'json', // Indiquez que vous attendez une réponse JSON
+    error: function (xhr, status, error) {
+      console.error('Erreur lors de la traduction:', error);
     },
-    body: JSON.stringify({
-      text: text,
-      source_lang: sourceLang,
-      target_lang: targetLang,
-    }),
+    success: function (response) {
+      console.log('Texte traduit:', response.translations);
 
-    mode: 'no-cors',
-  })
-    .then((response) => response.json())
-    .then((data) => {
-
-
-      data.translations = undefined;
-      document.getElementById("donation").textContent = data.translations[0].text;
-    })
-    .catch((error) => {
-      console.error("Erreur de traduction:", error);
-    });
+      // Insérez les traductions individuelles dans les bons éléments HTML
+      $('[data-translate]').each(function (index) {
+        const originalText = $(this).text();
+        const translatedText = response.translations[index];
+        $(this).html(translatedText);
+      });
+    },
+    url: 'trad.php',
+    type: 'GET'
+  });
 }
-
-document.addEventListener("DOMContentLoaded", function() {
-  translateText(document.getElementById("donation").textContent, "fr", "en");
-});

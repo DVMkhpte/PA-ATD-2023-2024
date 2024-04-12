@@ -32,7 +32,7 @@ def translate_text(text, from_lang='fr', to_lang=['en']):
     body = [{'text': text}]
     request = requests.post(constructed_url, params=params, headers=headers, json=body)
     response = request.json()
-    print("Response from translation API:", response)  # Ajout d'une instruction print pour débogage
+    print("Response from translation API:", response)
     translations = [item['translations'][0]['text'] for item in response]
     return translations
 
@@ -41,29 +41,30 @@ def translate_html_content(html_content):
 
     text_to_translate = []
 
-
     for element in soup.find_all(["h1", "p", "a", "button", "span", "div", "label"], class_=True):
         text_to_translate.append(element.get_text())
 
-
     translated_text = translate_text(' '.join(text_to_translate))
 
-
-    translated_index = 0
-    for element in soup.find_all(["h1", "p", "a", "button", "span", "div", "label"], class_=True):
-        element.string = translated_text[translated_index]
-        translated_index += 1
-
-    return str(soup)
-
-
+    return translated_text
 
 file_path = "../pages/donation.php"
 html_content = read_html_content(file_path)
 
 if html_content:
-    translated_html_content = translate_html_content(html_content)
+    translated_text = translate_html_content(html_content)
 
-    print(translated_html_content)
+    # Créer le texte traduit avec les balises HTML appropriées
+    translated_html_with_tags = ""
+    for text in translated_text.split('\n'):
+        # Supprimer les caractères spéciaux et les sauts de ligne
+        text = text.strip()
+        if text:
+            translated_html_with_tags += '<span data-translate="' + text + '">' + text + '</span>'
+
+    print(translated_html_with_tags)
 else:
     print("Impossible de lire le contenu du fichier.")
+
+# Après avoir obtenu les traductions
+translations_dict = dict(zip(original_texts, translated_texts))
