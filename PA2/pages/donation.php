@@ -9,15 +9,6 @@
         section{
             font-family: "Euclid Circular A", "Poppins";
         }
-
-        .container{
-            padding-top:20px ;
-        }
-
-        .translated {
-            font-style: italic;
-        }
-
     </style>
 
 </head>
@@ -27,12 +18,9 @@
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
 
-
 <section>
-    <script src="../javaScript/trad.js"></script>
 
-    <button onclick="traduirePage()" class="btn btn-primary translate">Traduire la page</button>
-    <div id="contenu-traduit"></div>
+    <div id="translated-content"></div>
     <div class="container" id="donation">
         <div class="card">
             <div class="card-header">
@@ -44,13 +32,22 @@
                     <img src="../img/cash.png" alt="halouf" class="logo" width="200" height="200">
                     <form>
                         <div class="form-group">
-                            <a data-translate="login" href="login.php" class="btn btn-link translate">Connectez-vous</a> ou <a data-translate="sign-up" href="createAccount.php" class="btn btn-link translate">Inscrivez-vous</a> en tant que benevole.
+                            <a href="login.php" class="btn btn-link translate">
+                                <span data-translate="login">Connectez-vous</span>
+                            </a>
+                            <span> ou </span>
+                            <a href="createAccount.php" class="btn btn-link translate">
+                                <span data-translate="sign-up">Inscrivez-vous</span>
+                            </a>
+                            <span> en tant que benevole.</span>
+
                         </div>
             </div>
 
             <form action="../stripe/checkout.php" method="post" onsubmit="redirectToCheckout()">
                 <div class="form-group">
                     <label for="amount">
+
                         <input type="number" min="0" step="0.01" name="amount" placeholder="0.00€" class="form-control"/>
                     </label>
                 </div>

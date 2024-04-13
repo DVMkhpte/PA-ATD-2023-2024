@@ -37,7 +37,7 @@
 
 
 </style>
-
+<div id="translated-content"></div>
 <div class="container mt-5">
     <h2>Devenir bénévole</h2>
     <form id ="demandeForm">

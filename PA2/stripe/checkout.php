@@ -10,6 +10,7 @@
 </head>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
+<div id="translated-content"></div>
 
 <?php
 
@@ -25,7 +26,7 @@ if(isset($_POST['amount'])) {
     $amount = $_POST['amount'];
 
     if ($amount <= 0) {
-        echo '<div class="alert alert-danger" role="alert">';
+        echo '<strong><div class="alert alert-danger" role="alert"></strong>';
         echo "Le montant du don ne peut pas être nul.";
         echo '</div>';
         echo '<a href="../pages/donation.php" class="btn btn-primary">Retour à la page de don</a>';
@@ -46,7 +47,7 @@ if(isset($_POST['amount'])) {
 
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php",
+        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php?_ijt=qbutm31cgkg4nreo56tdebj6m1",
         "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php",
         "line_items" => [
             [

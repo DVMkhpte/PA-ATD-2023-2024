@@ -13,7 +13,7 @@
     
 
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-
+<div id="translated-content"></div>
 <div class="container mt-5">
     <div class="text-display">
         <h1>Pourquoi faire un don ?</h1>

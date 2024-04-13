@@ -18,7 +18,7 @@
 </style>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-
+<div id="translated-content"></div>
     <div class="container">
     <h1>Politiques de Confidentialité</h1>
 <br> <p>Le site web www.autempsdonne.com est détenu par Au Temps Donné, qui est un contrôleur de données de vos données personnelles.</p>

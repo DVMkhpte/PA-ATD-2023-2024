@@ -10,7 +10,7 @@
 <body>
 
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-
+<div id="translated-content"></div>
 <div class="container mt-5">
     <h2>Contactez-nous</h2>
     <form onsubmit="return validateForm()">

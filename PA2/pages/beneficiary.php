@@ -10,7 +10,7 @@
 <?php  include("../includes/header.php") ?>
 
 <main>
-    
+    <div id="translated-content"></div>
     <div class="container_1">
 
         <div class="menu">

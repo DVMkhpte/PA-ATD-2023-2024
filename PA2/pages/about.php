@@ -11,7 +11,7 @@
 
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
-
+<div id="translated-content"></div>
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12">

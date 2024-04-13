@@ -28,8 +28,8 @@
 </head>
 <body>
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-    
 
+<div id="translated-content"></div>
     <div class="container">
     <h1>Mentions légales</h1>
     <p>

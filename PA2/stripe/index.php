@@ -7,6 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 </head>
 <body>
+<div id="translated-content"></div>
     <h1>Stripe</h1>
 
     <form method="post" action="checkout.php">
