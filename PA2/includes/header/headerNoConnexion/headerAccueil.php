@@ -57,22 +57,20 @@
 
               <div class="dropdown-menu">
                   <select id="languageDropdown" onchange="translatePage(this.value)">
-                      <option value="en">English</option>
-                      <option value="es">Español</option>
-                      <option value="it">Italiano</option>
-                      <option value="de">Deutsch</option>
-                      <option value="pt">Português</option>
-                      <option value="ru">русский</option>
-                      <option value="el">ελληνικά</option>
-                      <option value="ar">العَرَبِيَّة</option>
-                      <option value="zh">中文</option>
-                      <option value="hi">हिन्दी</option>
-                      <option value="ja">日本語</option>
-                      <option value="ko">한국어</option>
-                      <option value="bn">বাংলা</option>
-                      <option value="pa">ਪੰਜਾਬੀ</option>
-
-
+                      <option value="en" data-icon="../../img/flags/us.png">English</option>
+                      <option value="es" data-icon="../../img/flags/es.png">Español</option>
+                      <option value="it" data-icon="../../img/flags/it.png">Italiano</option>
+                      <option value="de" data-icon="../../img/flags/de.png">Deutsch</option>
+                      <option value="pt" data-icon="../../img/flags/pt.png">Português</option>
+                      <option value="ru" data-icon="../../img/flags/ru.png">русский</option>
+                      <option value="el" data-icon="../../img/flags/el.png">ελληνικά</option>
+                      <option value="ar" data-icon="../../img/flags/dz.png">العَرَبِيَّة</option>
+                      <option value="zh" data-icon="../../img/flags/zh.png">中文</option>
+                      <option value="hi" data-icon="../../img/flags/hi.png">हिन्दी</option>
+                      <option value="ja" data-icon="../../img/flags/ja.png">日本語</option>
+                      <option value="ko" data-icon="../../img/flags/ko.png">한국어</option>
+                      <option value="bn" data-icon="../../img/flags/bn.png">বাংলা</option>
+                      <option value="pa" data-icon="../../img/flags/pa.png">ਪੰਜਾਬੀ</option>
                   </select>
               </div>
           </div>
