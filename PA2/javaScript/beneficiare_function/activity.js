@@ -49,7 +49,7 @@ async function affichageActivity(data){
 
 
 async function joinActivity(idActivity){
-
+    //const idU = localStorage.getItem("id")
     const formData = {
         "id_activite": idActivity,
         "id_user": idUser
@@ -58,9 +58,9 @@ async function joinActivity(idActivity){
     try {
         const response = await requestApi(formData, "POST", "/participea/add");
         if (response.status === 200) {
-            showAlert("Création de l'utilisateur réussie !");
+            showAlert("Vous avez bien rejoint l'activité'");
         } else {
-            showAlert("Erreur lors de la création de l'inscription' : " + response.status);
+            showAlert("Erreur : " + response.status);
         }
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);

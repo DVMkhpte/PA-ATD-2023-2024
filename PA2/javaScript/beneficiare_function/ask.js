@@ -4,10 +4,11 @@ async function affichageDemande(){
         "   <form id=\"createForm\">\n" +
         "       <select class=\"input_form\" name=\"trie\" class=\"select_type\">\n" +
         "           <option selected disabled hidden id=\"type\" class=\"select_type\">Type de demande</option>\n" +
-        "           <option value=\"type1\">Type 1</option>\n" +
-        "           <option value=\"type2\">Type 2</option>\n" +
-        "           <option value=\"type3\">Type 3</option>\n" +
-        "           <option value=\"type4\">Type 4</option>\n" +
+        "           <option value=\"demande-benevole\">Devenire bénévole</option>\n" +
+        "           <option value=\"aide_service_administratif\">Aide service administratif</option>\n" +
+        "           <option value=\"demande_navette\">Navette</option>\n" +
+        "           <option value=\"demande_visite\">Visite</option>\n" +
+        "           <option value=\"autre\">autre</option>\n" +
         "       </select>\n" +
         "       <textarea  class=\"input_form\" id=\"description\" type=\"text\" name=\"description\" placeholder=\"Description\" autocomplete=\"off\"></textarea>\n" +
         "       <button class=\"input_form\" id=\"valid\" onclick=\"newAsk("+ 1 +")\">Valider</button>\n" +
