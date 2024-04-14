@@ -32,8 +32,8 @@ if(isset($_POST['amount'])) {
 
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php?_ijt=3p42jvs8nlqj57p2lt7ee6fmfm&_ij_reload=RELOAD_ON_SAVE",
-        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php?_ijt=edeacd4pssfc3du17s9pfavon5&_ij_reload=RELOAD_ON_SAVE",
+        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php",
+        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php",
         "line_items" => [
             [
                 "quantity" => 1,
