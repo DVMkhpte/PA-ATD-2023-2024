@@ -52,6 +52,7 @@ class DemandeController extends Controller
                 'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
                 'demande' => 'required|string',
                 'permis' => 'string',
+                'etat' => 'required|string|in:En attente,En cours, Fait, Annuler',
             ]);
 
            /* $data['id_user'] = $User->id;*/
@@ -83,6 +84,31 @@ class DemandeController extends Controller
         return response()->json(['message' => 'An error occurred while deleting the demande.'], 500);
     }
     }
+
+    public function update(Request $request, $id)
+    {
+        /*$user = Auth::user();*/
+
+        try {
+            $demande = Demandes::findOrFail($id);
+
+            $data = $request->validate([
+                'type' => '|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
+                'demande' => '|string',
+                'permis' => 'string',
+                'etat' => '|string|in:En attente,En cours, Fait, Annuler',
+            ]);
+
+
+            $demande->update($data);
+
+            /*Log::channel('user_activity')->info("Update demande demande " . $id . " by " . $user->name);*/
+            return response()->json($demande, 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while updating the demande.', 'error' => $e->getMessage()], 500);
+        }
+    }
+
 }
 
 

@@ -118,20 +118,22 @@
             permis.push(checkbox.value);
         });
         var type = "demande_benevole"
+        var etat = "En attente"
         var permisString = permis.join(',');
 
         var formData = {
             type: type,
             demande: demande,
             permis: permisString,
+            etat: etat,
         };
 
         try {
             const data = await requestApi(formData, "POST", "/demande/add");
-            if (data && data.status === 201) {
-                showAlert("Création de l'utilisateur réussie !");
+            if (data) {
+                showAlert("Votre demande a bien été pris en charge !");
             }else{
-                showAlert("Erreur:" + data.status )
+                showAlert("Erreur:" + data)
             }
         }catch (error) {
             console.error('Erreur lors de la requête à l\'API :', error.message);

@@ -15,13 +15,13 @@
     <h2>Contactez-nous</h2>
     <form onsubmit="return validateForm()">
         <div class="form-group">
-            <label for="nom">Nom :</label>
-            <input type="text" class="form-control" id="nom" placeholder="Mamoru" pattern="[A-Za-zÀ-ÿ\s]+" required>
+            <label for="name">Nom et Prenom :</label>
+            <input type="text" class="form-control" id="name">
         </div>
 
         <div class="form-group">
-            <label for="prenom">Prenom :</label>
-            <input type="text" class="form-control" id="prenom" placeholder="Takamura" pattern="[A-Za-zÀ-ÿ\s]+" required>
+            <label for="email">Adresse Email :</label>
+            <input type="email" class="form-control" id="email">
         </div>
 
         <div class="form-group">
@@ -31,15 +31,15 @@
 
         <select class="form-select custom-select" aria-label="Default select example" required>
             <option selected>Choisissez une catégorie</option>
-            <option value="1">Devenir Bénévole</option>
-            <option value="2">Signaler un problème</option>
-            <option value="3">Formation</option>
-            <option value="4">Autre</option>
+            <option value="aide_service_administratif">Besoin d'aide Administratif</option>
+            <option value="demande_navette">Demande de Transport</option>
+            <option value="demande_visite">Demande de Visite</option>
+            <option value="autre">Autre</option>
         </select>
 
         <div class="form-group">
-            <label for="message">Message :</label>
-            <textarea class="form-control" id="message" rows="4" placeholder="Entrez votre message" required></textarea>
+            <label for="demande">Message (Donner le plus de detail possible, Date, Adresse) :</label>
+            <textarea class="form-control" id="demande" rows="10" placeholder="Entrez votre message" required></textarea>
         </div>
 
         <button type="submit" class="btn btn-primary">Envoyer</button>

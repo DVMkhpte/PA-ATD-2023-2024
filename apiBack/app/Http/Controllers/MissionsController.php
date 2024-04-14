@@ -50,6 +50,10 @@ class MissionsController extends Controller
 
             $participation = Missions::create($data);
 
+            $demande = Demandes::findOrFail($data['id_demande']);
+            $demande->etat = 'En cours';
+            $demande->save();
+
             DB::commit();
 
             Log::channel('user_activity')->info("Create mission participation by " . $user->name);
