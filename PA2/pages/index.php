@@ -11,7 +11,7 @@
 
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 
-
+<div id="translated-content"></div>
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     
   <ol class="carousel-indicators">

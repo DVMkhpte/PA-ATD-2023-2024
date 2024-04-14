@@ -6,7 +6,7 @@
 </head>
 <body>
 
-
+<div id="translated-content"></div>
     <p>Merci pour votre don !</p>
     
 </body>

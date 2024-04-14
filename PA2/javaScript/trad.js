@@ -1,33 +1,42 @@
-const apiKey = "f1a9fd87-1d87-4b0a-a917-7f0f4e6fb920:fx";
-function translateText(text, sourceLang, targetLang) {
+function translatePage(targetLanguage) {
+    const sourceElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, ul, ol, li, p, a[href], input, input[placeholder], textarea, textarea[placeholder], button, button.button, span, option[value], option[selected], strong, label[for="nom"], label[for="prenom"], label[for="email"], label[for="message"], .dropdown-menu #flags, .dropdown-menu');
 
-  fetch("https://api.deepl.com/v2/translate", {
+  const promises = [];
 
-    method: "POST",
-    headers: {
-      "Authorization": `DeepL-Auth-Key ${apiKey}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      text: text,
-      source_lang: sourceLang,
-      target_lang: targetLang,
-    }),
+  sourceElements.forEach(element => {
+    promises.push(translateElement(element, targetLanguage));
+  });
 
-    mode: 'no-cors',
-  })
-    .then((response) => response.json())
-    .then((data) => {
-
-
-      data.translations = undefined;
-      document.getElementById("donation").textContent = data.translations[0].text;
-    })
-    .catch((error) => {
-      console.error("Erreur de traduction:", error);
-    });
+  Promise.all(promises)
+      .then(translations => {
+        // Remplace le texte d'origine par le texte traduit pour chaque élément
+        sourceElements.forEach((element, index) => {
+          element.innerText = translations[index];
+        });
+      })
+      .catch(error => console.error(error));
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-  translateText(document.getElementById("donation").textContent, "fr", "en");
-});
+function translateElement(element, targetLanguage) {
+  const apiKey = 'f0a8708d6f7441b6bab6ef7ae19e62ec';
+  const apiUrl = `https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&to=${targetLanguage}`;
+
+  const data = [{ text: element.innerText }];
+
+  return fetch(apiUrl, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+      'Ocp-Apim-Subscription-Key': apiKey,
+      'Ocp-Apim-Subscription-Region': 'francecentral'
+    }
+  })
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Erreur lors de la traduction: ' + response.status);
+        }
+        return response.json();
+      })
+      .then(result => result[0].translations[0].text);
+}
