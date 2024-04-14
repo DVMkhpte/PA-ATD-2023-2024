@@ -1,5 +1,5 @@
 function translatePage(targetLanguage) {
-  const sourceElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, label, ul, ol, li, p, a, button, span, select, strong');
+    const sourceElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, ul, ol, li, p, a[href], input, input[placeholder], textarea, textarea[placeholder], button, button.button, span, option[value], option[selected], strong, label[for="nom"], label[for="prenom"], label[for="email"], label[for="message"], .dropdown-menu #flags, .dropdown-menu');
 
   const promises = [];
 

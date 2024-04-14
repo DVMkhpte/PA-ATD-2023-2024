@@ -48,38 +48,70 @@
           </div>
         </div>
 
+
+
           <div class="dropdown">
               <script src="../javaScript/trad.js"></script>
-              <button class="button">
-                  Traduire la page
+              <button type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
+                  Traduire
                   <img src="../includes/header/headerNoConnexion/chevron.svg" />
               </button>
 
-              <div class="dropdown-menu">
-                  <select id="languageDropdown" onchange="translatePage(this.value)">
-                      <option value="en" data-icon="../../img/flags/us.png">English</option>
-                      <option value="es" data-icon="../../img/flags/es.png">Español</option>
-                      <option value="it" data-icon="../../img/flags/it.png">Italiano</option>
-                      <option value="de" data-icon="../../img/flags/de.png">Deutsch</option>
-                      <option value="pt" data-icon="../../img/flags/pt.png">Português</option>
-                      <option value="ru" data-icon="../../img/flags/ru.png">русский</option>
-                      <option value="el" data-icon="../../img/flags/el.png">ελληνικά</option>
-                      <option value="ar" data-icon="../../img/flags/dz.png">العَرَبِيَّة</option>
-                      <option value="zh" data-icon="../../img/flags/zh.png">中文</option>
-                      <option value="hi" data-icon="../../img/flags/hi.png">हिन्दी</option>
-                      <option value="ja" data-icon="../../img/flags/ja.png">日本語</option>
-                      <option value="ko" data-icon="../../img/flags/ko.png">한국어</option>
-                      <option value="bn" data-icon="../../img/flags/bn.png">বাংলা</option>
-                      <option value="pa" data-icon="../../img/flags/pa.png">ਪੰਜਾਬੀ</option>
-                  </select>
+              <div class="dropdown-menu" id="flags" aria-labelledby="languageDropdown">
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('en')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/us.png" alt="English Flag" class="img-fluid" style="width: 20px;"> English
+                  </a>
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('es')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/sp.png" alt="Spanish Flag" class="img-fluid" style="width: 20px;"> Español
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('it')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/it.png" alt="Italian Flag" class="img-fluid" style="width: 20px;"> Italiano
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('de')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/de.png" alt="German Flag" class="img-fluid" style="width: 20px;"> Deutsch
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('pt')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/pt.png" alt="Portuguese Flag" class="img-fluid" style="width: 20px;"> Português
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('ru')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/ru.png" alt="Russian Flag" class="img-fluid" style="width: 20px;"> русский
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('el')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/el.png" alt="Greek Flag" class="img-fluid" style="width: 20px;"> ελληνικά
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('ar')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/dz.png" alt="Arabic Flag" class="img-fluid" style="width: 20px;"> العَرَبِيَّة
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('zh')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/zh.png" alt="Chinese Flag" class="img-fluid" style="width: 20px;"> 中文
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('hi')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/hi.png" alt="Hindi Flag" class="img-fluid" style="width: 20px;"> हिन्दी
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('ja')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/ja.png" alt="Japanese Flag" class="img-fluid" style="width: 20px;"> 日本語
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('ko')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/ko.png" alt="Korean Flag" class="img-fluid" style="width: 20px;"> 한국어
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('bn')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/bn.png" alt="Bengali Flag" class="img-fluid" style="width: 20px;"> বাংলা
+                  </a>
+                  <a class="dropdown-item" href="#" onclick="translatePage('pa')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/pa.png" alt="Punjabi Flag" class="img-fluid" style="width: 20px;">ਪੰਜਾਬੀ
+                  </a>
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('fr')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/fr.png" alt="Punjabi Flag" class="img-fluid" style="width: 20px;">Français
+                  </a>
               </div>
           </div>
 
 
-
-
-
       </div>
+
         <div class="img-logo">
             <img src="../img/logo.png">
         </div>
