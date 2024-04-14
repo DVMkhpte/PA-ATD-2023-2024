@@ -1,25 +1,10 @@
-
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Votre titre de page</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
-<div id="translated-content"></div>
-
 <?php
 
 require __DIR__ . "/vendor/autoload.php";
 
-$stripe_secret_key = "sk_test_51N8SUKJrkwZGz1TY2MdyFcdP3jzsOIgcDbArd68v24vRKeN93L7yxb1ueY0uRjIHHuf2ELr08DBi9Z7X6XzFeqUO00mpLmqN75";
+$stripe_secret_key = "sk_test_51N8SUKJrkwZGz1TYXa2sKVWWJcVI3wEj2eLaFLfNOnBgpG7yZfcGhYN6RwJG0dpm3pq0ioAuyGBvkHKfwi0Hrg4s00waC0dOjO";
 
 \Stripe\Stripe::setApiKey($stripe_secret_key);
-
 
 if(isset($_POST['amount'])) {
 
@@ -41,14 +26,14 @@ if(isset($_POST['amount'])) {
         exit;
     }
 
-
-
     $amountInCents = $amount * 100;
+
+
 
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php?_ijt=qbutm31cgkg4nreo56tdebj6m1",
-        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php",
+        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php?_ijt=3p42jvs8nlqj57p2lt7ee6fmfm&_ij_reload=RELOAD_ON_SAVE",
+        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php?_ijt=edeacd4pssfc3du17s9pfavon5&_ij_reload=RELOAD_ON_SAVE",
         "line_items" => [
             [
                 "quantity" => 1,
@@ -63,17 +48,11 @@ if(isset($_POST['amount'])) {
         ]
     ]);
 
-
+    // Rediriger l'utilisateur vers la page de paiement Stripe
     header('Location: ' . $checkout_session->url);
     exit;
 } else {
-
+    // Si le montant n'a pas été spécifié, afficher un message d'erreur
     echo "Le montant n'a pas été spécifié.";
 }
 ?>
-
-<footer>
-<?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
-</footer>
-</body>
-</html>

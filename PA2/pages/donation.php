@@ -77,47 +77,6 @@
 
 <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 
-<script>
-
-
-
-    const validateForm = () => {
-        const errorMessageElement = document.querySelector('.error-message');
-        errorMessageElement.textContent = ""; // Réinitialiser le message d'erreur
-
-        const amountInput = document.querySelector('input[name="amount"]');
-
-
-
-        if (!amountInput.value || isNaN(amountInput.value) || amountInput.value <= 0) {
-            errorMessageElement.textContent = "Veuillez entrer un montant de don valide.";
-            errorMessageElement.style.display = "block";
-            return false;
-        }
-
-        return true;
-    };
-
-
-    const redirectToCheckout = () => {
-        const selectedAmount = document.querySelector('input[name="amount"]').value;
-        const checkoutLink = document.querySelector('a[href="#"]');
-        checkoutLink.href = `../stripe/checkout.php?amount=${selectedAmount}`;
-    };
-
-
-    document.querySelector('form').addEventListener('submit', (event) => {
-        event.preventDefault();
-
-        if (!validateForm()) {
-            return;
-        }
-
-        redirectToCheckout();
-
-    });
-    handleCheckboxChange();
-</script>
 
 
 
