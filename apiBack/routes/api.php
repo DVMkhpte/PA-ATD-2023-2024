@@ -92,6 +92,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
     Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
     Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
+    Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
 
 });
