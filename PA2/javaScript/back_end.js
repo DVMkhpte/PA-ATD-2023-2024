@@ -72,7 +72,39 @@ async function affichageBackEnd(affichage) {
             break;
 
         case 'Activitées':
-            var data = await requestApiNoBody("GET", "/activitees/");
+            //var data = await requestApiNoBody("GET", "/activitees/");
+            var data = [
+                {
+                    id: 1,
+                    nom: "Activité 1",
+                    adresse: "123 Rue de la Rue",
+                    date_debut: "01/04/2024",
+                    date_fin: "03/04/2024",
+                    description: "Ceci est la description de l'activité 1",
+                    nb_place: 20,
+                    superviser_par: { name: "Superviseur 1" }
+                },
+                {
+                    id: 2,
+                    nom: "Activité 2",
+                    adresse: "456 Avenue de l'Avenue",
+                    date_debut: "05/04/2024",
+                    date_fin: "07/04/2024",
+                    description: "Ceci est la description de l'activité 2",
+                    nb_place: 15,
+                    superviser_par: { name: "Superviseur 2" }
+                },
+                {
+                    id: 3,
+                    nom: "Activité 3",
+                    adresse: "789 Boulevard du Boulevard",
+                    date_debut: "10/04/2024",
+                    date_fin: "12/04/2024",
+                    description: "Ceci est la description de l'activité 3",
+                    nb_place: 25,
+                    superviser_par: { name: "Superviseur 3" }
+                }
+            ];
             strBox = await affichageActivitee(data);
             break;
 
@@ -80,29 +112,29 @@ async function affichageBackEnd(affichage) {
             //var data = await requestApiNoBody("GET", "/formations");
             var data = [
                 {
-                    id: "1",
-                    nom: "si mais",
-                    type: "Type 1",
-                    adresse: "123 Rue de la Rue",
-                    date_debut: "01/04/2024",
-                    date_fin: "03/04/2024",
-                    description: "Ceci est la description de l'activité 1",
-                    nb_place: 20,
-                    supervisor: {
-                        name: "Superviseur 1"
+                    "id": "1",
+                    "nom": "si mais",
+                    "type": "Type 1",
+                    "adresse": "123 Rue de la Rue",
+                    "date_debut": "01/04/2024",
+                    "date_fin": "03/04/2024",
+                    "description": "Ceci est la description de l'activité 1",
+                    "nb_place": 20,
+                    "supervisor": {
+                        "name": "Superviseur 1"
                     }
                 },
                 {
-                    id: "2",
-                    nom: "mais non",
-                    type: "Type 2",
-                    adresse: "456 Avenue de l'Avenue",
-                    date_debut: "05/04/2024",
-                    date_fin: "07/04/2024",
-                    description: "Ceci est la description de l'activité 2",
-                    nb_place: 15,
-                    supervisor: {
-                        name: "Superviseur 2"
+                    "id": "2",
+                    "nom": "mais non",
+                    "type": "Type 2",
+                    "adresse": "456 Avenue de l'Avenue",
+                    "date_debut": "05/04/2024",
+                    "date_fin": "07/04/2024",
+                    "description": "Ceci est la description de l'activité 2",
+                    "nb_place": 15,
+                    "supervisor": {
+                        "name": "Superviseur 2"
                     }
                 }
             ]
@@ -110,7 +142,75 @@ async function affichageBackEnd(affichage) {
             break;
 
         case 'Demandes':
-            var data = await requestApiNoBody("GET", "/demande");
+            //var data = await requestApiNoBody("GET", "/demande");
+            var data = [
+                {
+                    "id": 1,
+                    "type": "typetest",
+                    "demande": "Bonjour",
+                    "id_user": 3,
+                    "updated_at": "2024-02-22T10:08:55.000000Z",
+                    "created_at": "2024-02-22T10:08:55.000000Z",
+                    "statut" : "fait",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    }
+                },
+                {
+                    "id": 2,
+                    "type": "typetest2",
+                    "demande": "Bonjour fff",
+                    "id_user": 3,
+                    "updated_at": "2024-02-22T10:08:55.000000Z",
+                    "created_at": "2024-02-22T10:08:55.000000Z",
+                    "statut" : "en cour",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    }
+                },
+                {
+                    "id": 2,
+                    "type": "typetest2",
+                    "demande": "Bonjour fff",
+                    "id_user": 3,
+                    "updated_at": "2024-02-22T10:08:55.000000Z",
+                    "created_at": "2024-02-22T10:08:55.000000Z",
+                    "statut" : "en attente",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    }
+                }
+            ]
             strBox = await affichageDemande(data);
             break;
 
@@ -149,6 +249,9 @@ async function affichageBackEnd(affichage) {
             strBox = await affichageMission(data);
             break;
 
+        case "Evenement":
+            break;
+
         default:
             break;
     }
@@ -156,12 +259,6 @@ async function affichageBackEnd(affichage) {
     const affichageBoxAdmin = document.getElementById('box');
     affichageBoxAdmin.innerHTML = strBox;
 
-}
-
-
-
-function trie(filtre, affichage) {
-    console.log(filtre);
 }
 
 
@@ -214,17 +311,12 @@ async function voirParticipant(id, link){
 
     var affichage = head.concat(allParticipants)
     participation.innerHTML = affichage
-
-
-
 }
 
 
 async function suppParticipants(id, link){
     var fetchlink = link + id
-
     //var data = await requestApiNoBody("DEL", fetchLink);
-
 }
 
 function add(link){
@@ -236,4 +328,61 @@ function hide(id){
     hideDive.innerHTML = ""
 }
 
+
+function getAllType(data){
+    var allTypes = []
+    for (i = 0; i < data.length; i++) {
+        if(!(allTypes.includes(data[i].type))){
+            allTypes.push(data[i].type)
+        }
+    }
+    return allTypes
+}
+
+function  getAllUserNameByRole(role){
+    //var data = await requestApiNoBody("GET", "/users/")
+    var data = [{
+        "id": 1,
+        "name": "Titouan",
+        "code_postal": 91330,
+        "ville": "yerres",
+        "adresse": "affichage",
+        "num_phone": "1234567891",
+        "email": "test@test.fr",
+        "role": "benevole",
+        "email_verified": "False",
+    },
+        {
+            "id": 2,
+            "name": "Chauché",
+            "code_postal": 91330,
+            "ville": "yerres",
+            "adresse": "affichage",
+            "num_phone": "1234567891",
+            "email": "test@test.fr",
+            "role": "beneficiaire",
+            "email_verified": "False",
+        },
+        {
+            "id": 3,
+            "name": "Broooooooooooooooo",
+            "code_postal": 91330,
+            "ville": "yerres",
+            "adresse": "affichage",
+            "num_phone": "1234567891",
+            "email": "test@test.fr",
+            "role": "benevole",
+            "email_verified": "False",
+        }
+    ];
+
+    var userNameList = {}
+    for(i=0;i<data.length;i++) {
+        if (data[i].role === role){
+           userNameList[data[i].id] = data[i].name
+        }
+    }
+    console.log(userNameList)
+    return userNameList
+}
 

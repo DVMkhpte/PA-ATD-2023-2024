@@ -57,9 +57,9 @@
             <img src="../img/mission.png" />
             <span style="animation-delay: 0.3s">Missions</span>
           </button>
-          <button type="button" onclick="affichageBackEnd('Planning')">
-            <img src="../img/planning.png" />
-            <span style="animation-delay: 0.3s">Planning</span>
+          <button type="button" onclick="affichageBackEnd('Evenement')">
+            <img src="../img/evenement.png" />
+            <span style="animation-delay: 0.3s">Evenement</span>
           </button>
           <button type="button" onclick="affichageBackEnd('Stock')">
             <img src="../img/stock.png"/>
@@ -93,6 +93,9 @@
 <script src="../javaScript/back_end_function/formation.js" ></script>
 <script src="../javaScript/back_end_function/demande.js" ></script>
 <script src="../javaScript/back_end_function/mission.js" ></script>
+<script>
+    affichageBackEnd('Formations')
+</script>
 
 </body>
 </html>
