@@ -16,7 +16,8 @@
             <div class="nav_menu">
                 <div class="div_img" id="Planning" onclick="affichageBenevole('Planning')" ><img class="img_menu" src="../img/planning.png"></div>
                 <div class="div_img" id="Formation" onclick="affichageBenevole('Formation')"><img class="img_menu" src="../img/formation.png"></div>
-                <div class="div_img" id="Mission" onclick="affichageBenevole('Mission')"><img class="img_menu" src="../img/mission.png"></div>
+                <div class="div_img" id="Demande en attente" onclick="affichageBenevole('Demande en attente')"><img class="img_menu" src="../img/demande.png"></div>
+                <div class="div_img" id="Evenement" onclick="affichageBenevole('Evenement')"><img class="img_menu" src="../img/evenement.png"></div>
             </div>
 
             <div class="titre">
@@ -51,6 +52,7 @@
 
         <div class="nav_profil">
             <button class="modif">Modifier</button>
+            <button class="voir" onclick="affichageBenevole('Mes evenement')">Mes evenement</button>
             <button class="voir" onclick="affichageBenevole('Mes missions')">Mes missions</button>
             <button class="voir" onclick="affichageBenevole('Mes Formations')">Mes Formations</button>
         </div>
@@ -63,10 +65,12 @@
 <?php // include("../includes/footer.php") ?>
 
 <script src="../javaScript/benevole.js"></script>
-<script src="../javaScript/volonteer_function/mission.js"></script>
+<script src="../javaScript/volonteer_function/demande.js"></script>
 <script src="../javaScript/volonteer_function/formation.js"></script>
+<script src="../javaScript/volonteer_function/myMission.js"></script>
+<script src="../javaScript/volonteer_function/evenement.js"></script>
 <script>
-    affichageBenevole('Formation')
+    affichageBenevole('Planning')
 </script>
 </body>
 </html>

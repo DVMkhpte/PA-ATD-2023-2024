@@ -59,17 +59,61 @@ async function affichageBenevole(affichage) {
             var strBox = await affichageFormation(data);
             break;
 
-        case "Mission":
+        case "Demande en attente":
             //var data = await requestApiNoBody("GET", "/demande");
             var data = [
                 {
                     "id": 1,
-                    "type": "typetest",
+                    "type": "aide_administratif",
                     "demande": "Bonjour",
                     "id_user": 3,
-                    "etat": "En attente",
                     "updated_at": "2024-02-22T10:08:55.000000Z",
                     "created_at": "2024-02-22T10:08:55.000000Z",
+                    "etat" : "valider",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    }
+                },
+                {
+                    "id": 2,
+                    "type": "navette",
+                    "demande": "Bonjour fff",
+                    "id_user": 3,
+                    "updated_at": "2024-02-22T10:08:55.000000Z",
+                    "created_at": "2024-02-22T10:08:55.000000Z",
+                    "etat" : "valider",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    }
+                },
+                {
+                    "id": 2,
+                    "type": "demande_benevole",
+                    "demande": "Bonjour fff",
+                    "id_user": 3,
+                    "updated_at": "2024-02-22T10:08:55.000000Z",
+                    "created_at": "2024-02-22T10:08:55.000000Z",
+                    "etat" : "valider",
                     "user": {
                         "id": 3,
                         "name": "Enzo",
@@ -85,12 +129,42 @@ async function affichageBenevole(affichage) {
                     }
                 }
             ]
-            var strBox = await affichageMission(data);
+            var strBox = await affichageDemande(data);
             break;
 
         case "Mes missions":
             //var data = await requestApiNoBody("GET", "/mission");
-            var data = ""
+            var data = [
+                {
+                    "id": 1,
+                    "id_demande": 1,
+                    "realiser_par": 3,
+                    "created_at": "2024-02-28T14:51:38.000000Z",
+                    "updated_at": "2024-02-28T14:51:38.000000Z",
+                    "user": {
+                        "id": 3,
+                        "name": "Enzo",
+                        "code_postal": 0,
+                        "ville": "",
+                        "adresse": "",
+                        "num_telephone": 0,
+                        "email": "cocodoudo@gmail.com",
+                        "role": "admin",
+                        "email_verified_at": null,
+                        "created_at": "2024-02-12T20:45:43.000000Z",
+                        "updated_at": "2024-02-12T20:45:43.000000Z"
+                    },
+                    "demande": {
+                        "id": 1,
+                        "type": "navette",
+                        "etat": "fait",
+                        "demande": "Bonjour",
+                        "id_user": 3,
+                        "updated_at": "2024-02-22T10:08:55.000000Z",
+                        "created_at": "2024-02-22T10:08:55.000000Z"
+                    }
+                }
+            ]
             var strBox = await affichageMesMission(data)
             break;
 
@@ -98,6 +172,35 @@ async function affichageBenevole(affichage) {
             //var data = await requestApiNoBody("GET", "/formation");
             var data = ""
             var strBox = await affichageMesFormation(data)
+            break;
+
+        case "Evenement":
+            //var data = await requestApiNoBody("GET", "/evenements");
+            var data = [{
+                "id": 1,
+                "nom": "Gosse maraude",
+                "description": "On attend le plus de monde paussible sur cette maraude a villetech",
+                "date_debut": "2024-05-20",
+                "date_fin": "2024-05-22",
+                "type": "maraude",
+                "etat": "ouvert",
+                "adresse": "123 rue de l'IA",
+                "ville": "VilleTech",
+                "nb_participant" : 20
+            },{
+                "id": 2,
+                "nom": "Anniversaire de l'asso",
+                "description": "Deaj 1àans de l'association venez feter ca avec nous pour voous remercier de votre travail acharné",
+                "date_debut": "2024-05-20",
+                "date_fin": "2024-05-22",
+                "type": "Anniversaire",
+                "etat": "ouvert",
+                "adresse": "123 rue de l'IA",
+                "ville": "VilleTech",
+                "nb_participant" : 30
+            }]
+
+            strBox = await affichageEvenement(data);
             break;
 
         default:
@@ -108,4 +211,17 @@ async function affichageBenevole(affichage) {
     affichageContainer.innerHTML = strBox;
     
     
+}
+
+
+
+
+function getAllType(data){
+    var allTypes = []
+    for (i = 0; i < data.length; i++) {
+        if(!(allTypes.includes(data[i].type))){
+            allTypes.push(data[i].type)
+        }
+    }
+    return allTypes
 }

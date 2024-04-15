@@ -1,25 +1,26 @@
 
-async function affichageMission(data) {
+async function affichageDemande(data) {
     var filtre =
         "<div class=\"filtre\">\n" +
-        "   <div  class=\"barre_de_recherche\">\n" +
-        "       <input type=\"text\" id=\"search-article-input\" placeholder=\"Missions\">\n" +
-        "   </div>\n" +
-        "   <div  class=\"tout_les_filtre\">\n" +
+        "   <div  class=\"tout_les_filtre\">\n"+
         "       <select class=\"boutton\" name=\"trie\" id=\"trie\">\n" +
-        "           <option selected disabled hidden id=\"choix\">Trier type</option>\n" +
-        "           <option value=\"nom\" onclick=\"trie(\"nom\")\">Nom</option>\n" +
-        "           <option value=\"prenom\" onclick=\"trie(\"type\")\">Type</option>\n" +
-        "           <option value=\"acces\" onclick=\"trie(\"lieu\")\">Lieu</option>\n" +
-        "           <option value=\"acces\" onclick=\"trie(\"date\")\">Date</option>\n" +
-        "       </select>\n" +
+        "           <option selected disabled hidden id=\"choix\">Type</option>\n"+
+        "           <option value='en_cour' onclick='trieTypeD(\"aide_administratif\")'>Aide service administratif</option>" +
+        "           <option value='valider' onclick='trieTypeD(\"navette\")'>Navette</option>" +
+        "           <option value='en_attente_validation' onclick='trieTypeD(\"visite\")'>Visite</option>" +
+        "           <option value='annule' onclick='trieTypeD(\"autre\")'>Autre</option>" +
+        "       </select>\n"+
         "   </div>\n" +
+        "   <div class='div_riset'>" +
+        "       <img src='../img/reset.png' onclick='affichageBenevole(\"Demande en attente\")'/>"+
+        "   </div>"+
         "</div>"
 
     var allInfo = "<div class=\"all_info\">\n";
     var info = "";
     for(i=0; i<data.length; i++) {
-        if(data[i].type !== "demande-benevole" && data[i].etat === "En attente") {
+        console.log(data[i].etat)
+        if(data[i].type !== "demande_benevole" && data[i].etat === "valider") {
             info =
                 "<div class=\"info\">\n" +
                 "   <div class=\"description_general\">\n" +
@@ -51,17 +52,30 @@ async function affichageMission(data) {
 
 
 async function acceptMission(idD){
+    var formDataDemande = {
+        "etat": "en attente"
+    }
+
     var formDataMission = {
         "id_demande": idD
     }
 
-    var formDataDemande
     /*
     try {
-        const response = await requestApi(newFormData, "POST", "/missions/add");
+        const response = await requestApi(formDataDemande, "PITCH", "/demande/"+idD);
         if (response.status === 200) {
-            showAlert("Vous avez accepté cette mission avec succé!");
-            affichageBenevole("Mes formations")
+            showAlert("Vous avez accepté cette demande avec succé!");
+            try {
+                const response = await requestApi(formDataMission, "POST", "/missions/add");
+                if (response.status === 200) {
+                    showAlert("Nouvelle mission crée");
+                    affichageBenevole("Mes missions")
+                } else {
+                    showAlert("Erreur : " + response.status);
+                }
+            } catch (error) {
+                showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+            }
         } else {
             showAlert("Erreur : " + response.status);
         }
@@ -69,4 +83,5 @@ async function acceptMission(idD){
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
     */
+
 }

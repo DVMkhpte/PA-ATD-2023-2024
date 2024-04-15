@@ -1,20 +1,41 @@
 
 async function affichageFormation(data){
+    const allType = getAllType(data)
+
     var filtre =
         "<div class=\"filtre\">\n" +
-        "   <div  class=\"barre_de_recherche\">\n" +
-        "       <input type=\"text\" id=\"search-article-input\" placeholder=\"Formation\">\n" +
-        "   </div>\n" +
-        "   <div  class=\"tout_les_filtre\">\n" +
+        "   <div class=\"barre_de_recherche\">\n" +
+        "       <input type=\"text\" id=\"search-formation-input\" oninput=\"searchFormation()\" placeholder=\"Formations\">\n"+
+        "   </div>\n"+
+        "   <div class=\"tout_les_filtre\">\n"
+
+    var select =
         "       <select class=\"boutton\" name=\"trie\" id=\"trie\">\n" +
-        "           <option selected disabled hidden id=\"choix\">Trier par</option>\n" +
-        "           <option value=\"nom\" onclick=\"trie('nom')\">Nom</option>\n" +
-        "           <option value=\"prenom\" onclick=\"trie('type')\">Type</option>\n" +
-        "           <option value=\"acces\" onclick=\"trie('lieu')\">Lieu</option>\n" +
-        "           <option value=\"acces\" onclick=\"trie('date')\">Date</option>\n" +
-        "       </select>\n" +
+        "           <option selected disabled hidden id=\"choix\">Type</option>\n"
+
+    for(j=0;j<allType.length;j++) {
+        select = select.concat(
+            "<option value='"+ allType[j] +"' onclick=\"trieF('"+ allType[j] +"')\">"+ allType[j] +"</option>"
+        )
+
+    }
+
+    select = select.concat(
+        "       </select>\n"
+    )
+
+    filtre = filtre.concat(select)
+
+    filtre = filtre.concat(
         "   </div>\n" +
+        "   <div class=\"button_filtre\">\n" +
+        "       <button class=\"button_new\" onclick=\"add('addFormation.php')\">Nouveau</button>\n" +
+        "   </div>\n" +
+        "   <div class='div_riset'>" +
+        "       <img src='../img/reset.png' onclick='affichageBenevole(\"Formations\")'/>"+
+        "   </div>"+
         "</div>"
+    )
 
     var allInfo = "<div class=\"all_info\">\n";
     var info = "";
