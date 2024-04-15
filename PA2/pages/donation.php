@@ -64,7 +64,10 @@
 
         </div>
         <div class="form-group">
-            <p><a data-translate="why" href="about_donation.php" class="translate">Pourquoi faire un don ?</a></p>
+            <a href="about_donation.php" class="translate">
+                <span data-translate="why">Pourquoi faire un don ?</span>
+            </a>
+
         </div>
         </form>
     </div>

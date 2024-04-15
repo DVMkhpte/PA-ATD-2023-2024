@@ -16,12 +16,7 @@
     <form onsubmit="return validateForm()">
         <div class="form-group">
             <label for="name">Nom et Prenom :</label>
-            <input type="text" class="form-control" id="name">
-        </div>
-
-        <div class="form-group">
-            <label for="email">Adresse Email :</label>
-            <input type="email" class="form-control" id="email">
+            <input type="text" class="form-control" id="name" placeholder="Mamoru Takamura" required>
         </div>
 
         <div class="form-group">

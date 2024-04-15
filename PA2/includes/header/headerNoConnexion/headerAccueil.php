@@ -15,7 +15,7 @@
       <button onclick="toggleMenu()" class="burger"></button>
         <button class="button"><a href="index.php">Home</a></button>
       <div class="dropdowns">
-        <div class="dropdown">
+        <div class="dropdown" id="trad">
           <button class="button">
             Compte
             <img src="../includes/header/headerNoConnexion/chevron.svg" />
@@ -25,7 +25,7 @@
               <button><a href="createAccount.php"> Creer un compte</a></button>
           </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown" id="trad">
           <button class="button">
             Donation
             <img src="../includes/header/headerNoConnexion/chevron.svg" />
@@ -36,7 +36,7 @@
               <button><a href="about.php">Qui somme-nous ?</a></button>
           </div>
         </div>
-        <div class="dropdown">
+        <div class="dropdown" id="trad">
           <button class="button">
             Aide
             <img src="../includes/header/headerNoConnexion/chevron.svg" />
@@ -50,7 +50,7 @@
 
 
 
-          <div class="dropdown">
+          <div class="dropdown" id="trad">
               <script src="../javaScript/trad.js"></script>
               <button type="button" id="languageDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"">
                   Traduire
