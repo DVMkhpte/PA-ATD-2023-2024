@@ -87,12 +87,12 @@
 </script>
 <script src="../javaScript/back_end.js" ></script>
 <script src="../javaScript/function_api.js" ></script>
-<script src="../javaScript/back_end_function/benevole.js" ></script>
-<script src="../javaScript/back_end_function/beneficiaire.js" ></script>
+<script src="../javaScript/back_end_function/users.js" ></script>
 <script src="../javaScript/back_end_function/activitee.js" ></script>
 <script src="../javaScript/back_end_function/formation.js" ></script>
 <script src="../javaScript/back_end_function/demande.js" ></script>
 <script src="../javaScript/back_end_function/mission.js" ></script>
+<script src="../javaScript/back_end_function/evenement.js" ></script>
 <script>
     affichageBackEnd('Formations')
 </script>

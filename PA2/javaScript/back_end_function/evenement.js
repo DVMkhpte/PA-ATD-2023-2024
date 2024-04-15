@@ -1,11 +1,12 @@
 
-async function affichageFormation(data) {
+
+async function affichageEvenement(data){
     const allType = getAllType(data)
 
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div class=\"barre_de_recherche\">\n" +
-        "       <input type=\"text\" id=\"search-formation-input\" oninput=\"searchFormation()\" placeholder=\"Formations\">\n"+
+        "       <input type=\"text\" id=\"search-event-input\" oninput=\"searchEvenement()\" placeholder=\"Evenement\">\n"+
         "   </div>\n"+
         "   <div class=\"tout_les_filtre\">\n"
 
@@ -15,7 +16,7 @@ async function affichageFormation(data) {
 
     for(j=0;j<allType.length;j++) {
         select = select.concat(
-            "<option value='"+ allType[j] +"' onclick=\"trieF('"+ allType[j] +"')\">"+ allType[j] +"</option>"
+            "<option value='"+ allType[j] +"' onclick=\"trieE('"+ allType[j] +"')\">"+ allType[j] +"</option>"
         )
 
     }
@@ -29,23 +30,20 @@ async function affichageFormation(data) {
     filtre = filtre.concat(
         "   </div>\n" +
         "   <div class=\"button_filtre\">\n" +
-        "       <button class=\"button_new\" onclick=\"add('addFormation.php')\">Nouveau</button>\n" +
+        "       <button class=\"button_new\" onclick=\"add('addEvenement.php')\">Nouveau</button>\n" +
         "   </div>\n" +
         "   <div class='div_riset'>" +
-        "       <img src='../img/reset.png' onclick='affichageBackEnd(\"Formations\")'/>"+
+        "       <img src='../img/reset.png' onclick='affichageBackEnd(\"Evenement\")'/>"+
         "   </div>"+
         "</div>"
     )
-
-
-
 
     var allInfo = "<div id='allInfo'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
         info =
             "<div class=\"contener_1\">\n" +
-            "   <div class=\"contener_2\"  id=\"formation"+data[i].id+"\">\n" +
+            "   <div class=\"contener_2\"  id=\"evenement"+data[i].id+"\">\n" +
             "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
             "       </div>" +
             "       <div class=\"description_activitee\">\n" +
@@ -59,13 +57,13 @@ async function affichageFormation(data) {
             "           </div>\n" +
             "           <div class=\"description2_activitee\">\n" +
             "               <p>Description: " + data[i].description + "</p>\n" +
-            "               <div class=\"superviserPar\">Superviser Par : " + data[i].supervisor.name + "</div>\n" +
-            "               <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
+
+            "               <div class=\"nb_plae\">Nombre de participants : " + data[i].nb_participant + "</div>\n" +
             "           </div>\n" +
             "       </div>\n" +
             "       <div class=\"option\">\n" +
-            "           <button class=\"modif\" onclick=\"modifFormation(" + data[i].id + ")\">Modifier la formation</button>\n" +
-            "           <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participef/')\">Voir les participants</button>\n" +
+            "           <button class=\"modif\" onclick=\"modifEvenement(" + data[i].id + ")\">Modifier evenement</button>\n" +
+            "           <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participeE/')\">Voir les participants</button>\n" +
             "           <button class=\"supp\">Supprimer</button>\n" +
             "       </div>\n" +
             "   </div>\n" +
@@ -82,74 +80,53 @@ async function affichageFormation(data) {
 }
 
 
-async function modifFormation(id){
-    //var data = await requestApiNoBody("GET", "/formations/"+id)
+
+async function modifEvenement(id){
+    //var data = await requestApiNoBody("GET", "/evenements/"+id)
     var data =
         {
-            id: "1",
-            nom: "si mais",
-            type: "Type 1",
-            adresse: "123 Rue de la Rue",
-            date_debut: "01/04/2024",
-            date_fin: "03/04/2024",
-            description: "Ceci est la description de l'activité 1",
-            nb_place: 20,
-            supervisor: {
-                name: "Superviseur 1"
-            }
+            "id": 1,
+            "nom": "Gosse maraude",
+            "description": "On attend le plus de monde paussible sur cette maraude a villetech",
+            "date_debut": "2024-05-20",
+            "date_fin": "2024-05-22",
+            "type": "maraude",
+            "etat": "ouvert",
+            "adresse": "123 rue de l'IA",
+            "ville": "VilleTech",
+            "nb_participant" : 20
         }
 
     var userNameList = getAllUserNameByRole("benevole")
-    var addInput = document.getElementById("formation" +id)
+    var addInput = document.getElementById("evenement" +id)
 
     var input =
-    "       <div class=\"description_activitee\">\n" +
-    "           <div class=\"description1_activitee\">\n" +
-    "               <div class=\"description1_1_activitee\">\n" +
-    "                   <div class=\"nom\"> <input class=\"inputModif\" type=\"text\" id=\"nom\" value='" + data.nom + "' placeholder='" + data.nom + "'> </div>\n" +
-    "                   <div class=\"type\"> <input class=\"inputModif\" type=\"text\" id=\"type\" value='" + data.type + "' placeholder='" + data.type + "'> </div>\n" +
-    "               </div>\n" +
-    "               <div class=\"adresse\"> Au <input class=\"inputModif\" type=\"text\" id=\"adresse\" value='" + data.adresse + "' placeholder='" + data.adresse + "'> </div>\n" +
-    "               <div class=\"date\"> " +
-    "                               Du <input class=\"inputModif\" type=\"date\" id=\"date_debut\" value='" + data.date_debut + "'> " +
-    "                               au <input class=\"inputModif\" type=\"date\" id=\"date_fin\" value='" + data.date_fin + "'> " +
-    "               </div>\n" +
-    "           </div>\n" +
-    "           <div class=\"description2_activitee\">\n" +
-    "               <div>Description: </div><textarea class=\"inputModif\" type=\"text\" id=\"description\" placeholder='" + data.description + "'>" + data.description + "</textarea> \n" +
-    "               <div class=\"superviserPar\">Superviser Par :"
+        "       <div class=\"description_activitee\">\n" +
+        "           <div class=\"description1_activitee\">\n" +
+        "               <div class=\"description1_1_activitee\">\n" +
+        "                   <div class=\"nom\"> <input class=\"inputModif\" type=\"text\" id=\"nom\" value='" + data.nom + "' placeholder='" + data.nom + "'> </div>\n" +
+        "                   <div class=\"type\"> <input class=\"inputModif\" type=\"text\" id=\"type\" value='" + data.type + "' placeholder='" + data.type + "'> </div>\n" +
+        "               </div>\n" +
+        "               <div class=\"adresse\"> Au <input class=\"inputModif\" type=\"text\" id=\"adresse\" value='" + data.adresse + "' placeholder='" + data.adresse + "'> </div>\n" +
+        "               <div class=\"date\"> " +
+        "                               Du <input class=\"inputModif\" type=\"date\" id=\"date_debut\" value='" + data.date_debut + "'> " +
+        "                               au <input class=\"inputModif\" type=\"date\" id=\"date_fin\" value='" + data.date_fin + "'> " +
+        "               </div>\n" +
+        "           </div>\n" +
+        "           <div class=\"description2_activitee\">\n" +
+        "               <div>Description: </div><textarea class=\"inputModif\" type=\"text\" id=\"description\" placeholder='" + data.description + "'>" + data.description + "</textarea> \n" +
+        "           </div>"+
+        "       </div>\n" +
+        "       <div class=\"option\">\n" +
+        "           <button class=\"modif\" onclick=\"validModifE(" + data.id + ")\">Valider</button>\n" +
+        "           <button class=\"modif\" onclick=\"affichageBackEnd('Evenement')\">Annuler</button>\n" +
+        "       </div>\n"
 
-    var select =
-        "       <select class=\"boutton\" name=\"supervisor\" id=\"supervisorId\">\n" +
-        "           <option selected disabled hidden id=\"choix\">"+ data.supervisor.name +"</option>\n"
-
-    for(var key in userNameList){
-        select = select.concat(
-            "<option value='"+ key +"' \">"+ userNameList[key] +"</option>"
-        )
-    }
-
-    select = select.concat(
-        "       </select>\n"
-    )
-
-    input = input.concat(select)
-
-    input = input.concat(
-    "               </div>\n" +
-    "               <div class=\"nb_plae\">Place restante : <input class=\"inputModif\" type=\"number\" id=\"nb_place\" value='" + data.nb_place + "' placeholder='" + data.nom + "'></div>\n" +
-    "           </div>\n" +
-    "       </div>\n" +
-    "       <div class=\"option\">\n" +
-    "           <button class=\"modif\" onclick=\"validModifF(" + data.id + ")\">Valider</button>\n" +
-    "           <button class=\"modif\" onclick=\"affichageBackEnd('Formations')\">Annuler</button>\n" +
-    "       </div>\n"
-    )
 
     addInput.innerHTML = input;
 }
 
-async function validModifF(id){
+async function validModifE(id){
     const nom = document.getElementById('nom').value;
     const type = document.getElementById('type').value;
     const adresse  = document.getElementById('adresse').value;
@@ -190,38 +167,34 @@ async function validModifF(id){
 
 }
 
-async function searchFormation() {
-    //var data = await requestApiNoBody("GET", "/formations");
-    var data = [
-        {
-            "id": "1",
-            "nom": "si mais",
-            "type": "Type 1",
-            "adresse": "123 Rue de la Rue",
-            "date_debut": "01/04/2024",
-            "date_fin": "03/04/2024",
-            "description": "Ceci est la description de l'activité 1",
-            "nb_place": 20,
-            "supervisor": {
-                "name": "Superviseur 1"
-            }
-        },
-        {
-            "id": "2",
-            "nom": "mais non",
-            "type": "Type 2",
-            "adresse": "456 Avenue de l'Avenue",
-            "date_debut": "05/04/2024",
-            "date_fin": "07/04/2024",
-            "description": "Ceci est la description de l'activité 2",
-            "nb_place": 15,
-            "supervisor": {
-                "name": "Superviseur 2"
-            }
-        }
-    ]
 
-    const input = document.getElementById('search-formation-input');
+
+
+async function searchEvenement() {
+    //var data = await requestApiNoBody("GET", "/demande");
+    var data = [{
+        "nom": "Gosse maraude",
+        "description": "On attend le plus de monde paussible sur cette maraude a villetech",
+        "date_debut": "2024-05-20",
+        "date_fin": "2024-05-22",
+        "type": "maraude",
+        "etat": "ouvert",
+        "adresse": "123 rue de l'IA",
+        "ville": "VilleTech",
+        "nb_participant" : 20
+    },{
+        "nom": "Anniversaire de l'asso",
+        "description": "Deaj 1àans de l'association venez feter ca avec nous pour voous remercier de votre travail acharné",
+        "date_debut": "2024-05-20",
+        "date_fin": "2024-05-22",
+        "type": "Anniversaire",
+        "etat": "ouvert",
+        "adresse": "123 rue de l'IA",
+        "ville": "VilleTech",
+        "nb_participant" : 30
+    }]
+
+    const input = document.getElementById('search-event-input');
     const search = input.value;
 
     var allInfo = ""
@@ -233,10 +206,10 @@ async function searchFormation() {
         if(search.length > 0) {
             dataName = data[i].nom
             if (dataName.includes(search)) {
-                info =
+                var info =
                     "<div class=\"contener_1\">\n" +
-                    "   <div class=\"contener_2\"  id=\"formation" + data[i].id + "\">\n" +
-                    "       <div class=\"participation\" id=\"participation" + data[i].id + "\">" +
+                    "   <div class=\"contener_2\"  id=\"evenement"+data[i].id+"\">\n" +
+                    "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
                     "       </div>" +
                     "       <div class=\"description_activitee\">\n" +
                     "           <div class=\"description1_activitee\">\n" +
@@ -244,17 +217,17 @@ async function searchFormation() {
                     "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
                     "                   <div class=\"type\">" + data[i].type + "</div>\n" +
                     "               </div>\n" +
-                    "               <div class=\"adresse\"> Au  " + data[i].adresse + "</div>\n" +
+                    "               <div class=\"adresse\"> Au  "+ data[i].adresse + "</div>\n" +
                     "               <div class=\"date\"> Du  " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
                     "           </div>\n" +
                     "           <div class=\"description2_activitee\">\n" +
                     "               <p>Description: " + data[i].description + "</p>\n" +
-                    "               <div class=\"superviserPar\">Superviser Par : " + data[i].supervisor.name + "</div>\n" +
-                    "               <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
+
+                    "               <div class=\"nb_plae\">Nombre de participants : " + data[i].nb_participant + "</div>\n" +
                     "           </div>\n" +
                     "       </div>\n" +
                     "       <div class=\"option\">\n" +
-                    "           <button class=\"modif\" onclick=\"modifFormation(" + data[i].id + ")\">Modifier la formation</button>\n" +
+                    "           <button class=\"modif\" onclick=\"modifEvenement(" + data[i].id + ")\">Modifier evenement</button>\n" +
                     "           <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participef/')\">Voir les participants</button>\n" +
                     "           <button class=\"supp\">Supprimer</button>\n" +
                     "       </div>\n" +
@@ -264,9 +237,9 @@ async function searchFormation() {
                 allInfo = allInfo.concat(info)
             }
         }else {
-            info =
+            var info =
                 "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\"  id=\"formation"+data[i].id+"\">\n" +
+                "   <div class=\"contener_2\"  id=\"evenement"+data[i].id+"\">\n" +
                 "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
                 "       </div>" +
                 "       <div class=\"description_activitee\">\n" +
@@ -280,12 +253,12 @@ async function searchFormation() {
                 "           </div>\n" +
                 "           <div class=\"description2_activitee\">\n" +
                 "               <p>Description: " + data[i].description + "</p>\n" +
-                "               <div class=\"superviserPar\">Superviser Par : " + data[i].supervisor.name + "</div>\n" +
-                "               <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
+
+                "               <div class=\"nb_plae\">Nombre de participants : " + data[i].nb_participant + "</div>\n" +
                 "           </div>\n" +
                 "       </div>\n" +
                 "       <div class=\"option\">\n" +
-                "           <button class=\"modif\" onclick=\"modifFormation(" + data[i].id + ")\">Modifier la formation</button>\n" +
+                "           <button class=\"modif\" onclick=\"modifEvenement(" + data[i].id + ")\">Modifier evenement</button>\n" +
                 "           <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participef/')\">Voir les participants</button>\n" +
                 "           <button class=\"supp\">Supprimer</button>\n" +
                 "       </div>\n" +
@@ -298,36 +271,31 @@ async function searchFormation() {
     box.innerHTML = allInfo
 }
 
-function trieF(filtre) {
-    //var data = await requestApiNoBody("GET", "/formations");
-    var data = [
-        {
-            "id": "1",
-            "nom": "si mais",
-            "type": "Type 1",
-            "adresse": "123 Rue de la Rue",
-            "date_debut": "01/04/2024",
-            "date_fin": "03/04/2024",
-            "description": "Ceci est la description de l'activité 1",
-            "nb_place": 20,
-            "supervisor": {
-                "name": "Superviseur 1"
-            }
-        },
-        {
-            "id": "2",
-            "nom": "mais non",
-            "type": "Type 2",
-            "adresse": "456 Avenue de l'Avenue",
-            "date_debut": "05/04/2024",
-            "date_fin": "07/04/2024",
-            "description": "Ceci est la description de l'activité 2",
-            "nb_place": 15,
-            "supervisor": {
-                "name": "Superviseur 2"
-            }
-        }
-    ]
+
+
+function trieE(filtre) {
+    //var data = await requestApiNoBody("GET", "/demande");
+    var data = [{
+        "nom": "Gosse maraude",
+        "description": "On attend le plus de monde paussible sur cette maraude a villetech",
+        "date_debut": "2024-05-20",
+        "date_fin": "2024-05-22",
+        "type": "maraude",
+        "etat": "ouvert",
+        "adresse": "123 rue de l'IA",
+        "ville": "VilleTech",
+        "nb_participant" : 20
+    },{
+        "nom": "Anniversaire de l'asso",
+        "description": "Deaj 1àans de l'association venez feter ca avec nous pour voous remercier de votre travail acharné",
+        "date_debut": "2024-05-20",
+        "date_fin": "2024-05-22",
+        "type": "Anniversaire",
+        "etat": "ouvert",
+        "adresse": "123 rue de l'IA",
+        "ville": "VilleTech",
+        "nb_participant" : 30
+    }]
 
     const box = document.getElementById('allInfo');
     box.innerHTML = "";
@@ -335,10 +303,10 @@ function trieF(filtre) {
     var allInfo = ""
     for(i=0; i<data.length; i++) {
         if (data[i].type === filtre) {
-            info =
+            var info =
                 "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\"  id=\"formation" + data[i].id + "\">\n" +
-                "       <div class=\"participation\" id=\"participation" + data[i].id + "\">" +
+                "   <div class=\"contener_2\"  id=\"evenement"+data[i].id+"\">\n" +
+                "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
                 "       </div>" +
                 "       <div class=\"description_activitee\">\n" +
                 "           <div class=\"description1_activitee\">\n" +
@@ -346,17 +314,17 @@ function trieF(filtre) {
                 "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
                 "                   <div class=\"type\">" + data[i].type + "</div>\n" +
                 "               </div>\n" +
-                "               <div class=\"adresse\"> Au  " + data[i].adresse + "</div>\n" +
+                "               <div class=\"adresse\"> Au  "+ data[i].adresse + "</div>\n" +
                 "               <div class=\"date\"> Du  " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
                 "           </div>\n" +
                 "           <div class=\"description2_activitee\">\n" +
                 "               <p>Description: " + data[i].description + "</p>\n" +
-                "               <div class=\"superviserPar\">Superviser Par : " + data[i].supervisor.name + "</div>\n" +
-                "               <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
+
+                "               <div class=\"nb_plae\">Nombre de participants : " + data[i].nb_participant + "</div>\n" +
                 "           </div>\n" +
                 "       </div>\n" +
                 "       <div class=\"option\">\n" +
-                "           <button class=\"modif\" onclick=\"modifFormation(" + data[i].id + ")\">Modifier la formation</button>\n" +
+                "           <button class=\"modif\" onclick=\"modifEvenement(" + data[i].id + ")\">Modifier evenement</button>\n" +
                 "           <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participef/')\">Voir les participants</button>\n" +
                 "           <button class=\"supp\">Supprimer</button>\n" +
                 "       </div>\n" +
@@ -368,7 +336,3 @@ function trieF(filtre) {
     }
     box.innerHTML = allInfo
 }
-
-
-
-

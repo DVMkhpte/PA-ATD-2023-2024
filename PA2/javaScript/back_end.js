@@ -38,7 +38,7 @@ async function affichageBackEnd(affichage) {
                     "email_verified": "False",
                 }
             ];
-            strBox = await affichageBenevole(data);
+            strBox = await affichageUser(data, "benevole");
 
             break;
 
@@ -67,7 +67,7 @@ async function affichageBackEnd(affichage) {
                     "email_verified": "False",
                 }
             ];
-            strBox = await affichageBeneficiaire(data);
+            strBox = await affichageUser(data, "beneficiaire");
 
             break;
 
@@ -146,12 +146,12 @@ async function affichageBackEnd(affichage) {
             var data = [
                 {
                     "id": 1,
-                    "type": "typetest",
+                    "type": "aide_administratif",
                     "demande": "Bonjour",
                     "id_user": 3,
                     "updated_at": "2024-02-22T10:08:55.000000Z",
                     "created_at": "2024-02-22T10:08:55.000000Z",
-                    "statut" : "fait",
+                    "etat" : "fait",
                     "user": {
                         "id": 3,
                         "name": "Enzo",
@@ -168,12 +168,12 @@ async function affichageBackEnd(affichage) {
                 },
                 {
                     "id": 2,
-                    "type": "typetest2",
+                    "type": "navette",
                     "demande": "Bonjour fff",
                     "id_user": 3,
                     "updated_at": "2024-02-22T10:08:55.000000Z",
                     "created_at": "2024-02-22T10:08:55.000000Z",
-                    "statut" : "en cour",
+                    "etat" : "en cour",
                     "user": {
                         "id": 3,
                         "name": "Enzo",
@@ -190,12 +190,12 @@ async function affichageBackEnd(affichage) {
                 },
                 {
                     "id": 2,
-                    "type": "typetest2",
+                    "type": "demande_benevole",
                     "demande": "Bonjour fff",
                     "id_user": 3,
                     "updated_at": "2024-02-22T10:08:55.000000Z",
                     "created_at": "2024-02-22T10:08:55.000000Z",
-                    "statut" : "en attente",
+                    "etat" : "en attente",
                     "user": {
                         "id": 3,
                         "name": "Enzo",
@@ -238,7 +238,8 @@ async function affichageBackEnd(affichage) {
                     },
                     "demande": {
                         "id": 1,
-                        "type": "typetest",
+                        "type": "navette",
+                        "etat": "fait",
                         "demande": "Bonjour",
                         "id_user": 3,
                         "updated_at": "2024-02-22T10:08:55.000000Z",
@@ -250,6 +251,32 @@ async function affichageBackEnd(affichage) {
             break;
 
         case "Evenement":
+            //var data = await requestApiNoBody("GET", "/evenements");
+            var data = [{
+                "id": 1,
+                "nom": "Gosse maraude",
+                "description": "On attend le plus de monde paussible sur cette maraude a villetech",
+                "date_debut": "2024-05-20",
+                "date_fin": "2024-05-22",
+                "type": "maraude",
+                "etat": "ouvert",
+                "adresse": "123 rue de l'IA",
+                "ville": "VilleTech",
+                "nb_participant" : 20
+            },{
+                "id": 2,
+                "nom": "Anniversaire de l'asso",
+                "description": "Deaj 1àans de l'association venez feter ca avec nous pour voous remercier de votre travail acharné",
+                "date_debut": "2024-05-20",
+                "date_fin": "2024-05-22",
+                "type": "Anniversaire",
+                "etat": "ouvert",
+                "adresse": "123 rue de l'IA",
+                "ville": "VilleTech",
+                "nb_participant" : 30
+            }]
+
+            strBox = await affichageEvenement(data);
             break;
 
         default:
@@ -311,6 +338,28 @@ async function voirParticipant(id, link){
 
     var affichage = head.concat(allParticipants)
     participation.innerHTML = affichage
+}
+
+
+async function updateRoleUser(id, role){
+    var fomrData =
+    {
+        "role": role
+    }
+
+    /*
+    try {
+        const response = await requestApi(formData, "PITCH", "/users/"+id);
+        if (response.status === 200) {
+            showAlert("Changement de role effectué");
+        } else {
+            showAlert("Erreur lors du changement de role: " + response.status);
+        }
+    } catch (error) {
+        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+    }
+    */
+
 }
 
 

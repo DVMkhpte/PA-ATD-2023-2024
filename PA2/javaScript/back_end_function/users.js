@@ -1,18 +1,9 @@
 
-function affichageBenevole(data){
+function affichageUser(data, role){
     var filtre =
         "<div class=\"filtre\"> " +
         "   <div class= \"barre_de_recherche\"> " +
         "       <input type = \"text\" id = \"search-article-input\" placeholder = \"Activitées\" >" +
-        "   </div>" +
-        "   <div  class=\"tout_les_filtre\">" +
-        "       <select class=\"boutton\" name=\"trie\" id=\"trie\">" +
-        "           <option selected disabled hidden id=\"choix\">Trier par</option>" +
-        "           <option value = \"nom\" onclick = \"trie(\"nom\")\" >Nom</option>" +
-        "           <option value=\"prenom\" onclick=\"trie(\" prenom\")\">Prénom</option>" +
-        "           <option value=\"acces\" onclick=\"trie(\"acces\")\">Accés</option>" +
-        "          <option value=\"acces\" onclick=\"trie(\"statut\")\">Statut</option>" +
-        "       </select>" +
         "   </div>" +
         "   <div class=\"button_filtre\">\n" +
         "       <button class=\"button_new\" onclick='add(\"addUser.php\")'>Nouveau</button>" +
@@ -22,7 +13,7 @@ function affichageBenevole(data){
     var allInfo = "";
     var info = "";
     for(i=0; i<data.length; i++){
-        if(data[i].role == "benevole"){
+        if(data[i].role === role){
             info =
                 "<div class=\"contener_1\">\n" +
                 "   <div class=\"contener_2\">\n" +
@@ -42,9 +33,8 @@ function affichageBenevole(data){
                 "           </div>\n" +
                 "       </div>\n" +
                 "       <div class=\"option\">\n" +
-                "           <button class=\"modif_acces\">Modifier accé</button>\n" +
-                "           <button class=\"passer_admin\">Passer admin</button>\n" +
-                "           <button class=\"bannir\">Bannir</button>\n" +
+                "           <button class=\"passer_admin\" onclick='updateRoleUser("+ data[i].id +")'>Passer admin</button>\n" +
+                "           <button class=\"bannir\" onclick='banUser("+ data[i].id +")'>Bannir</button>\n" +
                 "           <button class=\"supp\">Supprimer</button>\n" +
                 "       </div>\n" +
                 "   </div>\n" +
@@ -56,4 +46,24 @@ function affichageBenevole(data){
     }
     var affichage = filtre.concat(allInfo);
     return affichage;
+}
+
+async function banUser(id){
+    var fomrData =
+        {
+            "statut": "ban"
+        }
+
+    /*
+    try {
+        const response = await requestApi(formData, "PITCH", "/users/"+id);
+        if (response.status === 200) {
+            showAlert(Utilisateur bannie");
+        } else {
+            showAlert("Erreur lors du bannisement: " + response.status);
+        }
+    } catch (error) {
+        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+    }
+    */
 }
