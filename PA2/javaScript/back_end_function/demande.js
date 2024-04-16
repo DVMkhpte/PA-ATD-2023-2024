@@ -1,5 +1,53 @@
+async function getInfoD(data){
+    var info =
+        "<div class=\"contener_1\">\n" +
+        "   <div class=\"contener_2\">\n" +
+        "       <div class=\"description_demande\">\n" +
+        "           <div class=\"description1_demande\">\n" +
+        "               <div class=\"type\">Type : " + data.type + "</div>\n" +
+        "               <div class=\"fait_par\">De : " + data.user.name + "</div>\n" +
+        "               <div class=\"date\">Fait le : " + data.created_at + "</div>\n" +
+        "           </div>\n" +
+        "           <div class=\"description2_demande\">\n" +
+        "               <div>" + data.demande + "</div>\n" +
+        "               <div>Statut : "+ data.etat +"</div>"+
+        "           </div>\n" +
+        "       </div>\n"
 
-function affichageDemande(data) {
+    var button =
+        "       <div class=\"option\">\n"
+    if(data.etat === "en attente"){
+        button = button.concat(
+            "           <button class=\"accepter\" onclick='validAsk("+ data.id +")'>Valider</button>\n" +
+            "           <button class=\"annuler\" onclick='cancelAsk("+ data.id +")'>Annuler</button>\n" +
+            "           <button class=\"supp\">Supprimer</button>\n" +
+            "       </div>\n" +
+            "    </div>\n" +
+            "</div>"
+        )
+    }else if(data.etat === "en cour" || data.etat === "valider"){
+        button = button.concat(
+            "           <button class=\"annuler\" onclick='cancelAsk("+ data.id +")'>Annuler</button>\n" +
+            "           <button class=\"supp\">Supprimer</button>\n" +
+            "       </div>\n" +
+            "    </div>\n" +
+            "</div>"
+        )
+    }else{
+        button = button.concat(
+            "           <button class=\"supp\">Supprimer</button>\n" +
+            "       </div>\n" +
+            "    </div>\n" +
+            "</div>"
+        )
+    }
+    info = info.concat(button)
+
+    return info
+}
+
+
+async function affichageDemande(data) {
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div  class=\"tout_les_filtre\">\n"+
@@ -31,49 +79,8 @@ function affichageDemande(data) {
     var allInfo = "<div id='allInfo'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
-        info =
-            "<div class=\"contener_1\">\n" +
-            "   <div class=\"contener_2\">\n" +
-            "       <div class=\"description_demande\">\n" +
-            "           <div class=\"description1_demande\">\n" +
-            "               <div class=\"type\">Type : " + data[i].type + "</div>\n" +
-            "               <div class=\"fait_par\">De : " + data[i].user.name + "</div>\n" +
-            "               <div class=\"date\">Fait le : " + data[i].created_at + "</div>\n" +
-            "           </div>\n" +
-            "           <div class=\"description2_demande\">\n" +
-            "               <div>" + data[i].demande + "</div>\n" +
-            "               <div>Statut : "+ data[i].etat +"</div>"+
-            "           </div>\n" +
-            "       </div>\n"
+        info = await getInfoD(data[i])
 
-        var button =
-        "       <div class=\"option\">\n"
-        if(data[i].etat === "en attente"){
-            button = button.concat(
-                "           <button class=\"accepter\" onclick='validAsk("+ data[i].id +")'>Valider</button>\n" +
-                "           <button class=\"annuler\" onclick='cancelAsk("+ data[i].id +")'>Annuler</button>\n" +
-                "           <button class=\"supp\">Supprimer</button>\n" +
-                "       </div>\n" +
-                "    </div>\n" +
-                "</div>"
-            )
-        }else if(data[i].etat === "en cour" || data[i].etat === "valider"){
-            button = button.concat(
-                "           <button class=\"annuler\" onclick='cancelAsk("+ data[i].id +")'>Annuler</button>\n" +
-                "           <button class=\"supp\">Supprimer</button>\n" +
-                "       </div>\n" +
-                "    </div>\n" +
-                "</div>"
-            )
-        }else{
-            button = button.concat(
-                "           <button class=\"supp\">Supprimer</button>\n" +
-                "       </div>\n" +
-                "    </div>\n" +
-                "</div>"
-            )
-        }
-        info = info.concat(button)
         allInfo = allInfo.concat(info)
     }
     allInfo = allInfo.concat("</div>")
@@ -212,49 +219,7 @@ async function trieTypeD(filtre){
     for(i=0; i<data.length; i++) {
         console.log(data[i].type)
         if (data[i].type === filtre) {
-            var info =
-                "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\">\n" +
-                "       <div class=\"description_demande\">\n" +
-                "           <div class=\"description1_demande\">\n" +
-                "               <div class=\"type\">Type : " + data[i].type + "</div>\n" +
-                "               <div class=\"fait_par\">De : " + data[i].user.name + "</div>\n" +
-                "               <div class=\"date\">Fait le : " + data[i].created_at + "</div>\n" +
-                "           </div>\n" +
-                "           <div class=\"description2_demande\">\n" +
-                "               <div>" + data[i].demande + "</div>\n" +
-                "               <div>Statut : " + data[i].etat + "</div>" +
-                "           </div>\n" +
-                "       </div>\n"
-
-            var button =
-                "       <div class=\"option\">\n"
-            if (data[i].etat === "en attente") {
-                button = button.concat(
-                    "           <button class=\"accepter\" onclick='acceptAsk(" + data[i].id + ")'>Accepter</button>\n" +
-                    "           <button class=\"annuler\" onclick='cancelAsk(" + data[i].id + ")'>Annuler</button>\n" +
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                )
-            } else if (data[i].etat === "en cour") {
-                button = button.concat(
-                    "           <button class=\"annuler\" onclick='cancelMission(" + data[i].id + ")'>Annuler</button>\n" +
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                )
-            } else {
-                button = button.concat(
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                )
-            }
-            info = info.concat(button)
+            var info = await getInfoD(data[i])
             allInfo = allInfo.concat(info)
         }
     }
@@ -274,49 +239,7 @@ async function trieStateD(filtreEtat){
     var allInfo = ""
     for(i=0; i<data.length; i++) {
         if (data[i].etat === filtreEtat) {
-            var info =
-                "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\">\n" +
-                "       <div class=\"description_demande\">\n" +
-                "           <div class=\"description1_demande\">\n" +
-                "               <div class=\"type\">Type : " + data[i].type + "</div>\n" +
-                "               <div class=\"fait_par\">De : " + data[i].user.name + "</div>\n" +
-                "               <div class=\"date\">Fait le : " + data[i].created_at + "</div>\n" +
-                "           </div>\n" +
-                "           <div class=\"description2_demande\">\n" +
-                "               <div>" + data[i].demande + "</div>\n" +
-                "               <div>Statut : " + data[i].etat + "</div>" +
-                "           </div>\n" +
-                "       </div>\n"
-
-            var button =
-                "       <div class=\"option\">\n"
-            if (data[i].etat === "en attente") {
-                button = button.concat(
-                    "           <button class=\"accepter\" onclick='acceptAsk(" + data[i].id + ")'>Accepter</button>\n" +
-                    "           <button class=\"annuler\" onclick='cancelAsk(" + data[i].id + ")'>Annuler</button>\n" +
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                );
-            } else if (data[i].etat === "en cour") {
-                button = button.concat(
-                    "           <button class=\"annuler\" onclick='cancelMission(" + data[i].id + ")'>Annuler</button>\n" +
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                );
-            } else {
-                button = button.concat(
-                    "           <button class=\"supp\">Supprimer</button>\n" +
-                    "       </div>\n" +
-                    "    </div>\n" +
-                    "</div>"
-                );
-            }
-            info = info.concat(button)
+            var info = await getInfoD(data[i])
             allInfo = allInfo.concat(info)
         }
     }

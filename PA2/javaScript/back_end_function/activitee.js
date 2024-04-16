@@ -1,5 +1,35 @@
+async function getInfoA(data){
+    var info =
+        "<div class=\"contener_1\">\n" +
+        "   <div class=\"contener_2\" id=\"activite"+data.id+"\">\n" +
+        "       <div class=\"participation\" id=\"participation"+ data.id +"\">" +
+        "       </div>" +
+        "       <div class=\"description_activitee\">\n" +
+        "           <div class=\"description1_activitee\">\n" +
+        "               <div class=\"description1_1_activitee\">\n" +
+        "                   <div class=\"nom\">" + data.nom + "</div>\n" +
+        "               </div>\n" +
+        "               <div class=\"adresse\"> Au  + data.adresse + </div>\n" +
+        "                   <div class=\"date\">Du " + data.date_debut + " au " + data.date_fin + "</div>\n" +
+        "               </div>\n" +
+        "               <div class=\"description2_activitee\">\n" +
+        "                   <p>Description: " + data.description + "</p>\n" +
+        "                   <div class=\"superviserPar\">Superviser Par : " + data.superviser_par.name + "</div>\n" +
+        "                   <div class=\"nb_plae\">Place restante : " + data.nb_place + "</div>\n" +
+        "               </div>\n" +
+        "           </div>\n" +
+        "           <div class=\"option\">\n" +
+        "               <button class=\"modif\" onclick=\"modifActivite(" + data.id + ")\">Modifier l'activité</button>\n" +
+        "               <button class=\"voir\" onclick=\"voirParticipant(" + data.id + ", '/participea/')\">Voir les participants</button>\n" +
+        "               <button class=\"supp\">Supprimer</button>\n" +
+        "           </div>\n" +
+        "       </div>\n" +
+        "   </div>"
 
-function affichageActivitee(data) {
+    return info
+}
+
+async function affichageActivitee(data) {
     const allType = getAllType(data)
 
     var filtre =
@@ -8,24 +38,18 @@ function affichageActivitee(data) {
         "       <input type=\"text\" id=\"search-activity-input\" placeholder=\"Activitées\" oninput='searchActivity()'>\n" +
         "   </div>\n" +
         "   <div  class=\"tout_les_filtre\">\n"
-
     var select =
         "       <select class=\"boutton\" name=\"trie\" id=\"trie\">\n" +
         "           <option selected disabled hidden id=\"choix\">Type</option>\n"
-
     for(j=0;j<allType.length;j++) {
         select = select.concat(
             "<option value='"+ allType[j] +"' onclick=\"trieF('"+ allType[j] +"')\">"+ allType[j] +"</option>"
         )
-
     }
-
     select = select.concat(
         "       </select>\n"
     )
-
     filtre = filtre.concat(select)
-
     filtre = filtre.concat(
         "   </div>\n" +
         "   <div class=\"button_filtre\">\n" +
@@ -40,39 +64,15 @@ function affichageActivitee(data) {
     var allInfo = "<div id='allInfo'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
-        info =
-            "<div class=\"contener_1\">\n" +
-            "   <div class=\"contener_2\" id=\"activite"+data[i].id+"\">\n" +
-            "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
-            "       </div>" +
-            "       <div class=\"description_activitee\">\n" +
-            "           <div class=\"description1_activitee\">\n" +
-            "               <div class=\"description1_1_activitee\">\n" +
-            "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
-            "               </div>\n" +
-            "               <div class=\"adresse\"> Au  + data[i].adresse + </div>\n" +
-            "                   <div class=\"date\">Du " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
-            "               </div>\n" +
-            "               <div class=\"description2_activitee\">\n" +
-            "                   <p>Description: " + data[i].description + "</p>\n" +
-            "                   <div class=\"superviserPar\">Superviser Par : " + data[i].superviser_par.name + "</div>\n" +
-            "                   <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
-            "               </div>\n" +
-            "           </div>\n" +
-            "           <div class=\"option\">\n" +
-            "               <button class=\"modif\" onclick=\"modifActivite(" + data[i].id + ")\">Modifier l'activité</button>\n" +
-            "               <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participea/')\">Voir les participants</button>\n" +
-            "               <button class=\"supp\">Supprimer</button>\n" +
-            "           </div>\n" +
-            "       </div>\n" +
-            "   </div>"
-
+        info = await getInfoA(data[i])
         allInfo = allInfo.concat(info)
     }
     allInfo = allInfo.concat("</div>")
     var affichage = filtre.concat(allInfo);
     return affichage
 }
+
+
 async function modifActivite(id){
     //var data = await requestApiNoBody("GET", "/activitees/"+id)
     var data =
@@ -175,6 +175,8 @@ async function validModif(id){
 }
 
 
+
+
 async function searchActivity() {
     var data = [
         {
@@ -221,62 +223,12 @@ async function searchActivity() {
         if(search.length > 0) {
             dataName = data[i].nom
             if (dataName.includes(search)) {
-                info =
-                    "<div class=\"contener_1\">\n" +
-                    "   <div class=\"contener_2\" id=\"activite"+data[i].id+"\">\n" +
-                    "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
-                    "       </div>" +
-                    "       <div class=\"description_activitee\">\n" +
-                    "           <div class=\"description1_activitee\">\n" +
-                    "               <div class=\"description1_1_activitee\">\n" +
-                    "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
-                    "               </div>\n" +
-                    "               <div class=\"adresse\"> Au  + data[i].adresse + </div>\n" +
-                    "                   <div class=\"date\">Du " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
-                    "               </div>\n" +
-                    "               <div class=\"description2_activitee\">\n" +
-                    "                   <p>Description: " + data[i].description + "</p>\n" +
-                    "                   <div class=\"superviserPar\">Superviser Par : " + data[i].superviser_par.name + "</div>\n" +
-                    "                   <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
-                    "               </div>\n" +
-                    "           </div>\n" +
-                    "           <div class=\"option\">\n" +
-                    "               <button class=\"modif\" onclick=\"modifActivite(" + data[i].id + ")\">Modifier l'activité</button>\n" +
-                    "               <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participea/')\">Voir les participants</button>\n" +
-                    "               <button class=\"supp\">Supprimer</button>\n" +
-                    "           </div>\n" +
-                    "       </div>\n" +
-                    "   </div>"
+                var info = await getInfoA(data[i])
 
                 allInfo = allInfo.concat(info)
             }
         }else {
-            info =
-                "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\" id=\"activite"+data[i].id+"\">\n" +
-                "       <div class=\"participation\" id=\"participation"+ data[i].id +"\">" +
-                "       </div>" +
-                "       <div class=\"description_activitee\">\n" +
-                "           <div class=\"description1_activitee\">\n" +
-                "               <div class=\"description1_1_activitee\">\n" +
-                "                   <div class=\"nom\">" + data[i].nom + "</div>\n" +
-                "               </div>\n" +
-                "               <div class=\"adresse\"> Au  + data[i].adresse + </div>\n" +
-                "                   <div class=\"date\">Du " + data[i].date_debut + " au " + data[i].date_fin + "</div>\n" +
-                "               </div>\n" +
-                "               <div class=\"description2_activitee\">\n" +
-                "                   <p>Description: " + data[i].description + "</p>\n" +
-                "                   <div class=\"superviserPar\">Superviser Par : " + data[i].superviser_par.name + "</div>\n" +
-                "                   <div class=\"nb_plae\">Place restante : " + data[i].nb_place + "</div>\n" +
-                "               </div>\n" +
-                "           </div>\n" +
-                "           <div class=\"option\">\n" +
-                "               <button class=\"modif\" onclick=\"modifActivite(" + data[i].id + ")\">Modifier l'activité</button>\n" +
-                "               <button class=\"voir\" onclick=\"voirParticipant(" + data[i].id + ", '/participea/')\">Voir les participants</button>\n" +
-                "               <button class=\"supp\">Supprimer</button>\n" +
-                "           </div>\n" +
-                "       </div>\n" +
-                "   </div>"
+            var info = await getInfoA(data[i])
             allInfo = allInfo.concat(info)
         }
     }

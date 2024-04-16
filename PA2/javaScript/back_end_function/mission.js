@@ -1,5 +1,29 @@
+async function getInfoM(data){
+    var info =
+        "<div class=\"contener_1\">\n" +
+        "   <div class=\"contener_2\">\n" +
+        "       <div class=\"description_demande\">\n" +
+        "           <div class=\"description1_demande\">\n" +
+        "               <div class=\"type\">Type : " + data.demande.type + "</div>\n" +
+        "               <div class=\"fait_par\">De : " + data.realiser_par + "</div>\n" +
+        "               <div class=\"pour\">Pour : " + data.user.name + "</div>\n" +
+        "               <div class=\"date\">Pour le :  + data[i].date + </div>\n" +
+        "           </div>\n" +
+        "           <div class=\"description2_demande\">\n" +
+        "               <p>" + data.demande.demande + "</p>\n" +
+        "               <div>Statut : "+ data.demande.etat +"</div>"+
+        "           </div>\n" +
+        "       </div>\n" +
+        "       <div class=\"option\">\n" +
+        "           <button class=\"annuler\" onclick='cancelMission("+ data.id +", "+ data.demande.id +")'>Annuler</button>\n" +
+        "       </div>\n" +
+        "   </div>\n" +
+        "</div>"
 
-function affichageMission(data) {
+    return info
+}
+
+async function affichageMission(data) {
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div  class=\"tout_les_filtre\">\n"+
@@ -20,7 +44,7 @@ function affichageMission(data) {
         "       </select>\n"+
         "   </div>" +
         "   <div class='div_riset'>" +
-        "       <img src='../img/reset.png' onclick='affichageBackEnd(\"Demandes\")'/>"+
+        "       <img src='../img/reset.png' onclick='affichageBackEnd(\"Missions\")'/>"+
         "   </div>"+
         "</div>"
 
@@ -28,26 +52,7 @@ function affichageMission(data) {
     var allInfo = "<div id='allInfo'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
-        info =
-            "<div class=\"contener_1\">\n" +
-            "   <div class=\"contener_2\">\n" +
-            "       <div class=\"description_demande\">\n" +
-            "           <div class=\"description1_demande\">\n" +
-            "               <div class=\"type\">Type : " + data[i].demande.type + "</div>\n" +
-            "               <div class=\"fait_par\">De : " + data[i].realiser_par + "</div>\n" +
-            "               <div class=\"pour\">Pour : " + data[i].user.name + "</div>\n" +
-            "               <div class=\"date\">Pour le :  + data[i].date + </div>\n" +
-            "           </div>\n" +
-            "           <div class=\"description2_demande\">\n" +
-            "               <p>" + data[i].demande.demande + "</p>\n" +
-            "               <div>Statut : "+ data[i].demande.etat +"</div>"+
-            "           </div>\n" +
-            "       </div>\n" +
-            "       <div class=\"option\">\n" +
-            "           <button class=\"annuler\" onclick='cancelMission("+ data[i].id +", "+ data[i].demande.id +")'>Annuler</button>\n" +
-            "       </div>\n" +
-            "   </div>\n" +
-            "</div>"
+        var info = await getInfoM(data[i])
 
         allInfo = allInfo.concat(info)
     }
@@ -135,26 +140,7 @@ async function trieTypeM(filtre){
     for(i=0; i<data.length; i++) {
         console.log(data[i].demande.type)
         if (data[i].demande.type === filtre) {
-            var info =
-            "<div class=\"contener_1\">\n" +
-            "   <div class=\"contener_2\">\n" +
-            "       <div class=\"description_demande\">\n" +
-            "           <div class=\"description1_demande\">\n" +
-            "               <div class=\"type\">Type : " + data[i].demande.type + "</div>\n" +
-            "               <div class=\"fait_par\">De : " + data[i].realiser_par + "</div>\n" +
-            "               <div class=\"pour\">Pour : " + data[i].user.name + "</div>\n" +
-            "               <div class=\"date\">Pour le :  + data[i].date + </div>\n" +
-            "           </div>\n" +
-            "           <div class=\"description2_demande\">\n" +
-            "               <p>" + data[i].demande.demande + "</p>\n" +
-            "               <div>Statut : "+ data[i].demande.etat +"</div>"+
-            "           </div>\n" +
-            "       </div>\n" +
-            "       <div class=\"option\">\n" +
-            "           <button class=\"annuler\" onclick='cancelMission("+ data[i].id +", "+ data[i].demande.id +")'>Annuler</button>\n" +
-            "       </div>\n" +
-            "   </div>\n" +
-            "</div>"
+            var info = await getInfoM(data[i])
 
             allInfo = allInfo.concat(info)
         }
@@ -203,26 +189,7 @@ async function trieStateM(filtreEtat){
     var allInfo = ""
     for(i=0; i<data.length; i++) {
         if (data[i].demande.etat === filtreEtat) {
-            var info =
-                "<div class=\"contener_1\">\n" +
-                "   <div class=\"contener_2\">\n" +
-                "       <div class=\"description_demande\">\n" +
-                "           <div class=\"description1_demande\">\n" +
-                "               <div class=\"type\">Type : " + data[i].demande.type + "</div>\n" +
-                "               <div class=\"fait_par\">De : " + data[i].realiser_par + "</div>\n" +
-                "               <div class=\"pour\">Pour : " + data[i].user.name + "</div>\n" +
-                "               <div class=\"date\">Pour le :  + data[i].date + </div>\n" +
-                "           </div>\n" +
-                "           <div class=\"description2_demande\">\n" +
-                "               <p>" + data[i].demande.demande + "</p>\n" +
-                "               <div>Statut : "+ data[i].demande.etat +"</div>"+
-                "           </div>\n" +
-                "       </div>\n" +
-                "       <div class=\"option\">\n" +
-                "           <button class=\"annuler\" onclick='cancelMission("+ data[i].id +", "+ data[i].demande.id +")'>Annuler</button>\n" +
-                "       </div>\n" +
-                "   </div>\n" +
-                "</div>"
+            var info = await getInfoM(data[i])
 
             allInfo = allInfo.concat(info)
         }
