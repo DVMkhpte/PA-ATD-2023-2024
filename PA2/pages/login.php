@@ -7,8 +7,11 @@
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
           rel="stylesheet"
       />
+      <script src="../javaScript/trad.js"></script>
   </head>
   <body>
+
+  <div id="translated-content"></div>
     <div class="background"></div>
     <div class="card">
       <img class="logo" src="../img/logo.png" />
@@ -20,8 +23,7 @@
           <button>Se connecter</button>
       </form>
         <footer>
-            Pas de compte? Creer-en un
-            <a href="createAccount.php">ici</a>
+            <span>Pas de compte? Créer-en un</span> <a href="createAccount.php">ici</a>
         </footer>
     </div>
   </body>

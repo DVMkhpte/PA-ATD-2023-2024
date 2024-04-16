@@ -14,10 +14,12 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
             rel="stylesheet"
     />
+    <script src="../javaScript/trad.js"></script>
 </head>
 
 
 <body>
+<div id="translated-content"></div>
 <div class="container">
   <div id="connexion">
     <div class="accueil">

@@ -1,9 +1,8 @@
 let originalDropdownContent = null;
 
-// Fonction pour traduire la page
 async function translatePage(targetLanguage) {
     try {
-        const sourceElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, a[href], ul, ol, li, p, input, input[placeholder], textarea, textarea[placeholder], button, button.button, span, option[value], option[selected], strong, label[for="nom"], label[for="prenom"], label[for="email"], label[for="message"], .dropdown-menu #flags, .dropdown-menu');
+        const sourceElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, a[href], ul, ol, li, p, input, [placeholder], textarea, textarea[placeholder], button, button.button, span, option[value], option[selected], strong, label[for="name"], label[for="email"], label[for="demande"]');
 
         const promises = [];
 
@@ -11,10 +10,9 @@ async function translatePage(targetLanguage) {
             promises.push(translateElement(element, targetLanguage));
         });
 
-
-        if (originalDropdownContent === null) {
-            // Sélectionne le contenu du dropdown
-            const dropdown = document.getElementById('flags');
+        // Sauvegarde le contenu original du dropdown uniquement s'il existe
+        const dropdown = document.getElementById('flags');
+        if (dropdown && originalDropdownContent === null) {
             originalDropdownContent = dropdown.innerHTML;
         }
 
@@ -26,9 +24,6 @@ async function translatePage(targetLanguage) {
             element.innerText = translations[index];
         });
 
-        // Réinsère le contenu original du dropdown après la traduction
-        document.getElementById('flags').innerHTML = originalDropdownContent;
-
         // Enregistre la langue sélectionnée dans un cookie
         document.cookie = `targetLanguage=${targetLanguage}; path=/`;
     } catch (error) {
@@ -36,6 +31,21 @@ async function translatePage(targetLanguage) {
     }
 }
 
+// Vérifie si un cookie de langue existe au chargement de la page
+window.addEventListener('DOMContentLoaded', () => {
+    const targetLanguage = getCookie('targetLanguage');
+    if (targetLanguage) {
+        translatePage(targetLanguage);
+    }
+
+    // Restaure le contenu original du dropdown après la traduction
+    if (originalDropdownContent !== null) {
+        const dropdown = document.getElementById('flags');
+        if (dropdown) {
+            dropdown.innerHTML = originalDropdownContent;
+        }
+    }
+});
 
 function translateElement(element, targetLanguage) {
     const apiKey = 'f0a8708d6f7441b6bab6ef7ae19e62ec';
@@ -61,15 +71,6 @@ function translateElement(element, targetLanguage) {
         .then(result => result[0].translations[0].text);
 }
 
-// Vérifie si un cookie de langue existe au chargement de la page
-window.addEventListener('DOMContentLoaded', () => {
-    const targetLanguage = getCookie('targetLanguage');
-    if (targetLanguage) {
-        translatePage(targetLanguage);
-    }
-});
-
-// Fonction pour récupérer la valeur d'un cookie
 function getCookie(name) {
     const cookies = document.cookie.split(';');
     for (let cookie of cookies) {

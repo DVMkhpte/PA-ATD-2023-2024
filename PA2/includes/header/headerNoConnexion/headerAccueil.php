@@ -104,8 +104,21 @@
                   </a>
 
                   <a class="dropdown-item" href="#" onclick="translatePage('fr')" style="color: white; background-color: transparent;">
-                      <img src="../img/flags/fr.png" alt="Punjabi Flag" class="img-fluid" style="width: 20px;">Français
+                      <img src="../img/flags/fr.png" alt="French Flag" class="img-fluid" style="width: 20px;">Français
                   </a>
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('ln')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/ln.png" alt="Lingala Flag" class="img-fluid" style="width: 20px;"> Lingala
+                  </a>
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('sr')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/sr.png" alt="Serbian Flag" class="img-fluid" style="width: 20px;"> Serbe
+                  </a>
+
+                  <a class="dropdown-item" href="#" onclick="translatePage('ca')" style="color: white; background-color: transparent;">
+                      <img src="../img/flags/ca.png" alt="Catalan Flag" class="img-fluid" style="width: 20px;"> Català
+                  </a>
+
               </div>
           </div>
 
