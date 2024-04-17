@@ -1,6 +1,4 @@
-main{
-    padding-top: 10%;
-}
+
 
 .recap_profil{
     margin: 5%;
@@ -9,7 +7,7 @@ main{
 .h1_profil{
     background-color: #59CD97;
     color: white;
-    padding: 2%;
+    padding: 1%;
     border-radius: 10px;
     
 }
@@ -61,7 +59,7 @@ main{
     border-radius: 10px;
     border: none;
     
-    font-size: 200%;
+    font-size: 150%;
     margin-top: 1%;
     padding: 1%;
     
@@ -78,11 +76,14 @@ main{
     cursor: pointer;
 }
 
+
 input{
     border-color: #59CD97;
     border-radius: 10px;
     padding: 1%;
 }
+
+
 
 .nom_prenom{
     margin-bottom: 1px;
