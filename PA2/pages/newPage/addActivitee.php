@@ -53,7 +53,6 @@
     </div>
 
 </body>
-<script src="../../javaScript/function_api.js"></script>
 <script>
     //var data = await requestApiNoBody("GET", "/users/")
     var data = [{
@@ -129,4 +128,5 @@
         */
     });
 </script>
+<script src="../../javaScript/function_api.js"></script>
 </html>
