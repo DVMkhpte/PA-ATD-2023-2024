@@ -1,3 +1,27 @@
+async function getInfoD(data) {
+    var info =
+        "<div class=\"info\">\n" +
+        "   <div class=\"description_general\">\n" +
+        "       <div class=\"description_1\">\n" +
+        "           <div class=\"description_1_1\">\n" +
+        "               <div class=\"type\">" + data.type + "</div>\n" +
+        "           </div>\n" +
+        "           <div class=\"description_1_3\">" +
+        "                <div class=\"date\">Fait le :" + data.created_at + "</div>\n" +
+        "           </div>" +
+        "       </div>\n" +
+        "       <div class=\"description_2\">\n" +
+        "           <div class=\"desription\">Desription : " + data.demande + "</div>\n" +
+        "           <div class=\"desription\">Fait par : " + data.user.name + "</div>\n" +
+        "       </div>\n" +
+        "   </div>\n" +
+        "   <div class=\"option\">\n" +
+        "       <button onclick=\"acceptMission(" + data.id + ")\" class=\"inscription\" >Je m'en charge</button>\n" +
+        "   </div>\n" +
+        "</div>"
+
+    return info
+}
 
 async function affichageDemande(data) {
     var filtre =
@@ -16,31 +40,12 @@ async function affichageDemande(data) {
         "   </div>"+
         "</div>"
 
-    var allInfo = "<div class=\"all_info\">\n";
+    var allInfo = "<div id=\"all_info\">\n";
     var info = "";
     for(i=0; i<data.length; i++) {
         console.log(data[i].etat)
         if(data[i].type !== "demande_benevole" && data[i].etat === "valider") {
-            info =
-                "<div class=\"info\">\n" +
-                "   <div class=\"description_general\">\n" +
-                "       <div class=\"description_1\">\n" +
-                "           <div class=\"description_1_1\">\n" +
-                "               <div class=\"type\">" + data[i].type + "</div>\n" +
-                "           </div>\n" +
-                "           <div class=\"description_1_3\">" +
-                "                <div class=\"date\">Fait le :" + data[i].created_at + "</div>\n" +
-                "           </div>" +
-                "       </div>\n" +
-                "       <div class=\"description_2\">\n" +
-                "           <div class=\"desription\">Desription : " + data[i].demande + "</div>\n" +
-                "           <div class=\"desription\">Fait par : " + data[i].user.name + "</div>\n" +
-                "       </div>\n" +
-                "   </div>\n" +
-                "   <div class=\"option\">\n" +
-                "       <button onclick=\"acceptMission("+ data[i].id +")\" class=\"inscription\" >Je m'en charge</button>\n" +
-                "   </div>\n" +
-                "</div>"
+            info = await getInfoD(data[i])
             allInfo = allInfo.concat(info)
         }
     }
@@ -83,5 +88,93 @@ async function acceptMission(idD){
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
     */
+
+}
+
+
+async function trieTypeD(filtre){
+    //var data = await requestApiNoBody("GET", "/demande");
+    var data = [
+        {
+            "id": 1,
+            "type": "aide_administratif",
+            "demande": "Bonjour",
+            "id_user": 3,
+            "updated_at": "2024-02-22T10:08:55.000000Z",
+            "created_at": "2024-02-22T10:08:55.000000Z",
+            "etat" : "valider",
+            "user": {
+                "id": 3,
+                "name": "Enzo",
+                "code_postal": 0,
+                "ville": "",
+                "adresse": "",
+                "num_telephone": 0,
+                "email": "cocodoudo@gmail.com",
+                "role": "admin",
+                "email_verified_at": null,
+                "created_at": "2024-02-12T20:45:43.000000Z",
+                "updated_at": "2024-02-12T20:45:43.000000Z"
+            }
+        },
+        {
+            "id": 2,
+            "type": "navette",
+            "demande": "Bonjour fff",
+            "id_user": 3,
+            "updated_at": "2024-02-22T10:08:55.000000Z",
+            "created_at": "2024-02-22T10:08:55.000000Z",
+            "etat" : "valider",
+            "user": {
+                "id": 3,
+                "name": "Enzo",
+                "code_postal": 0,
+                "ville": "",
+                "adresse": "",
+                "num_telephone": 0,
+                "email": "cocodoudo@gmail.com",
+                "role": "admin",
+                "email_verified_at": null,
+                "created_at": "2024-02-12T20:45:43.000000Z",
+                "updated_at": "2024-02-12T20:45:43.000000Z"
+            }
+        },
+        {
+            "id": 2,
+            "type": "demande_benevole",
+            "demande": "Bonjour fff",
+            "id_user": 3,
+            "updated_at": "2024-02-22T10:08:55.000000Z",
+            "created_at": "2024-02-22T10:08:55.000000Z",
+            "etat" : "valider",
+            "user": {
+                "id": 3,
+                "name": "Enzo",
+                "code_postal": 0,
+                "ville": "",
+                "adresse": "",
+                "num_telephone": 0,
+                "email": "cocodoudo@gmail.com",
+                "role": "admin",
+                "email_verified_at": null,
+                "created_at": "2024-02-12T20:45:43.000000Z",
+                "updated_at": "2024-02-12T20:45:43.000000Z"
+            }
+        }
+    ]
+
+    const box = document.getElementById('all_info');
+    box.innerHTML = "";
+
+    var allInfo = ""
+    for(i=0; i<data.length; i++) {
+        if(data[i].type !== "demande_benevole" && data[i].etat === "valider") {
+            if (data[i].type === filtre) {
+                var info = await getInfoD(data[i])
+                allInfo = allInfo.concat(info)
+            }
+        }
+    }
+    box.innerHTML = allInfo
 
 }

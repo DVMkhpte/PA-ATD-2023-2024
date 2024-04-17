@@ -19,10 +19,6 @@ body, html {
 }
 
 header {
-    position: fixed;
-    top: 0;
-    left: 0;
-
     padding-top: 0;
     margin-top: 0;
 
@@ -31,7 +27,7 @@ header {
     align-items: center;
 
     background: linear-gradient(90deg, #38A7A6, #59CD97);
-    height: 20%; 
+    height: 20%;
     width: 100%
 }
 
@@ -55,19 +51,17 @@ header {
 
 
 .img_header {
-    width: 15%;
+    width: 10%;
     background-color: white; 
     border-radius: 50%;
 }
 
 
 .nav_link_acceuil {
-    font-size: 200%;
+    font-size: 100%;
     text-decoration: none;
     color: white;
-    padding: 15px 20px; 
-    font-size: 18px; 
-
+    padding: 15px 20px;
     display: flex;
     align-items: center;
 

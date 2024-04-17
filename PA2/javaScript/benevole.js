@@ -215,6 +215,11 @@ async function affichageBenevole(affichage) {
 
 
 
+async function updateProfil(){
+    window.location.href ="../pages/modif_profil.php"
+}
+
+
 
 function getAllType(data){
     var allTypes = []
