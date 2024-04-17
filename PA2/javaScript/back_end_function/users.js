@@ -33,22 +33,22 @@ async function affichageUser(data, role){
     var filtre =
         "<div class=\"filtre\"> " +
         "   <div class= \"barre_de_recherche\"> " +
-        "       <input type = \"text\" id = \"search-article-input\" placeholder = \""+ role +"\" >" +
+        "       <input type = \"text\" id = \"search-user-input\" oninput=\"searchUser('"+ role +"')\" placeholder = \""+ role +"\" >" +
         "   </div>" +
         "   <div class=\"button_filtre\">\n" +
         "       <button class=\"button_new\" onclick='add(\"addUser.php\")'>Nouveau</button>" +
         "   </div>" +
         "</div>";
 
-    var allInfo = "";
+    var allInfo = "<div id='allInfo'>";
     var info = "";
     for(i=0; i<data.length; i++){
         if(data[i].role === role){
             var info = await getInfoU(data[i])
-
             allInfo = allInfo.concat(info)
         }
     }
+    allInfo = allInfo.concat("</div>")
     var affichage = filtre.concat(allInfo);
     return affichage;
 }
@@ -71,4 +71,56 @@ async function banUser(id){
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
     */
+}
+
+async function searchUser(role){
+    //var data = await requestApiNoBody("GET", "/users/")
+    var data = [{
+        "id": 1,
+        "name": "1 non",
+        "code_postal": 91330,
+        "ville": "yerres",
+        "adresse": "affichage",
+        "num_phone": "1234567891",
+        "email": "test@test.fr",
+        "role": "benevole",
+        "email_verified": "False",
+    },
+        {
+            "id": 2,
+            "name": "2 non",
+            "code_postal": 91330,
+            "ville": "yerres",
+            "adresse": "affichage",
+            "num_phone": "1234567891",
+            "email": "test@test.fr",
+            "role": "beneficiaire",
+            "email_verified": "False",
+        }
+    ];
+
+    const input = document.getElementById('search-user-input');
+    const search = input.value;
+
+    var allInfo = ""
+    const box = document.getElementById('allInfo');
+    box.innerHTML = "";
+    var dataName = ""
+    for(i=0; i<data.length; i++) {
+        if(data[i].role === role) {
+            if (search.length > 0) {
+                dataName = data[i].name
+                if (dataName.includes(search)) {
+                    var info = await getInfoU(data[i])
+
+                    allInfo = allInfo.concat(info)
+                }
+            } else {
+                var info = await getInfoU(data[i])
+
+                allInfo = allInfo.concat(info)
+            }
+        }
+    }
+    box.innerHTML = allInfo
 }
