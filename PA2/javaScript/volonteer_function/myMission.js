@@ -26,7 +26,7 @@ async function getInfoMyM(data){
 
 async function affichageMesMission(data) {
     //const idUser = localStorage.getItem("id")
-    var idUser = 3
+    var idUser = 1
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div  class=\"tout_les_filtre\">\n"+
@@ -60,68 +60,28 @@ async function affichageMesMission(data) {
 
 async function cancelMyMission(idM, idD){
     var formDataDemande = {
-        "etat": "valider"
+        "etat": "valide"
     }
 
-    /*
     try {
         const response = await requestApi(formDataDemande, "DELETE", "/missions/"+idM);
         if (response.status === 200) {
-            try {
-                const response = await requestApi(formDataDemande, "PITCH", "/demande"+idD);
-                if (response.status === 200) {
-                    showAlert("Mission annulé");
-                    affichageBenevole("Mes missions")
-                } else {
-                    showAlert("Erreur : " + response.status);
-                }
-            } catch (error) {
-                showAlert('Erreur lors de la requête à l\'API : ' + error.message);
-            }
+            showAlert("Mission annulé");
+            affichageBenevole("Mes missions")
         } else {
             showAlert("Erreur : " + response.status);
         }
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    */
+
 }
 
 async function trieTypeM(filtre){
     //const idUser = localStorage.getItem("id")
-    var idUser = 3
-    //var data = await requestApiNoBody("GET", "/mission");
-    var data = [
-        {
-            "id": 1,
-            "id_demande": 1,
-            "realiser_par": 3,
-            "created_at": "2024-02-28T14:51:38.000000Z",
-            "updated_at": "2024-02-28T14:51:38.000000Z",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            },
-            "demande": {
-                "id": 1,
-                "type": "navette",
-                "etat": "fait",
-                "demande": "Bonjour",
-                "id_user": 3,
-                "updated_at": "2024-02-22T10:08:55.000000Z",
-                "created_at": "2024-02-22T10:08:55.000000Z"
-            }
-        }
-    ]
+    var idUser = 1
+    var data = await requestApiNoBody("GET", "/missions");
+
     const box = document.getElementById('allInfo');
     box.innerHTML = "";
 

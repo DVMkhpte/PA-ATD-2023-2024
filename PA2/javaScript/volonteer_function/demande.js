@@ -4,7 +4,7 @@ async function getInfoD(data) {
         "   <div class=\"description_general\">\n" +
         "       <div class=\"description_1\">\n" +
         "           <div class=\"description_1_1\">\n" +
-        "               <div class=\"type\">" + data.type + "</div>\n" +
+        "               <div class=\"type\">Type : " + data.type + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description_1_3\">" +
         "                <div class=\"date\">Fait le :" + data.created_at + "</div>\n" +
@@ -44,7 +44,7 @@ async function affichageDemande(data) {
     var info = "";
     for(i=0; i<data.length; i++) {
         console.log(data[i].etat)
-        if(data[i].type !== "demande_benevole" && data[i].etat === "valider") {
+        if(data[i].type !== "demande_benevole" && data[i].etat === "valide") {
             info = await getInfoD(data[i])
             allInfo = allInfo.concat(info)
         }
@@ -56,119 +56,32 @@ async function affichageDemande(data) {
 }
 
 
+
+
 async function acceptMission(idD){
+    const idUser = localStorage.getItem("id")
     var formDataDemande = {
-        "etat": "en attente"
+        "etat": "a valider",
+        "id_benevole" : idUser
     }
 
-    var formDataMission = {
-        "id_demande": idD
-    }
-
-    /*
     try {
-        const response = await requestApi(formDataDemande, "PITCH", "/demande/"+idD);
-        if (response.status === 200) {
-            showAlert("Vous avez accepté cette demande avec succé!");
-            try {
-                const response = await requestApi(formDataMission, "POST", "/missions/add");
-                if (response.status === 200) {
-                    showAlert("Nouvelle mission crée");
-                    affichageBenevole("Mes missions")
-                } else {
-                    showAlert("Erreur : " + response.status);
-                }
-            } catch (error) {
-                showAlert('Erreur lors de la requête à l\'API : ' + error.message);
-            }
-        } else {
-            showAlert("Erreur : " + response.status);
-        }
+        const response = await requestApi(formDataDemande, "PATCH", "/demande/"+idD);
+        showAlert("Vous avez accepté cette demande avec succé!");
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    */
-
 }
 
 
 async function trieTypeD(filtre){
-    //var data = await requestApiNoBody("GET", "/demande");
-    var data = [
-        {
-            "id": 1,
-            "type": "aide_administratif",
-            "demande": "Bonjour",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "valider",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        },
-        {
-            "id": 2,
-            "type": "navette",
-            "demande": "Bonjour fff",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "valider",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        },
-        {
-            "id": 2,
-            "type": "demande_benevole",
-            "demande": "Bonjour fff",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "valider",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        }
-    ]
-
+    var data = await requestApiNoBody("GET", "/demande");
     const box = document.getElementById('all_info');
     box.innerHTML = "";
 
     var allInfo = ""
     for(i=0; i<data.length; i++) {
-        if(data[i].type !== "demande_benevole" && data[i].etat === "valider") {
+        if(data[i].type !== "demande_benevole" && data[i].etat === "valide") {
             if (data[i].type === filtre) {
                 var info = await getInfoD(data[i])
                 allInfo = allInfo.concat(info)
@@ -176,5 +89,4 @@ async function trieTypeD(filtre){
         }
     }
     box.innerHTML = allInfo
-
 }

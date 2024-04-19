@@ -27,180 +27,33 @@ async function affichageBenevole(affichage) {
     
     switch (affichage){
         case "Formation":
-            //var data = await requestApiNoBody("GET", "/formations");
-            var data = [
-                {
-                    id: "1",
-                    nom: "si mais",
-                    type: "Type 1",
-                    adresse: "123 Rue de la Rue",
-                    date_debut: "01/04/2024",
-                    date_fin: "03/04/2024",
-                    description: "Ceci est la description de l'activité 1",
-                    nb_place: 20,
-                    supervisor: {
-                        name: "Superviseur 1"
-                    }
-                },
-                {
-                    id: "2",
-                    nom: "mais non",
-                    type: "Type 2",
-                    adresse: "456 Avenue de l'Avenue",
-                    date_debut: "05/04/2024",
-                    date_fin: "07/04/2024",
-                    description: "Ceci est la description de l'activité 2",
-                    nb_place: 15,
-                    supervisor: {
-                        name: null
-                    }
-                }
-            ]
+            var data = await requestApiNoBody("GET", "/formations");
             var strBox = await affichageFormation(data);
             break;
 
         case "Demande en attente":
-            //var data = await requestApiNoBody("GET", "/demande");
-            var data = [
-                {
-                    "id": 1,
-                    "type": "aide_administratif",
-                    "demande": "Bonjour",
-                    "id_user": 3,
-                    "updated_at": "2024-02-22T10:08:55.000000Z",
-                    "created_at": "2024-02-22T10:08:55.000000Z",
-                    "etat" : "valider",
-                    "user": {
-                        "id": 3,
-                        "name": "Enzo",
-                        "code_postal": 0,
-                        "ville": "",
-                        "adresse": "",
-                        "num_telephone": 0,
-                        "email": "cocodoudo@gmail.com",
-                        "role": "admin",
-                        "email_verified_at": null,
-                        "created_at": "2024-02-12T20:45:43.000000Z",
-                        "updated_at": "2024-02-12T20:45:43.000000Z"
-                    }
-                },
-                {
-                    "id": 2,
-                    "type": "navette",
-                    "demande": "Bonjour fff",
-                    "id_user": 3,
-                    "updated_at": "2024-02-22T10:08:55.000000Z",
-                    "created_at": "2024-02-22T10:08:55.000000Z",
-                    "etat" : "valider",
-                    "user": {
-                        "id": 3,
-                        "name": "Enzo",
-                        "code_postal": 0,
-                        "ville": "",
-                        "adresse": "",
-                        "num_telephone": 0,
-                        "email": "cocodoudo@gmail.com",
-                        "role": "admin",
-                        "email_verified_at": null,
-                        "created_at": "2024-02-12T20:45:43.000000Z",
-                        "updated_at": "2024-02-12T20:45:43.000000Z"
-                    }
-                },
-                {
-                    "id": 2,
-                    "type": "demande_benevole",
-                    "demande": "Bonjour fff",
-                    "id_user": 3,
-                    "updated_at": "2024-02-22T10:08:55.000000Z",
-                    "created_at": "2024-02-22T10:08:55.000000Z",
-                    "etat" : "valider",
-                    "user": {
-                        "id": 3,
-                        "name": "Enzo",
-                        "code_postal": 0,
-                        "ville": "",
-                        "adresse": "",
-                        "num_telephone": 0,
-                        "email": "cocodoudo@gmail.com",
-                        "role": "admin",
-                        "email_verified_at": null,
-                        "created_at": "2024-02-12T20:45:43.000000Z",
-                        "updated_at": "2024-02-12T20:45:43.000000Z"
-                    }
-                }
-            ]
+            var data = await requestApiNoBody("GET", "/demande");
             var strBox = await affichageDemande(data);
             break;
 
         case "Mes missions":
-            //var data = await requestApiNoBody("GET", "/mission");
-            var data = [
-                {
-                    "id": 1,
-                    "id_demande": 1,
-                    "realiser_par": 3,
-                    "created_at": "2024-02-28T14:51:38.000000Z",
-                    "updated_at": "2024-02-28T14:51:38.000000Z",
-                    "user": {
-                        "id": 3,
-                        "name": "Enzo",
-                        "code_postal": 0,
-                        "ville": "",
-                        "adresse": "",
-                        "num_telephone": 0,
-                        "email": "cocodoudo@gmail.com",
-                        "role": "admin",
-                        "email_verified_at": null,
-                        "created_at": "2024-02-12T20:45:43.000000Z",
-                        "updated_at": "2024-02-12T20:45:43.000000Z"
-                    },
-                    "demande": {
-                        "id": 1,
-                        "type": "navette",
-                        "etat": "fait",
-                        "demande": "Bonjour",
-                        "id_user": 3,
-                        "updated_at": "2024-02-22T10:08:55.000000Z",
-                        "created_at": "2024-02-22T10:08:55.000000Z"
-                    }
-                }
-            ]
+            var data = await requestApiNoBody("GET", "/missions");
             var strBox = await affichageMesMission(data)
             break;
 
         case "Mes Formations":
-            //var data = await requestApiNoBody("GET", "/formation");
-            var data = ""
+            var data = await requestApiNoBody("GET", "/participef");
             var strBox = await affichageMesFormation(data)
             break;
 
         case "Evenement":
-            //var data = await requestApiNoBody("GET", "/evenements");
-            var data = [{
-                "id": 1,
-                "nom": "Gosse maraude",
-                "description": "On attend le plus de monde paussible sur cette maraude a villetech",
-                "date_debut": "2024-05-20",
-                "date_fin": "2024-05-22",
-                "type": "maraude",
-                "etat": "ouvert",
-                "adresse": "123 rue de l'IA",
-                "ville": "VilleTech",
-                "nb_participant" : 20
-            },{
-                "id": 2,
-                "nom": "Anniversaire de l'asso",
-                "description": "Deaj 1àans de l'association venez feter ca avec nous pour voous remercier de votre travail acharné",
-                "date_debut": "2024-05-20",
-                "date_fin": "2024-05-22",
-                "type": "Anniversaire",
-                "etat": "ouvert",
-                "adresse": "123 rue de l'IA",
-                "ville": "VilleTech",
-                "nb_participant" : 30
-            }]
-
+            var data = await requestApiNoBody("GET", "/evenements");
             strBox = await affichageEvenement(data);
+            break;
+
+        case "Mes evenement":
+            var data = await requestApiNoBody("GET", "/evenements");
+            strBox = await affichageMesEvent(data);
             break;
 
         default:

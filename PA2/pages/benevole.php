@@ -64,11 +64,14 @@
 
 <?php // include("../includes/footer.php") ?>
 
+<script src="../javaScript/function_api.js"></script>
 <script src="../javaScript/benevole.js"></script>
 <script src="../javaScript/volonteer_function/demande.js"></script>
 <script src="../javaScript/volonteer_function/formation.js"></script>
 <script src="../javaScript/volonteer_function/myMission.js"></script>
 <script src="../javaScript/volonteer_function/evenement.js"></script>
+<script src="../javaScript/volonteer_function/myEvent.js"></script>
+<script src="../javaScript/volonteer_function/myFormation.js"></script>
 <script>
     affichageBenevole('Planning')
 
