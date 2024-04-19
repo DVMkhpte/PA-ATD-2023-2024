@@ -1,4 +1,4 @@
-async function getInfoD(data){
+async function getInfoD(data) {
     var info =
         "<div class=\"contener_1\">\n" +
         "   <div class=\"contener_2\">\n" +
@@ -10,37 +10,55 @@ async function getInfoD(data){
         "           </div>\n" +
         "           <div class=\"description2_demande\">\n" +
         "               <div>" + data.demande + "</div>\n" +
-        "               <div>Statut : "+ data.etat +"</div>"+
+        "               <div>Statut : " + data.etat + "</div>" +
         "           </div>\n" +
         "       </div>\n"
 
     var button =
         "       <div class=\"option\">\n"
-    if(data.etat === "en attente"){
+    if (data.etat === "en attente" && data.type !== "demande_benevole") {
         button = button.concat(
-            "           <button class=\"accepter\" onclick='validAsk("+ data.id +")'>Valider</button>\n" +
-            "           <button class=\"annuler\" onclick='cancelAsk("+ data.id +")'>Annuler</button>\n" +
+            "           <button class=\"accepter\" onclick='validAsk(" + data.id + ")'>Valider</button>\n" +
+            "           <button class=\"annuler\" onclick='cancelAsk(" + data.id + ")'>Annuler</button>\n" +
             "           <button class=\"supp\">Supprimer</button>\n" +
             "       </div>\n" +
             "    </div>\n" +
             "</div>"
         )
-    }else if(data.etat === "en cour" || data.etat === "valider"){
+    }else if(data.etat === "a valider"){
         button = button.concat(
-            "           <button class=\"annuler\" onclick='cancelAsk("+ data.id +")'>Annuler</button>\n" +
+            "           <button class=\"accepter\" onclick='createMission(" + data.id + ")'>Valider la mission</button>\n" +
+            "           <button class=\"annuler\" onclick='cancelAsk(" + data.id + ")'>Annuler</button>\n" +
+            "           <button class=\"supp\">Supprimer</button>\n" +
+            "       </div>\n" +
+            "    </div>\n" +
+            "</div>"
+        )
+    }else if(data.etat === "valide" || data.etat === "en cour"){
+        button = button.concat(
+            "           <button class=\"annuler\" onclick='cancelAsk(" + data.id + ")'>Annuler</button>\n" +
+            "           <button class=\"supp\">Supprimer</button>\n" +
+            "       </div>\n" +
+            "    </div>\n" +
+            "</div>"
+        )
+    }else if(data.type === "demande_benevole"){
+        button = button.concat(
+            "           <button class=\"accepter\" onclick='newBenevole("+ data.id +", "+ data.user.id +")'>Ajouter benevole</button>\n" +
+            "           <button class=\"annuler\" onclick='cancelAsk(" + data.id + ")'>Annuler</button>\n" +
             "           <button class=\"supp\">Supprimer</button>\n" +
             "       </div>\n" +
             "    </div>\n" +
             "</div>"
         )
     }else{
-        button = button.concat(
-            "           <button class=\"supp\">Supprimer</button>\n" +
-            "       </div>\n" +
-            "    </div>\n" +
-            "</div>"
-        )
-    }
+            button = button.concat(
+                "           <button class=\"supp\">Supprimer</button>\n" +
+                "       </div>\n" +
+                "    </div>\n" +
+                "</div>"
+            )
+        }
     info = info.concat(button)
 
     return info
@@ -65,7 +83,8 @@ async function affichageDemande(data) {
         "           <option selected disabled hidden id=\"choix\">Statut</option>\n"+
         "           <option value='fait' onclick='trieStateD(\"fait\")'>Fait</option>" +
         "           <option value='en_cour' onclick='trieStateD(\"en cour\")'>En cour</option>" +
-        "           <option value='valider' onclick='trieStateD(\"valider\")'>Valider</option>" +
+        "           <option value='en_cour' onclick='trieStateD(\"a valider\")'>A valider</option>" +
+        "           <option value='valider' onclick='trieStateD(\"valide\")'>Valide</option>" +
         "           <option value='en_attente_validation' onclick='trieStateD(\"en attente\")'>En attente</option>" +
         "           <option value='annule' onclick='trieStateD(\"annule\")'>Annulé</option>" +
         "       </select>\n"+
@@ -90,127 +109,126 @@ async function affichageDemande(data) {
 }
 
 
+async function newBenevole(idD, idU){
+    var data = await requestApiNoBody("GET", "/demande/"+ idD);
+    var updateAsk = {
+        "id": data.id,
+        "type": data.type,
+        "demande": data.demande,
+        "permis": data.permis,
+        "etat": "fait",
+        "id_user": data.id_user,
+        "updated_at": data.updated_at,
+        "created_at": data.created_at
+    }
+    try {
+        const response = await requestApi(updateAsk, "PATCH", "/demande/"+id);
+        if (response.status === 200) {
+            showAlert("Nouveau benevole ajouté");
+        } else {
+            showAlert("Erreur lors du changement de status: " + response.status);
+        }
+    } catch (error) {
+        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+    }
 
-async function validAsk(id){
-    //var data = await requestApiNoBody("GET", "/demande/"+ id);
-    var data = { "id": 1, "type": "typetest", "demande": "Bonjour", "id_user": 3, "updated_at": "2024-02-22T10:08:55.000000Z","created_at": "2024-02-22T10:08:55.000000Z", "etat" : "fait","user": {"id": 3, "name": "Enzo","code_postal": 0,"ville": "","adresse": "", "num_telephone": 0,"email": "cocodoudo@gmail.com", "role": "admin","email_verified_at": null,"created_at": "2024-02-12T20:45:43.000000Z","updated_at": "2024-02-12T20:45:43.000000Z"}}
+    updateRoleUser(idU, "benevole")
+}
+
+
+async function createMission(id){
+    var data = await requestApiNoBody("GET", "/demande/"+ id);
 
     var updateAsk = {
-        "etat": "valider"
+        "id": data.id,
+        "type": data.type,
+        "demande": data.demande,
+        "permis": data.permis,
+        "etat": "en cour",
+        "id_user": data.id_user,
+        "updated_at": data.updated_at,
+        "created_at": data.created_at
     }
     var newMission = {
         "id_demande": id
     }
 
-    /*
+
+            try {
+                const response = await requestApi(newMission, "POST", "/missions/add");
+                if (response.status === 200) {
+                    showAlert("Nouvelle Mission");
+                    affichageBackEnd("Missions")
+                } else {
+                    showAlert("Erreur lors de la creation de la mission: " + response.status);
+                }
+            } catch (error) {
+                showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+            }
+
+
+}
+
+
+async function validAsk(id){
+    var data = await requestApiNoBody("GET", "/demande/"+ id);
+
+    var formData = {
+        "id": data.id,
+        "type": data.type,
+        "demande": data.demande,
+        "permis": data.permis,
+        "etat": "valide",
+        "id_user": data.id_user,
+        "updated_at": data.updated_at,
+        "created_at": data.created_at
+    }
     try {
-        const response = await requestApi(updateAsk, "PITCH", "/demande/"+id);
+        const response = await requestApi(formData, "PATCH", "/demande/"+id);
         if (response.status === 200) {
-            showAlert("Demande validé, maintenan visible pour les benenvoles");
+            showAlert("Demande valide, maintenan visible pour les benenvoles");
+            affichageBackEnd("Demandes")
         } else {
-            showAlert("Erreur lors du changement de status: " + response.status);
+            showAlert("Erreur lors du changement d'etat: " + response.status);
         }
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    */
 }
 
 
 async function cancelAsk(id){
-    //var data = await requestApiNoBody("GET", "/demande/"+ id);
-    var data = { "id": 1, "type": "typetest", "demande": "Bonjour", "id_user": 3, "updated_at": "2024-02-22T10:08:55.000000Z","created_at": "2024-02-22T10:08:55.000000Z", "etat" : "fait","user": {"id": 3, "name": "Enzo","code_postal": 0,"ville": "","adresse": "", "num_telephone": 0,"email": "cocodoudo@gmail.com", "role": "admin","email_verified_at": null,"created_at": "2024-02-12T20:45:43.000000Z","updated_at": "2024-02-12T20:45:43.000000Z"}}
-
+    var data = await requestApiNoBody("GET", "/demande/"+ id);
     var formData = {
-        "staut": "annuler"
+        "id": data.id,
+        "type": data.type,
+        "demande": data.demande,
+        "permis": data.permis,
+        "etat": "annuler",
+        "id_user": data.id_user,
+        "updated_at": data.updated_at,
+        "created_at": data.created_at
     }
-
-    /*
+    console.log(formData)
     try {
-        const response = await requestApi(formData, "PITCH", "/demande/"+id);
+        const response = await requestApi(formData, "PATCH", "/demande/"+id);
         if (response.status === 200) {
             showAlert("Annulation de la demande!");
         } else {
-            showAlert("Erreur lors du changement de status: " + response.status);
+            showAlert("Erreur lors du changement d'etat': " + response.status);
         }
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    */
+
 
 }
 
 
+
+
 async function trieTypeD(filtre){
-    //var data = await requestApiNoBody("GET", "/demande");
-    var data = [
-        {
-            "id": 1,
-            "type": "aide_administratif",
-            "demande": "Bonjour",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "fait",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        },
-        {
-            "id": 2,
-            "type": "navette",
-            "demande": "Bonjour fff",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "en cour",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        },
-        {
-            "id": 2,
-            "type": "demande_benevole",
-            "demande": "Bonjour fff",
-            "id_user": 3,
-            "updated_at": "2024-02-22T10:08:55.000000Z",
-            "created_at": "2024-02-22T10:08:55.000000Z",
-            "etat" : "en attente",
-            "user": {
-                "id": 3,
-                "name": "Enzo",
-                "code_postal": 0,
-                "ville": "",
-                "adresse": "",
-                "num_telephone": 0,
-                "email": "cocodoudo@gmail.com",
-                "role": "admin",
-                "email_verified_at": null,
-                "created_at": "2024-02-12T20:45:43.000000Z",
-                "updated_at": "2024-02-12T20:45:43.000000Z"
-            }
-        }
-    ]
+    var data = await requestApiNoBody("GET", "/demande");
 
     const box = document.getElementById('allInfo');
     box.innerHTML = "";
@@ -229,9 +247,7 @@ async function trieTypeD(filtre){
 
 
 async function trieStateD(filtreEtat){
-
-    //var data = await requestApiNoBody("GET", "/demande");
-    var data = [{"id": 1,"type": "typetest","demande": "Bonjour", "id_user": 3,"updated_at": "2024-02-22T10:08:55.000000Z","created_at": "2024-02-22T10:08:55.000000Z", "etat" : "fait", "user": {"id": 3,"name": "Enzo","code_postal": 0,"ville": "","adresse": "","num_telephone": 0,"email": "cocodoudo@gmail.com", "role": "admin","email_verified_at": null,"created_at": "2024-02-12T20:45:43.000000Z","updated_at": "2024-02-12T20:45:43.000000Z" }}, { "id": 2,"type": "typetest2", "demande": "Bonjour fff","id_user": 3, "updated_at": "2024-02-22T10:08:55.000000Z","created_at": "2024-02-22T10:08:55.000000Z","etat" : "en cour","user": {"id": 3,"name": "Enzo","code_postal": 0,"ville": "","adresse": "","num_telephone": 0,"email": "cocodoudo@gmail.com","role": "admin","email_verified_at": null,"created_at": "2024-02-12T20:45:43.000000Z","updated_at": "2024-02-12T20:45:43.000000Z"}}, {"id": 2, "type": "typetest2","demande": "Bonjour fff", "id_user": 3,"updated_at": "2024-02-22T10:08:55.000000Z", "created_at": "2024-02-22T10:08:55.000000Z","etat" : "en attente","user": {"id": 3,"name": "Enzo","code_postal": 0,"ville": "","adresse": "","num_telephone": 0,"email": "cocodoudo@gmail.com","role": "admin","email_verified_at": null,"created_at": "2024-02-12T20:45:43.000000Z","updated_at": "2024-02-12T20:45:43.000000Z" } } ]
+    var data = await requestApiNoBody("GET", "/demande");
 
     const box = document.getElementById('allInfo');
     box.innerHTML = "";

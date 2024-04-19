@@ -18,7 +18,7 @@ async function getInfoU(data){
         "           </div>\n" +
         "       </div>\n" +
         "       <div class=\"option\">\n" +
-        "           <button class=\"passer_admin\" onclick='updateRoleUser("+ data.id +")'>Passer admin</button>\n" +
+        "           <button class=\"passer_admin\" onclick='updateRoleUser("+ data.id +", \"admin\")'>Passer admin</button>\n" +
         "           <button class=\"bannir\" onclick='banUser("+ data.id +")'>Bannir</button>\n" +
         "           <button class=\"supp\">Supprimer</button>\n" +
         "       </div>\n" +
@@ -58,7 +58,6 @@ async function banUser(id){
         {
             "statut": "ban"
         }
-
     /*
     try {
         const response = await requestApi(formData, "PITCH", "/users/"+id);
@@ -74,30 +73,7 @@ async function banUser(id){
 }
 
 async function searchUser(role){
-    //var data = await requestApiNoBody("GET", "/users/")
-    var data = [{
-        "id": 1,
-        "name": "1 non",
-        "code_postal": 91330,
-        "ville": "yerres",
-        "adresse": "affichage",
-        "num_phone": "1234567891",
-        "email": "test@test.fr",
-        "role": "benevole",
-        "email_verified": "False",
-    },
-        {
-            "id": 2,
-            "name": "2 non",
-            "code_postal": 91330,
-            "ville": "yerres",
-            "adresse": "affichage",
-            "num_phone": "1234567891",
-            "email": "test@test.fr",
-            "role": "beneficiaire",
-            "email_verified": "False",
-        }
-    ];
+    var data = await requestApiNoBody("GET", "/users/")
 
     const input = document.getElementById('search-user-input');
     const search = input.value;
