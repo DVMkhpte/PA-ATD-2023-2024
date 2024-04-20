@@ -77,6 +77,7 @@ Route::delete('/missions/{id}',[App\Http\Controllers\MissionsController::class,'
 Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
 Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
 Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'destroy']);
+Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
 });
 
@@ -92,7 +93,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
     Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
     Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
-    Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
+
 
 
 });

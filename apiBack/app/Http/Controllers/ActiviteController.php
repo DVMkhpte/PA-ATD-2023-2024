@@ -15,11 +15,13 @@ class ActiviteController extends Controller
 
     public function index()
     {
+
         $adminUser = Auth::user();
         $activite = Activites::with('supervisor')->get();
 
         Log::channel('admin_activity')->info("Index Activite by " . $adminUser->name);
         return response()->json($activite);
+
     }
 
     public function show($id)

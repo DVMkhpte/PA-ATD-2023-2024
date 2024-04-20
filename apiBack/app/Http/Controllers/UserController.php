@@ -47,8 +47,7 @@ public function update(Request $request, $id)
         }
 
         $data = $request->validate([
-            'nom' => 'string|max:255',
-            'prenom' => 'string|max:255',
+            'name' => 'string|max:255',
             'email' => 'string|email|max:255|unique:users,email,' . $id,
             'code_postal'=> 'integer',
             'ville' => 'string|max:255',
