@@ -1,9 +1,17 @@
 async function requestApi(formData, method, link) {
+    let headers = {
+        'Content-Type': 'application/json',
+    };
+
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        headers['Authorization'] = 'Bearer ' + token;
+    }
+
     const response = await fetch('http://localhost:8000/api' + link, {
         method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: headers,
         body: JSON.stringify(formData)
     });
     console.log(response)
@@ -16,12 +24,19 @@ async function requestApi(formData, method, link) {
 }
 
 async function requestApiNoBody(method, link) {
+    let headers = {
+        'Content-Type': 'application/json',
+    };
+
+    const token = localStorage.getItem('token');
+    if (token) {
+        headers['Authorization'] = 'Bearer ' + token;
+    }
+
     const response = await fetch('http://localhost:8000/api' + link, {
         redirect: 'manual',
         method: method,
-        headers: {
-            'Content-Type': 'application/json',
-        },
+        headers: headers,
     });
     if (response.ok) {
         const data = await response.json();
