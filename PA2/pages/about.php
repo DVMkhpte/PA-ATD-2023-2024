@@ -15,23 +15,23 @@
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="mb-4">Qui sommes-nous ?</h2>
-            <p>
+            <h2 class="mb-4" data-translate="title">Qui sommes-nous ?</h2>
+            <p data-translate="paragraphs">
                 Nous sommes une association dédiée à l'aide des plus démunis.
             </p>
-            <p>
+            <p data-translate="paragraphs">
                 Notre association a été fondée en 1987 et depuis lors, nous nous efforçons de réaliser des activités comme des maraudes ou autre grâce à nos bénévoles.
             </p>
-            <p>
+            <p data-translate="paragraphs">
                 Nous sommes passionnés par l'entraide et la bonne humeur, c'est pour cela que cette association existe.
             </p>
-            <p>
+            <p data-translate="paragraphs">
                 N'hésitez pas à nous contacter pour plus d'informations sur notre association et comment vous pouvez vous impliquer.
             </p>
         </div>
     </div>
     <div class="container mt-3">
-    <a href="contact.php" class="btn btn-primary">Contactez-nous</a>
+    <a href="contact.php" data-translate="contact_button" class="btn btn-primary">Contactez-nous</a>
 </div>
 </div>
 

@@ -1,5 +1,20 @@
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #225B7C;
+    padding: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    color: whitesmoke;
+    font-family: "Euclid Circular A", "Poppins";
+}
+
 main {
-    
+
     height: 80%;
     display: flex;
     justify-content: space-between;
@@ -206,10 +221,16 @@ button{
     border-radius: 5px;
     border: none;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
 }
 
-.tout_les_filtre:hover, .button_filtre:hover, .barre_de_recherche:hover{
+.filtre_formation{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    margin: 1%;
+}
+
+.tout_les_filtre:hover, .button_filtre:hover, .barre_de_recherche:hover {
     cursor: pointer;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
@@ -223,12 +244,14 @@ select, input{
 }
 
 
-.tout_les_filtre select {
+.tout_les_filtre select{
     background-color: #59CD97;
     color: white;
     border: none;
     
 }
+
+
 
 .barre_de_recherche {
     background-color: #59CD97; 
@@ -286,6 +309,7 @@ select, input{
 
 .description_1{
     width: 25%;
+
 }
 
 .description_2{
@@ -297,7 +321,6 @@ select, input{
 
 .description_1_1, .description_1_2 {
     padding: 2%;
-
     display: flex;
     flex-direction: row;
     justify-content: space-between;
