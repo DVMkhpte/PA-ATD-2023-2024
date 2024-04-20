@@ -13,13 +13,13 @@ class Evenement extends Model
     protected $fillable = [
     'nom',
     'description',
-    'date_debut', 
+    'date_debut',
     'date_fin',
     'type',
     'etat',
     'adresse',
     'ville',
-
+    'nb_participant',
     ];
 
 

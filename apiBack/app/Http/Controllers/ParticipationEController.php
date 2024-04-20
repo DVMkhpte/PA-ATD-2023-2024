@@ -38,16 +38,20 @@ class ParticipationEController extends Controller
     public function store(Request $request)
     {
         $User = Auth::user();
-        
+
         try {
             $data = $request->validate([
-                'id_evenement' => 'required|integer', 
+                'id_evenement' => 'required|integer',
             ]);
 
             $data['id_user'] = $User->id;
-    
+
             $participation = ParticipeE::create($data);
-    
+
+            $evenement = Evenement::findOrFail($data['id_evenement']);
+            $evenement->nb_participants += 1;
+            $evenement->save();
+
            Log::channel('user_activity')->info("Create evenement participation by " . $User->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
@@ -61,7 +65,7 @@ class ParticipationEController extends Controller
         $adminUser = Auth::user();
         try {
             DB::beginTransaction();
-            
+
             $participation = ParticipeE::findOrFail($id);
 
             $participation->delete();
@@ -70,13 +74,13 @@ class ParticipationEController extends Controller
 
             Log::channel('admin_activity')->info("Delete evenement participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'evenement participation delete']);
-    
 
-       
+
+
     } catch (\Exception $e) {
         DB::rollBack();
         return response()->json(['message' => 'An error occurred while deleting the participation.'], 500);
     }
-    
+
 }
 }

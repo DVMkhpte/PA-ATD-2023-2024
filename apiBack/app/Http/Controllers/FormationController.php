@@ -44,6 +44,7 @@ class FormationController extends Controller
             'description' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
+            'adresse' => 'required|string',
             'nb_place' => 'required|integer',
             'supervise_par' => 'integer',
         ]);
@@ -75,6 +76,7 @@ class FormationController extends Controller
             'description' => 'required|string|max:255',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
+            'adresse' => 'required|string',
             'nb_place' => 'required|integer',
             'supervise_par' => 'integer',
         ]);
