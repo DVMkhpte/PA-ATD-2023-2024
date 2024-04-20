@@ -1,0 +1,146 @@
+{
+  "en": {
+    "title": "Who are we?",
+    "paragraphs1": "We are an association dedicated to helping the most deprived.",
+    "paragraphs2": "Our association was founded in 1987 and since then, we have been striving to carry out activities such as outreach work or others thanks to our volunteers.",
+    "paragraphs3": "We are passionate about mutual aid and good humor, which is why this association exists.",
+    "paragraphs4": "Do not hesitate to contact us for more information about our association and how you can get involved.",
+    "contact_button": "Contact Us"
+  },
+  "es": {
+    "title": "¿Quiénes somos?",
+    "paragraphs1": "Somos una asociación dedicada a ayudar a los más desfavorecidos.",
+    "paragraphs2": "Nuestra asociación fue fundada en 1987 y desde entonces, nos esforzamos por llevar a cabo actividades como trabajo de campo u otros gracias a nuestros voluntarios.",
+    "paragraphs3": "Somos apasionados por la ayuda mutua y el buen humor, por eso existe esta asociación.",
+    "paragraphs4": "No dudes en contactarnos para obtener más información sobre nuestra asociación y cómo puedes participar.",
+    "contact_button": "Contáctenos"
+  },
+  "it": {
+    "title": "Chi siamo?",
+    "paragraphs1": "Siamo un'associazione dedicata ad aiutare i più bisognosi.",
+    "paragraphs2": "La nostra associazione è stata fondata nel 1987 e da allora ci impegniamo a svolgere attività come il lavoro di assistenza o altri grazie ai nostri volontari.",
+    "paragraphs3": "Siamo appassionati di aiuto reciproco e buon umore, ecco perché esiste questa associazione.",
+    "paragraphs4": "Non esitare a contattarci per ulteriori informazioni sulla nostra associazione e su come puoi partecipare.",
+    "contact_button": "Contattaci"
+  },
+  "de": {
+    "title": "Wer sind wir?",
+    "paragraphs1": "Wir sind ein Verein, der sich der Hilfe für die Bedürftigsten widmet.",
+    "paragraphs2": "Unser Verein wurde 1987 gegründet und seither bemühen wir uns, Aktivitäten wie Streetwork oder andere dank unserer Freiwilligen durchzuführen.",
+    "paragraphs3": "Wir sind begeistert von gegenseitiger Hilfe und guter Laune, daher gibt es diesen Verein.",
+    "paragraphs4": "Zögern Sie nicht, uns für weitere Informationen über unseren Verein und wie Sie sich engagieren können, zu kontaktieren.",
+    "contact_button": "Kontaktieren Sie uns"
+  },
+  "pt": {
+    "title": "Quem somos nós?",
+    "paragraphs1": "Somos uma associação dedicada a ajudar os mais necessitados.",
+    "paragraphs2": "A nossa associação foi fundada em 1987 e desde então, temos nos esforçado para realizar atividades como trabalho de rua ou outros graças aos nossos voluntários.",
+    "paragraphs3": "Somos apaixonados pela ajuda mútua e bom humor, é por isso que esta associação existe.",
+    "paragraphs4": "Não hesite em contactar-nos para mais informações sobre a nossa associação e como pode se envolver.",
+    "contact_button": "Contate-nos"
+  },
+  "ru": {
+    "title": "Кто мы такие?",
+    "paragraphs1": "Мы - ассоциация, посвященная помощи наиболее нуждающимся.",
+    "paragraphs2": "Наша ассоциация была основана в 1987 году и с тех пор мы стремимся проводить такие мероприятия, как выездная работа или другие, благодаря нашим добровольцам.",
+    "paragraphs3": "Мы увлечены взаимопомощью и хорошим настроением, вот почему существует эта ассоциация.",
+    "paragraphs4": "Не стесняйтесь связаться с нами для получения дополнительной информации о нашей ассоциации и о том, как вы можете принять участие.",
+    "contact_button": "Связаться с нами"
+  },
+  "el": {
+    "title": "Ποιοι είμαστε;",
+    "paragraphs1": "Είμαστε μια ένωση που αφοσιώνεται στη βοήθεια των πλέον αδυνάμων.",
+    "paragraphs2": "Η ένωσή μας ιδρύθηκε το 1987 και από τότε προσπαθούμε να πραγματοποιούμε δραστηριότητες όπως εκστρατείες ενημέρωσης ή άλλες χάρη στους εθελοντές μας.",
+    "paragraphs3": "Είμαστε παθιασμένοι με την αλληλοβοήθεια και την καλή διάθεση, γι' αυτό υπάρχει αυτή η ένωση.",
+    "paragraphs4": "Μη διστάσετε να επικοινωνήσετε μαζί μας για περισσότερες πληροφορίες σχετικά με την ένωσή μας και πώς μπορείτε να συμμετάσχετε.",
+    "contact_button": "Επικοινωνήστε μαζί μας"
+  },
+  "ar": {
+    "title": "من نحن؟",
+    "paragraphs1": "نحن جمعية مكرسة لمساعدة الأكثر حاجة.",
+    "paragraphs2": "تأسست جمعيتنا في عام 1987 ومنذ ذلك الحين، نحن نسعى لتنفيذ أنشطة مثل العمل الميداني أو غيرها بفضل متطوعينا.",
+    "paragraphs3": "نحن متحمسون للمساعدة المتبادلة والمرح الجيد، ولهذا السبب توجد هذه الجمعية.",
+    "paragraphs4": "لا تتردد في الاتصال بنا للحصول على مزيد من المعلومات حول جمعيتنا وكيف يمكنك المشاركة.",
+    "contact_button": "اتصل بنا"
+  },
+  "zh": {
+    "title": "我们是谁？",
+    "paragraphs1": "我们是一个致力于帮助最贫困的人的协会。",
+    "paragraphs2": "我们的协会成立于1987年，从那时起，我们一直努力开展像外展工作或其他活动一样的活动，这要归功于我们的志愿者。",
+    "paragraphs3": "我们对互助和好心情充满热情，这就是为什么有这个协会。",
+    "paragraphs4": "请随时与我们联系，以获取有关我们的协会以及您如何参与的更多信息。",
+    "contact_button": "联系我们"
+  },
+  "hi": {
+    "title": "हम कौन हैं?",
+    "paragraphs1": "हम उन सबसे अधिक गरीबों की मदद के लिए समर्पित एक संघ हैं।",
+    "paragraphs2": "हमारा संघ 1987 में स्थापित किया गया था और उस समय से, हम आउटरीच काम या अन्य जैसे कार्यों को अपने स्वयंसेवकों की वजह से करने का प्रयास कर रहे हैं।",
+    "paragraphs3": "हम सहायता और अच्छे मिजाज के प्रति प्रेमी हैं, इसलिए यह संघ मौजूद है।",
+    "paragraphs4": "हमसे हमारे संघ के बारे में और आप कैसे शामिल हो सकते हैं के बारे में अधिक जानकारी के लिए संपर्क करने में हिचकिचाहट न करें।",
+    "contact_button": "हमसे संपर्क करें"
+  },
+  "ja": {
+    "title": "私たちは誰ですか？",
+    "paragraphs1": "私たちは最も恵まれない人々を助けることに専念している団体です。",
+    "paragraphs2": "私たちの団体は1987年に設立され、それ以来、私たちはボランティアのおかげでアウトリーチ活動やその他の活動などを実施することを目指しています。",
+    "paragraphs3": "私たちはお互いを助け合い、良い気分でいることに情熱を注いでいます。それがこの団体が存在する理由です。",
+    "paragraphs4": "私たちの団体や参加方法に関する詳細情報をお求めの場合は、お気軽にお問い合わせください。",
+    "contact_button": "お問い合わせ"
+  },
+  "ko": {
+    "title": "우리는 누구인가?",
+    "paragraphs1": "우리는 가장 불우한 사람들을 돕기 위해 헌신하는 협회입니다.",
+    "paragraphs2": "우리 협회는 1987년에 설립되었으며 그 이후로 저희는 자원봉사자들 덕분에 아웃리치 작업이나 기타 활동을 할 수 있도록 노력해 왔습니다.",
+    "paragraphs3": "우리는 상호 지원과 좋은 기분에 열정적입니다. 그것이 이 협회가 존재하는 이유입니다.",
+    "paragraphs4": "협회에 대한 자세한 정보나 참여 방법에 대해 더 알고 싶으시면 언제든지 문의해 주십시오.",
+    "contact_button": "문의하기"
+  },
+  "pa": {
+    "title": "ਅਸੀਂ ਕੌਣ ਹਾਂ?",
+    "paragraphs1": "ਅਸੀਂ ਸਭ ਤੋਂ ਗਰੀਬਾਂ ਦੀ ਮਦਦ ਕਰਨ ਲਈ ਇੱਕ ਸੰਘ ਹਾਂ।",
+    "paragraphs2": "ਸਾਡੇ ਸੰਘ ਨੂੰ 1987 ਵਿੱਚ ਸਥਾਪਿਤ ਕੀਤਾ ਗਿਆ ਸੀ ਅਤੇ ਤਬ ਤੋਂ ਹੀ, ਅਸੀਂ ਆਪਣੇ ਸ੍ਰੋਤ ਵਰਕ ਜਾਂ ਹੋਰ ਗਤੀਵਿਧੀਆਂ ਨੂੰ ਅਪਣੇ ਵਾਲੰਟੀਅਰਾਂ ਦੇ ਕਰਮ ਦੀ ਵਜ੍ਹਾ ਨਾਲ ਕਰਨ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰ ਰਹੇ ਹਾਂ।",
+    "paragraphs3": "ਅਸੀਂ ਪਰਸਪਰ ਸਹਾਇਤਾ ਅਤੇ ਚੰਗੀ ਮੁੱਦੀਂ ਵਿੱਚ ਉਤਸ਼ਾਹੀ ਹਾਂ, ਇਸ ਲਈ ਇਹ ਸੰਘ ਹੈ।",
+    "paragraphs4": "ਅਸੀਂ ਆਪਣੇ ਸੰਘ ਬਾਰੇ ਜਾਣਕਾਰੀ ਜਾਂ ਤੁਸੀਂ ਕਿਵੇਂ ਸ਼ਾਮਲ ਹੋ ਸਕਦੇ ਹੋ ਬਾਰੇ ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ ਸੰਪਰਕ ਕਰਨ ਲਈ ਸਹਾਇਤਾ ਕਰਨ ਲਈ ਅਸੀਂ ਤੁਹਾਨੂੰ ਹਿਮਮਤ ਦਿੰਦੇ ਹਾਂ।",
+    "contact_button": "ਸੰਪਰਕ ਕਰੋ"
+  },
+  "bn": {
+    "title": "আমরা কে?",
+    "paragraphs1": "আমরা যারা সর্বোচ্চ দুর্বলদের সাহায্য করার জন্য প্রতিষ্ঠিত একটি সংঘ।",
+    "paragraphs2": "আমাদের সংঘটনা 1987 সালে প্রতিষ্ঠিত হয়েছিল এবং তারপর থেকে, আমরা আমাদের স্বেচ্ছাসেবকদের সাহায্যে কিংবা অন্যান্য কোনও কাজ করার জন্য স্ট্রীটওয়ার্ক বা অন্যান্য কার্যকলাপ চালানোর চেষ্টা করি।",
+    "paragraphs3": "আমরা পরস্পরের সাহায্য এবং ভাল মন্ত্রে উদাসীন, তাই এই সংঘ আছে।",
+    "paragraphs4": "আমাদের সংঘ এবং আপনি কিভাবে অংশগ্রহণ করতে পারেন সে সম্পর্কে আরও তথ্যের জন্য আমাদের সাথে যোগাযোগ করতে হয়।",
+    "contact_button": "আমাদের সাথে যোগাযোগ করুন"
+  },
+  "fr": {
+    "title": "Qui sommes-nous ?",
+    "paragraphs1": "Nous sommes une association dédiée à aider les plus démunis.",
+    "paragraphs2": "Notre association a été fondée en 1987 et depuis lors, nous nous efforçons de réaliser des activités comme des maraudes ou autres grâce à nos bénévoles.",
+    "paragraphs3": "Nous sommes passionnés par l'entraide et la bonne humeur, c'est pour cela que cette association existe.",
+    "paragraphs4": "N'hésitez pas à nous contacter pour plus d'informations sur notre association et comment vous pouvez vous impliquer.",
+    "contact_button": "Contactez-nous"
+  },
+  "ln": {
+    "title": "Nkómbo na biso ?",
+    "paragraphs1": "Tunáli ekóko ya kosalisa bato moko ya liboso.",
+    "paragraphs2": "Ekóko ya biso etunáki na 1987 mpé motuna, betúki na kolongola mokili te na mibalé, malamu mpo na babóteli na biso.",
+    "paragraphs3": "Bisika tosónga biloko na bomoi, tosónga na kopesa moto ya libota, nde mpe ekóko ya libota etúki.",
+    "paragraphs4": "Tusalaki na bosoto ekóko ya biso mpe kotíka na ekoluka na biso na mibale, tosika basusu.",
+    "contact_button": "Sala biso"
+  },
+  "sr": {
+    "title": "Ko smo mi?",
+    "paragraphs1": "Mi smo udruženje posvećeno pomoći najugroženijima.",
+    "paragraphs2": "Naše udruženje osnovano je 1987. godine i od tada se trudimo da sprovodimo aktivnosti poput terenskog rada ili drugih zahvaljujući našim volonterima.",
+    "paragraphs3": "Mi smo strastveni u pomaganju jedni drugima i dobrom raspoloženju, zbog čega postoji ovo udruženje.",
+    "paragraphs4": "Ne ustručavajte se da nas kontaktirate za više informacija o našem udruženju i kako možete da se uključite.",
+    "contact_button": "Kontaktirajte nas"
+  },
+  "ca": {
+    "title": "Qui som nosaltres?",
+    "paragraphs1": "Som una associació dedicada a ajudar els més necessitats.",
+    "paragraphs2": "La nostra associació va ser fundada el 1987 i des de llavors, ens esforcem per dur a terme activitats com ara treball de carrer o altres gràcies als nostres voluntaris.",
+    "paragraphs3": "Estem apassionats per l'ajuda mútua i el bon humor, per això existeix aquesta associació.",
+    "paragraphs4": "No dubteu en contactar-nos per obtenir més informació sobre la nostra associació i com podeu participar.",
+    "contact_button": "Contacta'ns"
+  }
+}

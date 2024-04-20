@@ -32,8 +32,8 @@ if(isset($_POST['amount'])) {
 
     $checkout_session = \Stripe\Checkout\Session::create([
         "mode" => "payment",
-        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php",
-        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php",
+        "success_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/stripe/success.php?_ijt=8r60gl9hrjvjbt1epf9g3t4dip",
+        "cancel_url" => "http://localhost:63342/PA-ATD-2023-2024/PA2/pages/donation.php?_ijt=8r60gl9hrjvjbt1epf9g3t4dip",
         "line_items" => [
             [
                 "quantity" => 1,
@@ -48,11 +48,11 @@ if(isset($_POST['amount'])) {
         ]
     ]);
 
-    // Rediriger l'utilisateur vers la page de paiement Stripe
+    // Rediriger user vers la page de paiement Stripe
     header('Location: ' . $checkout_session->url);
     exit;
 } else {
-    // Si le montant n'a pas été spécifié, afficher un message d'erreur
+
     echo "Le montant n'a pas été spécifié.";
 }
 ?>

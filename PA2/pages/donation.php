@@ -34,11 +34,11 @@
                         <a href="login.php" class="btn btn-link translate">
                             <span data-translate="login">Connectez-vous</span>
                         </a>
-                        <span> ou </span>
+                        <span data-translate="or"> ou </span>
                         <a href="createAccount.php" class="btn btn-link translate">
                             <span data-translate="sign-up">Inscrivez-vous</span>
                         </a>
-                        <span> en tant que bénévole.</span>
+                        <span data-translate="volunteer"> en tant que bénévole.</span>
                     </div>
 
                     <div class="form-group">

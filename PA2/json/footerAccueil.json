@@ -1,0 +1,200 @@
+{
+  "en": {
+    "slogan": "Association Slogan",
+    "login-footer": "Login",
+    "signup-footer": "Sign Up",
+    "don-footer": "Make a Donation",
+    "about-footer": "About Us",
+    "copyright-footer": "© 2024 Au Temps Donné. All rights reserved",
+    "contact-footer": "Contact",
+    "mentions-footer": "Legal Mentions",
+    "datas-footer": "Data Policy"
+  },
+  "es": {
+    "slogan": "Eslogan de la Asociación",
+    "login-footer": "Iniciar sesión",
+    "signup-footer": "Crear una cuenta",
+    "don-footer": "Hacer una donación",
+    "about-footer": "Sobre nosotros",
+    "copyright-footer": "© 2024 Au Temps Donné. Todos los derechos reservados",
+    "contact-footer": "Contacto",
+    "mentions-footer": "Menciones legales",
+    "datas-footer": "Política de datos"
+  },
+  "it": {
+    "slogan": "Slogan dell'Associazione",
+    "login-footer": "Accedi",
+    "signup-footer": "Iscriviti",
+    "don-footer": "Fai una donazione",
+    "about-footer": "Chi siamo",
+    "copyright-footer": "© 2024 Au Temps Donné. Tutti i diritti riservati",
+    "contact-footer": "Contatto",
+    "mentions-footer": "Menzioni legali",
+    "datas-footer": "Politica dei dati"
+  },
+  "de": {
+    "slogan": "Verbandsmotto",
+    "login-footer": "Anmelden",
+    "signup-footer": "Registrieren",
+    "don-footer": "Spenden",
+    "about-footer": "Über uns",
+    "copyright-footer": "© 2024 Au Temps Donné. Alle Rechte vorbehalten",
+    "contact-footer": "Kontakt",
+    "mentions-footer": "Rechtliche Hinweise",
+    "datas-footer": "Datenschutzbestimmungen"
+  },
+  "pt": {
+    "slogan": "Slogan da Associação",
+    "login-footer": "Entrar",
+    "signup-footer": "Inscrever-se",
+    "don-footer": "Faça uma doação",
+    "about-footer": "Sobre nós",
+    "copyright-footer": "© 2024 Au Temps Donné. Todos os direitos reservados",
+    "contact-footer": "Contato",
+    "mentions-footer": "Avisos legais",
+    "datas-footer": "Política de dados"
+  },
+  "ru": {
+    "slogan": "Слоган ассоциации",
+    "login-footer": "Войти",
+    "signup-footer": "Зарегистрироваться",
+    "don-footer": "Сделать пожертвование",
+    "about-footer": "О нас",
+    "copyright-footer": "© 2024 Au Temps Donné. Все права защищены",
+    "contact-footer": "Контакт",
+    "mentions-footer": "Правовые уведомления",
+    "datas-footer": "Политика данных"
+  },
+  "el": {
+    "slogan": "Σύνθημα της Ένωσης",
+    "login-footer": "Σύνδεση",
+    "signup-footer": "Εγγραφή",
+    "don-footer": "Κάντε μια δωρεά",
+    "about-footer": "Σχετικά με εμάς",
+    "copyright-footer": "© 2024 Au Temps Donné. Με επιφύλαξη παντός δικαιώματος",
+    "contact-footer": "Επικοινωνία",
+    "mentions-footer": "Νομικές Δηλώσεις",
+    "datas-footer": "Πολιτική δεδομένων"
+  },
+  "ar": {
+    "slogan": "شعار الجمعية",
+    "login-footer": "تسجيل الدخول",
+    "signup-footer": "سجل",
+    "don-footer": "قدم تبرع",
+    "about-footer": "من نحن",
+    "copyright-footer": "© 2024 Au Temps Donné. كل الحقوق محفوظة",
+    "contact-footer": "اتصل",
+    "mentions-footer": "الإشارات القانونية",
+    "datas-footer": "سياسة البيانات"
+  },
+  "zh": {
+    "slogan": "协会口号",
+    "login-footer": "登录",
+    "signup-footer": "注册",
+    "don-footer": "捐款",
+    "about-footer": "关于我们",
+    "copyright-footer": "© 2024 Au Temps Donné。保留所有权利",
+    "contact-footer": "联系",
+    "mentions-footer": "法律声明",
+    "datas-footer": "数据政策"
+  },
+  "hi": {
+    "slogan": "संघ की नारा",
+    "login-footer": "लॉग इन करें",
+    "signup-footer": "साइन अप करें",
+    "don-footer": "दान करें",
+    "about-footer": "हमारे बारे में",
+    "copyright-footer": "© 2024 Au Temps Donné। सभी अधिकार सुरक्षित",
+    "contact-footer": "संपर्क करें",
+    "mentions-footer": "कानूनी सूचनाएँ",
+    "datas-footer": "डेटा नीति"
+  },
+  "ja": {
+    "slogan": "協会のスローガン",
+    "login-footer": "ログイン",
+    "signup-footer": "サインアップ",
+    "don-footer": "寄付する",
+    "about-footer": "私たちについて",
+    "copyright-footer": "© 2024 Au Temps Donné。全著作権所有",
+    "contact-footer": "連絡先",
+    "mentions-footer": "法的告知",
+    "datas-footer": "データポリシー"
+  },
+  "ko": {
+    "slogan": "협회 슬로건",
+    "login-footer": "로그인",
+    "signup-footer": "가입",
+    "don-footer": "기부",
+    "about-footer": "우리에 대하여",
+    "copyright-footer": "© 2024 Au Temps Donné. 모든 권리 보유",
+    "contact-footer": "연락처",
+    "mentions-footer": "법적 고지",
+    "datas-footer": "데이터 정책"
+  },
+  "pa": {
+    "slogan": "संघ की नारा",
+    "login-footer": "ਲੌਗਇਨ",
+    "signup-footer": "ਸਾਈਨ ਅਪ ਕਰੋ",
+    "don-footer": "ਦਾਨ ਕਰੋ",
+    "about-footer": "ਸਾਡੇ ਬਾਰੇ",
+    "copyright-footer": "© 2024 Au Temps Donné. ਸਾਰੇ ਹੱਕ ਰਖੇ",
+    "contact-footer": "ਸੰਪਰਕ",
+    "mentions-footer": "ਕਾਨੂੰਨੀ ਨੋਟਿਸ",
+    "datas-footer": "ਡੇਟਾ ਪਾਲੀਸੀ"
+  },
+  "bn": {
+    "slogan": "সমিতির মোটো",
+    "login-footer": "লগ ইন করুন",
+    "signup-footer": "নিবন্ধন করুন",
+    "don-footer": "দান করুন",
+    "about-footer": "আমাদের সম্পর্কে",
+    "copyright-footer": "© 2024 Au Temps Donné। সমস্ত অধিকার সংরক্ষিত",
+    "contact-footer": "যোগাযোগ",
+    "mentions-footer": "আইনি বিজ্ঞপ্তি",
+    "datas-footer": "ডেটা নীতি"
+  },
+  "fr": {
+    "slogan": "Slogan de l'Association",
+    "login-footer": "Se connecter",
+    "signup-footer": "Creer un compte",
+    "don-footer": "Faire un don",
+    "about-footer": "Qui somme nous",
+    "copyright-footer": "© 2024 Au Temps Donné. Tous droits réservés",
+    "contact-footer": "Contact",
+    "mentions-footer": "Mention légales",
+    "datas-footer": "Politique de données"
+  },
+  "ln": {
+    "slogan": "Slogan ya Association",
+    "login-footer": "Kobeta",
+    "signup-footer": "Toya",
+    "don-footer": "Kokoka",
+    "about-footer": "Tunabakin",
+    "copyright-footer": "© 2024 Au Temps Donné. Vyote vyakuliwa",
+    "contact-footer": "Wasiliana nasi",
+    "mentions-footer": "Marejeo ya kisheria",
+    "datas-footer": "Sera ya data"
+  },
+  "sr": {
+    "slogan": "Slogan udruženja",
+    "login-footer": "Prijavi se",
+    "signup-footer": "Prijavite se",
+    "don-footer": "Doniraj",
+    "about-footer": "O nama",
+    "copyright-footer": "© 2024 Au Temps Donné. Sva prava zadržana",
+    "contact-footer": "Kontakt",
+    "mentions-footer": "Pravne napomene",
+    "datas-footer": "Politika podataka"
+  },
+  "ca": {
+    "slogan": "Eslogan de l'Associació",
+    "login-footer": "Inicia sessió",
+    "signup-footer": "Registra't",
+    "don-footer": "Fer una donació",
+    "about-footer": "Qui som nosaltres",
+    "copyright-footer": "© 2024 Au Temps Donné. Tots els drets reservats",
+    "contact-footer": "Contacte",
+    "mentions-footer": "Avís legal",
+    "datas-footer": "Política de dades"
+  }
+}

@@ -12,32 +12,32 @@
 <?php include('../includes/header/headerNoConnexion/headerAccueil.php') ?>
 <div id="translated-content"></div>
 <div class="container mt-5">
-    <h2>Contactez-nous</h2>
+    <h2 data-translate ="contact">Contactez-nous</h2>
     <form onsubmit="return validateForm()">
         <div class="form-group">
-            <label for="name">Nom et Prenom :</label>
+            <label for="name" data-translate ="name">Nom et Prenom :</label>
             <input type="text" class="form-control" id="name" placeholder="Mamoru Takamura" required>
         </div>
 
         <div class="form-group">
-            <label for="email">Adresse Email :</label>
+            <label for="email" data-translate ="email">Adresse Email :</label>
             <input type="email" class="form-control" id="email" placeholder="takamura@ippo.fr" required>
         </div>
 
         <select class="form-select custom-select" aria-label="Default select example" required>
-            <option selected>Choisissez une catégorie</option>
-            <option value="aide_service_administratif">Besoin d'aide Administratif</option>
-            <option value="demande_navette">Demande de Transport</option>
-            <option value="demande_visite">Demande de Visite</option>
-            <option value="autre">Autre</option>
+            <option selected data-translate ="categorie">Choisissez une catégorie</option>
+            <option value="aide_service_administratif" data-translate ="admin">Besoin d'aide Administratif</option>
+            <option value="demande_navette" data-translate ="navette">Demande de Transport</option>
+            <option value="demande_visite" data-translate ="visite">Demande de Visite</option>
+            <option value="autre" data-translate ="autre">Autre</option>
         </select>
 
         <div class="form-group">
-            <label for="demande">Message (Donner le plus de detail possible, Date, Adresse) :</label>
-            <textarea class="form-control" id="demande" rows="10" placeholder="Entrez votre message" required></textarea>
+            <label for="demande" data-translate ="demande">Message (Donner le plus de detail possible, Date, Adresse) :</label>
+            <textarea class="form-control" id="demande" rows="10" data-translate ="placeholder" placeholder="Entrez votre message" required></textarea>
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" data-translate ="envoyer" class="btn btn-primary">Envoyer</button>
     </form>
 </div>
 

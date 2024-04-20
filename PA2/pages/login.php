@@ -7,7 +7,7 @@
           href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap"
           rel="stylesheet"
       />
-      <script src="../javaScript/trad/trad.js"></script>
+      <script src="../javaScript/trad.js"></script>
   </head>
   <body>
 
@@ -15,15 +15,15 @@
     <div class="background"></div>
     <div class="card">
       <img class="logo" src="../img/logo.png" />
-      <h2>Bienvenue</h2>
-      <form method="post" class="form" id="loginForm">
-        <input type="email" id="email" placeholder="Email" />
-        <input type="password" id="password" placeholder="Mot de passe" />
-          <div id="errorMessage" style="display: none; color: red;">Erreur : Identifiants incorrects</div>
-          <button>Se connecter</button>
+      <h2 data-translate ="welcome">Bienvenue</h2>
+      <form method="post"  class="form" id="loginForm">
+        <input type="email" data-translate ="email" id="email" placeholder="Email" />
+        <input type="password" data-translate ="password" id="password" placeholder="Mot de passe" />
+          <div id="errorMessage" data-translate ="error" style="display: none; color: red;">Erreur : Identifiants incorrects</div>
+          <button data-translate ="connect">Se connecter</button>
       </form>
         <footer>
-            <span>Pas de compte? Créer-en un</span> <a href="createAccount.php">ici</a>
+            <span data-translate ="no-account">Pas de compte? Créer-en un</span> <a href="createAccount.php" data-translate ="here">ici</a>
         </footer>
     </div>
   </body>

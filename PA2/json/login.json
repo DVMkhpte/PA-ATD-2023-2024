@@ -1,0 +1,164 @@
+{
+  "en": {
+    "welcome": "Welcome",
+    "email": "Email",
+    "password": "Password",
+    "error": "Error: Incorrect credentials",
+    "connect": "Log In",
+    "no-account": "No account? Create one",
+    "here": "here"
+  },
+  "es": {
+    "welcome": "Bienvenido",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "error": "Error: Credenciales incorrectas",
+    "connect": "Iniciar sesión",
+    "no-account": "¿No tienes una cuenta? Crea una",
+    "here": "aquí"
+  },
+  "fr": {
+    "welcome": "Bienvenue",
+    "email": "Email",
+    "password": "Mot de passe",
+    "error": "Erreur : Identifiants incorrects",
+    "connect": "Se connecter",
+    "no-account": "Pas de compte ? Créer-en un",
+    "here": "ici"
+  },
+  "it": {
+    "welcome": "Benvenuto",
+    "email": "Email",
+    "password": "Password",
+    "error": "Errore: Credenziali errate",
+    "connect": "Accedi",
+    "no-account": "Non hai un account? Creane uno",
+    "here": "qui"
+  },
+  "de": {
+    "welcome": "Willkommen",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "error": "Fehler: Falsche Anmeldedaten",
+    "connect": "Einloggen",
+    "no-account": "Kein Konto? Erstellen Sie eins",
+    "here": "hier"
+  },
+  "pt": {
+    "welcome": "Bem-vindo",
+    "email": "E-mail",
+    "password": "Senha",
+    "error": "Erro: Credenciais incorretas",
+    "connect": "Entrar",
+    "no-account": "Sem conta? Crie uma",
+    "here": "aqui"
+  },
+  "ru": {
+    "welcome": "Добро пожаловать",
+    "email": "Электронная почта",
+    "password": "Пароль",
+    "error": "Ошибка: Неверные учетные данные",
+    "connect": "Войти",
+    "no-account": "Нет аккаунта? Создайте его",
+    "here": "здесь"
+  },
+  "el": {
+    "welcome": "Καλώς ορίσατε",
+    "email": "Ηλεκτρονικό ταχυδρομείο",
+    "password": "Κωδικός πρόσβασης",
+    "error": "Σφάλμα: Λανθασμένα διαπιστευτήρια",
+    "connect": "Σύνδεση",
+    "no-account": "Χωρίς λογαριασμό; Δημιουργήστε έναν",
+    "here": "εδώ"
+  },
+  "ar": {
+    "welcome": "أهلاً وسهلاً",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "error": "خطأ: بيانات الاعتماد غير صحيحة",
+    "connect": "تسجيل الدخول",
+    "no-account": "لا يوجد حساب؟ أنشئ واحدًا",
+    "here": "هنا"
+  },
+  "zh": {
+    "welcome": "欢迎",
+    "email": "电子邮件",
+    "password": "密码",
+    "error": "错误：凭据不正确",
+    "connect": "登录",
+    "no-account": "没有账号？创建一个",
+    "here": "这里"
+  },
+  "hi": {
+    "welcome": "स्वागत है",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "error": "त्रुटि: गलत क्रेडेंशियल्स",
+    "connect": "लॉग इन करें",
+    "no-account": "कोई खाता नहीं है? एक बनाएं",
+    "here": "यहाँ"
+  },
+  "ja": {
+    "welcome": "ようこそ",
+    "email": "Eメール",
+    "password": "パスワード",
+    "error": "エラー：認証情報が正しくありません",
+    "connect": "ログイン",
+    "no-account": "アカウントがありませんか？ 作成する",
+    "here": "こちら"
+  },
+  "ko": {
+    "welcome": "환영합니다",
+    "email": "이메일",
+    "password": "암호",
+    "error": "오류: 잘못된 자격 증명",
+    "connect": "로그인",
+    "no-account": "계정이 없으세요? 계정 만들기",
+    "here": "여기"
+  },
+  "bn": {
+    "welcome": "স্বাগতম",
+    "email": "ইমেল",
+    "password": "পাসওয়ার্ড",
+    "error": "ত্রুটি: ভুল শংসাপত্র",
+    "connect": "লগ ইন করুন",
+    "no-account": "কোনো অ্যাকাউন্ট নেই? একটি তৈরি করুন",
+    "here": "এখানে"
+  },
+  "pa": {
+    "welcome": "ਜੀ ਆਇਆਂ ਨੂੰ",
+    "email": "ਈਮੇਲ",
+    "password": "ਪਾਸਵਰਡ",
+    "error": "ਗਲਤ ਕਰੀਡਿਟਸ: ਗਲਤ",
+    "connect": "ਲਾਗ ਇਨ",
+    "no-account": "ਕੋਈ ਖਾਤਾ ਨਹੀਂ ਹੈ? ਇੱਕ ਬਣਾਓ",
+    "here": "ਇੱਥੇ"
+  },
+  "sr": {
+    "welcome": "Добродошли",
+    "email": "Е-пошта",
+    "password": "Лозинка",
+    "error": "Грешка: Неисправни подаци за пријаву",
+    "connect": "Пријавите се",
+    "no-account": "Немате налог? Направите један",
+    "here": "овде"
+  },
+  "ln": {
+    "welcome": "Mbote",
+    "email": "E-mail",
+    "password": "Motɔ ya sika",
+    "error": "Lisusu: Malamu ezali mpe te",
+    "connect": "Kosakola",
+    "no-account": "Mokili ezali te? Boye ete",
+    "here": "kende"
+  },
+  "ca": {
+    "welcome": "Benvingut",
+    "email": "Correu electrònic",
+    "password": "Contrasenya",
+    "error": "Error: Credencials incorrectes",
+    "connect": "Inicia sessió",
+    "no-account": "Sense compte? Crea'n un",
+    "here": "aquí"
+  }
+}

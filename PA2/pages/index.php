@@ -33,9 +33,9 @@
       <img class="d-block w-100" src="../img/image3.jpg" alt="Third slide">
     </div>
     <div class="jumbotron">
-        <h1 class="display-4">Au Temps Donné, plus qu'une simple association.</h1>
-        <p class="lead">Depuis 1987.</p>
-        <a class="btn btn-primary btn-lg" href="donation.php">Faire un don</a>
+        <h1 class="display-4" data-translate="title">Au Temps Donné, plus qu'une simple association.</h1>
+        <p class="lead" data-translate="date">Depuis 1987.</p>
+        <a class="btn btn-primary btn-lg" data-translate="donation" href="donation.php">Faire un don</a>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -55,7 +55,8 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    
+
+
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 
 <head>
     <title>Creer votre compte</title>
@@ -14,7 +14,6 @@
             href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
             rel="stylesheet"
     />
-    <script src="../javaScript/trad/trad.js"></script>
 </head>
 
 
@@ -24,47 +23,51 @@
   <div id="connexion">
     <div class="accueil">
         <img src="../img/maison.png" alt="Image d'accueil">
-        <a href="index.php"><u>Retour à l'accueil</u></a>
+        <a href="index.php" data-translate="home"><u>Retour à l'accueil</u></a>
     </div>
-    <h1 class="title">Connectez-vous</h1>
-    <a href="login.php" class="btn-link connexion">Se connecter</a>
+    <h1 class="title" data-translate="login">Connectez-vous</h1>
+    <a href="login.php" class="btn-link connexion" data-translate="sign-in">Se connecter</a>
   </div>
   <div id="inscription">
-    <h1 class="title">Créer un compte</h1>
-    <p class="paragraphe">
+    <h1 class="title" data-translate="create">Créer un compte</h1>
+    <p class="paragraphe" data-translate="field">
       Veuillez remplir tous les champs
     </p>
     <form class="formulaire" id="createForm">
     <div class="group-form">
-        <input type="text" id="prenom" placeholder="Prenom">
-        <input type="text" id="nom" placeholder="Nom">
-    </div>  
-    <div class="group-form">
-        <input type="text" id="code_postal" placeholder="Code Postal">
-        <input type="text" id="ville" placeholder="Ville">
+        <input type="text" data-translate="prenom" id="prenom" placeholder="Prenom">
+        <input type="text" data-translate="nom" id="nom" placeholder="Nom">
     </div>
     <div class="group-form">
-        <input type="text" id="adresse" placeholder="Adresse">
+        <input type="text" data-translate="zipcode" id="code_postal" placeholder="Code Postal">
+        <input type="text" data-translate="city" id="ville" placeholder="Ville">
     </div>
     <div class="group-form">
-        <input type="text" id="phone" placeholder="Numero de telephone">
+        <input type="text" data-translate="adress" id="adresse" placeholder="Adresse">
     </div>
     <div class="group-form">
-        <input type="email" id="email" placeholder="Mail">
-      </div>
-      <div class="group-form"> 
-        <input type="password" id="password" placeholder="Mot de passe">
-          <p id="password-error-msg" style="color: red; display: none;">Le mot de passe doit avoir au moins 8 caractères et inclure au moins un chiffre</p>
+        <input type="text" data-translate="phone" id="phone" placeholder="Numero de telephone">
+    </div>
+    <div class="group-form">
+        <input type="email" data-translate="email" id="email" placeholder="Mail">
       </div>
       <div class="group-form">
-        <input type="submit" id="submitButton" class="inscription" value="S'inscrire">
+        <input type="password" data-translate="password" id="password" placeholder="Mot de passe">
+          <p id="password-error-msg" data-translate="error" style="color: red; display: none;">Le mot de passe doit avoir au moins 8 caractères et inclure au moins un chiffre</p>
+      </div>
+      <div class="group-form">
+        <input type="submit"  id="submitButton"  class="inscription"  value="S'inscrire" data-translate="inscription">
       </div>
     </form>
     <div class="benevole">
-    <p class="paragraphe">
-      Vous voulez nous aider ? Devenez <strong>bénévole</strong> en <a href="login.php" onclick="become_benevole()">cliquant ici.</a>
-    </p>
-  </div>
+        <p class="paragraphe">
+            <span data-translate="text-part1">Vous voulez nous aider ? Devenez </span>
+            <strong data-translate="strong-text">bénévole</strong>
+            <span class="become-benevole" data-translate="text-part2"> en cliquant ici.</span>
+        </p>
+
+
+    </div>
 </div>
 </body>
 
@@ -138,4 +141,36 @@
     }
 
 </script>
+<script>
+    document.addEventListener('DOMContentLoaded', async function() {
+        const selectedLanguage = localStorage.getItem('language') || 'fr';
+        await loadTranslations(selectedLanguage);
+    });
+    document.addEventListener('DOMContentLoaded', function() {
+        const becomeBenevoleElement = document.querySelector('.become-benevole');
+        becomeBenevoleElement.addEventListener('click', function() {
+            window.location.href = 'login.php';
+        });
+    });
+
+
+
+    async function loadTranslations(language) {
+        const translationFile = '../json/createAccount.json';
+        const response = await fetch(translationFile);
+        const translations = await response.json();
+        updateTranslations(language, translations);
+    }
+
+    function updateTranslations(language, translations) {
+        const elementsToTranslate = document.querySelectorAll('[data-translate]');
+        elementsToTranslate.forEach(element => {
+            const key = element.dataset.translate;
+            if (translations[language] && translations[language][key]) {
+                element.textContent = translations[language][key];
+            }
+        });
+    }
+</script>
+
 </html>

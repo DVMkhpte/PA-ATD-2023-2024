@@ -1,0 +1,165 @@
+{
+  "en": {
+    "faites-un-don": "Make a donation.",
+    "texte-don": "Help Au Temps Donne to grow and help others.",
+    "login": "Log in",
+    "sign-up": "Sign up",
+    "why": "Why Donate?",
+    "or": "or",
+    "volunteer": "as a volunteer."
+  },
+  "es": {
+    "faites-un-don": "Hacer una donación.",
+    "texte-don": "Ayuda a Au Temps Donne a crecer y ayudar a otros.",
+    "login": "Iniciar sesión",
+    "sign-up": "Registrarse",
+    "why": "¿Por qué donar?",
+    "or": "o",
+    "volunteer": "como voluntario."
+  },
+  "fr": {
+    "faites-un-don": "Faites un don.",
+    "texte-don": "Aidez Au Temps Donne à se développer pour venir en aide aux autres.",
+    "login": "Connexion",
+    "sign-up": "Inscrivez-vous",
+    "why": "Pourquoi faire un don ?",
+    "or": "ou",
+    "volunteer": "en tant que bénévole."
+  },
+  "it": {
+    "faites-un-don": "Fai una donazione.",
+    "texte-don": "Aiuta Au Temps Donne a crescere e ad aiutare gli altri.",
+    "login": "Accesso",
+    "sign-up": "Registrati",
+    "why": "Perché donare?",
+    "or": "o",
+    "volunteer": "come volontario."
+  },
+  "de": {
+    "faites-un-don": "Spenden Sie.",
+    "texte-don": "Helfen Sie Au Temps Donne zu wachsen und anderen zu helfen.",
+    "login": "Anmelden",
+    "sign-up": "Registrieren",
+    "why": "Warum spenden?",
+    "or": "oder",
+    "volunteer": "als Freiwilliger."
+  },
+  "pt": {
+    "faites-un-don": "Faça uma doação.",
+    "texte-don": "Ajude Au Temps Donne a crescer e ajudar os outros.",
+    "login": "Entrar",
+    "sign-up": "Registar",
+    "why": "Por que doar?",
+    "or": "ou",
+    "volunteer": "como voluntário."
+  },
+  "ru": {
+    "faites-un-don": "Сделайте пожертвование.",
+    "texte-don": "Помогите Au Temps Donne вырасти и помочь другим.",
+    "login": "Войти",
+    "sign-up": "Зарегистрироваться",
+    "why": "Зачем донатить?",
+    "or": "или",
+    "volunteer": "волонтером."
+
+  },
+  "el": {
+    "faites-un-don": "Κάντε μια δωρεά.",
+    "texte-don": "Βοηθήστε το Au Temps Donne να μεγαλώσει και να βοηθήσει άλλους.",
+    "login": "Σύνδεση",
+    "sign-up": "Εγγραφείτε",
+    "why": "Γιατί να δωρίσετε;",
+    "or": "ή",
+    "volunteer": "ως εθελοντής."
+  },
+  "ar": {
+    "faites-un-don": "قم بالتبرع.",
+    "texte-don": "ساعد Au Temps Donne على النمو ومساعدة الآخرين.",
+    "login": "تسجيل الدخول",
+    "sign-up": "سجل",
+    "why": "لماذا التبرع؟",
+    "or": "أو",
+    "volunteer": "كمتطوع."
+  },
+  "zh": {
+    "faites-un-don": "捐赠.",
+    "texte-don": "帮助 Au Temps Donne 成长并帮助他人.",
+    "login": "登录",
+    "sign-up": "注册",
+    "why": "为什么捐赠？",
+    "or": "或者",
+    "volunteer": "作为志愿者。"
+  },
+  "hi": {
+    "faites-un-don": "दान करें.",
+    "texte-don": "Au Temps Donne को बढ़ने में मदद करें और दूसरों की मदद करें।",
+    "login": "लॉग इन करें",
+    "sign-up": "साइन अप करें",
+    "why": "क्यों दान करें?",
+    "or": "या",
+    "volunteer": "स्वयंसेवक के रूप में।"
+  },
+  "ja": {
+    "faites-un-don": "寄付してください。",
+    "texte-don": "Au Temps Donne の成長と他者への支援を助けてください。",
+    "login": "ログイン",
+    "sign-up": "サインアップ",
+    "why": "なぜ寄付するのですか？",
+    "or": "または",
+    "volunteer": "ボランティアとして。"
+  },
+  "ko": {
+    "faites-un-don": "기부하다.",
+    "texte-don": "Au Temps Donne 의 성장을 돕고 다른 사람들에게 도움을 주세요.",
+    "login": "로그인",
+    "sign-up": "가입하기",
+    "why": "왜 기부하나요?",
+    "or": "또는",
+    "volunteer": "자원 봉사자로."
+  },
+  "bn": {
+    "faites-un-don": "দান করুন।",
+    "texte-don": "Au Temps Donne কে বড় করুন এবং অন্যদের সাহায্য করুন।",
+    "login": "লগইন করুন",
+    "sign-up": "নিবন্ধন করুন",
+    "why": "কেন দান করবেন?",
+    "or": "অথবা",
+    "volunteer": "স্বেচ্ছাসেবক হিসেবে।"
+  },
+  "pa": {
+    "faites-un-don": "ਦਾਨ ਕਰੋ।",
+    "texte-don": "Au Temps Donne ਦੀ ਵਧਾਈ ਕਰੋ ਅਤੇ ਹੋਰਾਂ ਦੀ ਮਦਦ ਕਰੋ।",
+    "login": "ਲਾਗ ਇਨ",
+    "sign-up": "ਸਾਈਨ ਅਪ",
+    "why": "ਕਿਉਂ ਦਾਨ ਕਰੋ?",
+    "or": "ਜਾਂ",
+    "volunteer": "ਸਵੈ-ਸੇਵਕ ਵਜੋਂ।"
+  },
+  "ln": {
+    "faites-un-don": "Kobanga.",
+    "texte-don": "Esengeli Au Temps Donne ya kozala moko na kosala ba ndeko.",
+    "login": "Kokendeke",
+    "sign-up": "Kosepela",
+    "why": "Mokomi kolukisa na ngai?",
+    "or": "Tozwi likambo na",
+    "volunteer": "monene neti benevole."
+  },
+  "sr": {
+    "faites-un-don": "Поднесите донацију.",
+    "texte-don": "Помозите Au Temps Donne да расте и помозите другима.",
+    "login": "Пријава",
+    "sign-up": "Региструј се",
+    "why": "Зашто донација?",
+    "or": "Или",
+    "volunteer": "као волонтер."
+  },
+  "ca": {
+    "faites-un-don": "Fes una donació.",
+    "texte-don": "Ajuda a Au Temps Donne a créixer i ajudar als altres.",
+    "login": "Iniciar sessió",
+    "sign-up": "Registra't",
+    "why": "Per què donar?",
+    "or": "O",
+    "volunteer": "com a voluntari."
+  }
+}
