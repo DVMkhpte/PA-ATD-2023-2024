@@ -15,7 +15,8 @@ class CreateController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'nom' => 'string|max:255',
+            'prenom' => 'string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'code_postal'=> 'required|integer',
             'ville' => 'required|string|max:255',
@@ -26,7 +27,8 @@ class CreateController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $data['name'],
+            'nom' => $data['nom'],
+            'prenom' => $data['prenom'],
             'email' => $data['email'],
             'code_postal' => $data[ 'code_postal'],
             'ville'=> $data['ville'],

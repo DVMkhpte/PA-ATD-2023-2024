@@ -15,8 +15,9 @@ class Formation extends Model
     protected $fillable = [
     'nom',
     'description',
-    'date_debut', 
+    'date_debut',
     'date_fin',
+    'addresse',
     'nb_place',
     'supervise_par'
     ];

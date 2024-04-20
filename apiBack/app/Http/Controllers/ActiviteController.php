@@ -17,7 +17,7 @@ class ActiviteController extends Controller
     {
         $adminUser = Auth::user();
         $activite = Activites::with('supervisor')->get();
-        
+
         Log::channel('admin_activity')->info("Index Activite by " . $adminUser->name);
         return response()->json($activite);
     }
@@ -44,6 +44,7 @@ class ActiviteController extends Controller
             'description' => 'required|string',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
+            'adresse' => 'required|string',
             'nb_place' => 'required|integer',
             'superviser_par' => 'integer',
         ]);
@@ -75,6 +76,7 @@ class ActiviteController extends Controller
             'description' => 'required|string|max:255',
             'date_debut' => 'required|date',
             'date_fin' => 'required|date|after_or_equal:date_debut',
+            'adresse' => 'required|string',
             'nb_place' => 'required|integer',
             'superviser_par' => 'integer',
         ]);
