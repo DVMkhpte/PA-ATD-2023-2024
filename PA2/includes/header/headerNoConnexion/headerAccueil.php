@@ -11,7 +11,73 @@
     <link href="../includes/header/headerNoConnexion/stylesHeaderAccueil.css" rel="stylesheet" />
 
     <header>
-        <script src="../javaScript/trad.js"></script>
+    <script src="../javaScript/trad.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                fetch('../json/headerAccueil.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        const elements = document.querySelectorAll('[data-translate]');
+                        elements.forEach(element => {
+                            const key = element.getAttribute('data-translate');
+                            const translation = data[key];
+                            if (translation) {
+                                element.textContent = translation;
+                            }
+                        });
+
+                        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+                        dropdownMenus.forEach(menu => {
+                            const menuItems = menu.querySelectorAll('[data-translate]');
+                            menuItems.forEach(item => {
+                                const key = item.getAttribute('data-translate');
+                                const translation = data[key];
+                                if (translation) {
+                                    item.textContent = translation;
+                                    console.log(`Texte traduit pour ${key} : ${translation}`);
+                                } else {
+                                    console.log(`Aucune traduction trouvée pour ${key}`);
+                                }
+                            });
+
+                            document.addEventListener("DOMContentLoaded", function() {
+                                fetch('../json/headerAccueil.json')
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        const buttons = document.querySelectorAll('button[data-translate="account2"]');
+                                        buttons.forEach(button => {
+
+                                            button.childNodes.forEach(node => {
+
+                                                if (node.nodeType === Node.TEXT_NODE && node.nodeValue.trim() === "Compte") {
+                                                    const translation = data['account2'];
+                                                    if (translation) {
+
+                                                        node.nodeValue = translation;
+                                                    } else {
+                                                        console.log(`Aucune traduction trouvée pour "Compte"`);
+                                                    }
+                                                }
+                                            });
+                                        });
+                                    })
+                                    .catch(error => {
+                                        console.error('Erreur lors du chargement du fichier JSON :', error);
+                                    });
+                            });
+
+
+
+                        });
+
+                    })
+                    .catch(error => {
+                        console.error('Erreur lors du chargement du fichier JSON :', error);
+                    });
+            });
+
+        </script>
+
         <nav class="navbar">
             <button onclick="toggleMenu()" class="burger"></button>
             <button class="button"><a href="index.php" data-translate="home2">Accueil</a></button>
@@ -21,6 +87,8 @@
                         Compte
                         <img src="../includes/header/headerNoConnexion/chevron.svg" />
                     </button>
+
+
                     <div class="dropdown-menu">
                         <button><a href="login.php" data-translate="login2">Se connecter</a></button>
                         <button><a href="createAccount.php" data-translate="create_account2">Creer un compte</a></button>

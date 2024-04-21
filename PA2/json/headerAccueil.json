@@ -1,18 +1,18 @@
 {
   "en": {
     "home2": "home",
-    "account2": "account2",
+    "account2": "account",
     "login2": "Log in",
-    "create_account2": "Create an account2",
-    "donation2": "donation2",
-    "make_donation2": "Make a donation2",
+    "create_account2": "Create an account",
+    "donation2": "donation",
+    "make_donation2": "Make a donation",
     "why_help2": "Why help us?",
     "who_we_are2": "Who are we?",
     "help2": "help",
     "contact_us2": "Contact us",
     "legal_mentions2": "Legal mentions",
     "data_policy2": "Data policy",
-    "translate2": "translate2"
+    "translate2": "translate"
   },
   "es": {
     "home2": "Inicio",
@@ -31,7 +31,7 @@
   },
   "it": {
     "home2": "Pagina iniziale",
-    "account2": "account2",
+    "account2": "Conto",
     "login2": "Accedi",
     "create_account2": "Crea un account2",
     "donation2": "Donazione",

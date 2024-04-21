@@ -8,8 +8,8 @@ const translationFiles = {
     'login.php': '../json/login.json',
     'policy.php': '../json/policy.json',
     'legal_mention.php': '../json/legal_mention.json',
-    '../../includes/header/headerNoConnexion/headerAccueil.php': '../json/headerAccueil.json',
-    '../../includes/footer/footerNoConnexion/footerAccueil.php': '../json/footerAccueil.json'
+    '../includes/header/headerNoConnexion/headerAccueil.php': '../json/headerAccueil.json',
+    '../includes/footer/footerNoConnexion/footerAccueil.php': '../json/footerAccueil.json'
 };
 
 let translations = {};
