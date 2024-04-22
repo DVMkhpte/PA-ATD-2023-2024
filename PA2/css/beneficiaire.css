@@ -1,10 +1,31 @@
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #225B7C;
+    padding: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    color: whitesmoke;
+    font-family: "Euclid Circular A", "Poppins";
+}
+
+
+
+
+html{
+    overflow: hidden;
+}
 main {
     
     height: 100%;
     display: flex;
     justify-content: space-between;
 
-    overflow: hidden;
+
 }
 
 .container_1{
@@ -12,7 +33,7 @@ main {
 }
 
 .menu {
-    margin-top: 15%;
+    margin-top: 2%;
     margin-left: 2%;
 
     display: flex;
@@ -64,14 +85,13 @@ button{
 
 
 .profil_part {
-    padding-top: 10%;
     padding-bottom: 1%;
     padding-left: 1%;
     padding-right: 1%;
    
     
     width: 30%;
-    height: 100%;
+    height: 80%;
     background-color: #38A7A6;
    
     color: white;
@@ -129,8 +149,11 @@ button{
 .aide_profil{
     display: flex;
     flex-direction: row;
+}
 
-    
+.nav_profil .modif{
+    margin-bottom: 5%;
+    width: 50%;
 }
 
 .aide_profil button{
@@ -214,6 +237,8 @@ select, input{
     background-color: #59CD97;
     color: white;
     border: none;
+
+    width: 100%;
     
 }
 
@@ -240,7 +265,22 @@ select, input{
 }
 
 
-.all_info {
+.div_riset{
+    width: 5%;
+}
+
+.div_riset img{
+    width: 100%;
+    border-radius: 35%;
+}
+
+.div_riset img:hover{
+    cursor: pointer;
+    transform: rotate(180deg);
+    transition: transform 1s ease;
+}
+
+#all_info {
     width: 100%;
     overflow: scroll; 
     max-height: 45vh;
@@ -286,7 +326,7 @@ select, input{
     padding: 2%;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -295,7 +335,7 @@ select, input{
     display: flex;
     flex-direction: row;
     color: white;
-    font-size:larger;
+    font-size:100%;
     margin: 1%;
 }
 
@@ -390,9 +430,6 @@ textarea{
     border-radius: 10px;
 
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-
-
 }
 
 .input_form:hover{
@@ -400,7 +437,6 @@ textarea{
 }
 
 #description_form{
-    
     color: #59CD97;
     height: 30vh;
 

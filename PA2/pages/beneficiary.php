@@ -33,27 +33,14 @@
     </div>
 
     <div class="profil_part">
-        <div class="info_profil_general">
-            <h1>Profil :</h1>
-            <div class="info_profil_1">
-                <div id="nom_profil" class="info_profil">Nom</div>
-                <div id="prenom_profil" class="info_profil">Prenom</div>
-            </div>
-            <div class="info_profil_2">
-                <div id="email_profil" class="info_profil">Email</div>
-                <div id="mdp_profil" class="info_profil">Mot de passe</div>
-            </div>
-            <div class="info_profil_3">
-                <div id="ville_profil" class="info_profil">Ville</div>
-                <div id="adresse_profil" class="info_profil">adresse</div>
-            </div>
+        <div id="info_profil_general">
 
         </div>
 
         <div class="nav_profil">
             <button class="modif" onclick="modifProfil()">Modifier</button>
             <button class="voir" onclick="affichageBeneficiaire('Mes demande')">Mes demande</button>
-            <button class="voir" onclick="affichageBeneficiaire('Mes Activité')">Activité</button>
+            <button class="voir" onclick="affichageBeneficiaire('Mes Activité')">Mes activité</button>
             <div class="aide_profil">
                 <button class="aide" onclick="">Aides ?</button>
                 <button class="benevole" onclick=""><a href="contact.php" class="a_button">Devenir bénévole</a></button>
@@ -67,10 +54,37 @@
 
 <?php // include("../includes/footer.php") ?>
 
+
+<script src="../javaScript/function_api.js"></script>
 <script src="../javaScript/beneficiare.js"></script>
 <script src="../javaScript/beneficiare_function/activity.js"></script>
 <script src="../javaScript/beneficiare_function/ask.js"></script>
-<script> affichageBeneficiaire("Activitée") </script>
+<script>
+    async function loadProfil() {
+        //const idUser = localStorage.getItem("id")
+        const idUser = 1
+        var data = await requestApiNoBody("GET", "/users/" + idUser)
+
+        const profil = document.getElementById('info_profil_general');
+        profil.innerHTML =
+            "<h1>Profil :</h1>" +
+            "<div class=\"info_profil_1\">" +
+            "    <div id=\"nom_profil\" class=\"info_profil\">" + data.name + "</div>" +
+            "    <div id=\"prenom_profil\" class=\"info_profil\">+ data.prenom +</div>" +
+            "</div>" +
+            "<div class=\"info_profil_2\">" +
+            "   <div id=\"email_profil\" class=\"info_profil\">" + data.email + "</div>" +
+            "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_phone + "</div>" +
+            "</div>" +
+            "<div class=\"info_profil_3\">" +
+            "    <div id=\"ville_profil\" class=\"info_profil\">" + data.adresse + ", " + data.code_postal + " " + data.ville + "</div>" +
+            "</div>"
+    }
+    loadProfil()
+    var langueNavigateur = navigator.language
+    console.log(langueNavigateur);
+    affichageBeneficiaire("Planning")
+</script>
 
 </body>
 </html>

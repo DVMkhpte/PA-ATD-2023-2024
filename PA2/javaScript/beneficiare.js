@@ -27,8 +27,7 @@ async function affichageBeneficiaire(affichage) {
     
     switch (affichage){
         case "Activitée":
-            //var data = await requestApiNoBody("GET", "/activitees/");
-            data = ""
+            var data = await requestApiNoBody("GET", "/activitees/");
             strBox = await affichageActivity(data);
             break;
 
@@ -37,33 +36,13 @@ async function affichageBeneficiaire(affichage) {
             break;
 
         case "Mes demande":
-            var data = [
-                {
-                    "type": "Demande 1",
-                    "fait_par": { "id":1, "name": "John Doe" },
-                    "date": "2024-04-08",
-                    "demande": "Ceci est la première demande."
-                },
-                {
-                    "type": "Demande 2",
-                    "fait_par": { "id":1,"name": "Jane Smith" },
-                    "date": "2024-04-07",
-                    "demande": "Ceci est la deuxième demande."
-                },
-                {
-                    "type": "Demande 3",
-                    "fait_par": {"id":2, "name": "Alice Johnson" },
-                    "date": "2024-04-06",
-                    "demande": "Ceci est la troisième demande."
-                }
-            ];
             //var data = await requestApiNoBody("GET", "/activitees/");
-            strBox = await affichageMesDemande(data,1);
+            strBox = await affichageMesDemande(data);
             break;
 
         case "Mes Activité":
             //var data = await requestApiNoBody("GET", "/activitees/");
-            strBox = await affichageMesActivitee(data,id);
+            strBox = await affichageMesActivitee(data);
             break;
     }
 
