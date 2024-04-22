@@ -1,0 +1,200 @@
+{
+  "fr": {
+    "planning": "Planning",
+    "activity": "Activité",
+    "request": "Demande",
+    "title": "Demande",
+    "modify": "Modifier",
+    "requests": "Mes demandes",
+    "activities": "Mes activités",
+    "help": "Aides ?",
+    "become_volunteer": "Devenir bénévole"
+  },
+  "en": {
+    "planning": "Planning",
+    "activity": "Activity",
+    "request": "Request",
+    "title": "Request",
+    "modify": "Modify",
+    "requests": "My Requests",
+    "activities": "My Activities",
+    "help": "Help?",
+    "become_volunteer": "Become Volunteer"
+  },
+  "es": {
+    "planning": "Planificación",
+    "activity": "Actividad",
+    "request": "Solicitud",
+    "title": "Solicitud",
+    "modify": "Modificar",
+    "requests": "Mis Solicitudes",
+    "activities": "Mis Actividades",
+    "help": "¿Ayuda?",
+    "become_volunteer": "Convertirse en Voluntario"
+  },
+  "it": {
+    "planning": "Pianificazione",
+    "activity": "Attività",
+    "request": "Richiesta",
+    "title": "Richiesta",
+    "modify": "Modificare",
+    "requests": "Le mie Richieste",
+    "activities": "Le mie Attività",
+    "help": "Aiuto?",
+    "become_volunteer": "Diventa Volontario"
+  },
+  "de": {
+    "planning": "Planung",
+    "activity": "Aktivität",
+    "request": "Anfrage",
+    "title": "Anfrage",
+    "modify": "Ändern",
+    "requests": "Meine Anfragen",
+    "activities": "Meine Aktivitäten",
+    "help": "Hilfe?",
+    "become_volunteer": "Freiwilliger werden"
+  },
+  "pt": {
+    "planning": "Planeamento",
+    "activity": "Atividade",
+    "request": "Pedido",
+    "title": "Pedido",
+    "modify": "Modificar",
+    "requests": "Meus Pedidos",
+    "activities": "Minhas Atividades",
+    "help": "Ajuda?",
+    "become_volunteer": "Torne-se Voluntário"
+  },
+  "el": {
+    "planning": "Προγραμματισμός",
+    "activity": "Δραστηριότητα",
+    "request": "Αίτημα",
+    "title": "Αίτημα",
+    "modify": "Τροποποίηση",
+    "requests": "Τα αιτήματά μου",
+    "activities": "Οι δραστηριότητές μου",
+    "help": "Βοήθεια;",
+    "become_volunteer": "Γίνε εθελοντής"
+  },
+  "ar": {
+    "planning": "التخطيط",
+    "activity": "النشاط",
+    "request": "طلب",
+    "title": "طلب",
+    "modify": "تعديل",
+    "requests": "طلباتي",
+    "activities": "أنشطتي",
+    "help": "مساعدة؟",
+    "become_volunteer": "كن متطوعًا"
+  },
+  "ru": {
+    "planning": "Планирование",
+    "activity": "Деятельность",
+    "request": "Запрос",
+    "title": "Запрос",
+    "modify": "Изменить",
+    "requests": "Мои запросы",
+    "activities": "Мои активности",
+    "help": "Помощь?",
+    "become_volunteer": "Стать волонтёром"
+  },
+  "zh": {
+    "planning": "规划",
+    "activity": "活动",
+    "request": "请求",
+    "title": "请求",
+    "modify": "修改",
+    "requests": "我的请求",
+    "activities": "我的活动",
+    "help": "帮助？",
+    "become_volunteer": "成为志愿者"
+  },
+  "hi": {
+    "planning": "योजना",
+    "activity": "गतिविधि",
+    "request": "अनुरोध",
+    "title": "अनुरोध",
+    "modify": "संशोधित करें",
+    "requests": "मेरे अनुरोध",
+    "activities": "मेरी गतिविधियाँ",
+    "help": "मदद?",
+    "become_volunteer": "स्वयंसेवक बनें"
+  },
+  "ja": {
+    "planning": "計画",
+    "activity": "活動",
+    "request": "リクエスト",
+    "title": "リクエスト",
+    "modify": "修正",
+    "requests": "私のリクエスト",
+    "activities": "私のアクティビティ",
+    "help": "ヘルプ？",
+    "become_volunteer": "ボランティアになる"
+  },
+  "ko": {
+    "planning": "계획",
+    "activity": "활동",
+    "request": "요청",
+    "title": "요청",
+    "modify": "수정",
+    "requests": "내 요청",
+    "activities": "내 활동",
+    "help": "도움말?",
+    "become_volunteer": "자원 봉사자 되기"
+  },
+  "pa": {
+    "planning": "ਯੋਜਨਾ",
+    "activity": "ਸਰਗਰਮੀ",
+    "request": "ਬੇਨਤੀ",
+    "title": "ਬੇਨਤੀ",
+    "modify": "ਸੋਧਣਾ",
+    "requests": "ਮੇਰੀ ਬੇਨਤੀਆਂ",
+    "activities": "ਮੇਰੀ ਸਰਗਰਮੀਆਂ",
+    "help": "ਮਦਦ?",
+    "become_volunteer": "ਸੇਵਾ ਕਰਨ ਲਈ ਬਨੋ"
+  },
+  "bn": {
+    "planning": "পরিকল্পনা",
+    "activity": "কর্মক্ষমতা",
+    "request": "অনুরোধ",
+    "title": "অনুরোধ",
+    "modify": "পরিবর্তন করুন",
+    "requests": "আমার অনুরোধ",
+    "activities": "আমার কর্মক্ষমতা",
+    "help": "সাহায্য?",
+    "become_volunteer": "স্বেচ্ছাসেবক হতে"
+  },
+  "sr": {
+    "planning": "Планирање",
+    "activity": "Активност",
+    "request": "Захтев",
+    "title": "Захтев",
+    "modify": "Измени",
+    "requests": "Моји захтеви",
+    "activities": "Моје активности",
+    "help": "Помоћ?",
+    "become_volunteer": "Постати добровољац"
+  },
+  "ca": {
+    "planning": "Planificació",
+    "activity": "Activitat",
+    "request": "Sol·licitud",
+    "title": "Sol·licitud",
+    "modify": "Modificar",
+    "requests": "Les meves sol·licituds",
+    "activities": "Les meves activitats",
+    "help": "Ajuda?",
+    "become_volunteer": "Converteix-te en voluntari"
+  },
+  "ln": {
+    "planning": "Elongama",
+    "activity": "Mokano",
+    "request": "Elongi",
+    "title": "Elongi",
+    "modify": "Kosalisa",
+    "requests": "Mingi na ngai",
+    "activities": "Mokano na ngai",
+    "help": "Bolingo?",
+    "become_volunteer": "Kokanga kozonga"
+  }
+}

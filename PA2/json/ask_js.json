@@ -1,0 +1,20 @@
+{
+  "en": {
+    "volunteer": "Become a volunteer",
+    "administrative_help": "Administrative assistance",
+    "shuttle": "Shuttle",
+    "visit": "Visit",
+    "other": "Other",
+    "description_placeholder": "Description",
+    "submit_button": "Submit"
+  },
+  "fr": {
+    "volunteer": "Devenir bénévole",
+    "administrative_help": "Aide administrative",
+    "shuttle": "Navette",
+    "visit": "Visite",
+    "other": "Autre",
+    "description_placeholder": "Description",
+    "submit_button": "Valider"
+  }
+}
