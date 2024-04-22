@@ -71,7 +71,6 @@ async function joinFormation(idF){
 
     var dataP = await requestApiNoBody("GET", "/participef");
     var participe = false
-    console.log(data)
     for(i=0; i<dataP.length; i++){
         if(dataP[i].id_user === idU && dataP[i].id_formation === idF){ participe = true }
     }

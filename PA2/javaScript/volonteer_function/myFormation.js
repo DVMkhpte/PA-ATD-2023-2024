@@ -1,4 +1,4 @@
-async function getInfoFormateur(data){
+async function getInfoF(data, action){
     var info =
         "<div class=\"info\">\n" +
         "   <div class=\"description_general\">\n" +
@@ -19,10 +19,14 @@ async function getInfoFormateur(data){
         "           </div>"+
         "       </div>\n" +
         "   </div>\n" +
-        "   <div class=\"option\">\n" +
-        "       <button onclick=\"cancelFormation("+ data.id +")\" class=\"inscription\" >Annuler</button>\n"+
+        "   <div class=\"option\">\n"
+    if(action === "p") {
+        info = info.concat(
+            "       <button onclick=\"cancelMyParticipation(" + data.id + ")\" class=\"inscription\" >Annuler</button>\n")
+    }
+    info = info.concat(
         "   </div>\n" +
-        "</div>"
+        "</div>")
     return info
 }
 
@@ -57,7 +61,6 @@ async function participantion(){
             myFormation.push(dataParticipation[i].id_formation)
         }
     }
-    console.log(myFormation)
 
     var dataFormation = await requestApiNoBody("GET", "/formations");
     const affichageInfo = document.getElementById('all_info_formateur');
@@ -74,7 +77,7 @@ async function participantion(){
     var info = "";
     for(i=0; i<dataFormation.length; i++){
         if(myFormation.includes(dataFormation[i].id)) {
-            info = await getInfoFormateur(dataFormation[i])
+            info = await getInfoF(dataFormation[i], "p")
             allInfo = allInfo.concat(info)
         }
     }
@@ -82,6 +85,24 @@ async function participantion(){
 
     var affichage = filtre.concat(allInfo);
     affichageInfo.innerHTML = affichage
+}
+
+
+async function cancelMyParticipation(idF){
+    //const idU = localStorage.getItem("id")
+    const idU = 7
+
+    var dataParticipation = await requestApiNoBody("GET", "/participef");
+    var idP = 0
+    for(i=0; i<dataParticipation.length; i++){
+        if(dataParticipation[i].id_user === idU && dataParticipation[i].id_formation === idF){
+            idP = dataParticipation[i].id
+        }
+    }
+    console.log(idP)
+    await requestApiNoBody("DELETE", "/participef/"+idP);
+    participantion()
+
 }
 
 async function searchFormationParticipant(){
@@ -111,12 +132,12 @@ async function searchFormationParticipant(){
             if (search.length > 0) {
                 dataName = dataFormation[i].nom
                 if (dataName.includes(search)) {
-                    var info = await getInfoFormateur(dataFormation[i])
+                    var info = await getInfoF(dataFormation[i], "p")
 
                     allInfo = allInfo.concat(info)
                 }
             } else {
-                var info = await getInfoFormateur(dataFormation[i])
+                var info = await getInfoF(dataFormation[i], "p")
 
                 allInfo = allInfo.concat(info)
             }
@@ -151,7 +172,7 @@ async function formateur(){
     var info = "";
     for(i=0; i<data.length; i++){
         if(data[i].supervise_par === idU) {
-            info = await getInfoFormateur(data[i])
+            info = await getInfoF(data[i], "f")
             allInfo = allInfo.concat(info)
         }
     }
@@ -180,12 +201,12 @@ async function searchFormationFormateur(){
             if (search.length > 0) {
                 dataName = data[i].nom
                 if (dataName.includes(search)) {
-                    var info = await getInfoFormateur(data[i])
+                    var info = await getInfoF(data[i], "f")
 
                     allInfo = allInfo.concat(info)
                 }
             } else {
-                var info = await getInfoFormateur(data[i])
+                var info = await getInfoF(data[i], "f")
 
                 allInfo = allInfo.concat(info)
             }
