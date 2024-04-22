@@ -8,7 +8,10 @@ const translationFiles = {
     'login.php': '../json/login.json',
     'policy.php': '../json/policy.json',
     'legal_mention.php': '../json/legal_mention.json',
-    '../includes/header/headerNoConnexion/headerAccueil.php': '../json/headerAccueil.json',
+    'beneficiary.php': '../json/beneficiary.json',
+    'become_benevole.php': '../json/become_benevole.json',
+    '../javaScript/beneficiare_function/ask.js' : '../json/ask_js.json',
+    '../includes/header/headerNoConnexion/headerAccueil.php': '../../../json/headerAccueil.json',
     '../includes/footer/footerNoConnexion/footerAccueil.php': '../json/footerAccueil.json'
 };
 

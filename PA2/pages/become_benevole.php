@@ -37,43 +37,45 @@
 
 
 </style>
-<div id="translated-content"></div>
+
 <div class="container mt-5">
-    <h2>Devenir bénévole</h2>
-    <form id ="demandeForm">
+    <h2 data-translate="become_volunteer_title">Devenir bénévole</h2>
+    <form id="demandeForm">
         <div class="form-group">
-            <label for="name">Nom et Prenom :</label>
+            <label for="name" data-translate="name_label">Nom et Prenom :</label>
             <input type="text" class="form-control" id="name">
         </div>
 
         <div class="form-group">
-            <label for="email">Adresse Email :</label>
+            <label for="email" data-translate="email_label">Adresse Email :</label>
             <input type="email" class="form-control" id="email">
         </div>
 
         <div class="form-group">
-            <label for="demande">Pourquoi voulez vous nous rejoindre ? (Parlez-vous des langues ? Des connaisances en particulier ?) :</label>
-            <textarea class="form-control" id="demande" rows="10"  required></textarea>
+            <label for="demande" data-translate="reason_label">Pourquoi voulez vous nous rejoindre ? (Parlez-vous des langues ? Des connaisances en particulier ?) :</label>
+            <textarea class="form-control" id="demande" rows="10" required></textarea>
         </div>
 
         <div class="form-check-check-inline">
-            <label class="form-check-label" for="flexCheckDefault">Avez-vous le permis ?</label>
-            <label class="form-check-label" for="inlineCheckbox1">Non :</label>
+            <label class="form-check-label" for="flexCheckDefault" data-translate="license_label">Avez-vous le permis ?</label>
+            <label class="form-check-label" for="inlineCheckbox1" data-translate="no_license_option">Non :</label>
             <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Non">
-            <label class="form-check-label" for="inlineCheckbox2">Permis A (moto) :</label>
+            <label class="form-check-label" for="inlineCheckbox2" data-translate="license_a_option">Permis A (moto) :</label>
             <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="A">
-            <label class="form-check-label" for="inlineCheckbox3">Permis B (voiture) :</label>
+            <label class="form-check-label" for="inlineCheckbox3" data-translate="license_b_option">Permis B (voiture) :</label>
             <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="B">
-            <label class="form-check-label" for="inlineCheckbox4">Permis C (camions) :</label>
+            <label class="form-check-label" for="inlineCheckbox4" data-translate="license_c_option">Permis C (camions) :</label>
             <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="C">
         </div>
 
-        <button type="submit" class="btn btn-primary">Envoyer</button>
+        <button type="submit" class="btn btn-primary" data-translate="submit_button">Envoyer</button>
     </form>
 </div>
 
+
 <?php include('../includes/footer/footerNoConnexion/footerAccueil.php'); ?>
 
+<script src="../javaScript/trad.js"></script>
 <script src="../javaScript/function_api.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
