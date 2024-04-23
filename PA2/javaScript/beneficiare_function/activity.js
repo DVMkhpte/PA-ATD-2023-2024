@@ -49,18 +49,22 @@ async function affichageActivity(data){
 
 
 async function joinActivity(idA){
-    //const idU = localStorage.getItem("id")
-    var idU = 2
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
     const formData = {
-        "id_activite": idA,
-        "id_user": idU
+        "id_activite": idA
     }
 
-    var dataP = await requestApiNoBody("GET", "/participea");
+    var link = "/user/"+ idU +"/participationsA"
+    var dataP = await requestApiNoBody("GET", link);
     var participe = false
     for(i=0; i<dataP.length; i++){
-        if(dataP[i].id_user === idU && dataP[i].id_activite === idA){ participe = true }
+        if(dataP[i].id_user === idU && dataP[i].id_activite === idA){
+            participe = true
+        }
     }
+    console.log(participe)
+
 
     if (participe === true){
         showAlert("Vous participez deja a cette activitée !");
@@ -132,21 +136,18 @@ async function infoMyActivity(data){
 
 
 
-async function affichageMesActivitee(data, id){
-    //const idU = localStorage.getItem("id")
-    const idU = 2
+async function affichageMesActivitee(dataActivity){
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participea");
+    var link = "/user/"+ idU +"/participationsA"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var myActivity = []
     for(i=0; i<dataParticipation.length; i++){
-        console.log(dataParticipation[i].id_user)
         if(dataParticipation[i].id_user === idU){
             myActivity.push(dataParticipation[i].id_activite)
         }
     }
-    console.log(myActivity)
-
-    var dataActivity = await requestApiNoBody("GET", "/activitees/");
 
     var filtre =
         "<div class=\"filtre\">\n" +
@@ -174,8 +175,8 @@ async function affichageMesActivitee(data, id){
 
 
 async function cancelMyParticipationA(idA){
-    //const idU = localStorage.getItem("id")
-    const idU = 2
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
     var dataParticipation = await requestApiNoBody("GET", "/participea");
     var idP = 0
@@ -185,7 +186,6 @@ async function cancelMyParticipationA(idA){
         }
     }
 
-    console.log(idP)
     try {
         await requestApiNoBody("DELETE", "/participea/"+idP);
         showAlert("Participation annulé!");
@@ -198,18 +198,15 @@ async function cancelMyParticipationA(idA){
 
 
 async function serchMyActivity(){
-    //const idU = localStorage.getItem("id")
-    const idU = 2
+    const idU = localStorage.getItem("id")
 
     var dataParticipation = await requestApiNoBody("GET", "/participea");
     var myActivity = []
     for(i=0; i<dataParticipation.length; i++){
-        console.log(dataParticipation[i].id_user)
         if(dataParticipation[i].id_user === idU){
             myActivity.push(dataParticipation[i].id_activite)
         }
     }
-    console.log(myActivity)
 
     var dataActivity = await requestApiNoBody("GET", "/activitees/");
 

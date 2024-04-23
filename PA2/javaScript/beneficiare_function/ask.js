@@ -19,8 +19,8 @@ async function affichageDemande(){
 }
 
 async function newAsk(){
-    //const idU = localStorage.getItem("id")
-    var idU = 2
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
     const type = document.getElementById('type').value;
     const description = document.getElementById('description').value;
@@ -71,8 +71,8 @@ async function infoMyD(data){
 
 async function affichageMesDemande(){
     var data = await requestApiNoBody("GET", "/demande");
-    //const idU = localStorage.getItem("id")
-    var idU = 3
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
     var filtre =
         "<div class=\"filtre\">\n" +
@@ -123,8 +123,8 @@ async function suppMyAsk(id){
 
 async function trieTypeMyD(type){
     var data = await requestApiNoBody("GET", "/demande");
-    //const idU = localStorage.getItem("id")
-    var idU = 3
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
     const box = document.getElementById('all_info');
     box.innerHTML = "";

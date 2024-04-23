@@ -59,13 +59,16 @@ async function affichageDemande(data) {
 
 
 async function acceptMission(idD){
-    var idUser = localStorage.getItem("id")
-    idUser = parseInt(idUser)
+    const data = await requestApiNoBody("GET", "/demande/"+idD);
 
     var formDataDemande = {
-        "etat": "a valider",
-        "id_benevole" : idUser
+        'type': data.type,
+        'demande':data.demande,
+        'permis': data.permis,
+        "etat": "a valider"
     }
+
+    console.log(formDataDemande)
 
     try {
         const response = await requestApi(formDataDemande, "PATCH", "/demande/"+idD);

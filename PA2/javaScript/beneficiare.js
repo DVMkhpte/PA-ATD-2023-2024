@@ -36,12 +36,12 @@ async function affichageBeneficiaire(affichage) {
             break;
 
         case "Mes demande":
-            //var data = await requestApiNoBody("GET", "/activitees/");
+            //var data = await requestApiNoBody();
             strBox = await affichageMesDemande(data);
             break;
 
         case "Mes Activité":
-            //var data = await requestApiNoBody("GET", "/activitees/");
+            var data = await requestApiNoBody("GET", "/activitees/");
             strBox = await affichageMesActivitee(data);
             break;
     }
