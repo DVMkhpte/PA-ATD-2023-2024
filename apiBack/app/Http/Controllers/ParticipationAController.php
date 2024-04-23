@@ -14,24 +14,24 @@ class ParticipationAController extends Controller
 {
     public function index()
     {
-        //$adminUser = Auth::user();
+        $adminUser = Auth::user();
         $participations = ParticipeA::with('user', 'activite')->get();
 
-        //Log::channel('admin_activity')->info("Index activite participation by " . $adminUser->name);
+        Log::channel('admin_activity')->info("Index activite participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
     public function show($id)
     {
-        //$adminUser = Auth::user();
+        $adminUser = Auth::user();
         $participations = ParticipeA::with('user', 'activite')->find($id);
 
         if (!$participations) {
-            //Log::channel('admin_activity')->info("Show activite participation by: " . $adminUser->name . " but the activite participation was not found");
+            Log::channel('admin_activity')->info("Show activite participation by: " . $adminUser->name . " but the activite participation was not found");
             return response()->json(['message' => 'activite participation not found'], 404);
         }
 
-        //Log::channel('admin_activity')->info("Show activite participation by " . $adminUser->name);
+        Log::channel('admin_activity')->info("Show activite participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
@@ -47,7 +47,7 @@ class ParticipationAController extends Controller
 
     public function store(Request $request)
     {
-        //$User = Auth::user();
+        $User = Auth::user();
 
         try {
             $data = $request->validate([
@@ -55,13 +55,13 @@ class ParticipationAController extends Controller
                 'id_user' => 'required|integer'
             ]);
 
-            //$data['id_user'] = $User->id;
+            $data['id_user'] = $User->id;
 
             $participation = ParticipeA::create($data);
 
             DB::table('activites')->where('id', $data['id_activite'])->decrement('nb_place');
 
-            //Log::channel('user_activity')->info("Create activite participation by " . $User->name);
+            Log::channel('user_activity')->info("Create activite participation by " . $User->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
             DB::rollBack();
@@ -71,7 +71,7 @@ class ParticipationAController extends Controller
 
     public function destroy($id)
     {
-        //$adminUser = Auth::user();
+        $adminUser = Auth::user();
         try {
             DB::beginTransaction();
 
@@ -85,7 +85,7 @@ class ParticipationAController extends Controller
 
            DB::commit();
 
-            //Log::channel('admin_activity')->info("Delete activite participation " . $id . " by " . $adminUser->name);
+            Log::channel('admin_activity')->info("Delete activite participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'activite participation delete']);
 
 

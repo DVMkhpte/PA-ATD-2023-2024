@@ -36,7 +36,7 @@ class CreateController extends Controller
             'role' => $data['role'],
             ]);
 
-        //$user->notify(new VerifyEmail($user));
+        $user->notify(new VerifyEmail($user));
 
         Log::channel('user_activity')->info("New user created with email " . $user->email);
         return response()->json($user);
