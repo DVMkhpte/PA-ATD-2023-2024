@@ -25,8 +25,9 @@ async function getInfoMyM(data){
 
 
 async function affichageMesMission(data) {
-    //const idUser = localStorage.getItem("id")
-    var idUser = 1
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div  class=\"tout_les_filtre\">\n"+
@@ -78,8 +79,9 @@ async function cancelMyMission(idM, idD){
 }
 
 async function trieTypeM(filtre){
-    //const idUser = localStorage.getItem("id")
-    var idUser = 1
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     var data = await requestApiNoBody("GET", "/missions");
 
     const box = document.getElementById('allInfo');
@@ -93,7 +95,6 @@ async function trieTypeM(filtre){
         if (data[i].demande.type === filtre) {
             if(data[i].realiser_par === idUser) {
                 var info = await getInfoMyM(data[i])
-
                 allInfo = allInfo.concat(info)
             }
         }

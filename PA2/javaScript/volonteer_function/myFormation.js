@@ -50,13 +50,13 @@ async function affichageMesFormation(data){
 }
 
 async function participantion(){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participef");
+    var link = "/user/"+ idU +"/participationsF"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var myFormation = []
     for(i=0; i<dataParticipation.length; i++){
-        console.log(dataParticipation[i].id_user)
         if(dataParticipation[i].id_user === idU){
             myFormation.push(dataParticipation[i].id_formation)
         }
@@ -89,10 +89,11 @@ async function participantion(){
 
 
 async function cancelMyParticipation(idF){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participef");
+    var link = "/user/"+ idU +"/participationsF"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var idP = 0
     for(i=0; i<dataParticipation.length; i++){
         if(dataParticipation[i].id_user === idU && dataParticipation[i].id_formation === idF){
@@ -106,10 +107,11 @@ async function cancelMyParticipation(idF){
 }
 
 async function searchFormationParticipant(){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participef");
+    var link = "/user/"+ idU +"/participationsF"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var myFormation = []
     for(i=0; i<dataParticipation.length; i++){
         console.log(dataParticipation[i].id_user)
@@ -154,8 +156,9 @@ async function searchFormationParticipant(){
 
 
 async function formateur(){
-    //const idU = localStorage.getItem("id")
-    const idU = 4
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     const affichageInfo = document.getElementById('all_info_formateur');
     var data = await requestApiNoBody("GET", "/formations");
 
@@ -185,8 +188,9 @@ async function formateur(){
 
 
 async function searchFormationFormateur(){
-    //const idU = localStorage.getItem("id")
-    const idU = 4
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     var data = await requestApiNoBody("GET", "/formations");
 
     const input = document.getElementById('search-formation-input');

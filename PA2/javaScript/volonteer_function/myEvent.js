@@ -23,10 +23,11 @@ async function getInfoMyEvent(data){
 
 
 async function affichageMesEvent(data){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participee");
+    var link = "/user/"+ idU +"/participationsE"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var myEvent = []
     for(i=0; i<dataParticipation.length; i++){
         if(dataParticipation[i].id_user === idU){
@@ -37,7 +38,7 @@ async function affichageMesEvent(data){
     var filtre =
         "<div class=\"filtre\">\n" +
         "   <div class=\"barre_de_recherche\">\n" +
-        "       <input type=\"text\" id=\"search-formation-input\" oninput=\"searchMyEvenement()\" placeholder=\"Evenements\">\n"+
+        "       <input type=\"text\" id=\"search-event-input\" oninput=\"searchMyEvenement()\" placeholder=\"Evenements\">\n"+
         "   </div>\n"+
         "   <div class='div_riset'>" +
         "       <img src='../img/reset.png' onclick='affichageBenevole(\"Mes evenement\")'/>"+
@@ -59,37 +60,40 @@ async function affichageMesEvent(data){
 
 
 async function searchMyEvenement(){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participee");
+    var link = "/user/"+ idU +"/participationsE"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var myEvent = []
     for(i=0; i<dataParticipation.length; i++){
-        console.log(dataParticipation[i].id_user)
         if(dataParticipation[i].id_user === idU){
-            myEvent.push(dataParticipation[i].id_formation)
+            myEvent.push(dataParticipation[i].id_evenement)
         }
     }
 
+
+    console.log(myEvent)
+
     var dataEvent = await requestApiNoBody("GET", "/evenements");
 
-    const input = document.getElementById('search-formation-input');
+    const input = document.getElementById('search-event-input');
     const search = input.value;
 
     var allInfo = ""
     const box = document.getElementById('all_info');
     box.innerHTML = "";
     var dataName = ""
-    for(i=0; i<data.length; i++) {
+    for(i=0; i<dataEvent.length; i++) {
         if(myEvent.includes(dataEvent[i].id)) {
             if (search.length > 0) {
                 dataName = dataEvent[i].nom
                 if (dataName.includes(search)) {
-                    var info = await getInfoFormateur(dataEvent[i])
+                    var info = await getInfoMyEvent(dataEvent[i])
                     allInfo = allInfo.concat(info)
                 }
             } else {
-                var info = await getInfoFormateur(dataEvent[i])
+                var info = await getInfoMyEvent(dataEvent[i])
 
                 allInfo = allInfo.concat(info)
             }

@@ -59,7 +59,9 @@ async function affichageDemande(data) {
 
 
 async function acceptMission(idD){
-    const idUser = localStorage.getItem("id")
+    var idUser = localStorage.getItem("id")
+    idUser = parseInt(idUser)
+
     var formDataDemande = {
         "etat": "a valider",
         "id_benevole" : idUser

@@ -19,7 +19,6 @@ async function getInfoE(data){
         "   </div>\n" +
         "</div>\n"
 
-
     return info
 }
 
@@ -53,7 +52,7 @@ async function affichageEvenement(data){
     var allInfo = "<div id='all_info'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
-        var info = await getInfoE(data[i])
+        info = await getInfoE(data[i])
 
         allInfo = allInfo.concat(info)
     }
@@ -66,20 +65,30 @@ async function affichageEvenement(data){
 
 
 async function joinEvenement(idE){
-    //const idU = localStorage.getItem("id")
-    const idU = 1
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     const formData = {
         "id_evenement": idE
     }
-
-    try {
-        const response = await requestApi(formData, "POST", "/participee/add");
-        showAlert("Vous avez bien rejoint l'evenement'!");
-        affichageBenevole("Mes evenements")
-    } catch (error) {
-        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+    var link = "/user/"+ idU +"/participationsE"
+    var dataP = await requestApiNoBody("GET", link);
+    var participe = false
+    for(i=0; i<dataP.length; i++){
+        if(dataP[i].id_user === idU && dataP[i].id_evenement === idE){ participe = true }
     }
 
+    if (participe === true){
+        showAlert("Vous participez deja a l'evenement' !");
+        await affichageBenevole("Evenement")
+    }else {
+        try {
+            const response = await requestApi(formData, "POST", "/participee/add");
+            showAlert("Vous avez bien rejoint l'evenement'!");
+        } catch (error) {
+            showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+        }
+    }
 }
 
 

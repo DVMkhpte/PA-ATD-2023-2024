@@ -1,4 +1,4 @@
-async function getInfoF(data){
+async function getInfoForm(data){
     var info =
         "<div class=\"info\">\n" +
         "   <div class=\"description_general\">\n" +
@@ -11,7 +11,7 @@ async function getInfoF(data){
         "           </div>\n"
     if(data.supervise_par !== 0){
         info = info.concat(
-            "<div class=\"superviser\">Supervisé par : "+ data.supervisor.name +"</div>\n"
+            "<div class=\"superviser\">Supervisé par : "+ data.supervisor.nom +"</div>\n"
         )
     }
     info = info.concat(
@@ -51,7 +51,7 @@ async function affichageFormation(data){
     var allInfo = "<div id=\"all_info\">\n";
     var info = "";
     for(i=0; i<data.length; i++){
-        info = await getInfoF(data[i])
+        info = await getInfoForm(data[i])
         allInfo = allInfo.concat(info)
     }
     allInfo = allInfo.concat("</div>")
@@ -62,14 +62,15 @@ async function affichageFormation(data){
 
 
 async function joinFormation(idF){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
     const formData = {
-        "id_user": idU,
         "id_formation": idF
     }
 
-    var dataP = await requestApiNoBody("GET", "/participef");
+    var link = "/user/"+ idU +"/participationsF"
+    var dataP = await requestApiNoBody("GET", link);
     var participe = false
     for(i=0; i<dataP.length; i++){
         if(dataP[i].id_user === idU && dataP[i].id_formation === idF){ participe = true }
@@ -77,7 +78,7 @@ async function joinFormation(idF){
 
     if (participe === true){
         showAlert("Vous participez deja a la formation !");
-        affichageBenevole("Formation")
+        await affichageBenevole("Formation")
     }else {
         try {
             const response = await requestApi(formData, "POST", "/participef/add");
@@ -85,14 +86,13 @@ async function joinFormation(idF){
         } catch (error) {
             showAlert('Erreur lors de la requête à l\'API : ' + error.message);
         }
-        affichageBenevole("Mes formations")
     }
 }
 
 
 async function becomeSupervisorF(idF){
-    //const idU = localStorage.getItem("id")
-    const idU = 7
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
 
     console.log(idF)
     var data = await requestApiNoBody("GET", "/formations/"+idF);

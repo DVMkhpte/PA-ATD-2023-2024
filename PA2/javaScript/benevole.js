@@ -23,36 +23,38 @@ async function affichageBenevole(affichage) {
     retirerContainer.innerHTML = "";
 
     var strBox = ""
-    
+    var data = []
     
     switch (affichage){
         case "Formation":
-            var data = await requestApiNoBody("GET", "/formations");
-            var strBox = await affichageFormation(data);
+            data = await requestApiNoBody("GET", "/formations");
+            strBox = await affichageFormation(data);
             break;
 
         case "Demande en attente":
-            var data = await requestApiNoBody("GET", "/demande");
-            var strBox = await affichageDemande(data);
+            data = await requestApiNoBody("GET", "/demande");
+            strBox = await affichageDemande(data);
             break;
 
         case "Mes missions":
-            var data = await requestApiNoBody("GET", "/missions");
-            var strBox = await affichageMesMission(data)
+            data = await requestApiNoBody("GET", "/missions");
+            strBox = await affichageMesMission(data)
             break;
 
         case "Mes Formations":
-            var data = await requestApiNoBody("GET", "/participef");
-            var strBox = await affichageMesFormation(data)
+            var idU = localStorage.getItem("id")
+            var link = "/user/"+ idU +"/participationsF"
+            data = await requestApiNoBody("GET", link);
+            strBox = await affichageMesFormation(data)
             break;
 
         case "Evenement":
-            var data = await requestApiNoBody("GET", "/evenements");
+            data = await requestApiNoBody("GET", "/evenements");
             strBox = await affichageEvenement(data);
             break;
 
         case "Mes evenement":
-            var data = await requestApiNoBody("GET", "/evenements");
+            data = await requestApiNoBody("GET", "/evenements");
             strBox = await affichageMesEvent(data);
             break;
 

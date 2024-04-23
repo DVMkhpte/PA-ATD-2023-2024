@@ -74,20 +74,19 @@
 <script src="../javaScript/volonteer_function/myFormation.js"></script>
 <script>
     async function loadProfil() {
-        //const idUser = localStorage.getItem("id")
-        const idUser = 1
+        const idUser = localStorage.getItem("id")
         var data = await requestApiNoBody("GET", "/users/" + idUser)
 
         const profil = document.getElementById('info_profil_general');
         profil.innerHTML =
             "<h1>Profil :</h1>" +
             "<div class=\"info_profil_1\">" +
-            "    <div id=\"nom_profil\" class=\"info_profil\">" + data.name + "</div>" +
-            "    <div id=\"prenom_profil\" class=\"info_profil\">+ data.prenom +</div>" +
+            "    <div id=\"nom_profil\" class=\"info_profil\">" + data.nom + "</div>" +
+            "    <div id=\"prenom_profil\" class=\"info_profil\">"+ data.prenom +"</div>" +
             "</div>" +
             "<div class=\"info_profil_2\">" +
             "   <div id=\"email_profil\" class=\"info_profil\">" + data.email + "</div>" +
-            "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_phone + "</div>" +
+            "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_telephone + "</div>" +
             "</div>" +
             "<div class=\"info_profil_3\">" +
             "    <div id=\"ville_profil\" class=\"info_profil\">" + data.adresse + ", " + data.code_postal + " " + data.ville + "</div>" +
@@ -95,7 +94,7 @@
     }
     loadProfil()
     affichageBenevole('Planning')
-
+    console.log(localStorage.getItem('token'))
 
 
 </script>
