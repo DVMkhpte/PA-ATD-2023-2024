@@ -1,10 +1,20 @@
-import Planning from "./components/Planning";
+import React from 'react';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import IndexPHP from "./components/index_php";
+import Planning from "./components/planning";
+
 function App() {
   return (
     <div className="App">
-      <Planning/>
+      <Router>
+        <Routes>
+          
+          <Route path="/" element={<Planning />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
+
 
 export default App;
