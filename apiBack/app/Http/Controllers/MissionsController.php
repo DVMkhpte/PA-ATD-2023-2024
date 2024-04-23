@@ -14,24 +14,24 @@ class MissionsController extends Controller
 {
     public function index()
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $participations = Missions::with('user', 'demande')->get();
 
-        Log::channel('admin_activity')->info("Index mission participation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Index mission participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
     public function show($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $participations = Missions::with('user', 'demande')->find($id);
 
         if (!$participations) {
-            Log::channel('admin_activity')->info("Show mission participation by: " . $adminUser->name . " but the mission participation was not found");
+            //Log::channel('admin_activity')->info("Show mission participation by: " . $adminUser->name . " but the mission participation was not found");
             return response()->json(['message' => 'Mission participation not found'], 404);
         }
 
-        Log::channel('admin_activity')->info("Show mission participation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Show mission participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
@@ -56,17 +56,17 @@ class MissionsController extends Controller
 
             DB::commit();
 
-            Log::channel('user_activity')->info("Create mission participation by " . $user->name);
+            //Log::channel('user_activity')->info("Create mission participation by " . $user->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
-            DB::rollBack();
+            //DB::rollBack();
             return response()->json(['message' => 'An error occurred while creating the participation.', 'error' => $e->getMessage()], 500);
         }
     }
 
     public function destroy($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         try {
             DB::beginTransaction();
 
@@ -77,7 +77,7 @@ class MissionsController extends Controller
 
            DB::commit();
 
-            Log::channel('admin_activity')->info("Delete mission participation " . $id . " by " . $adminUser->name);
+            //Log::channel('admin_activity')->info("Delete mission participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'Mission participation delete']);
 
 
@@ -107,7 +107,7 @@ class MissionsController extends Controller
 
             DB::commit();
 
-            Log::channel('user_activity')->info("Update mission participation " . $id . " by " . $user->name);
+            //Log::channel('user_activity')->info("Update mission participation " . $id . " by " . $user->name);
             return response()->json($participation, 200);
         } catch (\Exception $e) {
             DB::rollBack();

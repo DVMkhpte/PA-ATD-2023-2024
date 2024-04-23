@@ -20,7 +20,7 @@ class CreateController extends Controller
             'code_postal'=> 'required|integer',
             'ville' => 'required|string|max:255',
             'adresse' => 'required|string|max:255',
-            'num_telephone'=> 'required|integer',
+            'num_telephone'=> 'required|string|max:10',
             'password' => 'required|string|min:8',
             'role' => 'string|in:benevole,beneficiaire,admin',
         ]);
