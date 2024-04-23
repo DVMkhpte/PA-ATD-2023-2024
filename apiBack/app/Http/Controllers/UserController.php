@@ -52,7 +52,7 @@ public function update(Request $request, $id)
             'code_postal'=> 'integer',
             'ville' => 'string|max:255',
             'adresse' => 'string|max:255',
-            'num_telephone'=> 'integer',
+            'num_telephone'=> 'string|max:10',
             'password' => 'string|min:8',
             'role' => 'string',
         ]);

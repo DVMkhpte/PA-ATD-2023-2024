@@ -125,7 +125,7 @@
 
         try {
             const data = await requestApi(formData, "POST", "/user/create");
-            if (data && data.status === 200) {
+            if (data) {
                 showAlert("Création de l'utilisateur réussie !");
             } /*else {
                 showAlert("Erreur lors de la création de l'utilisateur : " + (data ? data.status : 'Response is undefined'));
