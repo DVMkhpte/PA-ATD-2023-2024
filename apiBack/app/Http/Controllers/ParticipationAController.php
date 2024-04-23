@@ -51,8 +51,7 @@ class ParticipationAController extends Controller
 
         try {
             $data = $request->validate([
-                'id_activite' => 'required|integer',
-                'id_user' => 'required|integer'
+                'id_activite' => 'required|integer'
             ]);
 
             $data['id_user'] = $User->id;
