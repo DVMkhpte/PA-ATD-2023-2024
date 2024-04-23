@@ -1,4 +1,5 @@
 async function requestApi(formData, method, link) {
+
     let headers = {
         'Content-Type': 'application/json',
     };
@@ -39,8 +40,15 @@ async function requestApiNoBody(method, link) {
         headers: headers,
     });
     if (response.ok) {
-        const data = await response.json();
-        return data;
+        const textResponse = await response.text();
+        let jsonResponse;
+        if (textResponse.startsWith('1')) {
+            const trimmedResponse = textResponse.substring(1);
+            jsonResponse = JSON.parse(trimmedResponse);
+        } else {
+            jsonResponse = JSON.parse(textResponse);
+        }
+        return jsonResponse;
     } else {
         throw new Error('Erreur lors de la récupération des données : ' + response.status);
     }
