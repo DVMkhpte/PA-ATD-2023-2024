@@ -14,24 +14,24 @@ class ParticipationFController extends Controller
 {
     public function index()
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $participations = ParticipeF::with('user', 'formation')->get();
 
-        Log::channel('admin_activity')->info("Index Formation participation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Index Formation participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
     public function show($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $participations = ParticipeF::with('user', 'formation')->find($id);
 
         if (!$participations) {
-            Log::channel('admin_activity')->info("Show formation participation by: " . $adminUser->name . " but the formation participation was not found");
+            //Log::channel('admin_activity')->info("Show formation participation by: " . $adminUser->name . " but the formation participation was not found");
             return response()->json(['message' => 'Formation participation not found'], 404);
         }
 
-        Log::channel('admin_activity')->info("Show formation participation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Show formation participation by " . $adminUser->name);
         return response()->json($participations);
     }
 
@@ -63,10 +63,10 @@ class ParticipationFController extends Controller
 
             DB::commit();
 
-            Log::channel('admin_activity')->info("Create formation participation by " . $User->name);
+            //Log::channel('admin_activity')->info("Create formation participation by " . $User->name);
             return response()->json($participation, 201);
         } catch (\Exception $e) {
-            DB::rollBack();
+            //DB::rollBack();
             return response()->json(['message' => 'An error occurred while creating the participation.'], 500);
         }
     }

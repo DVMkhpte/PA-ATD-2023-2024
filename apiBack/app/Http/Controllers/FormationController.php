@@ -24,21 +24,21 @@ class FormationController extends Controller
 
     public function show($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $formation = Formation::with('supervisor')->find($id);
 
         if (!$formation) {
-            Log::channel('admin_activity')->info("Show formation by: " . $adminUser->name . "but the formation was not found");
+            //Log::channel('admin_activity')->info("Show formation by: " . $adminUser->name . "but the formation was not found");
             return response()->json(['message' => 'Formation not found'], 404);
         }
 
-        Log::channel('admin_activity')->info("Show formation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Show formation by " . $adminUser->name);
         return response()->json($formation);
     }
 
     public function store(Request $request)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $data = $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
@@ -57,17 +57,17 @@ class FormationController extends Controller
 
         $formation = Formation::create($data);
 
-        Log::channel('admin_activity')->info("Create formation by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Create formation by " . $adminUser->name);
         return response()->json($formation, 201);
     }
 
     public function update(Request $request, $id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $formation = Formation::find($id);
 
         if (!$formation) {
-            Log::channel('admin_activity')->info("Update formation by: " . $adminUser->name . "but the formation was not found");
+            //Log::channel('admin_activity')->info("Update formation by: " . $adminUser->name . "but the formation was not found");
             return response()->json(['message' => 'Formation not found'], 404);
         }
 
@@ -83,23 +83,23 @@ class FormationController extends Controller
 
         $formation->update($data);
 
-        Log::channel('admin_activity')->info("Update formation " . $formation->nom . " by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Update formation " . $formation->nom . " by " . $adminUser->name);
         return response()->json($formation, 200);
     }
 
     public function destroy($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $formation = Formation::find($id);
 
         if (!$formation) {
-            Log::channel('admin_activity')->info("Destroy formation by: " . $adminUser->name . "but the formation was not found");
+            //Log::channel('admin_activity')->info("Destroy formation by: " . $adminUser->name . "but the formation was not found");
             return response()->json(['message' => 'Formation not found'], 404);
         }
 
         $formation->delete();
 
-        Log::channel('admin_activity')->info("Delete event " . $formation->nom . " by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Delete event " . $formation->nom . " by " . $adminUser->name);
         return response()->json(['message' => 'Formation delete']);
     }
 }

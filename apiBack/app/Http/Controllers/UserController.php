@@ -14,35 +14,35 @@ class UserController extends Controller
 
 public function index()
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $users = User::all();
 
-        Log::channel('admin_activity')->info("Index user by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Index user by " . $adminUser->name);
         return response()->json($users);
     }
 
 public function show($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $user = User::find($id);
 
         if (!$user) {
 
-            Log::channel('admin_activity')->info("Show user by: " . $adminUser->name . "but the user was not found");
+            //Log::channel('admin_activity')->info("Show user by: " . $adminUser->name . "but the user was not found");
             return response()->json(['message' => 'User not found'], 404);
         }
 
-        Log::channel('admin_activity')->info("Show user by: " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Show user by: " . $adminUser->name);
         return response()->json($user);
     }
 
 public function update(Request $request, $id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $user = User::find($id);
 
         if (!$user) {
-            Log::channel('admin_activity')->info("Update user by: " . $adminUser->name . "but the user was not found");
+            //Log::channel('admin_activity')->info("Update user by: " . $adminUser->name . "but the user was not found");
             return response()->json(['message' => 'User not found'], 404);
         }
 
@@ -59,23 +59,23 @@ public function update(Request $request, $id)
 
         $user->update($data);
 
-        Log::channel('admin_activity')->info("Update user " . $user->email . " by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Update user " . $user->email . " by " . $adminUser->name);
         return response()->json($user);
     }
 
     public function destroy($id)
     {
-        $adminUser = Auth::user();
+        //$adminUser = Auth::user();
         $user = User::find($id);
 
         if (!$user) {
-            Log::channel('admin_activity')->info("Destroy user by: " . $adminUser->name . "but the user was not found");
+            //Log::channel('admin_activity')->info("Destroy user by: " . $adminUser->name . "but the user was not found");
             return response()->json(['message' => 'User not found'], 404);
         }
 
         $user->delete();
 
-        Log::channel('admin_activity')->info("Delete user " . $user->email . " by " . $adminUser->name);
+        //Log::channel('admin_activity')->info("Delete user " . $user->email . " by " . $adminUser->name);
         return response()->json(['message' => 'User Delete']);
     }
 }

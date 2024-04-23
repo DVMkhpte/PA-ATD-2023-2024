@@ -45,7 +45,7 @@ class DemandeController extends Controller
 
     public function store(Request $request)
     {
-        $User = Auth::user();
+        /*$User = Auth::user();*/
 
         try {
             $data = $request->validate([
@@ -55,11 +55,11 @@ class DemandeController extends Controller
                 'etat' => 'required|string|in:En attente,En cours, Fait, Annuler',
             ]);
 
-           $data['id_user'] = $User->id;
+           /* $data['id_user'] = $User->id;*/
 
             $demande = Demandes::create($data);
 
-            Log::channel('user_activity')->info("Create demande demande by " . $User->name);
+            Log::channel('user_activity')->info("Create demande demande by "/* . $User->name*/);
             return response()->json($demande, 201);
 
             }catch (\Exception $e) {
@@ -87,7 +87,7 @@ class DemandeController extends Controller
 
     public function update(Request $request, $id)
     {
-        $user = Auth::user();
+        /*$user = Auth::user();*/
 
         try {
             $demande = Demandes::findOrFail($id);
@@ -102,7 +102,7 @@ class DemandeController extends Controller
 
             $demande->update($data);
 
-            Log::channel('user_activity')->info("Update demande demande " . $id . " by " . $user->name);
+            /*Log::channel('user_activity')->info("Update demande demande " . $id . " by " . $user->name);*/
             return response()->json($demande, 200);
         } catch (\Exception $e) {
             return response()->json(['message' => 'An error occurred while updating the demande.', 'error' => $e->getMessage()], 500);

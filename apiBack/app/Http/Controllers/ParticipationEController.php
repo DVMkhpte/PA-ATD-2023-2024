@@ -35,6 +35,16 @@ class ParticipationEController extends Controller
         return response()->json($participations);
     }
 
+    public function getUserParticipations($userId)
+    {
+        try {
+            $participations = ParticipeE::with('evenement')->where('id_user', $userId)->get();
+            return response()->json($participations);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.'], 500);
+        }
+    }
+
     public function store(Request $request)
     {
         $User = Auth::user();
