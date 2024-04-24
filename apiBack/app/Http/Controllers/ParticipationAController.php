@@ -38,10 +38,10 @@ class ParticipationAController extends Controller
     public function getUserParticipations($userId)
     {
         try {
-            $participations = ParticipeA::with('activites')->where('id_user', $userId)->get();
+            $participations = ParticipeA::with('activite')->where('id_user', $userId)->get();
             return response()->json($participations);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'An error occurred while fetching user participations.'], 500);
+            return response()->json(['message' => 'An error occurred while fetching user participations.' , 'error' => $e->getMessage()], 500);
         }
     }
 
