@@ -46,15 +46,11 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::delete('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'destroy']);
 
     Route::post('/formations/add',[FormationController::class,'store'] );
-
-    Route::get('/formations/{id}',[FormationController::class,'show']);
     Route::patch('/formations/{id}',[FormationController::class,'update']);
     Route::delete('/formations/{id}',[FormationController::class,'destroy']);
 
     Route::post('/activitees/add',[\App\Http\Controllers\ActiviteController::class,'store'] );
-    Route::get('/activitees',[\App\Http\Controllers\ActiviteController::class,'index']);
-    Route::get('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'show']);
-    Route::patch('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
+    Route::patch('/activitee/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
     Route::delete('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
     Route::get('/participef',[App\Http\Controllers\ParticipationFController::class,'index']);
@@ -83,16 +79,11 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
 
 Route::middleware(['auth:sanctum', 'role:benevole'])->group(function () {
-    Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
-    Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
-    Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
-    Route::get('/evenements',[\App\Http\Controllers\EvenementController::class,'index']);
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
     Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
     Route::get('/user/{userId}/participationsE',[App\Http\Controllers\ParticipationEController::class, 'getUserParticipations']);
 
-    Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
     Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
     Route::get('/user/{userId}/participationsF',[App\Http\Controllers\ParticipationFController::class, 'getUserParticipations']);
     Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
@@ -109,6 +100,13 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/activitees',[\App\Http\Controllers\ActiviteController::class,'index']);
     Route::get('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'show']);
+
+    Route::get('/formations',[\App\Http\Controllers\FormationController::class,'index']);
+    Route::get('/formations/{id}',[FormationController::class,'show']);
+
+    Route::get('/evenements',[\App\Http\Controllers\EvenementController::class,'index']);
+    Route::get('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'index']);
+
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
     Route::get('/user/{userId}/participationsA',[App\Http\Controllers\ParticipationAController::class, 'getUserParticipations']);
     Route::delete('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'destroy']);
