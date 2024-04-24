@@ -17,9 +17,16 @@ async function requestApi(formData, method, link) {
     });
     console.log(response)
     if (response.ok) {
-        const data = await response.json();
-        if(data){
-            return data
+        const textResponse = await response.text();
+        let jsonResponse;
+        if (textResponse.startsWith('1')) {
+            const trimmedResponse = textResponse.substring(1);
+            jsonResponse = JSON.parse(trimmedResponse);
+        } else {
+            jsonResponse = JSON.parse(textResponse);
+        }
+        if(jsonResponse){
+            return jsonResponse
         }
     }
 }
