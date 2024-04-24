@@ -63,9 +63,6 @@ async function joinActivity(idA){
             participe = true
         }
     }
-    console.log(participe)
-
-
     if (participe === true){
         showAlert("Vous participez deja a cette activitée !");
         affichageBeneficiaire("Activitée")
@@ -178,13 +175,16 @@ async function cancelMyParticipationA(idA){
     var idU = localStorage.getItem("id")
     idU = parseInt(idU)
 
-    var dataParticipation = await requestApiNoBody("GET", "/participea");
+    var link = "/user/"+ idU +"/participationsA"
+    var dataParticipation = await requestApiNoBody("GET", link);
     var idP = 0
     for(i=0; i<dataParticipation.length; i++){
         if(dataParticipation[i].id_user === idU && dataParticipation[i].id_activite === idA){
             idP = dataParticipation[i].id
         }
     }
+
+    console.log(idP)
 
     try {
         await requestApiNoBody("DELETE", "/participea/"+idP);
