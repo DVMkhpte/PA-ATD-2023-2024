@@ -44,6 +44,9 @@ async function affichageBeneficiaire(affichage) {
             var data = await requestApiNoBody("GET", "/activitees/");
             strBox = await affichageMesActivitee(data);
             break;
+        case "Planning":
+            window.location.href = 'http://localhost:3000/';
+            break;
     }
 
     const affichageContainer = document.getElementById('container_2');

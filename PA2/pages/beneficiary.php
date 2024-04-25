@@ -5,17 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Bénéficiaire</title>
     <link rel="stylesheet" href="../CSS/beneficiaire.css">
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@fullcalendar/react@latest/main.js"></script>
+    <script src="https://unpkg.com/@fullcalendar/daygrid@latest/main.js"></script>
+    <script src="https://unpkg.com/@fullcalendar/timegrid@latest/main.js"></script>
+    <script src="https://unpkg.com/@fullcalendar/interaction@latest/main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@latest/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/@fullcalendar/react@latest/main.js"></script>
+
+
+
+
+
 </head>
 <body>
 <?php  include("../includes/header.php") ?>
 
+
 <main>
+    <div id="root"></div>
     <div id="translated-content"></div>
     <div class="container_1">
 
         <div class="menu">
             <div class="nav_menu">
-                <div class="div_img" id="Planning" onclick="affichageBeneficiaire('Planning')" ><img class="img_menu" src="../img/planning.png"></div>
+                <div class="div_img" id="Planning" onclick="affichageBeneficiaire('Planning')">
+                 
+
+                    <img class="img_menu" src="../img/planning.png" alt="planning">
+                </div>
+
+                    <div id="planningContainer"></div>
+
+
+
                 <div class="div_img" id="Activitée" onclick="affichageBeneficiaire('Activitée')"><img class="img_menu" src="../img/activitee.png"></div>
                 <div class="div_img" id="Demande" onclick="affichageBeneficiaire('Demande')"><img class="img_menu" src="../img/demande.png"></div>
             </div>
@@ -47,12 +71,19 @@
             </div>
         </div>
 
-        
+
     </div>
 
 </main>
 
 <?php // include("../includes/footer.php") ?>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    function affichageBeneficiaire() {
+        window.location.href = '../planning/src/components/planning.jsx';
+    }
+</script>
 
 
 <script src="../javaScript/function_api.js"></script>
@@ -80,8 +111,4 @@
             "</div>"
     }
     loadProfil()
-    affichageBeneficiaire("Planning")
-</script>
 
-</body>
-</html>

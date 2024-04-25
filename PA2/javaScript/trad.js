@@ -29,7 +29,7 @@ async function loadTranslations(language) {
     translations = await response.json();
     updateTranslations(language);
 }
-export function updateTranslations(language) {
+function updateTranslations(language) {
     const elementsToTranslate = document.querySelectorAll('[data-translate]');
     elementsToTranslate.forEach(element => {
         const key = element.dataset.translate;
