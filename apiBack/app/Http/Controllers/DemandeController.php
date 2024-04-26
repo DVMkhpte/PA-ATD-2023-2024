@@ -53,6 +53,7 @@ class DemandeController extends Controller
                 'demande' => 'required|string',
                 'permis' => 'string',
                 'etat' => 'string|in:En attente,En cours, Fait, Annuler',
+                'date' => 'required|date'
             ]);
 
            $data['id_user'] = $user->id;
