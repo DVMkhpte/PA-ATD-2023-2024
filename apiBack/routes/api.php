@@ -75,10 +75,21 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
     Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
+    Route::post('/camions/add',[\App\Http\Controllers\CamionsController::class,'store'] );
+    Route::get('/camions',[\App\Http\Controllers\CamionsController::class,'index']);
+    Route::get('/camions/{id}',[\App\Http\Controllers\CamionsController::class,'show']);
+    Route::patch('/camions/{id}',[\App\Http\Controllers\CamionsController::class,'update']);
+    Route::delete('/camions/{id}',[\App\Http\Controllers\CamionsController::class,'destroy']);
+
+    Route::get('/entrepots',[\App\Http\Controllers\EntrepotsController::class,'index']);
+    Route::get('/entrepots/{id}',[\App\Http\Controllers\EntrepotsController::class,'show']);
+    Route::patch('/entrepots/{id}',[\App\Http\Controllers\EntrepotsController::class,'update']);
+   // Route::delete('/entrepots/{id}',[\App\Http\Controllers\EntrepotsController::class,'destroy']);
+
 });
 
 
-Route::middleware(['auth:sanctum', 'role:benevole'])->group(function () {
+Route::middleware(['auth:sanctum', 'check_admin_or_benevole'])->group(function () {
 
     Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
     Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
