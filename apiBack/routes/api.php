@@ -50,7 +50,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::delete('/formations/{id}',[FormationController::class,'destroy']);
 
     Route::post('/activitees/add',[\App\Http\Controllers\ActiviteController::class,'store'] );
-    Route::patch('/activitee/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
+    Route::patch('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
     Route::delete('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
     Route::get('/participef',[App\Http\Controllers\ParticipationFController::class,'index']);
@@ -105,7 +105,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/formations/{id}',[FormationController::class,'show']);
 
     Route::get('/evenements',[\App\Http\Controllers\EvenementController::class,'index']);
-    Route::get('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'index']);
+    Route::get('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'show']);
 
     Route::post('/participea/add',[App\Http\Controllers\ParticipationAController::class,'store']);
     Route::get('/user/{userId}/participationsA',[App\Http\Controllers\ParticipationAController::class, 'getUserParticipations']);

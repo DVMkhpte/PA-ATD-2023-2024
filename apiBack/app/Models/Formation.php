@@ -17,7 +17,7 @@ class Formation extends Model
     'description',
     'date_debut',
     'date_fin',
-    'addresse',
+    'adresse',
     'nb_place',
     'supervise_par'
     ];

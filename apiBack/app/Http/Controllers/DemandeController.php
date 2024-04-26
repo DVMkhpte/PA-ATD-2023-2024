@@ -52,7 +52,7 @@ class DemandeController extends Controller
                 'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
                 'demande' => 'required|string',
                 'permis' => 'string',
-                'etat' => 'required|string|in:En attente,En cours, Fait, Annuler',
+                'etat' => 'string|in:En attente,En cours, Fait, Annuler',
             ]);
 
            $data['id_user'] = $User->id;
