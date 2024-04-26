@@ -86,6 +86,16 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::patch('/entrepots/{id}',[\App\Http\Controllers\EntrepotsController::class,'update']);
    // Route::delete('/entrepots/{id}',[\App\Http\Controllers\EntrepotsController::class,'destroy']);
 
+    Route::post('/etageres/add',[\App\Http\Controllers\EtageresController::class,'store'] );
+    Route::get('/etageres',[\App\Http\Controllers\EtageresController::class,'index']);
+    Route::get('/etageres/{id}',[\App\Http\Controllers\EtageresController::class,'show']);
+    Route::delete('/etageres/{id}',[\App\Http\Controllers\EtageresController::class,'destroy']);
+
+    Route::post('/produits/add',[\App\Http\Controllers\ProduitController::class,'store'] );
+    Route::get('/produits',[\App\Http\Controllers\ProduitController::class,'index']);
+    Route::get('/produits/{id}',[\App\Http\Controllers\ProduitController::class,'show']);
+    Route::delete('/produits/{id}',[\App\Http\Controllers\ProduitController::class,'destroy']);
+
 });
 
 
