@@ -30,14 +30,16 @@
                     <input type="text" id="nom" placeholder="Nom">
                 </div>
                 <div class="group-form">
-                    <input type="text" id="type" placeholder="Type">
+                    <input type="text" id="adresse" placeholder="Adresse">
                 </div>
                 <div class="group-form">
-                    <input type="text" id="description" placeholder="Description">
+                    <textarea type="text" id="description" placeholder="Description"></textarea>
                 </div>
                 <div class="group-form">
-                    <input type="date" id="date_debut" placeholder="Date de debut">
-                    <input type="date" id="date_fin" placeholder="Date de fin">
+                    Date debut : <input type="datetime-local" id="date_debut" placeholder="Date de debut">
+                </div>
+                <div class="group-form">
+                    Date fin : <input type="datetime-local" id="date_fin" placeholder="Date de fin">
                 </div>
                 <div class="group-form">
                     <input type="number" id="nb_place" placeholder="Nombres de places">
@@ -53,49 +55,32 @@
     </div>
 
 </body>
+<script src="../../javaScript/function_api.js"></script>
 <script>
-    //var data = await requestApiNoBody("GET", "/users/")
-    var data = [{
-        "id": 1,
-        "name": "enzo",
-        "code_postal": 91330,
-        "ville": "yerres",
-        "adresse": "affichage",
-        "num_phone": "1234567891",
-        "email": "test@test.fr",
-        "role": "benevole",
-        "email_verified": "False",
-    },
-        {
-            "id": 2,
-            "name": "titouan",
-            "code_postal": 91330,
-            "ville": "yerres",
-            "adresse": "affichage",
-            "num_phone": "1234567891",
-            "email": "test@test.fr",
-            "role": "benevole",
-            "email_verified": "False",
+    async function selectVolonteer() {
+        var data = await requestApiNoBody("GET", "/users/")
+
+        var addOption = document.getElementById("user")
+        var allUseursName =
+            "<option selected disabled hidden id=\"choix\">Superviser par</option>" +
+            "<option value=\"Null\">à definir</option>"
+        var userName = ""
+
+        for (i = 0; i < data.length; i++) {
+            if(data[i].role === "benevole") {
+                usersName = "<option value=\"" + data[i].id + "\">" + data[i].nom + "</option>";
+                allUseursName = allUseursName.concat(usersName);
+            }
         }
-    ];
-
-    var addOption = document.getElementById("user")
-    var allUseursName =
-        "<option selected disabled hidden id=\"choix\">Superviser par</option>" +
-        "<option value=\"Null\">à definir</option>"
-    var userName = ""
-
-    for (i = 0; i < data.length; i++) {
-        usersName = "<option value=\"" + data[i].id + "\">" + data[i].name + "</option>";
-        allUseursName = allUseursName.concat(usersName);
+        addOption.innerHTML = allUseursName
     }
-    addOption.innerHTML = allUseursName
 
 
     document.getElementById('createForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const nom = document.getElementById('nom').value;
+        const adresse = document.getElementById('adresse').value;
         const description = document.getElementById('description').value;
         const date_debut = document.getElementById('date_debut').value;
         const date_fin = document.getElementById('date_fin').value;
@@ -105,28 +90,24 @@
 
         const formData = {
             nom: nom,
+            adresse: adresse,
             description: description,
             date_debut: date_debut,
             date_fin: date_fin,
             nb_place: nb_place,
-            no: idUser
+            superviser_par: idUser
         };
 
-        console.log(formData)
-
-        /*
         try {
             const response = await requestApi(formData, "POST", "/activitees/add");
-            if (response.status === 200) {
-                showAlert("Création de l'activitée réussie !");
-            } else {
-                showAlert("Erreur lors de la création de l'utilisateur : " + response.status);
-            }
+            showAlert("Création de l'activitée réussie !");
+            window.location.href ="../back_end.php"
         } catch (error) {
             showAlert('Erreur lors de la requête à l\'API : ' + error.message);
         }
-        */
+
     });
+
+    selectVolonteer()
 </script>
-<script src="../../javaScript/function_api.js"></script>
 </html>
