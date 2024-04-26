@@ -49,6 +49,10 @@
             <img src="../img/beneficiaire.png" />
             <span style="animation-delay: 0.2s">Bénéficiaires</span>
           </button>
+            <button type="button" onclick="affichageBackEnd('Admin')">
+                <img src="../img/admin.png" />
+                <span style="animation-delay: 0.2s">Admin</span>
+            </button>
           <button type="button" onclick="affichageBackEnd('Demandes')">
             <img src="../img/demande.png" />
             <span style="animation-delay: 0.2s">Demandes</span>

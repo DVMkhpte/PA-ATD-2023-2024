@@ -4,9 +4,9 @@ async function getInfoU(data){
         "   <div class=\"contener_2\">\n" +
         "       <div class=\"descriptions_users\">\n" +
         "           <div class=\"description1_users\">\n" +
-        "               <div class=\"nom\">Nom : " + data.name + "</div>\n" +
-        "               <div class=\"prenom\">Prénom :  + data.prenom + </div>\n" +
-        "               <div class=\"statut\">Statut : </div>\n" +
+        "               <div class=\"nom\">Nom : " + data.nom + "</div>\n" +
+        "               <div class=\"prenom\">Prénom : " + data.prenom +" </div>\n" +
+        "               <div class=\"statut\">Statut : " + data.statut + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_users\">\n" +
         "               <div class=\"role\">Role : " + data.role + "</div>\n" +
@@ -17,13 +17,18 @@ async function getInfoU(data){
         "               <div class=\"adresse\">Adresse : " + data.code_postal + ", " + data.ville + ", " + data.adresse + "</div>\n" +
         "           </div>\n" +
         "       </div>\n" +
-        "       <div class=\"option\">\n" +
-        "           <button class=\"passer_admin\" onclick='updateRoleUser("+ data.id +", \"admin\")'>Passer admin</button>\n" +
-        "           <button class=\"bannir\" onclick='banUser("+ data.id +")'>Bannir</button>\n" +
+        "       <div class=\"option\">\n"
+        if(data.role === "beneficiaire") {
+            info += "<button class=\"passer_admin\" onclick='updateRoleUser(" + data.id + ", \"benevole\")'>Passer benevole</button>\n"
+        }else if(data.role === "benevole"){
+            info += "<button class=\"passer_admin\" onclick='updateRoleUser(" + data.id + ", \"admin\")'>Passer admin</button>\n"
+        }
+        info = info.concat(
+        "           <button class=\"bannir\" onclick='updateRoleUser("+ data.id +", \"banni\")'>Bannir</button>\n" +
         "           <button class=\"supp\">Supprimer</button>\n" +
         "       </div>\n" +
         "   </div>\n" +
-        "</div>"
+        "</div>")
 
     return info
 }
@@ -53,24 +58,6 @@ async function affichageUser(data, role){
     return affichage;
 }
 
-async function banUser(id){
-    var fomrData =
-        {
-            "statut": "ban"
-        }
-    /*
-    try {
-        const response = await requestApi(formData, "PITCH", "/users/"+id);
-        if (response.status === 200) {
-            showAlert(Utilisateur bannie");
-        } else {
-            showAlert("Erreur lors du bannisement: " + response.status);
-        }
-    } catch (error) {
-        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
-    }
-    */
-}
 
 async function searchUser(role){
     var data = await requestApiNoBody("GET", "/users/")

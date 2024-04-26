@@ -13,8 +13,11 @@ async function getInfoF(data){
         "               <div class=\"date\"> Du  " + data.date_debut + " au " + data.date_fin + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_activitee\">\n" +
-        "               <p>Description: " + data.description + "</p>\n" +
-        "               <div class=\"superviserPar\">Superviser Par : " + data.supervisor.name + "</div>\n" +
+        "               <p>Description: " + data.description + "</p>\n"
+        if(data.supervise_par !== 0) {
+            info = info.concat("<div class=\"superviserPar\">Superviser Par : " + data.supervisor.nom + "</div>\n")
+        }
+        info = info.concat(
         "               <div class=\"nb_plae\">Place restante : " + data.nb_place + "</div>\n" +
         "           </div>\n" +
         "       </div>\n" +
@@ -24,7 +27,7 @@ async function getInfoF(data){
         "           <button class=\"supp\">Supprimer</button>\n" +
         "       </div>\n" +
         "   </div>\n" +
-        "</div>"
+        "</div>")
 
     return info
 
@@ -85,9 +88,13 @@ async function modifFormation(id){
 
     var select =
         "       <select class=\"boutton\" name=\"supervisor\" id=\"supervisorId\">\n" +
-        "           <option selected disabled hidden id=\"choix\" value='"+ data.supervisor.id +"'>"+ data.supervisor.name +"</option>\n"
+        "           <option selected disabled hidden id=\"choix\""
+    if(data.supervise_par !== 0) {
+       select+= " value='" + data.supervisor.id + "'>" + data.supervisor.nom + "</option>\n"
+    }else{
+        select+= " value='" + data.supervise_par + "'>A definir</option>\n"
+    }
     for (var key in userNameList) {
-        console.log(key);
         select += "<option value='" + key + "'>" + userNameList[key] + "</option>";
     }
     select = select.concat(
@@ -109,6 +116,7 @@ async function modifFormation(id){
 }
 
 async function validModifF(id){
+    console.log(id)
     var data = await requestApiNoBody("GET", "/formations/"+id);
     console.log(data)
 
@@ -137,12 +145,9 @@ async function validModifF(id){
     }else{
         formData.date_fin = date_fin
     }
-    try {
-        const response = await requestApi(formData, "PATCH", "/formations/"+id);
-            showAlert("Formation modifié!");
-    } catch (error) {
-        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
-    }
+
+    const response = await requestApi(formData, "PATCH", "/formations/"+id);
+    showAlert("Formation modifié!");
     await affichageBackEnd("Formations")
 }
 
@@ -174,8 +179,8 @@ async function voirParticipantF(idF, ){
         if(data[i].id_formation === idF) {
             participant =
                 "<tr>" +
-                "   <td>"+ data[i].user.name +"</td>" +
-                "   <td>Titoaun</td>" +
+                "   <td>"+ data[i].user.nom +"</td>" +
+                "   <td>"+ data[i].user.prenom +"</td>" +
                 "   <td>"+ data[i].user.role +"</td>" +
                 "   <td>" +
                 "       <button class='suppParticipants' onclick=\"suppParticipantsF(" + data[i].id + ","+ idF +")\">Supp</button>" +
@@ -199,11 +204,6 @@ async function suppParticipantsF(idP, id){
     const response = await requestApiNoBody("DELETE", "/participef/"+idP);
     voirParticipantF(id)
 }
-
-
-
-
-
 
 
 async function searchFormation() {

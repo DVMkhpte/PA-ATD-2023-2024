@@ -170,8 +170,8 @@ async function voirParticipantA(idA){
         if(data[i].id_activite === idA) {
             participant =
                 "<tr>" +
-                "   <td>"+ data[i].user.name +"</td>" +
-                "   <td>Titoaun</td>" +
+                "   <td>"+ data[i].user.nom +"</td>" +
+                "   <td>"+ data[i].user.nom +"</td>" +
                 "   <td>"+ data[i].user.role +"</td>" +
                 "   <td>" +
                 "       <button class='suppParticipants' onclick=\"suppParticipantsA(" + data[i].id + ","+ idA +")\">Supp</button>" +

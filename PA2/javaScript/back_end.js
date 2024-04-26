@@ -25,6 +25,12 @@ async function affichageBackEnd(affichage) {
 
             break;
 
+        case 'Admin':
+            var data = await requestApiNoBody("GET", "/users/");
+            strBox = await affichageUser(data, "admin");
+
+            break;
+
         case 'Activitées':
             var data = await requestApiNoBody("GET", "/activitees/");
             strBox = await affichageActivitee(data);
@@ -62,21 +68,28 @@ async function affichageBackEnd(affichage) {
 
 async function updateRoleUser(id, role){
     console.log(role)
+    console.log(id)
     var formData =
     {
         "role": role
     }
     try {
         const response = await requestApi(formData, "PATCH", "/users/"+id);
-        if (response.status === 200) {
-            showAlert("Changement de role effectué");
-        } else {
-            showAlert("Erreur lors du changement de role: " + response.status);
-        }
+        showAlert("Changement de role effectué");
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    affichageBackEnd("Admin")
+    switch (role){
+        case "benevole":
+            affichageBackEnd("Bénévoles")
+            break;
+        case "admin":
+            console.log("admin")
+            affichageBackEnd("Admin")
+            break;
+
+    }
+
 
 }
 
@@ -106,7 +119,7 @@ async function  getAllUserNameByRole(role){
     var userNameList = {}
     for(i=0;i<data.length;i++) {
         if (data[i].role === role){
-           userNameList[data[i].id] = data[i].name
+           userNameList[data[i].id] = data[i].nom
         }
     }
     return userNameList

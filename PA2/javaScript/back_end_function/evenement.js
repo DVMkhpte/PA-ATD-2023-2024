@@ -15,7 +15,7 @@ async function getInfoE(data){
         "           <div class=\"description2_activitee\">\n" +
     "                   <div class=\"type\">Type : " + data.type + "</div>\n" +
         "               <p>Description: " + data.description + "</p>\n" +
-        "               <div class=\"nb_place\">Nombre de participants : " + data.nb_participant + "</div>\n" +
+        "               <div class=\"nb_place\">Nombre de participants : " + data.nb_participants + "</div>\n" +
         "               <div class=\"etat\">Etat : " + data.etat + "</div>\n" +
         "           </div>\n" +
         "       </div>\n" +
@@ -81,6 +81,7 @@ async function affichageEvenement(data){
 
 async function modifEvenement(id){
     var data = await requestApiNoBody("GET", "/evenements/"+id)
+    console.log(data)
 
     var allData = await requestApiNoBody("GET", "/evenements")
     const allType = getAllType(allData)
@@ -206,8 +207,8 @@ async function voirParticipantE(idA){
         if(data[i].id_evenement === idA) {
             participant =
                 "<tr>" +
-                "   <td>"+ data[i].user.name +"</td>" +
-                "   <td>Titoaun</td>" +
+                "   <td>"+ data[i].user.nom +"</td>" +
+                "   <td>"+ data[i].user.prenom +"</td>" +
                 "   <td>"+ data[i].user.role +"</td>" +
                 "   <td>" +
                 "       <button class='suppParticipants' onclick=\"suppParticipantsE(" + data[i].id + ","+ idA +")\">Supp</button>" +
