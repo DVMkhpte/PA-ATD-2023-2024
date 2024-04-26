@@ -112,11 +112,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'destroy']);
 
     Route::get('/users/{id}', [\App\Http\Controllers\UserController::class, 'show']);
-
+    Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
 Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
-Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
+
 
 

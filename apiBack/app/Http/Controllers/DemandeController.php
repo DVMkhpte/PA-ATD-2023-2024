@@ -45,7 +45,7 @@ class DemandeController extends Controller
 
     public function store(Request $request)
     {
-        $User = Auth::user();
+        $user = Auth::user();
 
         try {
             $data = $request->validate([
@@ -55,11 +55,11 @@ class DemandeController extends Controller
                 'etat' => 'string|in:En attente,En cours, Fait, Annuler',
             ]);
 
-           $data['id_user'] = $User->id;
+           $data['id_user'] = $user->id;
 
             $demande = Demandes::create($data);
 
-            Log::channel('user_activity')->info("Create demande demande by " . $User->name);
+            Log::channel('user_activity')->info("Create demande demande by " .  $user->name);
             return response()->json($demande, 201);
 
             }catch (\Exception $e) {
@@ -79,7 +79,7 @@ class DemandeController extends Controller
 
         Log::channel('admin_activity')->info("Delete demande demande " . $id . " by " . $adminUser->name);
 
-        return response()->json(['message' => 'Demande demande delete']);
+        return response()->json(['message' => 'Demande delete']);
     } catch (\Exception $e) {
         return response()->json(['message' => 'An error occurred while deleting the demande.'], 500);
     }
