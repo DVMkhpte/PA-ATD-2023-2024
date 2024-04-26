@@ -96,6 +96,12 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/produits/{id}',[\App\Http\Controllers\ProduitController::class,'show']);
     Route::delete('/produits/{id}',[\App\Http\Controllers\ProduitController::class,'destroy']);
 
+    Route::post('/commercants/add',[\App\Http\Controllers\CommercantController::class,'store'] );
+    Route::get('/commercants',[\App\Http\Controllers\CommercantController::class,'index']);
+    Route::get('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'show']);
+    Route::patch('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'update']);
+    Route::delete('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'destroy']);
+
 });
 
 
