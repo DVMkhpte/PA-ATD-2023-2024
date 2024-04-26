@@ -15,6 +15,7 @@ class Demandes extends Model
         'demande',
         'permis',
         'etat',
+        'date',
         'id_user',
 
     ];
