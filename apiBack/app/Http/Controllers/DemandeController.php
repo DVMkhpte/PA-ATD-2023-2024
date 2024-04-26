@@ -52,7 +52,7 @@ class DemandeController extends Controller
                 'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
                 'demande' => 'required|string',
                 'permis' => 'string',
-                'etat' => 'string|in:En attente,En cours, Fait, Annuler',
+                'etat' => 'string|in:en attente,en cours, fait, annuler, a valider',
                 'date' => 'required|date'
             ]);
 
