@@ -29,8 +29,9 @@
     </style>
 </head>
 <body>
-<button onclick="showAlert()">Afficher Popup</button>
+<button onclick="test()">Afficher Popup</button>
 
+<script src="../javaScript/function_api.js"></script>
 <script>
     function showAlert() {
         const message = "Ceci est un message de test pour la popup !";
@@ -44,6 +45,12 @@
         setTimeout(() => {
             popup.remove();
         }, 3000);
+    }
+
+    function test(){
+        localStorage.setItem('id',"3")
+        localStorage.setItem('token',"g3DPoiovRAPRqXyX5vZTJ9bYXmAlNI59gmBn2EG8")
+        console.log(GetAllActivityForPlanning())
     }
 </script>
 </body>

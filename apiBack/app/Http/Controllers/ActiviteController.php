@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activites;
+use App\Models\ParticipeA;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -36,6 +37,26 @@ class ActiviteController extends Controller
 
         Log::channel('admin_activity')->info("Show Activite by " . $adminUser->name);
         return response()->json($activite);
+    }
+
+    public function getUserActivity($userId)
+    {
+        try {
+            $participations = ParticipeA::with('activite')->where('id_user', $userId)->get();
+            $participations->transform(function ($item, $key) {
+                $item->activite->descrip = $item->activite->description;
+                unset($item->activite->description);
+                return $item;
+            });
+
+            $activities = $participations->map(function ($participation) {
+                return $participation->activite;
+            });
+
+            return response()->json($activities);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.', 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)

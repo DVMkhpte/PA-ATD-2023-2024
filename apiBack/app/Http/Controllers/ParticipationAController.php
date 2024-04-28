@@ -45,6 +45,7 @@ class ParticipationAController extends Controller
         }
     }
 
+
     public function store(Request $request)
     {
         $User = Auth::user();

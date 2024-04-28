@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Formation;
+use App\Models\ParticipeF;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -34,6 +35,26 @@ class FormationController extends Controller
 
         Log::channel('admin_activity')->info("Show formation by " . $adminUser->name);
         return response()->json($formation);
+    }
+
+    public function getUserFormation($userId)
+    {
+        try {
+            $participations = ParticipeF::with('formation')->where('id_user', $userId)->get();
+            $participations->transform(function ($item, $key) {
+                $item->formation->descrip = $item->formation->description;
+                unset($item->formation->description);
+                return $item;
+            });
+
+            $formations = $participations->map(function ($participation) {
+                return $participation->formation;
+            });
+
+            return response()->json($formations);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.', 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)

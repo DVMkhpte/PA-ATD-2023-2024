@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Evenement;
 use App\Http\Controllers\Controller;
+use App\Models\ParticipeE;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -33,10 +34,30 @@ class EvenementController extends Controller
         return response()->json($evenement);
     }
 
+    public function getUserEvenement($userId)
+    {
+        try {
+            $participations = ParticipeE::with('evenement')->where('id_user', $userId)->get();
+            $participations->transform(function ($item, $key) {
+                $item->evenement->descrip = $item->evenement->description;
+                unset($item->evenement->description);
+                return $item;
+            });
+
+            $evenements = $participations->map(function ($participation) {
+                return $participation->evenement;
+            });
+
+            return response()->json($evenements);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.', 'error' => $e->getMessage()], 500);
+        }
+    }
+
     public function store(Request $request)
     {
         $adminUser = Auth::user();
-        
+
         $data = $request->validate([
             'nom' => 'required|string|max:255',
             'description' => 'required|string',
