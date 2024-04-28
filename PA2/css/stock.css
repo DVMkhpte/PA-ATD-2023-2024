@@ -1,3 +1,20 @@
+.popup {
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #225B7C;
+    padding: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    color: whitesmoke;
+    font-family: "Euclid Circular A", "Poppins";
+}
+
+
+
 body {
     background: #f8f9fb;
     font-family: "Euclid Circular A", "Poppins";
@@ -203,15 +220,13 @@ main{
 
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
 }
 
 #entrepot_camion, #entrepot_stock{
     width: 50%;
     padding: 1% 1%;
-
-    overflow: scroll;
-    max-height: 100vh;
 }
 
 
@@ -223,7 +238,7 @@ main{
 
 #voir_denree{
     overflow: scroll;
-    max-height: 100vh;
+    max-height: 40vh;
     width: 100%;
 }
 
@@ -256,7 +271,13 @@ td, th, tr {
     font-weight: bold;
 }
 
-.etagere button{
+
+
+
+
+/*------------BUTTON-------------------------*/
+
+.etagere button, .buttonAdd, .buttonAddEtatagere{
     background-color: #59CD97;
     color: white;
     border: none;
@@ -264,7 +285,33 @@ td, th, tr {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.etagere button:hover{
+.buttonAdd{
+    height: 30px;
+}
+
+.buttonAddEtatagere{
+    height: 20px;
+}
+
+.updateButton{
+    background-color: #c68437;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.buttonSupp{
+    background-color: #d93025;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.etagere button:hover, .buttonSupp:hover, .buttonAdd:hover, .updateButton:hover{
     cursor: pointer;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+

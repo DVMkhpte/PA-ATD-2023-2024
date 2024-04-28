@@ -73,6 +73,7 @@ async function affichageCamion(idEntrepot){
     var info =
         "   <div  class=\"entrepot_titre\">"+
         "       <h3>Camions</h3>\n" +
+        "       <button class='buttonAdd' onclick='addCamion("+ idEntrepot +")'>Ajouter</button>" +
         "   </div>"+
         "   <table>\n" +
         "       <thead>\n" +
@@ -89,10 +90,13 @@ async function affichageCamion(idEntrepot){
         if(data[i].id_entrepot === idEntrepot) {
             info +=
                 "           <tr>\n" +
-                "               <td>" + data[i].immatriculation + "</td>\n" +
-                "               <td>" + data[i].modele + "</td>\n" +
-                "               <td>" + data[i].type + "</td>\n" +
-                "               <td>" + data[i].status + "</td>\n" +
+                "               <td>"+ data[i].immatriculation +"</td>\n" +
+                "               <td>"+ data[i].modele +"</td>\n" +
+                "               <td>"+ data[i].type +"</td>\n" +
+                "               <td>"+ data[i].status +"</td>\n" +
+                "               <td>"+
+                "                   <button class='updateButton' onclick='updateCamion("+ data[i].id +")'>Update statut</button>" +
+                "               </td>\n" +
                 "           </tr>\n"
         }
     }
@@ -142,11 +146,10 @@ async function affichageDenree(idEntrepot){
 
 async function entrepotInfo(data){
     var idE = data.id
-    console.log(idE)
 
     var info =
         "<div class=\"entrepot\">\n" +
-        "   <h3 class='entrepot_name'>Stock de l'entrepot : "+ data.nom +"</h3>\n" +
+        "   <h3 class='entrepot_name'>Entrepot de "+ data.nom +"</h3>\n" +
         "   <div class=\"info_stock\">"+
         "       <div id=\"entrepot_camion\">\n"
 
@@ -177,7 +180,9 @@ async function voirAllDenree(idEtagere, numEtagere){
 
     var info =
         "                   <div class='etagere'>" +
-        "                       <div>Etagere : "+ numEtagere +"</div>" +
+        "                       <div>Etagere : "+ numEtagere +"" +
+        "                           <button class='buttonAddEtatagere' onclick='addProduit("+ idEtagere +")'>Ajouter</button>" +
+        "                       </div>" +
         "                       <button onclick='retourEtagere("+ dataEtagere.id_entrepot +")'>Retour</button>" +
         "                   </div>"+
         "                   <table>\n" +
@@ -222,6 +227,7 @@ async function voirDenreeByName(idEtagere, numeroEtagere, nomProduit){
         "                                <th>Id</th>\n" +
         "                                <th>Date d'arrivée</th>\n" +
         "                                <th>Date limite</th>\n" +
+        "                                <th>Option</th>\n" +
         "                            </tr>\n" +
         "                        </thead>\n" +
         "                        <tbody>\n"
@@ -233,6 +239,9 @@ async function voirDenreeByName(idEtagere, numeroEtagere, nomProduit){
                 "                                <td>" + dataProduit[i].id + "</td>\n" +
                 "                                <td>" + dataProduit[i].date_arrivee + "</td>\n" +
                 "                                <td>" + dataProduit[i].date_limite + "</td>\n" +
+                "                                <td>" +
+                "                                   <button class='buttonSupp' onclick='supp("+dataProduit[i].id+", \"/produits/\")'>Supp</button>" +
+                "                               </td>\n" +
                 "                            </tr>\n"
         }
     }
@@ -251,4 +260,27 @@ async function retourEtagere(idEntrepot){
     voirDenree.innerHTML = info
 }
 
+
+
+async function supp(id, link){
+    var fetchLink = link+id
+    console.log(fetchLink)
+    await requestApiNoBody("DELETE", fetchLink)
+    showAlert("Produit supprimé!");
+}
+
+
+
+async function addCamion(idEntrepot){
+
+}
+
+
+async function updateCamion(idCamion){
+
+}
+
+async function addProduit(idEtagere){
+
+}
 
