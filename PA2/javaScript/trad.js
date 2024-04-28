@@ -11,7 +11,7 @@ const translationFiles = {
     'beneficiary.php': '../json/beneficiary.json',
     'become_benevole.php': '../json/become_benevole.json',
     '../javaScript/beneficiare_function/ask.js' : '../json/ask_js.json',
-    '../includes/header/headerNoConnexion/headerAccueil.php': '../../../json/headerAccueil.json',
+    '../includes/header/headerNoConnexion/headerAccueil.php': '../json/headerAccueil.json',
     '../includes/footer/footerNoConnexion/footerAccueil.php': '../json/footerAccueil.json'
 };
 
@@ -40,15 +40,26 @@ function updateTranslations(language) {
                 } else {
                     element.placeholder = translations[language][key];
                 }
+            } else if (element.tagName === 'BUTTON' || element.tagName === 'A') {
+                element.textContent = translations[language][key];
+            } else if (element.classList.contains('dropdown-menu')) {
+                const buttons = element.querySelectorAll('button');
+                buttons.forEach(button => {
+                    const buttonKey = button.dataset.translate;
+                    if (translations[language][buttonKey]) {
+                        button.textContent = translations[language][buttonKey];
+                    }
+                });
             } else {
                 element.innerHTML = translations[language][key];
             }
-
         }
     });
 
     localStorage.setItem('language', language);
 }
+
+
 
 
 
@@ -62,3 +73,5 @@ function getPageName() {
     const path = window.location.pathname;
     return path.split('/').pop();
 }
+
+

@@ -35,7 +35,7 @@
     </p>
     <form class="formulaire" id="createForm">
     <div class="group-form">
-        <input type="text" data-translate="prenom" id="prenom" placeholder="Prenom">
+        <input type="text" data-translate="prenom" id="prenom" placeholder="Prenom" />
         <input type="text" data-translate="nom" id="nom" placeholder="Nom">
     </div>
     <div class="group-form">
@@ -43,13 +43,13 @@
         <input type="text" data-translate="city" id="ville" placeholder="Ville">
     </div>
     <div class="group-form">
-        <input type="text" data-translate="adress" id="adresse" placeholder="Adresse">
+        <input type="text" data-translate="adress2" id="adresse" placeholder="Adresse">
     </div>
     <div class="group-form">
         <input type="text" data-translate="phone" id="phone" placeholder="Numero de telephone">
     </div>
     <div class="group-form">
-        <input type="email" data-translate="email" id="email" placeholder="Mail">
+        <input type="email" data-translate ="email" id="email" placeholder="Email" />
       </div>
       <div class="group-form">
         <input type="password" data-translate="password" id="password" placeholder="Mot de passe">

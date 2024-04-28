@@ -75,7 +75,7 @@
     "nom": "Cognome",
     "zipcode": "CAP",
     "city": "Città",
-    "adress": "Indirizzo",
+    "adress2": "Indirizzo",
     "phone": "Numero di Telefono",
     "email": "Email",
     "password": "Password",

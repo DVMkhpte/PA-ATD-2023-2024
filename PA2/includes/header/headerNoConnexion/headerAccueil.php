@@ -19,7 +19,7 @@
                     .then(data => {
                         translateElements(data);
                         translateDropdownMenus(data);
-                        translateSpans(data);
+
                     })
                     .catch(error => {
                         console.error('Erreur lors du chargement du fichier JSON :', error);
@@ -38,6 +38,7 @@
             }
 
             function translateDropdownMenus(data) {
+                console.log(data);
                 const dropdownMenus = document.querySelectorAll('.dropdown-menu');
                 dropdownMenus.forEach(menu => {
                     const menuItems = menu.querySelectorAll('[data-translate]');
@@ -54,18 +55,7 @@
                 });
             }
 
-            function translateSpans(data) {
-                const spans = document.querySelectorAll('span[data-translate="account2"]');
-                spans.forEach(span => {
-                    const translationKey = span.textContent.trim();
-                    const translation = data[translationKey];
-                    if (translation) {
-                        span.textContent = translation;
-                    } else {
-                        console.log(`Aucune traduction trouvée pour "${translationKey}"`);
-                    }
-                });
-            }
+
         </script>
 
 
@@ -115,6 +105,12 @@
                     </button>
 
                     <div class="dropdown-menu" aria-labelledby="languageDropdown">
+
+
+                        <!-- French -->
+                        <a class="dropdown-item" href="#" onclick="updateTranslations('fr')" style="color: white; background-color: transparent;">
+                            <img src="../img/flags/fr.png" alt="French Flag" class="img-fluid" style="width: 20px;"> Français
+                        </a>
 
                         <!-- English -->
                         <a id="english" class="dropdown-item" href="#" onclick="updateTranslations('en')" style="color: white; background-color: transparent;">
@@ -186,10 +182,6 @@
                             <img src="../img/flags/pa.png" alt="Punjabi Flag" class="img-fluid" style="width: 20px;"> ਪੰਜਾਬੀ
                         </a>
 
-                        <!-- French -->
-                        <a class="dropdown-item" href="#" onclick="updateTranslations('fr')" style="color: white; background-color: transparent;">
-                            <img src="../img/flags/fr.png" alt="French Flag" class="img-fluid" style="width: 20px;"> Français
-                        </a>
 
                         <!-- Lingala -->
                         <a class="dropdown-item" href="#" onclick="updateTranslations('ln')" style="color: white; background-color: transparent;">
