@@ -56,6 +56,10 @@ async function affichageBackEnd(affichage) {
             strBox = await affichageEvenement(data);
             break;
 
+        case "Stock" :
+            window.location.href ="../pages/stock.php"
+            break;
+
         default:
             break;
     }

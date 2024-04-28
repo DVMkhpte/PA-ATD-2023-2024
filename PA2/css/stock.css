@@ -1,0 +1,232 @@
+body {
+    background: #f8f9fb;
+    font-family: "Euclid Circular A", "Poppins";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+
+    background-color: white;
+
+    font-family: "Arial", sans-serif;
+
+
+    overflow: hidden;
+}
+
+header {
+    padding-top: 0;
+    margin-top: 0;
+
+    display: flex;
+    align-items: center;
+
+    background: linear-gradient(90deg, #38A7A6, #59CD97);
+    height: 120px;
+    width: 100%
+}
+
+.left_partH,
+.right_partH {
+    display: flex;
+    align-items: center;
+}
+
+
+.left_partH {
+    padding-left: 1%;
+    width: 25%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+
+.img_header {
+    width: 100px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+}
+
+.img_header img{
+    width: 100%;
+}
+
+
+.nav_link_acceuil {
+    font-size: 25px;
+    text-decoration: none;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+
+    border-radius: 5px;
+    margin: 1%;
+}
+
+.nav_link_acceuil:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+
+.mid_partH {
+    width: 50%;
+    display: flex;
+    justify-content: space-around;
+    color: white;
+}
+
+
+.right_partH{
+    width: 25%;
+}
+
+#option{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.new_button{
+    background-color: #59CD97;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    margin: 1%;
+
+    font-size: 20px;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/*------------------------------- main ---------------------------------*/
+
+
+main{
+}
+
+.new_button:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.entrepot_nav{
+    display: flex;
+    justify-content: space-around;
+}
+
+.allEntrepot{
+    margin: 2%;
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+
+    border-radius: 25px;
+
+    background-color: #38A6A7;
+    color: white;
+}
+
+.select_entrepot{
+    width: 50%;
+    padding: 1% 2%;
+
+    display: flex;
+    justify-content: space-around;
+}
+
+.select_entrepot:hover{
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: #59CD97;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+}
+
+.select_entrepot img{
+    height: 60px;
+}
+
+#container{
+    display: flex;
+    justify-content: space-around;
+
+    color: #38A6A7;
+}
+
+.entrepot_name{
+    padding: 10px;
+    margin: 0;
+}
+
+.entrepot{
+    padding: 1% 1%;
+    width: 98%;
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    color: #38A7A6;
+}
+
+.info_stock{
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+
+.entrepot_titre{
+    border-bottom: solid;
+    border-color: #38A6A7;
+}
+
+.entrepot_camion, .entrepot_stock{
+    width: 50%;
+    padding: 1% 1%;
+
+    overflow: scroll;
+    max-height: 45vh;
+}
+
+
+
+.entrepot_stock{
+    border-left: solid;
+    border-color: #38A6A7;
+}
+
+#voir_denree{
+    overflow: scroll;
+    max-height: 20vh;
+    width: 100%;
+}
+
+table thead{
+    border-bottom: solid;
+    border-color: #38A6A7;
+}
+
+td, th, tr {
+    padding: 2px 15px;
+    border-radius: 5px;
+}
+
+.denree:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
