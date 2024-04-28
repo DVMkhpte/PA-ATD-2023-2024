@@ -10,6 +10,36 @@ async function getEntrepot(entrepotName){
     return entrepot
 }
 
+async function trieProduitByName(idEtagere){
+    var dataAllProduit = await requestApiNoBody("GET", "/produits")
+
+    var dataProduit = []
+    for(j=0; j<dataAllProduit.length; j++){
+        var produit = {}
+        if(dataAllProduit[j].id_etagere === idEtagere) {
+            produit = {
+                nomP: dataAllProduit[j].nom,
+                type: dataAllProduit[j].type,
+                quantite: 1
+            }
+
+            var nomExist = false
+            for (k = 0; k < dataProduit.length; k++) {
+                if (dataProduit[k].nomP === produit.nomP){
+                    nomExist = true
+                    dataProduit[k].quantite += 1
+                }
+            }
+
+            if (!nomExist) {
+                dataProduit.push(produit)
+            }
+        }
+    }
+
+    return dataProduit
+}
+
 
 async function affichageStock(affichage) {
     const stock = document.getElementById('container');
@@ -41,8 +71,9 @@ async function affichageStock(affichage) {
 async function affichageCamion(idEntrepot){
     var data = await requestApiNoBody("GET", "/camions/")
     var info =
-        "<div class=\"entrepot_camion\">\n" +
-        "   <h3 class=\"entrepot_titre\">Camions</h3>\n" +
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Camions</h3>\n" +
+        "   </div>"+
         "   <table>\n" +
         "       <thead>\n" +
         "           <tr>\n" +
@@ -67,8 +98,7 @@ async function affichageCamion(idEntrepot){
     }
     info +=
         "       </tbody>\n" +
-        "   </table>\n" +
-        "</div>"
+        "   </table>\n"
 
     return info
 }
@@ -78,9 +108,10 @@ async function affichageDenree(idEntrepot){
     console.log(dataEtagere)
 
     var info =
-        "<div class=\"entrepot_stock\">\n" +
-        "   <h3 class=\"entrepot_titre\">Stock</h3>\n" +
-        "   <div id =\"voir_denree\"></div>\n" +
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Stock</h3>\n" +
+        "   </div>"+
+        "   <div id =\"voir_denree\">"+
         "       <table>\n" +
         "           <thead>\n" +
         "               <tr>\n" +
@@ -93,7 +124,7 @@ async function affichageDenree(idEntrepot){
     for(i=0; i<dataEtagere.length; i++){
         if(dataEtagere[i].id_entrepot === idEntrepot) {
             info +=
-                "               <tr class=\"denree\" onclick='voirAllDenree(" + dataEtagere[i].id + ")'>\n" +
+                "               <tr class=\"denree\" onclick='voirAllDenree(" + dataEtagere[i].id + ", \""+ dataEtagere[i].numero +"\")'>\n" +
                 "                   <td></td>\n" +
                 "                   <td>" + dataEtagere[i].numero + "</td>\n" +
                 "                   <td>" + dataEtagere[i].capacite_actuelle + "</td>\n" +
@@ -103,7 +134,7 @@ async function affichageDenree(idEntrepot){
     info +=
         "           </tbody>\n" +
         "       </table>\n" +
-        "</div>"
+        "   </div>\n"
 
     return info
 
@@ -116,13 +147,18 @@ async function entrepotInfo(data){
     var info =
         "<div class=\"entrepot\">\n" +
         "   <h3 class='entrepot_name'>Stock de l'entrepot : "+ data.nom +"</h3>\n" +
-        "   <div class=\"info_stock\">"
+        "   <div class=\"info_stock\">"+
+        "       <div id=\"entrepot_camion\">\n"
 
     info+= await affichageCamion(idE)
+
+    info+=  "</div>" +
+            "<div id=\"entrepot_stock\">\n"
 
     info+= await affichageDenree(idE)
 
     info +=
+        "       </div>"+
         "   </div>\n" +
         "</div>"
 
@@ -133,16 +169,56 @@ async function entrepotInfo(data){
 
 
 
-async function voirAllDenree(idEtagere){
+async function voirAllDenree(idEtagere, numEtagere){
     const voirDenree = document.getElementById("voir_denree")
-    var dataProduit = await requestApiNoBody("GET", "/produits")
+    var dataEtagere = await requestApiNoBody("GET", "/etageres/"+idEtagere)
+
+    var dataProduit = await trieProduitByName(idEtagere)
 
     var info =
+        "                   <div class='etagere'>" +
+        "                       <div>Etagere : "+ numEtagere +"</div>" +
+        "                       <button onclick='retourEtagere("+ dataEtagere.id_entrepot +")'>Retour</button>" +
+        "                   </div>"+
         "                   <table>\n" +
         "                        <thead>\n" +
         "                            <tr>\n" +
-        "                               <th>Etagere</th>"+
-        "                               <th>Nom</th>"+
+        "                               <th>Nom produit</th>"+
+        "                                <th>Type</th>\n" +
+        "                                <th>Quantité</th>\n" +
+        "                            </tr>\n" +
+        "                        </thead>\n" +
+        "                        <tbody>\n"
+    for(i=0; i<dataProduit.length; i++) {
+        info +=
+            "                            <tr class=\"denree\" onclick='voirDenreeByName(" + dataEtagere.id + ", \""+ dataEtagere.numero +"\", \""+ dataProduit[i].nomP +"\")'>\n" +
+            "                                <td>" + dataProduit[i].nomP + "</td>\n" +
+            "                                <td>" + dataProduit[i].type + "</td>\n" +
+            "                                <td>" + dataProduit[i].quantite + "</td>\n" +
+            "                            </tr>\n"
+    }
+    info +=
+        "                        </tbody>\n" +
+        "                    </table>"
+    voirDenree.innerHTML = info
+
+}
+
+
+async function voirDenreeByName(idEtagere, numeroEtagere, nomProduit){
+    const voirDenree = document.getElementById("voir_denree")
+    var dataProduit = await requestApiNoBody("GET", "/produits")
+    var dataEtagere = await requestApiNoBody("GET", "/etageres/"+idEtagere)
+
+    var info =
+        "                   <div class='etagere'>" +
+        "                       <div>Etagere : "+ numeroEtagere +", produit : "+ nomProduit +"</div>" +
+        "                       <button onclick='voirAllDenree("+ dataEtagere.id +", \""+ dataEtagere.numero +"\")'>Retour</button>" +
+        "                   </div>"+
+        "                   <table>\n" +
+        "                        <thead>\n" +
+        "                            <tr>\n" +
+        "                               <th>Produit</th>"+
         "                                <th>Id</th>\n" +
         "                                <th>Date d'arrivée</th>\n" +
         "                                <th>Date limite</th>\n" +
@@ -150,11 +226,10 @@ async function voirAllDenree(idEtagere){
         "                        </thead>\n" +
         "                        <tbody>\n"
     for(i=0; i<dataProduit.length; i++) {
-        if(dataProduit[i].id_etagere === idEtagere) {
+        if(dataProduit[i].id_etagere === idEtagere && dataProduit[i].nom === nomProduit) {
             info +=
                 "                            <tr>\n" +
-                "                                <td>" + dataProduit[i].etagere.numero + "</td>\n" +
-                "                                <td>" + dataProduit[i].nom + "</td>\n" +
+                "                                <td></td>\n" +
                 "                                <td>" + dataProduit[i].id + "</td>\n" +
                 "                                <td>" + dataProduit[i].date_arrivee + "</td>\n" +
                 "                                <td>" + dataProduit[i].date_limite + "</td>\n" +
@@ -165,5 +240,15 @@ async function voirAllDenree(idEtagere){
         "                        </tbody>\n" +
         "                    </table>"
     voirDenree.innerHTML = info
+
 }
+
+
+
+async function retourEtagere(idEntrepot){
+    const voirDenree = document.getElementById("entrepot_stock")
+    var info = await affichageDenree(idEntrepot)
+    voirDenree.innerHTML = info
+}
+
 

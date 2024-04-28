@@ -142,6 +142,7 @@ main{
 .select_entrepot{
     width: 50%;
     padding: 1% 2%;
+    height: 50px;
 
     display: flex;
     justify-content: space-around;
@@ -155,7 +156,7 @@ main{
 }
 
 .select_entrepot img{
-    height: 60px;
+    height: 40px;
 }
 
 #container{
@@ -168,6 +169,8 @@ main{
 .entrepot_name{
     padding: 10px;
     margin: 0;
+
+    height: 10px;
 }
 
 .entrepot{
@@ -190,28 +193,37 @@ main{
 }
 
 .entrepot_titre{
+    padding: 0;
+    margin: 0;
+
+    height: 45px;
+
     border-bottom: solid;
     border-color: #38A6A7;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.entrepot_camion, .entrepot_stock{
+#entrepot_camion, #entrepot_stock{
     width: 50%;
     padding: 1% 1%;
 
     overflow: scroll;
-    max-height: 45vh;
+    max-height: 100vh;
 }
 
 
 
-.entrepot_stock{
+#entrepot_stock{
     border-left: solid;
     border-color: #38A6A7;
 }
 
 #voir_denree{
     overflow: scroll;
-    max-height: 20vh;
+    max-height: 100vh;
     width: 100%;
 }
 
@@ -230,3 +242,29 @@ td, th, tr {
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+.etagere{
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.etagere div{
+    font-weight: bold;
+}
+
+.etagere button{
+    background-color: #59CD97;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.etagere button:hover{
+    cursor: pointer;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
+}
