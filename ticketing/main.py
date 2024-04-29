@@ -6,7 +6,7 @@ from admin import AdminTicketingApp
 class LoginPage:
     def __init__(self, root):
         self.root = root
-        self.root.title("Page de connexion")
+        self.root.title("Page de connexion - App Ticketing Au Temps Donné")
         self.root.geometry("400x300")
 
         # Chargement du logo
@@ -37,21 +37,21 @@ class LoginPage:
         self.benevole_button.pack(pady=5)
 
     def login_admin(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion
+        self.root.destroy()  # Fermer la fenêtre de connexion admin
         root = tk.Tk()
         tickets = []
-        admin_app = AdminTicketingApp(root, tickets)
+        admin_app = AdminTicketingApp(root)
         root.mainloop()
 
     def login_beneficiaire(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion
+        self.root.destroy()  # Fermer la fenêtre de connexion beneficiaire
         root = tk.Tk()
         tickets = []
         user_app = TicketingApp(root, tickets)
         root.mainloop()
 
     def login_benevole(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion
+        self.root.destroy()  # Fermer la fenêtre de connexion benevole
         root = tk.Tk()
         tickets = []
         user_app = TicketingApp(root, tickets)
