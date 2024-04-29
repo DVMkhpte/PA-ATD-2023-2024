@@ -10,6 +10,13 @@ async function getEntrepot(entrepotName){
     return entrepot
 }
 
+
+async function refreshCamion(idEntrepot){
+    const refreshCamion = document.getElementById("entrepot_camion")
+    var info = await affichageCamion(idEntrepot)
+    refreshCamion.innerHTML = info
+}
+
 async function trieProduitByName(idEtagere){
     var dataAllProduit = await requestApiNoBody("GET", "/produits")
 
@@ -75,6 +82,7 @@ async function affichageCamion(idEntrepot){
         "       <h3>Camions</h3>\n" +
         "       <button class='buttonAdd' onclick='addCamion("+ idEntrepot +")'>Ajouter</button>" +
         "   </div>"+
+        "   <div class='overflowStock'>"+
         "   <table>\n" +
         "       <thead>\n" +
         "           <tr>\n" +
@@ -102,7 +110,8 @@ async function affichageCamion(idEntrepot){
     }
     info +=
         "       </tbody>\n" +
-        "   </table>\n"
+        "   </table>\n"+
+        "</div>"
 
     return info
 }
@@ -115,7 +124,7 @@ async function affichageDenree(idEntrepot){
         "   <div  class=\"entrepot_titre\">"+
         "       <h3>Stock</h3>\n" +
         "   </div>"+
-        "   <div id =\"voir_denree\">"+
+        "   <div class='overflowStock' id='voir_denree'>"+
         "       <table>\n" +
         "           <thead>\n" +
         "               <tr>\n" +
@@ -185,6 +194,7 @@ async function voirAllDenree(idEtagere, numEtagere){
         "                       </div>" +
         "                       <button onclick='retourEtagere("+ dataEtagere.id_entrepot +")'>Retour</button>" +
         "                   </div>"+
+        "                   <div class='overflowStock'>"+
         "                   <table>\n" +
         "                        <thead>\n" +
         "                            <tr>\n" +
@@ -204,7 +214,8 @@ async function voirAllDenree(idEtagere, numEtagere){
     }
     info +=
         "                        </tbody>\n" +
-        "                    </table>"
+        "                    </table>"+
+        "               </div>"
     voirDenree.innerHTML = info
 
 }
@@ -220,6 +231,7 @@ async function voirDenreeByName(idEtagere, numeroEtagere, nomProduit){
         "                       <div>Etagere : "+ numeroEtagere +", produit : "+ nomProduit +"</div>" +
         "                       <button onclick='voirAllDenree("+ dataEtagere.id +", \""+ dataEtagere.numero +"\")'>Retour</button>" +
         "                   </div>"+
+        "                   <div class='overflowStock'>"+
         "                   <table>\n" +
         "                        <thead>\n" +
         "                            <tr>\n" +
@@ -247,7 +259,8 @@ async function voirDenreeByName(idEtagere, numeroEtagere, nomProduit){
     }
     info +=
         "                        </tbody>\n" +
-        "                    </table>"
+        "                    </table>"+
+        "                 </div>"
     voirDenree.innerHTML = info
 
 }
@@ -272,11 +285,153 @@ async function supp(id, link){
 
 
 async function addCamion(idEntrepot){
+    const updateCamion = document.getElementById("entrepot_camion")
+
+    var info =
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Nouveau Camion</h3>\n" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd1'>" +
+        "       <input id='immatriculation' type='text' placeholder='Immatriculation' required>" +
+        "       <input id='modele' placeholder='modele' type='text' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd2'>" +
+        "       <select class=\"selectAdd\" name=\"type\" id=\"type\" required>\n" +
+        "           <option selected disabled hidden id=\"type\">Type</option>\n"+
+        "           <option value='porteur' >Porteur</option>" +
+        "           <option value='semi-remorque' >Semi-remorque</option>" +
+        "           <option value='tracteur' >Tracteur</option>" +
+        "           <option value='camionnette'>Camionnette</option>" +
+        "       </select>\n"+
+        "       <select class=\"selectAdd\" name=\"status\" id=\"status\" required>\n" +
+        "           <option selected disabled hidden id=\"type\" >Status</option>\n"+
+        "           <option value='disponible' >Dispnible</option>" +
+        "           <option value='en panne' >en panne</option>" +
+        "           <option value='maintenance' >maintenance</option>" +
+        "       </select>\n"+
+        "       <input id='date_dernier_controle' placeholder='Date controle technique' type='date' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd3'>" +
+        "       <input id='poids' placeholder='Poids' type='number' required>" +
+        "       <input id='hauteur' placeholder='Hauteur' type='number' required>" +
+        "       <input id='capacite_max' placeholder='Capacite max' type='number' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd4'>" +
+        "       <button class='buttonAdd' onclick='confirmNewCamion("+ idEntrepot +")'>Ajouter</button>" +
+        "       <button class='buttonAdd' onclick='refreshCamion("+ idEntrepot +")'>Retour</button>" +
+        "   </div>" +
+        ""
+
+    updateCamion.innerHTML = info
+}
+
+
+async function confirmNewCamion(idEntrepot){
+    const immatriculation = document.getElementById("immatriculation").value
+    const modele = document.getElementById("modele").value
+    const type = document.getElementById("type").value
+    const status = document.getElementById("status").value
+    const poids = document.getElementById("poids").value
+    const hauteur = document.getElementById("hauteur").value
+    const capacite_max = document.getElementById("capacite_max").value
+    const date_dernier_controle = document.getElementById("date_dernier_controle").value
+
+
+    if(poids > 0 && hauteur > 0 && capacite_max > 0){
+        var formData = {
+            "immatriculation": immatriculation,
+            "modele": modele,
+            "type": type,
+            "status": status,
+            "poids": poids,
+            "hauteur": hauteur,
+            "capacite_max": capacite_max,
+            "date_dernier_controle": date_dernier_controle,
+            "id_entrepot": idEntrepot
+        }
+
+        console.log(formData)
+
+        await requestApi(formData, "POST", "/camions/add")
+        showAlert("Camion créé!");
+
+        refreshCamion(idEntrepot)
+
+    }else{
+        showAlert("Erreur dans les valeurs");
+        await addCamion(idEntrepot)
+    }
 
 }
 
 
 async function updateCamion(idCamion){
+    const updateCamion = document.getElementById("entrepot_camion")
+    var dataCamion = await requestApiNoBody("GET", "/camions/"+idCamion)
+
+    var form =
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Camions</h3>\n" +
+        "   </div>"+
+        "   <table>\n" +
+        "       <thead>\n" +
+        "           <tr>\n" +
+        "               <th>Matriculation</th>\n" +
+        "               <th>Modèle</th>\n" +
+        "               <th class='selectColone'>Type</th>\n" +
+        "               <th class='selectColone'>Statut</th>\n" +
+        "               <th>Options</th>\n" +
+        "           </tr>\n" +
+        "       </thead>\n" +
+        "       <tbody>\n" +
+        "           <tr>" +
+        "               <td>"+ dataCamion.immatriculation +"</td>" +
+        "               <td>"+ dataCamion.modele +"</td>" +
+        "               <td class='selectColone'>" +
+        "                   <select class=\"select\" name=\"type\" id=\"type\">\n" +
+        "                       <option selected disabled hidden id=\"type\" value='"+ dataCamion.type +"'>Type</option>\n"+
+        "                       <option value='porteur' >Porteur</option>" +
+        "                       <option value='semi-remorque' >Semi-remorque</option>" +
+        "                       <option value='tracteur' >Tracteur</option>" +
+        "                       <option value='camionnette'>Camionnette</option>" +
+        "                   </select>\n"+
+        "               </td>" +
+        "               <td class='selectColone'>" +
+        "                   <select class=\"select\" name=\"status\" id=\"status\">\n" +
+        "                       <option selected disabled hidden id=\"type\" value='"+ dataCamion.status +"'>Status</option>\n"+
+        "                       <option value='disponible' >Dispnible</option>" +
+        "                       <option value='en panne' >en panne</option>" +
+        "                       <option value='maintenance' >maintenance</option>" +
+        "                   </select>\n"+
+        "               </td>" +
+        "               <td>" +
+        "                   <button class='buttonAdd' onclick='validModif("+ idCamion +")'>Valider</button>" +
+        "               </td>" +
+        "           </tr>"
+
+    updateCamion.innerHTML = form
+}
+
+
+async function validModif(idCamion){
+    var dataCamion = await requestApiNoBody("GET", "/camions/"+idCamion)
+
+    const type = document.getElementById("type").value
+    const status = document.getElementById("status").value
+
+    var formData = {
+        "immatriculation": dataCamion.immatriculation,
+        "modele": dataCamion.modele,
+        "type": type,
+        "status": status
+    }
+
+    console.log(formData)
+
+    await requestApi(formData, "PATCH", "/camions/"+idCamion)
+    showAlert("Camion modifié!");
+
+    refreshCamion(dataCamion.id_entrepot)
 
 }
 

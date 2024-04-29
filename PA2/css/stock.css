@@ -224,23 +224,27 @@ main{
     justify-content: space-between;
 }
 
-#entrepot_camion, #entrepot_stock{
-    width: 50%;
+#entrepot_camion{
+    width: 60%;
     padding: 1% 1%;
 }
 
+#entrepot_stock{
+    width: 40%;
+    padding: 1% 1%;
+}
 
+.overflowStock{
+    overflow: scroll;
+    max-height: 40vh;
+    width: 100%;
+}
 
 #entrepot_stock{
     border-left: solid;
     border-color: #38A6A7;
 }
 
-#voir_denree{
-    overflow: scroll;
-    max-height: 40vh;
-    width: 100%;
-}
 
 table thead{
     border-bottom: solid;
@@ -272,7 +276,38 @@ td, th, tr {
 }
 
 
+.selectColone{
+    width: 100px;
+}
 
+.select{
+    width: 100%;
+    border: none;
+    background-color: #59CD97;
+    color: white;
+
+    border-radius: 10px;
+}
+
+.inputAdd{
+    padding: 5px;
+    display: flex;
+}
+
+.inputAdd input, .selectAdd{
+    background-color: white;
+    color: #38A6A7;
+
+    border: 2px solid #59CD97;
+    border-radius: 5px;
+    padding: 2px;
+    margin-right: 5px;
+}
+
+#inputAdd4{
+    display: flex;
+    justify-content: space-between;
+}
 
 
 /*------------BUTTON-------------------------*/
@@ -289,7 +324,7 @@ td, th, tr {
     height: 30px;
 }
 
-.buttonAddEtatagere{
+.buttonAddEtagere{
     height: 20px;
 }
 
