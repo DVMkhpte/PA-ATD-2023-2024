@@ -10,7 +10,7 @@ class LoginPage:
         self.root.geometry("400x300")
 
         # Chargement du logo
-        self.logo_image = tk.PhotoImage(file="../img/logo.png")
+        self.logo_image = tk.PhotoImage(file="../PA2/img/logo.png")
         self.logo_image = self.logo_image.subsample(2, 2)
         self.logo_label = tk.Label(root, image=self.logo_image)
         self.logo_label.pack(pady=10)

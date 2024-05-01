@@ -27,7 +27,7 @@ class AdminDashboard:
         # Option pour filtrer les tickets par statut
         self.status_filter_var = tk.StringVar()
         self.status_filter_var.set("Tous les statuts")
-        self.status_filter = ttk.Combobox(self.main_frame, textvariable=self.status_filter_var, values=["Tous les statuts", "En Attente", "En Cours", "Terminé"], state="readonly")
+        self.status_filter = ttk.Combobox(self.main_frame, textvariable=self.status_filter_var, values=["Tous les statuts", "A Traiter", "En Cours", "Terminé"], state="readonly")
         self.status_filter.pack(pady=5)
 
         # Bouton pour filtrer les tickets
@@ -57,7 +57,7 @@ class AdminDashboard:
         if selected_status == "Tous les statuts":
             filtered_tickets = self.ticket_list
         else:
-            filtered_tickets = [ticket for ticket in self.ticket_list if ticket.get("Statut") == selected_status]
+            filtered_tickets = [ticket for ticket in self.ticket_list if ticket.get("Statut", "").lower() == selected_status.lower()]
         self.display_tickets(filtered_tickets)
 
     def display_tickets(self, tickets):
@@ -66,22 +66,29 @@ class AdminDashboard:
             self.results_text.insert(tk.END, f"Client: {ticket.get('Client', '')}, Problème: {ticket.get('Problème', '')}, Statut: {ticket.get('Statut', '')}\n")
 
     def plot_tickets_bar_chart(self):
+    # Initialiser les compteurs de chaque statut à zéro
+        status_counts = {"Terminé": 0}  # Nous n'initialisons que pour "Terminé" car il doit toujours être affiché
+        
         # Compter le nombre de tickets pour chaque statut
-        status_counts = {"En Attente": 0, "En Cours": 0, "Terminé": 0}
         for ticket in self.ticket_list:
             status = ticket.get("Statut")
             if status in status_counts:
-                status_counts[status] += 1
+                status_counts[status] = status_counts.get(status, 0) + 1  # Incrémentation du compteur existant
+            else:
+                # Si le statut n'est pas dans la liste des statuts connus, ajoutez-le avec un compteur de 1
+                status_counts[status] = 1
 
         # Créer le graphique en barre
         fig, ax = plt.subplots()
-        ax.bar(status_counts.keys(), status_counts.values(), color=['green', 'blue', 'orange'])
+        ax.bar(status_counts.keys(), status_counts.values(), color=['green', 'orange', 'red'])
         ax.set_xlabel('Statut')
         ax.set_ylabel('Nombre de Tickets')
         ax.set_title('Tickets par Statut')
 
         # Retourner le graphique pour pouvoir l'ajouter à la grille
         return FigureCanvasTkAgg(fig, master=self.graph_frame)
+
+
 
     def plot_tickets_priority_chart(self):
         # Compter le nombre de tickets pour chaque priorité

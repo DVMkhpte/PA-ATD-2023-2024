@@ -12,7 +12,7 @@ class TicketingApp:
         self.main_color = "#005bac"
         self.text_color = "#333333"
 
-        self.logo_image = tk.PhotoImage(file="../img/logo.png")
+        self.logo_image = tk.PhotoImage(file="../PA2/img/logo.png")
         self.logo_image = self.logo_image.subsample(2, 2)
 
         self.main_frame = tk.Frame(self.root, bg=self.bg_color)
@@ -66,7 +66,7 @@ class TicketingApp:
         submit_button.grid(row=3, columnspan=2, pady=10)
 
         # Bouton de déconnexion
-        self.logout_button = tk.Button(self.create_ticket_frame, text="Déconnexion", command=self.logout)
+        self.logout_button = tk.Button(self.create_ticket_frame, text="Déconnexion", command=self.logout, bg="#f44336", fg="white")
         self.logout_button.grid(row=4, columnspan=2, pady=10)
 
     def setup_history_tab(self):
