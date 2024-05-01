@@ -309,7 +309,6 @@ td, th, tr {
     justify-content: space-between;
 }
 
-
 /*------------BUTTON-------------------------*/
 
 .etagere button, .buttonAdd, .buttonAddEtatagere{
@@ -344,9 +343,105 @@ td, th, tr {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.etagere button:hover, .buttonSupp:hover, .buttonAdd:hover, .updateButton:hover{
+.etagere button:hover, .buttonSupp:hover, .buttonAdd:hover, .updateButton:hover, .validTrajetButton:hover, .addNewTrajet:hover{
     cursor: pointer;
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
+
+
+
+/*------------------Form Trajet-------------------------------*/
+
+.newTrajet{
+    width: 93%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    margin: 5%;
+    padding: 2%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.newFormTrajet{
+    width: 30%;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.newFormTrajet{
+    padding: 1%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+
+    color: #38A6A7;
+}
+
+.allCheckbox{
+    width: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 1%;
+    margin-bottom: 2%;
+}
+
+.checkbox input, .checkbox label{
+    color: #38A6A7;
+}
+
+.validTrajetButton{
+    padding: 2%;
+    background-color: #59CD97;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.selectEntrepot, .inputDate{
+    margin-bottom: 2%;
+    padding: 1%;
+
+    background-color: white;
+    color: #38A6A7;
+    border: 1px solid #38A6A7;
+    border-radius: 5px;
+}
+
+
+
+/*-------------Recap---------------------*/
+#recap{
+    border-left: solid;
+    border-color: #38A6A7;
+    padding: 1%;
+    margin: 2%;
+    width: 60%;
+    color: #38A6A7;
+
+
+}
+
+#pdf{
+    overflow: scroll;
+    max-height: 50vh;
+}
+
+#routes{
+    padding: 1% 5%;
+}
+
+#routes div{
+    padding: 1%;
+}
+
+.addNewTrajet{
+    padding: 1%;
+    background-color: #59CD97;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
 
 
