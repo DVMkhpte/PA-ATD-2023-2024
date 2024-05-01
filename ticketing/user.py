@@ -1,12 +1,14 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import json
+import sqlite3
 
 class TicketingApp:
-    def __init__(self, root, ticket_list):
+    def __init__(self, root):
         self.root = root
-        self.ticket_list = ticket_list
         self.root.title("Application de Ticketing")
+
+        self.conn = sqlite3.connect("ticketing.db")
+        self.c = self.conn.cursor()
 
         self.bg_color = "#f0f0f0"
         self.main_color = "#005bac"
@@ -37,8 +39,9 @@ class TicketingApp:
         self.dashboard_notebook.add(self.history_frame, text="Historique des tickets")
         self.setup_history_tab()
 
-        # Charger les tickets à partir du fichier JSON
-        self.load_tickets()
+        # Établir une connexion à la base de données
+        self.conn = sqlite3.connect("ticketing.db")
+        self.c = self.conn.cursor()
 
     def setup_create_ticket_tab(self):
         # Cadre pour créer un ticket
@@ -90,7 +93,11 @@ class TicketingApp:
             messagebox.showerror("Erreur", "Veuillez remplir tous les champs.")
             return
 
-        self.ticket_list.append({"Client": client_name, "Problème": problem_description, "Priorité": priority, "Statut": "Non défini"})
+        # Execute SQL query to insert ticket data into the database
+        self.c.execute("INSERT INTO tickets (client, problem, priority, status) VALUES (?, ?, ?, ?)",
+                       (client_name, problem_description, priority, "Non défini"))
+        self.conn.commit()  # Commit changes to the database
+
         messagebox.showinfo("Confirmation", "Ticket soumis avec succès.")
 
         # Effacer les entrées après soumission
@@ -100,31 +107,25 @@ class TicketingApp:
 
         # Mettre à jour l'historique après soumission du ticket
         self.update_history()
-        self.save_tickets()
-    
-    def save_tickets(self):
-        with open("tickets.json", "w") as file:
-            json.dump(self.ticket_list, file)
 
-    def load_tickets(self):
-        try:
-            with open("tickets.json", "r") as file:
-                self.ticket_list = json.load(file)
-        except FileNotFoundError:
-            # Créer un nouveau fichier s'il n'existe pas
-            self.ticket_list = []
+    def __del__(self):
+        self.conn.close()
 
     def update_history(self):
         # Effacer le contenu actuel de l'historique
         self.history_text.delete("1.0", tk.END)
 
+        # Récupérer les tickets depuis la base de données
+        self.c.execute("SELECT * FROM tickets")
+        tickets = self.c.fetchall()
+
         # Ajouter les tickets existants à l'historique
-        for i, ticket in enumerate(self.ticket_list, start=1):
+        for i, ticket in enumerate(tickets, start=1):
             self.history_text.insert(tk.END, f"Ticket {i}:\n")
-            self.history_text.insert(tk.END, f"Client: {ticket['Client']}\n")
-            self.history_text.insert(tk.END, f"Problème: {ticket['Problème']}\n")
-            self.history_text.insert(tk.END, f"Priorité: {ticket['Priorité']}\n")
-            self.history_text.insert(tk.END, f"Statut: {ticket['Statut']}\n\n")
+            self.history_text.insert(tk.END, f"Client: {ticket[0]}\n")
+            self.history_text.insert(tk.END, f"Problème: {ticket[1]}\n")
+            self.history_text.insert(tk.END, f"Priorité: {ticket[2]}\n")
+            self.history_text.insert(tk.END, f"Statut: {ticket[3]}\n\n")
 
     def logout(self):
         # Fermer la fenêtre principale pour déconnecter l'utilisateur
@@ -132,7 +133,5 @@ class TicketingApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    tickets = []
-    app = TicketingApp(root, tickets)
-    app.load_tickets()  # Charger les tickets à partir du fichier JSON
+    app = TicketingApp(root)
     root.mainloop()

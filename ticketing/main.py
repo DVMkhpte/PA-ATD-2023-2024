@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import messagebox
 from user import TicketingApp
 from admin import AdminTicketingApp
 
@@ -39,22 +38,19 @@ class LoginPage:
     def login_admin(self):
         self.root.destroy()  # Fermer la fenêtre de connexion admin
         root = tk.Tk()
-        tickets = []
         admin_app = AdminTicketingApp(root)
         root.mainloop()
 
     def login_beneficiaire(self):
         self.root.destroy()  # Fermer la fenêtre de connexion beneficiaire
         root = tk.Tk()
-        tickets = []
-        user_app = TicketingApp(root, tickets)
+        user_app = TicketingApp(root)
         root.mainloop()
 
     def login_benevole(self):
         self.root.destroy()  # Fermer la fenêtre de connexion benevole
         root = tk.Tk()
-        tickets = []
-        user_app = TicketingApp(root, tickets)
+        user_app = TicketingApp(root)
         root.mainloop()
 
 if __name__ == "__main__":

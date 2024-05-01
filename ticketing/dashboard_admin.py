@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import json
+import sqlite3
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import os
@@ -15,9 +15,15 @@ class AdminDashboard:
 
     def load_tickets(self):
         try:
-            with open("tickets.json", "r") as file:
-                self.ticket_list = json.load(file)
-        except FileNotFoundError:
+            # Connexion à la base de données
+            self.conn = sqlite3.connect("ticketing.db")
+            self.c = self.conn.cursor()
+
+            # Récupérer les tickets depuis la base de données
+            self.c.execute("SELECT * FROM tickets")
+            self.ticket_list = self.c.fetchall()
+        except sqlite3.Error as e:
+            print("Error fetching tickets:", e)
             self.ticket_list = []
 
     def create_widgets(self):
@@ -57,21 +63,21 @@ class AdminDashboard:
         if selected_status == "Tous les statuts":
             filtered_tickets = self.ticket_list
         else:
-            filtered_tickets = [ticket for ticket in self.ticket_list if ticket.get("Statut", "").lower() == selected_status.lower()]
+            filtered_tickets = [ticket for ticket in self.ticket_list if ticket[4].lower() == selected_status.lower()]
         self.display_tickets(filtered_tickets)
 
     def display_tickets(self, tickets):
         self.results_text.delete("1.0", tk.END)
         for ticket in tickets:
-            self.results_text.insert(tk.END, f"Client: {ticket.get('Client', '')}, Problème: {ticket.get('Problème', '')}, Statut: {ticket.get('Statut', '')}\n")
+            self.results_text.insert(tk.END, f"Client: {ticket[1]}, Problème: {ticket[2]}, Statut: {ticket[4]}\n")
 
     def plot_tickets_bar_chart(self):
-    # Initialiser les compteurs de chaque statut à zéro
+        # Initialiser les compteurs de chaque statut à zéro
         status_counts = {"Terminé": 0}  # Nous n'initialisons que pour "Terminé" car il doit toujours être affiché
         
         # Compter le nombre de tickets pour chaque statut
         for ticket in self.ticket_list:
-            status = ticket.get("Statut")
+            status = ticket[4]
             if status in status_counts:
                 status_counts[status] = status_counts.get(status, 0) + 1  # Incrémentation du compteur existant
             else:
@@ -88,13 +94,11 @@ class AdminDashboard:
         # Retourner le graphique pour pouvoir l'ajouter à la grille
         return FigureCanvasTkAgg(fig, master=self.graph_frame)
 
-
-
     def plot_tickets_priority_chart(self):
         # Compter le nombre de tickets pour chaque priorité
         priority_counts = {"Faible": 0, "Normal": 0, "Élevée": 0, "Urgente": 0}
         for ticket in self.ticket_list:
-            priority = ticket.get("Priorité")
+            priority = ticket[3]
             if priority in priority_counts:
                 priority_counts[priority] += 1
 
