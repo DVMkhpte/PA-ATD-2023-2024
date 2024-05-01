@@ -28,6 +28,103 @@ async function newTrajet(origin, arrivee, tabEtapes){
     return tabEtapesTrie
 }
 
+
+
+async function validTrajet(nbEtapes, type){
+    var textAsk = ""
+    var textPdf = document.getElementById("pdf")
+    var getText, link, formData
+
+    var pdfName = 'trajet-'+ type +'.pdf'
+    var opt = {
+        margin:  0.5,
+        filename:     'trajet.pdf',
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(textPdf).save()
+
+
+    var depart = document.getElementById("depart")
+    textAsk += depart.innerText+"   "
+
+    for(i=1; i<nbEtapes; i++){
+        getText = document.getElementById("etape"+i)
+        textAsk += getText.innerText+"   "
+    }
+    getText = document.getElementById("destination")
+    textAsk += getText.innerText+"   "
+
+    var date = document.getElementById("date").value
+
+    if(type === "collecte") {
+        formData = {
+            type: "collecte",
+            demande: textAsk,
+            permis: "0",
+            etat: "valide",
+            date: date
+        };
+        link = "/demande/add"
+
+    }else if(type === "maraude"){
+        var date_fin = new Date(date);
+        date_fin.setDate(date_fin.getDate() + 1);
+        date_fin = date_fin.toISOString().slice(0, 16);
+
+
+        formData = {
+            nom: "Maraude du "+ date,
+            description: textAsk,
+            date_debut: date,
+            date_fin: date_fin,
+            adresse: depart.innerText,
+            ville: "Saint-Quentin",
+            type:"Maraude"
+        };
+        console.log(formData)
+        link = "/evenements/add"
+    }
+
+
+    try {
+        const response = await requestApi(formData, "POST", link);
+        showAlert("Création");
+
+    } catch (error) {
+        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
+    }
+}
+
+
+
+
+async function affichageTrajet(tabEtapesTrie, date, type){
+    var nbEtape = tabEtapesTrie.length
+    var recap =
+        "<div id='pdf'>"+
+        "   <h2 id='titre' > Nouvelle "+ type +" </h2>" +
+        "   <h3 id='feuilleDeRoutes'>Feuille de route</h3>" +
+        "   <div id='routes'>" +
+        "       Pour le : " +
+        "       <div id='date'>"+ date +"</div> "+
+        "       <div id='depart'>Depart : "+ tabEtapesTrie[0] +"</div>"
+    for(i=1; i<nbEtape -1; i++) {
+        recap += "<div id='etape" + i + "'>Etape " + i + " : " + tabEtapesTrie[i] + "</div>"
+    }
+
+    recap +=
+        "       <div id='destination'>Destination : "+ tabEtapesTrie[nbEtape -1] +"</div>"+
+        "   </div>" +
+        "</div>" +
+        "<div class='option trajet'>" +
+        "   <button class='addNewTrajet' onclick='validTrajet("+ (nbEtape - 1) +", \""+ type +"\")'>Valider cette collecte</button>" +
+        "</div>"
+
+    return recap
+}
+
 async function newCollecte(){
     const newForm = document.getElementById("mainStock")
     const dataEntrepot = await requestApiNoBody("GET", "/entrepots/")
@@ -57,7 +154,7 @@ async function newCollecte(){
         "           <option value='" + dataEntrepot[0].adresse + "'>" + dataEntrepot[0].nom + "</option>" +
         "           <option value='" + dataEntrepot[1].adresse + "'>" + dataEntrepot[1].nom + "</option>" +
         "       </select>\n"+
-        "       <input class=\"inputDate\" type=\"datetime-local\" id=\"date\" required>" +
+        "       <input class=\"inputT\" type=\"datetime-local\" id=\"date\" required>" +
         "       <div class='validTrajet'>"+
         "           <button class='validTrajetButton' onclick='validCollect()'>Generer le trajet</button>" +
         "        </div>"+
@@ -69,6 +166,8 @@ async function newCollecte(){
 
     newForm.innerHTML = form
 }
+
+
 async function validCollect(){
     const dataCommercants = await requestApiNoBody("GET", "/commercants/")
 
@@ -87,84 +186,82 @@ async function validCollect(){
 
 
     const addReacap = document.getElementById("recap")
+    addReacap.innerHTML =  await affichageTrajet(tabEtapesTrie, date, "collecte")
+}
 
-    var nbEtape = tabEtapesTrie.length
-    var recap =
-        "<div id='pdf'>"+
-        "   <h2 id='titre' > Nouvelle collecte </h2>" +
-        "   <h3 id='feuilleDeRoutes'>Feuille de route</h3>" +
-        "   <div id='routes'>" +
-        "       Pour le : " +
-        "       <div id='date'>"+ date +"</div> "+
-        "       <div id='depart'>Depart : "+ tabEtapesTrie[0] +"</div>"
-    for(i=1; i<nbEtape -1; i++) {
-        recap += "<div id='etape" + i + "'>Etape " + i + " : " + tabEtapesTrie[i] + "</div>"
+
+
+
+
+async function afficherAdresse(){
+    const input = document.getElementById('nbAdresse');
+    const nbAdresse = input.value;
+
+    const addAdresse = document.getElementById("allAdresse")
+    var allAdresseInput = ""
+    for(i=1; i<=nbAdresse; i++){
+        allAdresseInput += "<input class='inputT' id='addresse"+ i +"' type='text' placeholder='Adresse n"+ i +"'>"
     }
+    addAdresse.innerHTML = allAdresseInput
+}
+async function newMaraude(){
+    const newForm = document.getElementById("mainStock")
+    const dataEntrepot = await requestApiNoBody("GET", "/entrepots/")
 
-    recap +=
-        "       <div id='destination'>Destination : "+ tabEtapesTrie[nbEtape -1] +"</div>"+
+    var form =
+        "<div class='newTrajet'>" +
+        "   <div class='newFormTrajet'>" +
+        "       <select class=\"selectEntrepot\" name=\"status\" id=\"entrepotOrigin\" required>\n" +
+        "           <option selected disabled hidden id=\"entrepot\" >Entrepot Origin</option>\n"+
+        "           <option value='"+ dataEntrepot[0].adresse +"'>"+ dataEntrepot[0].nom +"</option>" +
+        "           <option value='"+ dataEntrepot[1].adresse +"'>"+ dataEntrepot[1].nom +"</option>"+
+        "       </select>\n"+
+        "       <div>Donner un nombres d'etapes :</div>"+
+        "       <input class=\"inputT\" id='nbAdresse' oninput='afficherAdresse()' placeholder=\"Nombres d\'etapes\">" +
+        "       <div id='allAdresse'></div>"+
+
+        "       <select class=\"selectEntrepot\" name=\"status\" id=\"entrepotDestination\" required>\n" +
+        "           <option selected disabled hidden id=\"entrepotDestination\" >Entrepot destination</option>\n" +
+        "           <option value='" + dataEntrepot[0].adresse + "'>" + dataEntrepot[0].nom + "</option>" +
+        "           <option value='" + dataEntrepot[1].adresse + "'>" + dataEntrepot[1].nom + "</option>" +
+        "       </select>\n"+
+        "       <input class=\"inputT\" type=\"datetime-local\" id=\"date\" required>" +
+        "       <div class='validTrajet'>"+
+        "           <button class='validTrajetButton' onclick='validMaraude()'>Generer le trajet</button>" +
+        "        </div>"+
         "   </div>" +
-        "</div>" +
-        "<div class='option trajet'>" +
-        "   <button class='addNewTrajet' onclick='validTrajet("+ (nbEtape - 1) +", \"collecte\")'>Valider cette collecte</button>" +
+        "   <div id='recap'>" +
+        "       "+
+        "   </div>" +
         "</div>"
 
-    addReacap.innerHTML = recap
-
-
+    newForm.innerHTML = form
 }
 
-async function newMaraude(){
+async function validMaraude(){
+    const origines = document.getElementById("entrepotOrigin").value
+    console.log(origines)
+    const destination = document.getElementById("entrepotDestination").value
+    console.log(destination)
 
-}
+    const nbEtapes = document.getElementById("nbAdresse").value
+    const date = document.getElementById("date").value
 
-
-
-
-
-async function validTrajet(nbEtapes, type){
-    var textAsk = ""
-    var getText
-    var textPdf = document.getElementById("pdf")
-
-    var pdfName = 'trajet-'+ type +'.pdf'
-    var opt = {
-        margin:  0.5,
-        filename:     'trajet.pdf',
-        image:        { type: 'jpeg', quality: 1 },
-        html2canvas:  { scale: 2 },
-        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(textPdf).save()
-
-
-    getText = document.getElementById("depart")
-    textAsk += getText.innerText+"  "
-
-    for(i=1; i<nbEtapes; i++){
-        getText = document.getElementById("etape"+i)
-        textAsk += getText.innerText+"  "
+    var etapes = []
+    for(i=1; i<=nbEtapes; i++){
+        let addresse = document.getElementById("addresse"+ i ).value
+        etapes.push(addresse)
     }
-    getText = document.getElementById("destination")
-    textAsk += getText.innerText+"  "
 
-    var date = document.getElementById("date").value
+    console.log(origines, destination, etapes)
 
-    const formData = {
-        type: "collecte",
-        demande: textAsk,
-        permis: "0",
-        etat : "valide",
-        date: date
-    };
-    console.log(formData)
-    try {
-        const response = await requestApi(formData, "POST", "/demande/add");
-        showAlert("Création de la demande !");
+    var tabEtapesTrie = await newTrajet(origines, destination, etapes)
 
-    } catch (error) {
-        showAlert('Erreur lors de la requête à l\'API : ' + error.message);
-    }
+
+    const addReacap = document.getElementById("recap")
+    addReacap.innerHTML =  await affichageTrajet(tabEtapesTrie, date, "maraude")
 }
+
+
 
 

@@ -398,7 +398,7 @@ td, th, tr {
     border-radius: 5px;
 }
 
-.selectEntrepot, .inputDate{
+.selectEntrepot, .inputT{
     margin-bottom: 2%;
     padding: 1%;
 
@@ -406,6 +406,10 @@ td, th, tr {
     color: #38A6A7;
     border: 1px solid #38A6A7;
     border-radius: 5px;
+}
+
+#allAdresse{
+    padding: 1% 5%;
 }
 
 
@@ -423,6 +427,11 @@ td, th, tr {
 }
 
 #pdf{
+    overflow: scroll;
+    max-height: 50vh;
+}
+
+.newFormTrajet{
     overflow: scroll;
     max-height: 50vh;
 }
