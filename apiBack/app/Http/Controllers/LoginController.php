@@ -23,7 +23,7 @@ class LoginController extends Controller
                 $token = $user->createToken('admin-access-token')->plainTextToken;
 
                 Log::channel('admin_activity')->info("Admin with email {$user->email} logged in successfully");
-                return response()->json(['token' => $token,'role' => $user->role], 200);
+                return response()->json(['token' => $token,'role' => $user->role,'id' => $user->id], 200);
             }else{
 
                 $token = $user->createToken('Personal Access Token')->plainTextToken;

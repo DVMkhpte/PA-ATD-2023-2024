@@ -1,6 +1,7 @@
 async function getAllActivityForPlanning() {
     try {
-        const userId = localStorage.getItem('id')
+        const user = localStorage.getItem('id')
+        console.log(userId)
 
         const participationsE = await requestApiNoBody("GET", `/user/${userId}/evenement`);
         const participationsF = await requestApiNoBody("GET", `/user/${userId}/formation`);

@@ -77,25 +77,5 @@ function showAlert(message) {
     }, 3000);
 }
 
-async function GetAllActivityForPlanning(){
-    try {
 
-        const userId = localStorage.getItem("3")
-        localStorage.setItem('token',"MAo0cn7dXINoeeQ2kELdukJSX0XLqFAX3keHkpvl")
-
-        const participationsE = await requestApiNoBody('GET', `/user/${userId}/participationsE`);
-        const participationsF = await requestApiNoBody('GET', `/user/${userId}/participationsF`);
-        const participationsA = await requestApiNoBody('GET', `/user/${userId}/participationsA`);
-
-
-        return {
-            participationsE,
-            participationsF,
-            participationsA
-        };
-    } catch (error) {
-        console.error('Erreur lors de la récupération des participations de l\'utilisateur :', error);
-        throw error;
-    }
-}
 
