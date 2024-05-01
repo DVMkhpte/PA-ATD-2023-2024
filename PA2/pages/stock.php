@@ -46,6 +46,41 @@
     </div>
 </main>
 </body>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6CUzOUwOwUUoHYp7s5ZFpow70ao6eC_0=places"></script>
+    <script>
+    // Initialisation du service de la matrice de distances
+    var distanceMatrixService = new google.maps.DistanceMatrixService();
+
+    // Définir les adresses de départ et d'arrivée
+    var origin = '5 Rue Jules Ferry, 91330 Yerres';
+    var destination = 'Parc Astérix, 60128 Plailly';
+
+    // Paramètres de la requête
+    var request = {
+        origins: [origin],
+        destinations: [destination],
+        travelMode: 'DRIVING', // Mode de transport (DRIVING, WALKING, BICYCLING, TRANSIT)
+        unitSystem: google.maps.UnitSystem.METRIC, // Unité de mesure (METRIC, IMPERIAL)
+        avoidHighways: false, // Éviter les autoroutes
+        avoidTolls: false // Éviter les péages
+    };
+
+    // Envoi de la requête au service de la matrice de distances
+    distanceMatrixService.getDistanceMatrix(request, function(response, status) {
+        if (status == 'OK') {
+            // Récupérer la distance et la durée
+            var distance = response.rows[0].elements[0].distance.text;
+            var duration = response.rows[0].elements[0].duration.text;
+
+            // Afficher les résultats
+            console.log('Distance:', distance);
+            console.log('Durée:', duration);
+        } else {
+            console.log('Erreur:', status);
+        }
+    });
+</script>
 <script src="../javaScript/function_api.js"></script>
 <script src="../javaScript/stock.js"></script>
 </html>
