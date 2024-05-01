@@ -49,10 +49,10 @@ class DemandeController extends Controller
 
         try {
             $data = $request->validate([
-                'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
+                'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,collecte,autre',
                 'demande' => 'required|string',
                 'permis' => 'string',
-                'etat' => 'string|in:en attente,en cours, fait, annuler, a valider, valide',
+                'etat' => 'string|in:en attente,en cours,fait,annuler,a valider,valide',
                 'date' => 'required|date'
             ]);
 
@@ -94,7 +94,7 @@ class DemandeController extends Controller
             $demande = Demandes::findOrFail($id);
 
             $data = $request->validate([
-                'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,autre',
+                'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,collecte,autre',
                 'demande' => 'required|string',
                 'permis' => 'string',
                 'etat' => 'string|in:en attente,en cours,fait,annuler,a valider,valide',
