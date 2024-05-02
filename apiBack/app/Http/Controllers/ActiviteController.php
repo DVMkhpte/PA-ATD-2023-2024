@@ -74,7 +74,7 @@ class ActiviteController extends Controller
 
         $supervisor = User::findOrFail($data['superviser_par']);
 
-        if (!$supervisor->hasRole('bénévole')) {
+        if (!$supervisor->hasRole('benevole')) {
             return response()->json(['message' => 'The supervisor is not a volunteer'], 400);
         }
 
