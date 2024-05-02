@@ -65,15 +65,9 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::get('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'show']);
     Route::delete('/participea/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
-    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
-    Route::get('/missions/{id}',[App\Http\Controllers\MissionsController::class,'show']);
-    Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
     Route::delete('/missions/{id}',[App\Http\Controllers\MissionsController::class,'destroy']);
 
     Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'destroy']);
-    Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
-    Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
-    Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
     Route::post('/camions/add',[\App\Http\Controllers\CamionsController::class,'store'] );
     Route::get('/camions',[\App\Http\Controllers\CamionsController::class,'index']);
@@ -120,6 +114,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
     Route::get('/my-demande', [\App\Http\Controllers\DemandeController::class, 'getUserDemandes']);
+    Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
+    Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
+    Route::patch('/demande/{id}',[\App\Http\Controllers\DemandeController::class,'update']);
 
     Route::get('/activitees',[\App\Http\Controllers\ActiviteController::class,'index']);
     Route::get('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'show']);
@@ -143,6 +140,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{userId}/formation',[App\Http\Controllers\FormationController::class, 'getUserFormation']);
     Route::get('/user/{userId}/evenement',[App\Http\Controllers\EvenementController::class, 'getUserEvenement']);
     Route::get('/user/{userId}/activite',[App\Http\Controllers\ActiviteController::class, 'getUserActivity']);
+
+    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
+    Route::get('/missions/{id}',[App\Http\Controllers\MissionsController::class,'show']);
+    Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
