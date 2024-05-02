@@ -1,12 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 import sqlite3
+import os
 import subprocess
 
 class AdminTicketingApp:
     def __init__(self, root):
         self.root = root
-        self.ticket_list = []  # Ajout de l'initialisation de ticket_list
+        self.ticket_list = []  
         self.root.title("Panneau d'administration - Gestion des tickets")
         self.main_frame = tk.Frame(self.root, bg="#f0f0f0")
         self.main_frame.pack(padx=20, pady=20)
@@ -19,9 +20,8 @@ class AdminTicketingApp:
         self.results_listbox = tk.Listbox(self.main_frame, bg="white", fg="#333333", width=150)
         self.results_listbox.pack(pady=15, fill="both", expand=True)
 
-
         self.status_var = tk.StringVar()
-        self.status_var.set("En cours")  # Statut par défaut
+        self.status_var.set("En cours")  
         self.status_label = tk.Label(self.main_frame, text="Statut:", bg="#f0f0f0")
         self.status_label.pack(pady=5)
         self.status_dropdown = ttk.Combobox(self.main_frame, textvariable=self.status_var, values=["En cours", "A traiter", "Terminé"], state="readonly")
@@ -30,8 +30,12 @@ class AdminTicketingApp:
         self.update_status_button = tk.Button(self.main_frame, text="Mettre à jour le statut", command=self.update_status, bg="#4CAF50", fg="white")
         self.update_status_button.pack(pady=5)
 
-        self.load_tickets()  # Charger les tickets depuis la base de données
+        self.load_tickets()  
         self.populate_tickets_listbox()
+
+        # Bouton de chat
+        self.chat_button = tk.Button(self.main_frame, text="Ouvrir un Chat", command=self.run_chat, bg="#225B7C", fg="white")
+        self.chat_button.pack(pady=10)
 
         # Bouton pour afficher les tickets
         self.show_tickets_button = tk.Button(self.main_frame, text="Afficher les tickets", command=self.show_tickets, bg="#225B7C", fg="white")
@@ -47,15 +51,14 @@ class AdminTicketingApp:
 
     def load_tickets(self):
         try:
-            # Execute SQL query to fetch tickets from the database
             self.c.execute("SELECT * FROM tickets")
-            self.ticket_list = self.c.fetchall()  # Fetch all tickets from the database
+            self.ticket_list = self.c.fetchall()  
         except sqlite3.Error as e:
             print("Error fetching tickets:", e)
             self.ticket_list = []
         
     def populate_tickets_listbox(self):
-        self.results_listbox.delete(0, tk.END)  # Supprimer tous les éléments actuels de la Listbox
+        self.results_listbox.delete(0, tk.END)  
         for ticket in self.ticket_list:
             ticket_info = f"Client: {ticket[1]}, Problème: {ticket[2]}, Priorité: {ticket[3]}, Statut: {ticket[4]}"
             self.results_listbox.insert(tk.END, ticket_info)
@@ -66,11 +69,9 @@ class AdminTicketingApp:
             selected_index = selected_index[0]
             if 0 <= selected_index < len(self.ticket_list):
                 new_status = self.status_var.get()
-                ticket_id = self.ticket_list[selected_index][0]  # ID du ticket dans la première colonne
-                # Exécuter une mise à jour dans la base de données
+                ticket_id = self.ticket_list[selected_index][0]  
                 self.c.execute("UPDATE tickets SET status = ? WHERE id = ?", (new_status, ticket_id))
-                self.conn.commit()  # Valider la mise à jour dans la base de données
-                # Recharger les tickets depuis la base de données et mettre à jour l'affichage
+                self.conn.commit()  
                 self.load_tickets()
                 self.populate_tickets_listbox()
             else:
@@ -79,7 +80,6 @@ class AdminTicketingApp:
             self.results_listbox.insert(tk.END, "Aucun ticket sélectionné. Veuillez sélectionner un ticket dans la liste.\n")
 
     def show_tickets(self):
-        # Afficher les tickets dans la console pour le moment
         for ticket in self.ticket_list:
             print(ticket)
 
@@ -88,6 +88,9 @@ class AdminTicketingApp:
 
     def run_test(self):
         subprocess.Popen(["python", "dashboard_admin.py"])
+
+    def run_chat(self):
+        subprocess.Popen(["python", "chatbot/chat_admin.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

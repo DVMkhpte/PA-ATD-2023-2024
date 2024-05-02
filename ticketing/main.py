@@ -6,7 +6,7 @@ class LoginPage:
     def __init__(self, root):
         self.root = root
         self.root.title("Page de connexion - App Ticketing Au Temps Donné")
-        self.root.geometry("400x300")
+        self.root.geometry("600x500")
 
         # Chargement du logo
         self.logo_image = tk.PhotoImage(file="../PA2/img/logo.png")

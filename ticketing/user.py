@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
 import sqlite3
+import os
+import subprocess
 
 class TicketingApp:
     def __init__(self, root):
@@ -39,12 +41,14 @@ class TicketingApp:
         self.dashboard_notebook.add(self.history_frame, text="Historique des tickets")
         self.setup_history_tab()
 
+        
+
         # Établir une connexion à la base de données
         self.conn = sqlite3.connect("ticketing.db")
         self.c = self.conn.cursor()
 
     def setup_create_ticket_tab(self):
-        # Cadre pour créer un ticket
+    # Cadre pour créer un ticket
         self.create_ticket_frame.grid_rowconfigure(0, weight=1)
         self.create_ticket_frame.grid_columnconfigure(0, weight=1)
 
@@ -64,22 +68,31 @@ class TicketingApp:
         self.priority_menu = ttk.Combobox(self.create_ticket_frame, textvariable=self.priority_var, values=["Faible", "Normal", "Élevée", "Urgente"], state="readonly")
         self.priority_menu.grid(row=2, column=1, padx=10, pady=5)
 
+        # Bouton de chat
+        self.chat_button = tk.Button(self.create_ticket_frame, text="Ouvrir un Chat", command=self.run_chat, bg=self.main_color, fg="white")
+        self.chat_button.grid(row=3, columnspan=2, pady=10)
+
         # Bouton pour soumettre le ticket
         submit_button = tk.Button(self.create_ticket_frame, text="Soumettre", command=self.submit_ticket, bg=self.main_color, fg="white", activebackground=self.main_color, activeforeground="white")
-        submit_button.grid(row=3, columnspan=2, pady=10)
+        submit_button.grid(row=4, columnspan=2, pady=10)
 
         # Bouton de déconnexion
         self.logout_button = tk.Button(self.create_ticket_frame, text="Déconnexion", command=self.logout, bg="#f44336", fg="white")
-        self.logout_button.grid(row=4, columnspan=2, pady=10)
+        self.logout_button.grid(row=5, columnspan=2, pady=10)
+
 
     def setup_history_tab(self):
         # Cadre pour afficher l'historique des tickets
         self.history_frame.grid_rowconfigure(0, weight=1)
         self.history_frame.grid_columnconfigure(0, weight=1)
 
-        # Zone de texte pour afficher l'historique des tickets
+            # Zone de texte pour afficher l'historique des tickets
         self.history_text = tk.Text(self.history_frame, bg="white", fg=self.text_color, wrap="word")
         self.history_text.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        # Désactiver la saisie directe dans la zone de texte
+        self.history_text.bind("<KeyPress>", lambda e: "break")
+
 
         # Afficher les tickets existants dans l'historique
         self.update_history()
@@ -130,6 +143,9 @@ class TicketingApp:
     def logout(self):
         # Fermer la fenêtre principale pour déconnecter l'utilisateur
         self.root.destroy()
+
+    def run_chat(self):
+        subprocess.Popen(["python", "chatbot/chat_user.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

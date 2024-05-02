@@ -41,7 +41,7 @@ class AdminDashboard:
         self.filter_button.pack(pady=5)
 
         # Zone de texte pour afficher les tickets filtrés
-        self.results_text = tk.Text(self.main_frame, bg="white", fg="#333333", wrap="word")
+        self.results_text = tk.Text(self.main_frame, bg="white", fg="#333333", wrap="word", state="disabled")
         self.results_text.pack(pady=10, fill="both", expand=True)
 
         # Créer une frame pour les graphiques
@@ -67,9 +67,11 @@ class AdminDashboard:
         self.display_tickets(filtered_tickets)
 
     def display_tickets(self, tickets):
+        self.results_text.config(state="normal")  # Permettre la modification temporairement
         self.results_text.delete("1.0", tk.END)
         for ticket in tickets:
             self.results_text.insert(tk.END, f"Client: {ticket[1]}, Problème: {ticket[2]}, Statut: {ticket[4]}\n")
+        self.results_text.config(state="disabled")
 
     def plot_tickets_bar_chart(self):
         # Initialiser les compteurs de chaque statut à zéro
