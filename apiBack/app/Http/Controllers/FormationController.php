@@ -67,13 +67,15 @@ class FormationController extends Controller
             'date_fin' => 'required|date|after_or_equal:date_debut',
             'adresse' => 'required|string',
             'nb_place' => 'required|integer',
-            'supervise_par' => 'integer',
+            'supervise_par' => '',
         ]);
 
-        $supervisor = User::findOrFail($data['supervise_par']);
 
-        if (!$supervisor->hasRole('benevole')) {
-            return response()->json(['message' => 'The supervisor is not a volunteer'], 400);
+        if (isset($data['supervise_par'])) {
+            $supervisor = User::findOrFail($data['supervise_par']);
+            if (!$supervisor->hasRole('benevole')) {
+                return response()->json(['message' => 'The supervisor is not a volunteer'], 400);
+            }
         }
 
         $formation = Formation::create($data);
@@ -101,6 +103,12 @@ class FormationController extends Controller
             'nb_place' => 'required|integer',
             'supervise_par' => 'integer',
         ]);
+
+        $supervisor = User::findOrFail($data['supervise_par']);
+
+        if (!$supervisor->hasRole('benevole')) {
+            return response()->json(['message' => 'The supervisor is not a volunteer'], 400);
+        }
 
         $formation->update($data);
 
