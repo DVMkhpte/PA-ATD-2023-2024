@@ -62,13 +62,13 @@
         var data = await requestApiNoBody("GET", "/users/")
         var addOption = document.getElementById("user")
         var allUseursName =
-            "<option selected disabled hidden value='0' >Superviser par</option>"
-            //"<option value=\"Null\">à definir</option>"
+            "<option id='user' selected disabled hidden value='0' >Superviser par</option>"+
+            "<option id='user' value='0' >à definir</option>"
         var userName = ""
 
         for (i = 0; i < data.length; i++) {
             if(data[i].role === "benevole") {
-                userName = "<option value=\"" + data[i].id + "\">" + data[i].nom + "</option>";
+                userName = "<option id='user' value=\"" + data[i].id + "\">" + data[i].name + "</option>";
                 allUseursName = allUseursName.concat(userName);
             }
         }
@@ -89,14 +89,14 @@
 
         const formData = {
             nom: nom,
-            adresse: adresse,
             description: description,
             date_debut: date_debut,
             date_fin: date_fin,
+            adresse: adresse,
             nb_place: nb_place,
             supervise_par: idUser
         };
-
+        console.log(formData)
         try {
             const response = await requestApi(formData, "POST", "/formations/add");
             showAlert("Création de la formation réussie !");

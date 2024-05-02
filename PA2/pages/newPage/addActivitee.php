@@ -68,7 +68,7 @@
 
         for (i = 0; i < data.length; i++) {
             if(data[i].role === "benevole") {
-                usersName = "<option value=\"" + data[i].id + "\">" + data[i].nom + "</option>";
+                usersName = "<option value=\"" + data[i].id + "\">" + data[i].name + "</option>";
                 allUseursName = allUseursName.concat(usersName);
             }
         }
