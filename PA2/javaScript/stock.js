@@ -123,6 +123,7 @@ async function affichageDenree(idEntrepot){
     var info =
         "   <div  class=\"entrepot_titre\">"+
         "       <h3>Stock</h3>\n" +
+        "       <button class='buttonAdd' onclick='addEtageres("+ idEntrepot +")'>Ajouter Etagere</button>" +
         "   </div>"+
         "   <div class='overflowStock' id='voir_denree'>"+
         "       <table>\n" +
@@ -435,7 +436,89 @@ async function validModif(idCamion){
 
 }
 
-async function addProduit(idEtagere){
 
+async function addEtageres(idEntrepot){
+    const addEtageres = document.getElementById("entrepot_stock")
+    var info =
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Nouveau Camion</h3>\n" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd1'>" +
+        "       <input id='numero' type='text' placeholder='Numero etageres' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd4'>" +
+        "       <button class='buttonAdd' onclick='confirmNewEtageres("+ idEntrepot +")'>Ajouter</button>" +
+        "       <button class='buttonAdd' onclick='retourEtagere("+ idEntrepot +")'>Retour</button>" +
+        "   </div>"
+
+    addEtageres.innerHTML = info
 }
 
+async function confirmNewEtageres(idEntrepot){
+    const numero = document.getElementById("numero").value
+
+    var formData = {
+        numero: numero,
+        id_entrepot: idEntrepot
+    }
+
+    console.log(formData)
+
+    await requestApi(formData, "POST", "/etageres/add")
+    showAlert("Etageres créé!");
+
+    retourEtagere(idEntrepot)
+}
+
+
+
+
+async function addProduit(idEtagere){
+    var dataEtagere = await requestApiNoBody("GET", "/etageres/"+idEtagere)
+
+    const addProduit = document.getElementById("entrepot_stock")
+    var info =
+        "   <div  class=\"entrepot_titre\">"+
+        "       <h3>Nouveau Camion</h3>\n" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd1'>" +
+        "       <input id='nom' type='text' placeholder='Nom produit' required>" +
+        "       <input id='type'  type='text' placeholder='Type' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd2'>" +
+        "       <input id='date_arrivee' placeholder=\"Date d\'arrive du produit\" type='date' required>" +
+        "       <input id='date_limite' placeholder=\"Date de perenption\" type='date' required>" +
+        "   </div>" +
+        "   <div  class='inputAdd' id='inputAdd4'>" +
+        "       <button class='buttonAdd' onclick='confirmNewDenree("+ idEtagere +", "+ dataEtagere.id_entrepot +")'>Ajouter</button>" +
+        "       <button class='buttonAdd' onclick='retourEtagere("+ dataEtagere.id_entrepot +")'>Retour</button>" +
+        "   </div>" +
+        ""
+
+    addProduit.innerHTML = info
+}
+
+
+async function confirmNewDenree(idEtagere, idEntrepot){
+    const nom = document.getElementById("nom").value
+    const type = document.getElementById("type").value
+    const date_arrivee = document.getElementById("date_arrivee").value
+    const date_limite = document.getElementById("date_limite").value
+
+    var formData = {
+        nom: nom,
+        type: type,
+        date_arrivee: date_arrivee,
+        date_limite: date_limite,
+        id_etagere: idEtagere
+    }
+
+    console.log(formData)
+
+    await requestApi(formData, "POST", "/produits/add")
+    showAlert("Camion créé!");
+
+    retourEtagere(idEntrepot)
+
+
+}
