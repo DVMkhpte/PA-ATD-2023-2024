@@ -101,14 +101,16 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
 Route::middleware(['auth:sanctum', 'check_admin_or_benevole'])->group(function () {
 
-    Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
-    Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+
 
 });
 
 Route::middleware('auth:sanctum')->group(function () {
+
+    Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
+    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
+    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
     Route::post('/user/logout', [\App\Http\Controllers\LogoutController::class, 'store']);
 
