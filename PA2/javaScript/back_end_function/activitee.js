@@ -9,7 +9,7 @@ async function getInfoA(data){
         "               <div class=\"description1_1_activitee\">\n" +
         "                   <div class=\"nom\">" + data.nom + "</div>\n" +
         "               </div>\n" +
-        "               <div class=\"adresse\"> Au  + data.adresse + </div>\n" +
+        "               <div class=\"adresse\"> Au "  + data.adresse + "</div>\n" +
         "                   <div class=\"date\">Du " + data.date_debut + " au " + data.date_fin + "</div>\n" +
         "               </div>\n" +
         "               <div class=\"description2_activitee\">\n" +
@@ -70,8 +70,8 @@ async function modifActivite(id){
         "               </div>\n" +
         "                   <div class=\"adresse\"> Au <input class=\"inputModif\" type=\"text\" id=\"adresse\" value='" + data.adresse + "' placeholder='" + data.adresse + "'> </div>\n" +
         "                   <div class=\"date\"> " +
-        "                               Du <input class=\"inputModif\" type=\"date\" id=\"date_debut\" value='" + data.date_debut + "'> " +
-        "                               au <input class=\"inputModif\" type=\"date\" id=\"date_fin\" value='" + data.date_fin + "'> " +
+        "                               Du <input class=\"inputModif\" type=\"datetime-local\" id=\"date_debut\" value='" + data.date_debut + "'> " +
+        "                               au <input class=\"inputModif\" type=\"datetime-local\" id=\"date_fin\" value='" + data.date_fin + "'> " +
         "                   </div>\n" +
         "               </div>\n" +
         "               <div class=\"description2_activitee\">\n" +

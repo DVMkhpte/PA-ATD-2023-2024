@@ -14,8 +14,8 @@ async function getInfoF(data){
         "           </div>\n" +
         "           <div class=\"description2_activitee\">\n" +
         "               <p>Description: " + data.description + "</p>\n"
-        if(data.supervise_par !== 0) {
-            info = info.concat("<div class=\"superviserPar\">Superviser Par : " + data.supervisor.nom + "</div>\n")
+        if(data.supervise_par !== null) {
+            info = info.concat("<div class=\"superviserPar\">Superviser Par : " + data.supervisor.name + "</div>\n")
         }
         info = info.concat(
         "               <div class=\"nb_plae\">Place restante : " + data.nb_place + "</div>\n" +
@@ -78,8 +78,8 @@ async function modifFormation(id){
     "               </div>\n" +
     "               <div class=\"adresse\"> Au <input class=\"inputModif\" type=\"text\" id=\"adresse\" value='" + data.adresse + "' placeholder='" + data.adresse + "'> </div>\n" +
     "               <div class=\"date\"> " +
-    "                               Du <input class=\"inputModif\" type=\"date\" id=\"date_debut\" value='" + data.date_debut + "'> " +
-    "                               au <input class=\"inputModif\" type=\"date\" id=\"date_fin\" value='" + data.date_fin + "'> " +
+    "                               Du <input class=\"inputModif\" type=\"datetime-local\" id=\"date_debut\" value='" + data.date_debut + "'> " +
+    "                               au <input class=\"inputModif\" type=\"datetime-local\" id=\"date_fin\" value='" + data.date_fin + "'> " +
     "               </div>\n" +
     "           </div>\n" +
     "           <div class=\"description2_activitee\">\n" +
@@ -90,7 +90,7 @@ async function modifFormation(id){
         "       <select class=\"boutton\" name=\"supervisor\" id=\"supervisorId\">\n" +
         "           <option selected disabled hidden id=\"choix\""
     if(data.supervise_par !== 0) {
-       select+= " value='" + data.supervisor.id + "'>" + data.supervisor.nom + "</option>\n"
+       select+= " value='" + data.supervisor.id + "'>" + data.supervisor.name + "</option>\n"
     }else{
         select+= " value='" + data.supervise_par + "'>A definir</option>\n"
     }

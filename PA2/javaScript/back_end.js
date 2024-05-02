@@ -123,7 +123,7 @@ async function  getAllUserNameByRole(role){
     var userNameList = {}
     for(i=0;i<data.length;i++) {
         if (data[i].role === role){
-           userNameList[data[i].id] = data[i].nom
+           userNameList[data[i].id] = data[i].name
         }
     }
     return userNameList

@@ -4,14 +4,11 @@ async function getInfoU(data){
         "   <div class=\"contener_2\">\n" +
         "       <div class=\"descriptions_users\">\n" +
         "           <div class=\"description1_users\">\n" +
-        "               <div class=\"nom\">Nom : " + data.nom + "</div>\n" +
-        "               <div class=\"prenom\">Prénom : " + data.prenom +" </div>\n" +
-        "               <div class=\"statut\">Statut : " + data.statut + "</div>\n" +
+        "               <div class=\"nom\">Nom : " + data.name + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_users\">\n" +
         "               <div class=\"role\">Role : " + data.role + "</div>\n" +
         "               <div class=\"email\">Email : " + data.email + "</div>\n" +
-        "               <div class=\"verified_email\">Email verifié : " + data.email_verified + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description3_users\">\n" +
         "               <div class=\"adresse\">Adresse : " + data.code_postal + ", " + data.ville + ", " + data.adresse + "</div>\n" +
@@ -39,9 +36,6 @@ async function affichageUser(data, role){
         "<div class=\"filtre\"> " +
         "   <div class= \"barre_de_recherche\"> " +
         "       <input type = \"text\" id = \"search-user-input\" oninput=\"searchUser('"+ role +"')\" placeholder = \""+ role +"\" >" +
-        "   </div>" +
-        "   <div class=\"button_filtre\">\n" +
-        "       <button class=\"button_new\" onclick='add(\"addUser.php\")'>Nouveau</button>" +
         "   </div>" +
         "</div>";
 

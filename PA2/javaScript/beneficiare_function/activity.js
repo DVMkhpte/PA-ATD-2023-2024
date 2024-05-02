@@ -183,9 +183,6 @@ async function cancelMyParticipationA(idA){
             idP = dataParticipation[i].id
         }
     }
-
-    console.log(idP)
-
     try {
         await requestApiNoBody("DELETE", "/participea/"+idP);
         showAlert("Participation annulé!");
