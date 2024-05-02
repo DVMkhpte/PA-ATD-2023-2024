@@ -274,7 +274,7 @@ select, input{
 }
 
 
-#all_info {
+#all_info,  #allInfo{
     width: 100%;
     overflow: scroll; 
     max-height: 45vh;

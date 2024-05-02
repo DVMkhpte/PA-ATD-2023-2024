@@ -8,8 +8,11 @@ async function getInfoF(data, action){
         "           </div>\n" +
         "           <div class=\"description_1_2\">\n" +
         "               <div class=\"adresse\">"+ data.adresse +"</div>\n" +
-        "           </div>\n"+
-        "               <div class=\"superviser\">Supervisé par : "+ data.supervisor.name +"</div>\n"+
+        "           </div>\n"
+    if(data.supervise_par !== null) {
+        info += "<div class=\"superviser\">Supervisé par : " + data.supervisor.name + "</div>\n"
+    }
+    info+=
         "       </div>\n" +
         "       <div class=\"description_2\">\n" +
         "           <div class=\"desription\">Desription : "+ data.description +"</div>\n"+

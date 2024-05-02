@@ -9,7 +9,7 @@ async function getInfoForm(data){
         "           <div class=\"description_1_2\">\n" +
         "               <div class=\"adresse\">"+ data.adresse +"</div>\n" +
         "           </div>\n"
-    if(data.supervise_par !== 0){
+    if(data.supervise_par !== null){
         info = info.concat(
             "<div class=\"superviser\">Supervisé par : "+ data.supervisor.nom +"</div>\n"
         )
@@ -27,7 +27,7 @@ async function getInfoForm(data){
         "   <div class=\"option\">\n" +
         "       <button onclick=\"joinFormation("+ data.id +")\" class=\"inscription\" >Ce positionner</button>\n"
     )
-    if(data.supervise_par === 0) {
+    if(data.supervise_par === null) {
         info = info.concat(
             "<button onclick=\"becomeSupervisorF(" + data.id + ")\" class=\"inscription\" >Superviser</button>\n"
         )

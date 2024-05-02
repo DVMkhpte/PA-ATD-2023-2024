@@ -7,7 +7,7 @@ async function getInfoD(data) {
         "               <div class=\"type\">Type : " + data.type + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description_1_3\">" +
-        "                <div class=\"date\">Fait le :" + data.created_at + "</div>\n" +
+        "                <div class=\"date\">Pour le : " + data.date + "</div>\n" +
         "           </div>" +
         "       </div>\n" +
         "       <div class=\"description_2\">\n" +
@@ -16,7 +16,7 @@ async function getInfoD(data) {
         "       </div>\n" +
         "   </div>\n" +
         "   <div class=\"option\">\n" +
-        "       <button onclick=\"acceptMission(" + data.id + ")\" class=\"inscription\" >Je m'en charge</button>\n" +
+        "       <button onclick=\"acceptMissionB(" + data.id + ")\" class=\"inscription\" >Je m'en charge</button>\n" +
         "   </div>\n" +
         "</div>"
 
@@ -43,7 +43,6 @@ async function affichageDemande(data) {
     var allInfo = "<div id=\"all_info\">\n";
     var info = "";
     for(i=0; i<data.length; i++) {
-        console.log(data[i].etat)
         if(data[i].type !== "demande_benevole" && data[i].etat === "valide") {
             info = await getInfoD(data[i])
             allInfo = allInfo.concat(info)
@@ -58,21 +57,28 @@ async function affichageDemande(data) {
 
 
 
-async function acceptMission(idD){
+async function acceptMissionB(idD){
     const data = await requestApiNoBody("GET", "/demande/"+idD);
+    console.log(idD)
 
-    var formDataDemande = {
+    var formDataAcceptDemande = {
         'type': data.type,
         'demande':data.demande,
         'permis': data.permis,
-        "etat": "a valider"
+        "etat": "a valider",
+        "date": data.date
+    }
+    console.log(formDataAcceptDemande)
+
+    var formDataMission= {
+        "id_demande": data.id
     }
 
-    console.log(formDataDemande)
-
     try {
-        const response = await requestApi(formDataDemande, "PATCH", "/demande/"+idD);
+        const responseD = await requestApi(formDataAcceptDemande, "PATCH", "/demande/"+idD);
+        const responseM = await requestApi(formDataMission, "POST", "/missions/add");
         showAlert("Vous avez accepté cette demande avec succé!");
+        affichageBenevole("Demande en attente")
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }

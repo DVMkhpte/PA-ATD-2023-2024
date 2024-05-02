@@ -7,7 +7,7 @@ async function getInfoMyM(data){
         "               <div class=\"type\">Type : " + data.demande.type + "</div>\n" +
         "               <div class=\"fait_par\">De : " + data.realiser_par + "</div>\n" +
         "               <div class=\"pour\">Pour : " + data.user.name + "</div>\n" +
-        "               <div class=\"date\">Pour le :  + data[i].date + </div>\n" +
+        "               <div class=\"date\">Pour le : " + data.demande.date +"</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_demande\">\n" +
         "               <p>" + data.demande.demande + "</p>\n" +
@@ -48,7 +48,7 @@ async function affichageMesMission(data) {
     var allInfo = "<div id='allInfo'>";
     var info = "";
     for (i = 0; i < data.length; i++) {
-        if(data[i].realiser_par === idUser) {
+        if(data[i].realiser_par === idU) {
             info = await getInfoMyM(data[i])
             allInfo = allInfo.concat(info)
         }
