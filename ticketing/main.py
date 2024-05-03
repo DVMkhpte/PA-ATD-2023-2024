@@ -1,23 +1,24 @@
 import tkinter as tk
-from user import TicketingApp
+import re
+from PIL import Image, ImageTk
 from admin import AdminTicketingApp
+from user import TicketingApp
 
 class LoginPage:
     def __init__(self, root):
         self.root = root
-        self.root.title("Page de connexion - App Ticketing Au Temps Donné")
+        self.root.title("Connexion - App Ticketing Au Temps Donné")
         self.root.geometry("600x500")
 
-        # Chargement du logo
-        self.logo_image = tk.PhotoImage(file="../PA2/img/logo.png")
-        self.logo_image = self.logo_image.subsample(2, 2)
-        self.logo_label = tk.Label(root, image=self.logo_image)
-        self.logo_label.pack(pady=10)
+        # Couleurs
+        bg_color = "#f0f0f0"
+        button_color = "#007bff"
+        button_text_color = "white"
 
-        # Styles de boutons
-        self.button_style = {
-            "bg": "#007bff",
-            "fg": "white",
+        # Style pour les boutons
+        button_style = {
+            "bg": button_color,
+            "fg": button_text_color,
             "font": ("Arial", 12),
             "relief": "flat",
             "activebackground": "#0056b3",
@@ -27,31 +28,79 @@ class LoginPage:
             "width": 15
         }
 
-        # Boutons pour différents utilisateurs
-        self.admin_button = tk.Button(root, text="Administrateur", command=self.login_admin, **self.button_style)
-        self.admin_button.pack(pady=5)
-        self.beneficiaire_button = tk.Button(root, text="Bénéficiaire", command=self.login_beneficiaire, **self.button_style)
-        self.beneficiaire_button.pack(pady=5)
-        self.benevole_button = tk.Button(root, text="Bénévole", command=self.login_benevole, **self.button_style)
-        self.benevole_button.pack(pady=5)
+        # Frame principale
+        main_frame = tk.Frame(root, bg=bg_color)
+        main_frame.pack(expand=True, fill=tk.BOTH)
 
-    def login_admin(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion admin
-        root = tk.Tk()
-        admin_app = AdminTicketingApp(root)
-        root.mainloop()
+        # Centrer le cadre verticalement et horizontalement
+        self.root.update_idletasks()
+        window_width = self.root.winfo_width()
+        window_height = self.root.winfo_height()
+        x = (self.root.winfo_screenwidth() // 2) - (window_width // 2)
+        y = (self.root.winfo_screenheight() // 2) - (window_height // 2)
+        self.root.geometry(f"+{x}+{y}")
 
-    def login_beneficiaire(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion beneficiaire
-        root = tk.Tk()
-        user_app = TicketingApp(root)
-        root.mainloop()
+        image_path = "../PA2/img/logo.png"
+        original_image = Image.open(image_path)
+        resized_image = original_image.resize((200, 200))
+        self.logo_image = ImageTk.PhotoImage(resized_image)
+        logo_label = tk.Label(main_frame, image=self.logo_image, bg=bg_color)
+        logo_label.pack(pady=20)
 
-    def login_benevole(self):
-        self.root.destroy()  # Fermer la fenêtre de connexion benevole
-        root = tk.Tk()
-        user_app = TicketingApp(root)
-        root.mainloop()
+        # Labels et champs de saisie pour le login et le mot de passe
+        tk.Label(main_frame, text="Adresse email:", bg=bg_color).pack()
+        self.email_entry = tk.Entry(main_frame, bg="white")
+        self.email_entry.pack(pady=5)
+        tk.Label(main_frame, text="Mot de passe:", bg=bg_color).pack()
+        self.password_entry = tk.Entry(main_frame, show="*", bg="white")
+        self.password_entry.pack(pady=5)
+
+        # Bouton de connexion
+        login_button = tk.Button(main_frame, text="Se connecter", command=self.login, **button_style)
+        login_button.pack(pady=10)
+
+    def login(self):
+        email = self.email_entry.get().strip()
+        password = self.password_entry.get().strip() 
+
+        if not email or not password:
+            tk.messagebox.showerror("Erreur de connexion", "Veuillez remplir tous les champs.")
+            return
+
+        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            tk.messagebox.showerror("Erreur de connexion", "Veuillez saisir une adresse email valide.")
+            return
+
+        if len(password) < 8:
+            tk.messagebox.showerror("Erreur de connexion", "Le mot de passe doit contenir au moins 8 caractères.")
+            return
+
+        login_data = {
+        "email": email,
+        "password": password
+        }
+
+        role_data = {
+            "token": "62|ZJ6BNqHBLbB6NgpTOCalsdu7KDP1p4c2cgZn3E7e",
+            "role": "admin",
+            "id": 3
+        }
+        role = role_data["role"]
+
+        # Redirection en fonction du rôle
+        if role == "admin":
+            self.root.destroy()
+            root = tk.Tk()
+            admin_app = AdminTicketingApp(root)
+            root.mainloop()
+        elif role == "beneficiaire" or role == "benevole":
+            self.root.destroy()
+            root = tk.Tk()
+            admin_app = TicketingApp(root)
+            root.mainloop()
+        else:
+            tk.messagebox.showerror("Erreur de connexion", "Identifiants incorrects")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
