@@ -62,7 +62,7 @@
                 travelMode: 'DRIVING',
                 unitSystem: google.maps.UnitSystem.METRIC,
                 avoidHighways: false,
-                avoidTolls: false
+                avoidTolls: false,
             };
 
             distanceMatrixService.getDistanceMatrix(request, function (response, status) {
