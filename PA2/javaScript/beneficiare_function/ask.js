@@ -27,7 +27,7 @@ async function newAsk(){
         type: type,
         demande: description,
         permis: "0",
-        etat : "En attente",
+        etat : "en attente",
         date: date
     };
     console.log(formData)

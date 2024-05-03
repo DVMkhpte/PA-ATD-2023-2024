@@ -58,27 +58,15 @@ async function affichageDemande(data) {
 
 
 async function acceptMissionB(idD){
-    const data = await requestApiNoBody("GET", "/demande/"+idD);
-    console.log(idD)
-
-    var formDataAcceptDemande = {
-        'type': data.type,
-        'demande':data.demande,
-        'permis': data.permis,
-        "etat": "a valider",
-        "date": data.date
-    }
-    console.log(formDataAcceptDemande)
 
     var formDataMission= {
-        "id_demande": data.id
+        "id_demande": idD
     }
 
     try {
-        const responseD = await requestApi(formDataAcceptDemande, "PATCH", "/demande/"+idD);
         const responseM = await requestApi(formDataMission, "POST", "/missions/add");
         showAlert("Vous avez accepté cette demande avec succé!");
-        affichageBenevole("Demande en attente")
+        affichageBenevole("Mes missions")
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }

@@ -84,8 +84,31 @@ strong{
 
 
 .group-form input[placeholder="Nom"],
+.group-form input[placeholder="Type"],
 .group-form input[placeholder="Prenom"]{
     width: 150px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Adresse"]{
+    width: 200px;
+    height: 40px;
+    border: 1px solid #707070;
+    border-radius: 9999px;
+    padding-left: 15px;
+    outline: none;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+.group-form input[placeholder="Ville"]{
+    width: 100px;
     height: 40px;
     border: 1px solid #707070;
     border-radius: 9999px;

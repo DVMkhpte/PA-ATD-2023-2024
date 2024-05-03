@@ -118,11 +118,11 @@ async function affichageCamion(idEntrepot){
 
 async function affichageDenree(idEntrepot){
     var dataEtagere = await requestApiNoBody("GET", "/etageres/")
-    console.log(dataEtagere)
+    var dataEntrepot = await requestApiNoBody("GET", "/entrepots/"+idEntrepot)
 
     var info =
         "   <div  class=\"entrepot_titre\">"+
-        "       <h3>Stock</h3>\n" +
+        "       <h3>Stock, Nombres d'etageres : "+ dataEntrepot.nb_etageres +"</h3>\n" +
         "       <button class='buttonAdd' onclick='addEtageres("+ idEntrepot +")'>Ajouter Etagere</button>" +
         "   </div>"+
         "   <div class='overflowStock' id='voir_denree'>"+
@@ -154,12 +154,70 @@ async function affichageDenree(idEntrepot){
 
 }
 
+
+async function voirDanreelimite(idE){
+    const voirDenree = document.getElementById("voir_denree")
+    var dataProduit = await requestApiNoBody("GET", "/produits")
+
+    var aujourdHui = new Date();
+    aujourdHui.setDate(aujourdHui.getDate() + 5);
+    var annee = aujourdHui.getFullYear();
+    var mois = ('0' + (aujourdHui.getMonth() + 1)).slice(-2);
+    var jour = ('0' + aujourdHui.getDate()).slice(-2);
+    var dateLimite = annee + "-" + mois + "-" + jour;
+    dateLimite = new Date(dateLimite)
+    console.log(dateLimite)
+
+    var info =
+        "                   <div class='etagere'>" +
+        "                       <div>Produit proche de la limte :</div>" +
+        "                       <button onclick='retourEtagere("+ idE +")'>Retour</button>" +
+        "                   </div>"+
+        "                   <div class='overflowStock'>"+
+        "                   <table>\n" +
+        "                        <thead>\n" +
+        "                            <tr>\n" +
+        "                                <th>Etagere</th>\n" +
+        "                               <th>Produit</th>"+
+        "                                <th>Id</th>\n" +
+        "                                <th>Date limite</th>\n" +
+        "                                <th>Option</th>\n" +
+        "                            </tr>\n" +
+        "                        </thead>\n" +
+        "                        <tbody>\n"
+    for(i=0; i<dataProduit.length; i++) {
+        const dateLimiteProduit = new Date(dataProduit[i].date_limite);
+        if(dateLimiteProduit < dateLimite && dataProduit[i].etagere.id_entrepot === idE) {
+            info +=
+                "                            <tr>\n" +
+                "                                <td>" + dataProduit[i].etagere.numero + "</td>\n" +
+                "                                <td>" + dataProduit[i].nom + "</td>\n" +
+                "                                <td>" + dataProduit[i].id + "</td>\n" +
+                "                                <td>" + dataProduit[i].date_limite + "</td>\n" +
+                "                                <td>" +
+                "                                   <button class='buttonSupp' onclick='supp("+dataProduit[i].id+", \"/produits/\")'>Supp</button>" +
+                "                               </td>\n" +
+                "                            </tr>\n"
+        }
+    }
+    info +=
+        "                        </tbody>\n" +
+        "                    </table>"+
+        "                 </div>"
+    voirDenree.innerHTML = info
+
+}
+
+
 async function entrepotInfo(data){
     var idE = data.id
 
     var info =
         "<div class=\"entrepot\">\n" +
-        "   <h3 class='entrepot_name'>Entrepot de "+ data.nom +"</h3>\n" +
+        "   <div class='optionEntrepot'>"+
+        "       <h3 class='entrepot_name'>Entrepot de "+ data.nom +",  Place restante : "+ data.place_restante +"</h3>\n" +
+        "       <button class='buttonAdd' onclick='voirDanreelimite("+ idE+")'>Voir danrée limite</button>" +
+        "   </div>" +
         "   <div class=\"info_stock\">"+
         "       <div id=\"entrepot_camion\">\n"
 

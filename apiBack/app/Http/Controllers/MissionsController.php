@@ -51,7 +51,7 @@ class MissionsController extends Controller
             $participation = Missions::create($data);
 
             $demande = Demandes::findOrFail($data['id_demande']);
-            $demande->etat = 'En cours';
+            $demande->etat = 'a valider';
             $demande->save();
 
             DB::commit();

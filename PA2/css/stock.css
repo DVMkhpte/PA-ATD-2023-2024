@@ -183,11 +183,19 @@ main{
     color: #38A6A7;
 }
 
-.entrepot_name{
+.optionEntrepot{
     padding: 10px;
     margin: 0;
+    height: 35px;
 
-    height: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    border-bottom: solid;
+    border-width: 1px;
+    border-color: #38A6A7;
 }
 
 .entrepot{
