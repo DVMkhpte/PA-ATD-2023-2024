@@ -1,29 +1,37 @@
 
-async function newTrajet(origin, arrivee, tabEtapes){
+async function newTrajet(origin, arrivee, tabEtapes) {
     var tabEtapesTrie = [origin]
     var depart, distance, distanceMin, adresseMin
 
     var nbEtape = tabEtapes.length
-    for(i=0; i<nbEtape; i++) {
-        distanceMin = await getDistance(tabEtapesTrie[0], tabEtapes[0])
-        distanceMin = parseFloat(distanceMin.match(/[\d,\.]+/)[0].replace(",", "."));
-        adresseMin = tabEtapes[0]
-        depart=tabEtapesTrie[i]
 
-        for (j = 0; j < tabEtapes.length; j++){
-            distance = await getDistance(depart, tabEtapes[j])
-            distance = parseFloat(distance.match(/[\d,\.]+/)[0].replace(",", "."));
+    if (tabEtapes.length > 0) {
 
-            if(distance < distanceMin){
-                distanceMin = distance
-                adresseMin = tabEtapes[j]
+        for (i = 0; i < nbEtape; i++) {
+            distanceMin = await getDistance(tabEtapesTrie[i], tabEtapes[0])
+            distanceMin = parseFloat(distanceMin.match(/[\d,\.]+/)[0].replace(",", "."));
+            adresseMin = tabEtapes[0]
+            depart = tabEtapesTrie[i]
+
+            console.log(distanceMin)
+            for (j = 0; j < tabEtapes.length; j++) {
+                distance = await getDistance(depart, tabEtapes[j])
+                //Pour convertir distance en float
+                distance = parseFloat(distance.match(/[\d,\.]+/)[0].replace(",", "."));
+
+                console.log(depart, i, tabEtapes[j], distance)
+
+                if (distance < distanceMin) {
+                    distanceMin = distance
+                    adresseMin = tabEtapes[j]
+                }
             }
+            tabEtapes = tabEtapes.filter(element => element !== adresseMin);
+            tabEtapesTrie.push(adresseMin)
         }
-        tabEtapes = tabEtapes.filter(element => element !== adresseMin);
-        tabEtapesTrie.push(adresseMin)
     }
-
     tabEtapesTrie.push(arrivee)
+    console.log(tabEtapesTrie)
 
     return tabEtapesTrie
 }
