@@ -13,7 +13,7 @@ class AdminTicketingApp:
         self.main_frame.pack(padx=20, pady=20)
 
         # Connexion à BDD
-        self.conn = sqlite3.connect("ticketing.db")
+        self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/ticketing.db")
         self.c = self.conn.cursor()
 
         # Augmentation de la hauteur de la Listbox
@@ -87,10 +87,10 @@ class AdminTicketingApp:
         self.root.destroy()
 
     def run_test(self):
-        subprocess.Popen(["python", "dashboard_admin.py"])
+        subprocess.Popen(["python", "C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/dashboard_admin.py"])
 
     def run_chat(self):
-        subprocess.Popen(["python", "chatbot/chat_admin.py"])
+        subprocess.Popen(["python", "C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/chatbot/chat_admin.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

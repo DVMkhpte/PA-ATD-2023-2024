@@ -40,7 +40,7 @@ class LoginPage:
         y = (self.root.winfo_screenheight() // 2) - (window_height // 2)
         self.root.geometry(f"+{x}+{y}")
 
-        image_path = "../PA2/img/logo.png"
+        image_path = "C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/PA2/img/logo.png"
         original_image = Image.open(image_path)
         resized_image = original_image.resize((200, 200))
         self.logo_image = ImageTk.PhotoImage(resized_image)
@@ -82,7 +82,7 @@ class LoginPage:
 
         role_data = {
             "token": "62|ZJ6BNqHBLbB6NgpTOCalsdu7KDP1p4c2cgZn3E7e",
-            "role": "admin",
+            "role": "beneficiaire",
             "id": 3
         }
         role = role_data["role"]

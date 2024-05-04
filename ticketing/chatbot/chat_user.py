@@ -10,7 +10,7 @@ class ChatGUI:
         self.root.configure(bg="#f0f0f0")
         
         # Connexion à la base de données
-        self.conn = sqlite3.connect("messages.db")
+        self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/messages.db")
         self.c = self.conn.cursor()
         
         # Cadre principal

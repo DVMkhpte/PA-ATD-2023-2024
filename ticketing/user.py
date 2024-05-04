@@ -9,14 +9,14 @@ class TicketingApp:
         self.root = root
         self.root.title("Application de Ticketing")
 
-        self.conn = sqlite3.connect("ticketing.db")
+        self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/ticketing.db")
         self.c = self.conn.cursor()
 
         self.bg_color = "#f0f0f0"
         self.main_color = "#005bac"
         self.text_color = "#333333"
 
-        self.logo_image = tk.PhotoImage(file="../PA2/img/logo.png")
+        self.logo_image = tk.PhotoImage(file="C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/PA2/img/logo.png")
         self.logo_image = self.logo_image.subsample(2, 2)
 
         self.main_frame = tk.Frame(self.root, bg=self.bg_color)
@@ -44,7 +44,7 @@ class TicketingApp:
         
 
         # Établir une connexion à la base de données
-        self.conn = sqlite3.connect("ticketing.db")
+        self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/ticketing.db")
         self.c = self.conn.cursor()
 
     def setup_create_ticket_tab(self):
@@ -145,7 +145,7 @@ class TicketingApp:
         self.root.destroy()
 
     def run_chat(self):
-        subprocess.Popen(["python", "chatbot/chat_user.py"])
+        subprocess.Popen(["python", "C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/chatbot/chat_user.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

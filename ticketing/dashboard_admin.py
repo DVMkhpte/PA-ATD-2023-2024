@@ -16,7 +16,7 @@ class AdminDashboard:
     def load_tickets(self):
         try:
             # Connexion à la base de données
-            self.conn = sqlite3.connect("ticketing.db")
+            self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/ticketing.db")
             self.c = self.conn.cursor()
 
             # Récupérer les tickets depuis la base de données
@@ -115,7 +115,7 @@ class AdminDashboard:
         return FigureCanvasTkAgg(fig, master=self.graph_frame)
 
     def open_admin_interface(self):
-        os.system("python admin.py")
+        os.system("python C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/admin.py")
 
 if __name__ == "__main__":
     root = tk.Tk()
