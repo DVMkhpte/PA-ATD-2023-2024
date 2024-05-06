@@ -69,6 +69,30 @@ async function affichageBenevole(affichage) {
 }
 
 
+async function deconexion(){
+    var token = localStorage.getItem("token")
+    var logOutForm = {
+        "token": token
+    }
+    console.log(logOutForm)
+    await requestApi(logOutForm, "POST", "/user/logout")
+    window.location.href ="../pages"
+}
+
+
+async function extractionPdf(){
+    var textPdf = document.getElementById("info_profil_general")
+
+    var pdfName = 'myInfo.pdf'
+    var opt = {
+        margin:  10,
+        filename:     pdfName,
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(textPdf).save()
+}
 
 async function updateProfil(){
     window.location.href ="../pages/modif_profil.php"

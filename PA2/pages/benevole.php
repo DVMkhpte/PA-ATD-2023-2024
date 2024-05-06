@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Bénévole</title>
     <link rel="stylesheet" href="../CSS/benevole.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 <?php  include("../includes/header.php") ?>
@@ -51,7 +52,11 @@
         </div>
 
         <div class="nav_profil">
-            <button class="modif" onclick="updateProfil()">Modifier</button>
+            <div class="profil_option">
+                <button class="modif" onclick="updateProfil()">Modifier</button>
+                <button class="deco" onclick="deconexion()">Deconnexion</button>
+                <button class="extract" onclick="extractionPdf()">Extraction profil</button>
+            </div>
             <button class="voir" onclick="affichageBenevole('Mes evenement')">Mes evenement</button>
             <button class="voir" onclick="affichageBenevole('Mes missions')">Mes missions</button>
             <button class="voir" onclick="affichageBenevole('Mes Formations')">Mes Formations</button>
