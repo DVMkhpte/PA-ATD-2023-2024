@@ -27,9 +27,16 @@ class MainActivity : AppCompatActivity() {
             var mdp=findViewById<EditText>(R.id.mdp)
             var mdpString=mdp.text.toString()
 
+            /*
             val formData = JSONObject().apply {
                 put("email", emailString)
                 put("password", mdpString)
+            }
+            */
+
+            val formData = JSONObject().apply {
+                put("email", "cocodoudo@gmail.com")
+                put("password", "Enzo1110&")
             }
 
             val queue = Volley.newRequestQueue(applicationContext)
