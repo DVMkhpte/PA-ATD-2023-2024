@@ -34,13 +34,18 @@ class ActivityPlanning : AppCompatActivity() {
         //--Resuperation des infoLogin---------------------
         var infoLogin = getSharedPreferences("save", MODE_PRIVATE)
         var token  = infoLogin.getString("token", "")
+        if (token != null) {
+            token = token.substringAfter("|")
+        }
         var id  = infoLogin.getString("id", "")
 
 
 
         //--Initialisation des dates--------------------------
         val currentDate = LocalDate.now()
+        val year = currentDate.year
         val month = currentDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
+        val monthInt = currentDate.month.value
         val today = currentDate.dayOfMonth
 
         val calendar = Calendar.getInstance()
@@ -70,12 +75,59 @@ class ActivityPlanning : AppCompatActivity() {
 
 
 
-        val urlEvenement = "http://10.0.2.2:8000/api/user/"+ id +"/evenement"
+        //--setUp de l'affichage---------------------------------------
+        var jour0 = findViewById<TextView>(R.id.jour0)
+        var jour1 = findViewById<TextView>(R.id.jour1)
+        var jour2 = findViewById<TextView>(R.id.jour2)
+        var jour3 = findViewById<TextView>(R.id.jour3)
+        var jour4 = findViewById<TextView>(R.id.jour4)
+        var jour5 = findViewById<TextView>(R.id.jour5)
+        var jour6 = findViewById<TextView>(R.id.jour6)
+
+        var date = "$year-$monthInt-"
+        val selectDate = date.plus(today)
+        requestApiPlanning(id, token, selectDate)
+
+        jour0.setOnClickListener{
+            val selectDate = date.plus(jour0.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour1.setOnClickListener{
+            val selectDate = date.plus(jour1.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour2.setOnClickListener{
+            val selectDate = date.plus(jour2.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour3.setOnClickListener{
+            val selectDate = date.plus(jour3.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour4.setOnClickListener{
+            val selectDate = date.plus(jour4.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour5.setOnClickListener{
+            val selectDate = date.plus(jour5.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+        jour6.setOnClickListener{
+            val selectDate = date.plus(jour6.text.toString())
+            requestApiPlanning(id, token, selectDate)
+        }
+
+
+    }
+
+    private fun requestApiPlanning(idUser: String?, tokenUser: String?, date: String?) {
+        val urlEvenement = "http://10.0.2.2:8000/api/user/"+ idUser +"/evenement"
+        Log.d("selectDate", date.toString())
         Log.d("url", urlEvenement )
-        Log.d("Token", token.toString())
+        Log.d("Token", tokenUser.toString())
 
         val headers = HashMap<String, String>()
-        headers["Authorization"] = "Bearer $token"
+        headers["Authorization"] = "Bearer $tokenUser"
 
         var queue = Volley.newRequestQueue(applicationContext)
         var request = StringRequest(
@@ -89,8 +141,5 @@ class ActivityPlanning : AppCompatActivity() {
             })
 
         queue.add(request)
-
-
-
     }
 }
