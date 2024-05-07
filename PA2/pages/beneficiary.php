@@ -62,15 +62,7 @@
 <?php // include("../includes/footer.php") ?>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    function affichageBeneficiaire() {
-        console.log("1")
-        setTimeout(() => {
-            // Rediriger vers le composant souhaité
-            window.location.href = '../planning/src/components/planning.jsx';
-        }, 5000);
-    }
-</script>
+
 
 
 <script src="../javaScript/function_api.js"></script>
