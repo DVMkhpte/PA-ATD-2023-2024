@@ -42,8 +42,6 @@ class FormationController extends Controller
         try {
             $participations = ParticipeF::with('formation')->where('id_user', $userId)->get();
             $participations->transform(function ($item, $key) {
-                $item->formation->descrip = $item->formation->description;
-                unset($item->formation->description);
                 return $item;
             });
 

@@ -39,8 +39,6 @@ class EvenementController extends Controller
         try {
             $participations = ParticipeE::with('evenement')->where('id_user', $userId)->get();
             $participations->transform(function ($item, $key) {
-                $item->evenement->descrip = $item->evenement->description;
-                unset($item->evenement->description);
                 return $item;
             });
 
