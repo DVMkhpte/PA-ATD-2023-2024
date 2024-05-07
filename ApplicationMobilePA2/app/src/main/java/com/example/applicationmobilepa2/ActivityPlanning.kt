@@ -16,12 +16,22 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
+import androidx.lifecycle.lifecycleScope
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.coroutines.awaitAll
+import org.json.JSONArray
 import org.json.JSONObject
+import kotlin.math.log
+import java.text.SimpleDateFormat
+import java.util.Date
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.*
 
 
 class ActivityPlanning : AppCompatActivity() {
@@ -44,21 +54,25 @@ class ActivityPlanning : AppCompatActivity() {
         //--Initialisation des dates--------------------------
         val currentDate = LocalDate.now()
         val year = currentDate.year
+
         val month = currentDate.month.getDisplayName(TextStyle.FULL, Locale.getDefault())
-        val monthInt = currentDate.month.value
-        val today = currentDate.dayOfMonth
+        val monthIntUnformated = currentDate.month.value
+        val monthInt = "%02d".format(monthIntUnformated)
+
+        val today =currentDate.dayOfMonth
 
         val calendar = Calendar.getInstance()
         val dayWeek = calendar.get(Calendar.DAY_OF_WEEK)
 
         var tabDay = Array(7){1}
-        for(i in 1..<dayWeek){
-            tabDay[i-1]=today-i
+        for(i in 1 until dayWeek){
+            tabDay[(dayWeek-i)-1]=today-i
         }
         var nbBoucle = 7-dayWeek
         for(i in 0..nbBoucle){
             tabDay[(dayWeek-1)+i]=today+i
         }
+
 
 
 
@@ -84,62 +98,85 @@ class ActivityPlanning : AppCompatActivity() {
         var jour5 = findViewById<TextView>(R.id.jour5)
         var jour6 = findViewById<TextView>(R.id.jour6)
 
-        var date = "$year-$monthInt-"
-        val selectDate = date.plus(today)
-        requestApiPlanning(id, token, selectDate)
+        var listActivity = mutableListOf<Planning>()
 
-        jour0.setOnClickListener{
-            val selectDate = date.plus(jour0.text.toString())
-            requestApiPlanning(id, token, selectDate)
+        var date = "$year-$monthInt-"
+        var selectDate = date.plus("%02d".format(today))
+
+        lifecycleScope.launch {
+            listActivity = apiPlanning_E_F(id, token, selectDate, "evenement")
+            listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
+
+            var lv = findViewById<ListView>(R.id.lv_planning)
+            var adap = PlanningAdaptater(applicationContext, listActivity)
+            lv.adapter = adap
         }
-        jour1.setOnClickListener{
-            val selectDate = date.plus(jour1.text.toString())
-            requestApiPlanning(id, token, selectDate)
-        }
-        jour2.setOnClickListener{
-            val selectDate = date.plus(jour2.text.toString())
-            requestApiPlanning(id, token, selectDate)
-        }
-        jour3.setOnClickListener{
-            val selectDate = date.plus(jour3.text.toString())
-            requestApiPlanning(id, token, selectDate)
-        }
-        jour4.setOnClickListener{
-            val selectDate = date.plus(jour4.text.toString())
-            requestApiPlanning(id, token, selectDate)
-        }
-        jour5.setOnClickListener{
-            val selectDate = date.plus(jour5.text.toString())
-            requestApiPlanning(id, token, selectDate)
-        }
-        jour6.setOnClickListener{
-            val selectDate = date.plus(jour6.text.toString())
-            requestApiPlanning(id, token, selectDate)
+
+
+
+        val jours = listOf(jour0, jour1, jour2, jour3, jour4, jour5, jour6)
+        jours.forEachIndexed { index, button ->
+            button.setOnClickListener {
+
+                selectDate = date.plus("%02d".format(button.text.toString().toInt()))
+                lifecycleScope.launch {
+                    listActivity = apiPlanning_E_F(id, token, selectDate, "evenement")
+                    listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
+                    listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
+
+
+
+                    var lv = findViewById<ListView>(R.id.lv_planning)
+                    var adap = PlanningAdaptater(applicationContext, listActivity)
+                    lv.adapter = adap
+                }
+            }
         }
 
 
     }
 
-    private fun requestApiPlanning(idUser: String?, tokenUser: String?, date: String?) {
-        val urlEvenement = "http://10.0.2.2:8000/api/user/"+ idUser +"/evenement"
-        Log.d("selectDate", date.toString())
-        Log.d("url", urlEvenement )
-        Log.d("Token", tokenUser.toString())
+    private suspend fun apiPlanning_E_F(idUser: String?, tokenUser: String?, datePlanning: String, type: String): MutableList<Planning> {
+        return suspendCoroutine { continuation ->
+            val listActivity = mutableListOf<Planning>()
 
-        val headers = HashMap<String, String>()
-        headers["Authorization"] = "Bearer $tokenUser"
+            val queue = Volley.newRequestQueue(applicationContext)
+            val requestEvent = object : StringRequest(
+                Method.GET,
+                "http://10.0.2.2:8000/api/user/$idUser/$type",
+                Response.Listener { resultat ->
+                    val jsonGlobal = JSONArray(resultat)
+                    if (jsonGlobal.length() > 0) {
+                        for (i in 0 until jsonGlobal.length()) {
+                            val br = jsonGlobal.getJSONObject(i)
+                            var dateActivity = br.getString("date_debut")
+                            dateActivity = dateActivity.substringBefore(" ")
 
-        var queue = Volley.newRequestQueue(applicationContext)
-        var request = StringRequest(
-            Request.Method.GET, urlEvenement,
-            Response.Listener { resultat ->
-                Log.d("result", resultat.toString())
-            },
-            Response.ErrorListener { error ->
-                Toast.makeText(applicationContext,"Erreur lors de la recuperation",Toast.LENGTH_SHORT).show()
-                Log.d("error", error.toString())
-            })
-
-        queue.add(request)
+                            if (dateActivity == datePlanning) {
+                                val event = Planning(
+                                    br.getInt("id"),
+                                    type,
+                                    br.getString("nom"),
+                                    br.getString("date_debut"),
+                                    br.getString("adresse"),
+                                    br.getString("description")
+                                )
+                                listActivity.add(event)
+                            }
+                        }
+                    }
+                    continuation.resume(listActivity)
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(applicationContext, "Erreur lors de la récupération", Toast.LENGTH_SHORT).show()
+                }) {
+                override fun getHeaders(): MutableMap<String, String> {
+                    val headers = HashMap<String, String>()
+                    headers["Authorization"] = "Bearer $tokenUser"
+                    return headers
+                }
+            }
+            queue.add(requestEvent)
+        }
     }
 }
