@@ -142,6 +142,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{userId}/formation',[App\Http\Controllers\FormationController::class, 'getUserFormation']);
     Route::get('/user/{userId}/evenement',[App\Http\Controllers\EvenementController::class, 'getUserEvenement']);
     Route::get('/user/{userId}/activite',[App\Http\Controllers\ActiviteController::class, 'getUserActivity']);
+    Route::get('/user/{userId}/mission',[App\Http\Controllers\MissionsController::class, 'getUserMission']);
 
     Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
     Route::get('/missions/{id}',[App\Http\Controllers\MissionsController::class,'show']);

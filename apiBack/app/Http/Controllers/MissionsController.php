@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ParticipeF;
 use Illuminate\Http\Request;
 use App\Models\Demandes;
 use App\Models\Missions;
@@ -21,6 +22,8 @@ class MissionsController extends Controller
         return response()->json($participations);
     }
 
+
+
     public function show($id)
     {
         $adminUser = Auth::user();
@@ -33,6 +36,20 @@ class MissionsController extends Controller
 
         Log::channel('admin_activity')->info("Show mission participation by " . $adminUser->name);
         return response()->json($participations);
+    }
+
+    public function getUserMission($userId)
+    {
+        try {
+            $participations = Missions::with('demande')->where('realiser_par', $userId)->get();
+            $mission = $participations->map(function ($participation) {
+                return $participation->mission;
+            });
+
+            return response()->json($participations);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while fetching user participations.', 'error' => $e->getMessage()], 500);
+        }
     }
 
     public function store(Request $request)
