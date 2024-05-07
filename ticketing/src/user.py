@@ -4,6 +4,34 @@ import sqlite3
 import os
 import subprocess
 
+class CustomDialog(tk.Toplevel):
+    def __init__(self, parent, title, message):
+        super().__init__(parent)
+        self.title(title)
+        self.geometry("300x150")
+
+        label = tk.Label(self, text=message)
+        label.pack(pady=10)
+
+        button_frame = tk.Frame(self)
+        button_frame.pack(pady=10)
+
+        modify_button = tk.Button(button_frame, text="Modifier", command=self.modify)
+        modify_button.pack(side=tk.LEFT, padx=10)
+
+        delete_button = tk.Button(button_frame, text="Supprimer", command=self.delete)
+        delete_button.pack(side=tk.RIGHT, padx=10)
+
+        self.result = None
+
+    def modify(self):
+        self.result = "modify"
+        self.destroy()
+
+    def delete(self):
+        self.result = "delete"
+        self.destroy()
+
 class TicketingApp:
     def __init__(self, root):
         self.root = root
@@ -41,14 +69,12 @@ class TicketingApp:
         self.dashboard_notebook.add(self.history_frame, text="Historique des tickets")
         self.setup_history_tab()
 
-        
-
         # Établir une connexion à la base de données
         self.conn = sqlite3.connect("../db/ticketing.db")
         self.c = self.conn.cursor()
 
     def setup_create_ticket_tab(self):
-    # Cadre pour créer un ticket
+        # Cadre pour créer un ticket
         self.create_ticket_frame.grid_rowconfigure(0, weight=1)
         self.create_ticket_frame.grid_columnconfigure(0, weight=1)
 
@@ -80,50 +106,76 @@ class TicketingApp:
         self.logout_button = tk.Button(self.create_ticket_frame, text="Déconnexion", command=self.logout, bg="#f44336", fg="white")
         self.logout_button.grid(row=5, columnspan=2, pady=10)
 
-
     def setup_history_tab(self):
         # Cadre pour afficher l'historique des tickets
         self.history_frame.grid_rowconfigure(0, weight=1)
         self.history_frame.grid_columnconfigure(0, weight=1)
 
-            # Zone de texte pour afficher l'historique des tickets
+        # Zone de texte pour afficher l'historique des tickets
         self.history_text = tk.Text(self.history_frame, bg="white", fg=self.text_color, wrap="word")
         self.history_text.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
+
+        # Scrollbar pour la zone de texte
+        scrollbar = tk.Scrollbar(self.history_frame, orient="vertical", command=self.history_text.yview)
+        scrollbar.grid(row=0, column=1, sticky="ns")
+        self.history_text.config(yscrollcommand=scrollbar.set)
 
         # Désactiver la saisie directe dans la zone de texte
         self.history_text.bind("<KeyPress>", lambda e: "break")
 
-
         # Afficher les tickets existants dans l'historique
         self.update_history()
 
-    def submit_ticket(self):
-        client_name = self.client_name_entry.get().strip()  # Supprimer les espaces vides au début et à la fin
-        problem_description = self.problem_description_entry.get().strip()  # Supprimer les espaces vides au début et à la fin
-        priority = self.priority_var.get()
-
-        if not client_name or not problem_description:
-            messagebox.showerror("Erreur", "Veuillez remplir tous les champs.")
-            return
-
-        # Exécuter la requête SQL pour insérer les données du ticket dans la base de données
-        self.c.execute("INSERT INTO tickets (client, problem, priority, status) VALUES (?, ?, ?, ?)",
-                    (client_name, problem_description, priority, "Non défini"))
-        self.conn.commit()  # Valider les modifications dans la base de données
-
-        messagebox.showinfo("Confirmation", "Ticket soumis avec succès.")
-
-        # Effacer les entrées après soumission
-        self.client_name_entry.delete(0, tk.END)
-        self.problem_description_entry.delete(0, tk.END)
-        self.priority_var.set("Normal")
-
-        # Mettre à jour l'historique après soumission du ticket
-        self.update_history()
+    def handle_ticket_double_click(self, ticket_number):
+        custom_dialog = CustomDialog(self.root, "Action sur le ticket", f"Que voulez-vous faire avec le ticket {ticket_number} ?")
+        self.root.wait_window(custom_dialog)
+        choice = custom_dialog.result
+        if choice == 'modify':
+            self.edit_ticket(ticket_number)
+        elif choice == 'delete':
+            self.delete_ticket(ticket_number)
 
 
-    def __del__(self):
-        self.conn.close()
+    def edit_ticket(self, ticket_number):
+        # Récupérer les détails du ticket depuis la base de données
+        self.c.execute("SELECT * FROM tickets WHERE id=?", (ticket_number,))
+        ticket = self.c.fetchone()
+        if ticket:
+            # Créer une nouvelle fenêtre de dialogue pour la modification du ticket
+            edit_window = tk.Toplevel(self.root)
+            edit_window.title("Modifier le ticket")
+
+            # Entrées pour modifier les détails du ticket
+            tk.Label(edit_window, text="Nom du client:", bg=self.bg_color, fg=self.text_color).grid(row=0, column=0, sticky="w", padx=10, pady=5)
+            new_client_name_entry = tk.Entry(edit_window)
+            new_client_name_entry.insert(0, ticket[1])
+            new_client_name_entry.grid(row=0, column=1, padx=10, pady=5)
+
+            tk.Label(edit_window, text="Description du problème:", bg=self.bg_color, fg=self.text_color).grid(row=1, column=0, sticky="w", padx=10, pady=5)
+            new_problem_description_entry = tk.Entry(edit_window)
+            new_problem_description_entry.insert(0, ticket[2])
+            new_problem_description_entry.grid(row=1, column=1, padx=10, pady=5)
+
+            tk.Label(edit_window, text="Priorité:", bg=self.bg_color, fg=self.text_color).grid(row=2, column=0, sticky="w", padx=10, pady=5)
+            new_priority_var = tk.StringVar(value=ticket[3])
+            new_priority_menu = ttk.Combobox(edit_window, textvariable=new_priority_var, values=["Faible", "Normal", "Élevée", "Urgente"], state="readonly")
+            new_priority_menu.grid(row=2, column=1, padx=10, pady=5)
+
+            # Bouton pour valider la modification du ticket
+            submit_button = tk.Button(edit_window, text="Enregistrer", command=lambda: self.save_edited_ticket(ticket_number, new_client_name_entry.get(), new_problem_description_entry.get(), new_priority_var.get()), bg=self.main_color, fg="white")
+            submit_button.grid(row=3, columnspan=2, pady=10)
+
+    def save_edited_ticket(self, ticket_number, new_client_name, new_problem_description, new_priority):
+        # Mettre à jour le ticket dans la base de données
+        self.c.execute("UPDATE tickets SET client=?, problem=?, priority=? WHERE id=?", (new_client_name, new_problem_description, new_priority, ticket_number))
+        self.conn.commit()  # Commit changes to the database
+        messagebox.showinfo("Confirmation", f"Les modifications pour le ticket {ticket_number} ont été enregistrées avec succès.")
+
+    def delete_ticket(self, ticket_number):
+        # Supprimer le ticket correspondant de la base de données
+        self.c.execute("DELETE FROM tickets WHERE id=?", (ticket_number,))
+        self.conn.commit()  # Commit changes to the database
+        messagebox.showinfo("Confirmation", f"Le ticket {ticket_number} a été supprimé avec succès.")
 
     def update_history(self):
         # Effacer le contenu actuel de l'historique
@@ -134,12 +186,43 @@ class TicketingApp:
         tickets = self.c.fetchall()
 
         # Ajouter les tickets existants à l'historique
-        for i, ticket in enumerate(tickets, start=1):
-            self.history_text.insert(tk.END, f"Ticket {i}:\n")
-            self.history_text.insert(tk.END, f"Client: {ticket[0]}\n")
-            self.history_text.insert(tk.END, f"Problème: {ticket[1]}\n")
-            self.history_text.insert(tk.END, f"Priorité: {ticket[2]}\n")
-            self.history_text.insert(tk.END, f"Statut: {ticket[3]}\n\n")
+        for ticket in tickets:
+            ticket_number = ticket[0]
+            tag_name = f"ticket_{ticket_number}"
+            self.history_text.insert(tk.END, f"Ticket {ticket_number}:\n", tag_name)
+            self.history_text.insert(tk.END, f"Client: {ticket[1]}\n")
+            self.history_text.insert(tk.END, f"Problème: {ticket[2]}\n")
+            self.history_text.insert(tk.END, f"Priorité: {ticket[3]}\n\n")
+            self.history_text.insert(tk.END, f"Statut du ticket: {ticket[4]}\n\n\n")
+            
+            # Ajouter un événement de double clic à chaque ticket
+            self.history_text.tag_configure(tag_name, foreground="blue", underline=1)
+            self.history_text.tag_bind(tag_name, "<Double-1>", lambda event, ticket_number=ticket_number: self.handle_ticket_double_click(ticket_number))
+
+    def submit_ticket(self):
+        client_name = self.client_name_entry.get()
+        problem_description = self.problem_description_entry.get()
+        priority = self.priority_var.get()
+
+        if client_name == '' or problem_description == '':
+            messagebox.showerror("Erreur", "Veuillez remplir tous les champs.")
+            return
+
+        self.c.execute("INSERT INTO tickets (client, problem, priority, status) VALUES (?, ?, ?, ?)",
+                       (client_name, problem_description, priority, "Non défini"))
+        self.conn.commit()
+
+        messagebox.showinfo("Confirmation", "Ticket soumis avec succès.")
+
+        # Effacer les entrées après soumission
+        self.client_name_entry.delete(0, tk.END)
+        self.problem_description_entry.delete(0, tk.END)
+        self.priority_var.set("Normal")
+
+        self.update_history()
+
+    def __del__(self):
+        self.conn.close()
 
     def logout(self):
         # Fermer la fenêtre principale pour déconnecter l'utilisateur

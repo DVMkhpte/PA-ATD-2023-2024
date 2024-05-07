@@ -82,7 +82,7 @@ class LoginPage:
 
         role_data = {
             "token": "62|ZJ6BNqHBLbB6NgpTOCalsdu7KDP1p4c2cgZn3E7e",
-            "role": "admin",
+            "role": "benevole",
             "id": 3
         }
         role = role_data["role"]
