@@ -78,6 +78,10 @@
 <script src="../javaScript/volonteer_function/myEvent.js"></script>
 <script src="../javaScript/volonteer_function/myFormation.js"></script>
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        verifconnection();
+    });
+
     async function loadProfil() {
         const idUser = localStorage.getItem("id")
         var data = await requestApiNoBody("GET", "/users/" + idUser)

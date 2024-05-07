@@ -77,5 +77,12 @@ function showAlert(message) {
     }, 3000);
 }
 
+function verifconnection(){
+    token = localStorage.getItem('token')
+    if(!token){
+        window.location.href ='index.php'
+    }
+}
+
 
 

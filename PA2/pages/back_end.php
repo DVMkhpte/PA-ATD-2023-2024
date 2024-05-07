@@ -87,6 +87,10 @@
 
 <?php  //include("../includes/footer.php") ?>
 <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        verifconnection();
+    });
+
     const toggleSidebar = () => document.body.classList.toggle("open");
 </script>
 <script src="../javaScript/back_end.js" ></script>

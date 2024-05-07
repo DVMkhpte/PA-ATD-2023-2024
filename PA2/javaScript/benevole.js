@@ -76,6 +76,7 @@ async function deconexion(){
     }
     console.log(logOutForm)
     await requestApi(logOutForm, "POST", "/user/logout")
+    localStorage.clear();
     window.location.href ="../pages"
 }
 

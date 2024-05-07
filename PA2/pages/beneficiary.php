@@ -70,6 +70,11 @@
 <script src="../javaScript/beneficiare_function/activity.js"></script>
 <script src="../javaScript/beneficiare_function/ask.js"></script>
 <script>
+
+    document.addEventListener('DOMContentLoaded', function() {
+        verifconnection();
+    });
+
     async function loadProfil() {
         const idUser = localStorage.getItem("id")
         var data = await requestApiNoBody("GET", "/users/" + idUser)
