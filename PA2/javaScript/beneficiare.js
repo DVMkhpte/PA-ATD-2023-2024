@@ -45,7 +45,10 @@ async function affichageBeneficiaire(affichage) {
             strBox = await affichageMesActivitee(data);
             break;
         case "Planning":
-            window.location.href = 'http://localhost:3000/';
+            var token = localStorage.getItem('token');
+            var userId = localStorage.getItem('id');
+            var url = 'http://localhost:3000/?token=' + encodeURIComponent(token) + '&userId=' + encodeURIComponent(userId);
+            window.location.href = url;
             break;
     }
 
