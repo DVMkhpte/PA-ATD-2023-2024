@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(applicationContext)
             val url = "http://10.0.2.2:8000/api/user/login"
+            Log.d("url post", url)
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, formData,
                 {resultat ->
                     val jsonObject = JSONObject(resultat.toString())
