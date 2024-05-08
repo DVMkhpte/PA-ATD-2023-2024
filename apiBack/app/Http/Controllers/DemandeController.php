@@ -51,8 +51,9 @@ class DemandeController extends Controller
             $data = $request->validate([
                 'type' => 'required|string|in:demande_benevole,aide_service_administratif,demande_navette,demande_visite,collecte,autre',
                 'demande' => 'required|string',
-                'permis' => 'string',
+                'permis' => '',
                 'etat' => 'string|in:en attente,en cours,fait,annuler,a valider,valide',
+                'adresse' => '',
                 'date' => 'required|date'
             ]);
 
@@ -98,6 +99,7 @@ class DemandeController extends Controller
                 'demande' => 'required|string',
                 'permis' => 'string',
                 'etat' => 'string|in:en attente,en cours,fait,annuler,a valider,valide',
+                'adresse' => '',
                 'date' => 'required|date',
             ]);
 
