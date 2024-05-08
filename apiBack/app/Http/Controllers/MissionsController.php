@@ -42,11 +42,15 @@ class MissionsController extends Controller
     {
         try {
             $participations = Missions::with('demande')->where('realiser_par', $userId)->get();
-            $mission = $participations->map(function ($participation) {
-                return $participation->mission;
+            $participations->transform(function ($item, $key) {
+                return $item;
             });
 
-            return response()->json($participations);
+            $mission = $participations->map(function ($participation) {
+                return $participation->demande;
+            });
+
+            return response()->json($mission);
         } catch (\Exception $e) {
             return response()->json(['message' => 'An error occurred while fetching user participations.', 'error' => $e->getMessage()], 500);
         }
