@@ -14,6 +14,7 @@ import java.util.Locale
 import java.util.Calendar
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -104,8 +105,9 @@ class ActivityPlanning : AppCompatActivity() {
         var selectDate = date.plus("%02d".format(today))
 
         lifecycleScope.launch {
-            listActivity = apiPlanning_E_F(id, token, selectDate, "evenement")
-            listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
+            listActivity = requestApiPlanning(id, token, selectDate, "evenement")
+            listActivity += requestApiPlanning(id,token,selectDate, "formation")
+            listActivity += requestApiPlanning(id,token,selectDate, "mission")
 
             var lv = findViewById<ListView>(R.id.lv_planning)
             var adap = PlanningAdaptater(applicationContext, listActivity)
@@ -120,11 +122,9 @@ class ActivityPlanning : AppCompatActivity() {
 
                 selectDate = date.plus("%02d".format(button.text.toString().toInt()))
                 lifecycleScope.launch {
-                    listActivity = apiPlanning_E_F(id, token, selectDate, "evenement")
-                    listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
-                    listActivity += apiPlanning_E_F(id,token,selectDate, "formation")
-
-
+                    listActivity = requestApiPlanning(id, token, selectDate, "evenement")
+                    listActivity += requestApiPlanning(id,token,selectDate, "formation")
+                    listActivity += requestApiPlanning(id,token,selectDate, "mission")
 
                     var lv = findViewById<ListView>(R.id.lv_planning)
                     var adap = PlanningAdaptater(applicationContext, listActivity)
@@ -133,10 +133,33 @@ class ActivityPlanning : AppCompatActivity() {
             }
         }
 
+        var afficheagePlanning = findViewById<ImageView>(R.id.planning)
+        afficheagePlanning.setOnClickListener{
+            val i = Intent(this,ActivityPlanning::class.java)
+            startActivity(i)
+        }
+
+        var afficheageMission = findViewById<ImageView>(R.id.mission)
+        afficheagePlanning.setOnClickListener{
+            val i = Intent(this,ActivityMission::class.java)
+            startActivity(i)
+        }
+
+        var afficheageFormation = findViewById<ImageView>(R.id.formation)
+        afficheagePlanning.setOnClickListener{
+            val i = Intent(this,ActivityFormation::class.java)
+            startActivity(i)
+        }
+
+        var afficheageEvenement = findViewById<ImageView>(R.id.evenement)
+        afficheagePlanning.setOnClickListener{
+            val i = Intent(this,ActivityEvenement::class.java)
+            startActivity(i)
+        }
 
     }
 
-    private suspend fun apiPlanning_E_F(idUser: String?, tokenUser: String?, datePlanning: String, type: String): MutableList<Planning> {
+    private suspend fun requestApiPlanning(idUser: String?, tokenUser: String?, datePlanning: String, type: String): MutableList<Planning> {
         return suspendCoroutine { continuation ->
             val listActivity = mutableListOf<Planning>()
 
@@ -146,22 +169,48 @@ class ActivityPlanning : AppCompatActivity() {
                 "http://10.0.2.2:8000/api/user/$idUser/$type",
                 Response.Listener { resultat ->
                     val jsonGlobal = JSONArray(resultat)
+
                     if (jsonGlobal.length() > 0) {
                         for (i in 0 until jsonGlobal.length()) {
                             val br = jsonGlobal.getJSONObject(i)
-                            var dateActivity = br.getString("date_debut")
-                            dateActivity = dateActivity.substringBefore(" ")
+                            if(type == "mission"){
 
-                            if (dateActivity == datePlanning) {
-                                val event = Planning(
-                                    br.getInt("id"),
-                                    type,
-                                    br.getString("nom"),
-                                    br.getString("date_debut"),
-                                    br.getString("adresse"),
-                                    br.getString("description")
-                                )
-                                listActivity.add(event)
+                                var dateActivity = br.getString("date")
+                                dateActivity = dateActivity.substringBefore(" ")
+
+                                if (dateActivity == datePlanning) {
+                                    val date = br.getString("date").substring(5)
+                                    val event = Planning(
+                                        br.getInt("id"),
+                                        type,
+                                        br.getString("type"),
+                                        date,
+                                        br.getString("adresse"),
+                                        br.getString("demande")
+                                    )
+                                    listActivity.add(event)
+                                }
+
+                            }else {
+
+                                var dateActivity = br.getString("date_debut")
+                                dateActivity = dateActivity.substringBefore(" ")
+
+                                if (dateActivity == datePlanning) {
+                                    val debut = br.getString("date_debut").substring(5)
+                                    val fin = br.getString("date_fin").substring(5)
+                                    val date = "$debut \n$fin"
+                                    val event = Planning(
+                                        br.getInt("id"),
+                                        type,
+                                        br.getString("nom"),
+                                        date,
+                                        br.getString("adresse"),
+                                        br.getString("description")
+                                    )
+                                    listActivity.add(event)
+                                }
+
                             }
                         }
                     }
