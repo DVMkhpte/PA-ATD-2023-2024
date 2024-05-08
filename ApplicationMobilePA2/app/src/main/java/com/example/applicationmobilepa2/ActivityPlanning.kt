@@ -42,7 +42,7 @@ class ActivityPlanning : AppCompatActivity() {
         setContentView(R.layout.activity_planning)
 
 
-        //--Resuperation des infoLogin---------------------
+        //--Resuperation des infoLogin-------------------------------
         var infoLogin = getSharedPreferences("save", MODE_PRIVATE)
         var token  = infoLogin.getString("token", "")
         if (token != null) {
@@ -52,7 +52,7 @@ class ActivityPlanning : AppCompatActivity() {
 
 
 
-        //--Initialisation des dates--------------------------
+        //--Initialisation des dates----------------------------------
         val currentDate = LocalDate.now()
         val year = currentDate.year
 
@@ -77,7 +77,7 @@ class ActivityPlanning : AppCompatActivity() {
 
 
 
-        //--Assignement des dates---------------------------------
+        //--Assignement des dates--------------------------------------------------------
         var monthTV = findViewById<TextView>(R.id.month)
         monthTV.text = month
 
@@ -90,7 +90,7 @@ class ActivityPlanning : AppCompatActivity() {
 
 
 
-        //--setUp de l'affichage---------------------------------------
+        //--setUp de l'affichage------------------------------------------------------
         var jour0 = findViewById<TextView>(R.id.jour0)
         var jour1 = findViewById<TextView>(R.id.jour1)
         var jour2 = findViewById<TextView>(R.id.jour2)
@@ -115,7 +115,7 @@ class ActivityPlanning : AppCompatActivity() {
         }
 
 
-
+        //--Choix de la date-------------------------------------------------------------
         val jours = listOf(jour0, jour1, jour2, jour3, jour4, jour5, jour6)
         jours.forEachIndexed { index, button ->
             button.setOnClickListener {
@@ -133,6 +133,9 @@ class ActivityPlanning : AppCompatActivity() {
             }
         }
 
+
+
+        //--Navigation--------------------------------------------------------------------
         var afficheagePlanning = findViewById<ImageView>(R.id.planning)
         afficheagePlanning.setOnClickListener{
             val i = Intent(this,ActivityPlanning::class.java)
@@ -140,19 +143,19 @@ class ActivityPlanning : AppCompatActivity() {
         }
 
         var afficheageMission = findViewById<ImageView>(R.id.mission)
-        afficheagePlanning.setOnClickListener{
+        afficheageMission.setOnClickListener{
             val i = Intent(this,ActivityMission::class.java)
             startActivity(i)
         }
 
         var afficheageFormation = findViewById<ImageView>(R.id.formation)
-        afficheagePlanning.setOnClickListener{
+        afficheageFormation.setOnClickListener{
             val i = Intent(this,ActivityFormation::class.java)
             startActivity(i)
         }
 
         var afficheageEvenement = findViewById<ImageView>(R.id.evenement)
-        afficheagePlanning.setOnClickListener{
+        afficheageEvenement.setOnClickListener{
             val i = Intent(this,ActivityEvenement::class.java)
             startActivity(i)
         }
@@ -200,12 +203,22 @@ class ActivityPlanning : AppCompatActivity() {
                                     val debut = br.getString("date_debut").substring(5)
                                     val fin = br.getString("date_fin").substring(5)
                                     val date = "$debut \n$fin"
+
+                                    var fullAdresse = ""
+                                    if(type == "evenement"){
+                                        val ville = br.getString("ville")
+                                        val adresse = br.getString("adresse")
+                                        fullAdresse = "$adresse, $ville"
+                                    }else{
+                                        fullAdresse = br.getString("adresse")
+                                    }
+
                                     val event = Planning(
                                         br.getInt("id"),
                                         type,
                                         br.getString("nom"),
                                         date,
-                                        br.getString("adresse"),
+                                        fullAdresse,
                                         br.getString("description")
                                     )
                                     listActivity.add(event)
