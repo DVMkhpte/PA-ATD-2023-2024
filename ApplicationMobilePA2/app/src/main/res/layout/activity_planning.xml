@@ -172,7 +172,7 @@
                 android:layout_weight=".25"
                 android:src="@drawable/formation"
 
-                android:id="@+id/fromation"
+                android:id="@+id/formation"
                 />
 
             <ImageView

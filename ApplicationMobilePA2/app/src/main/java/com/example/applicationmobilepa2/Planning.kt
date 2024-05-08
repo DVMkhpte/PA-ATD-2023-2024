@@ -8,7 +8,7 @@ class Planning {
     var adresse = ""
     var description = ""
 
-    constructor(id: Int, type: String, nom: String, date: String, description: String, adresse: String) {
+    constructor(id: Int, type: String, nom: String, date: String, adresse: String, description: String) {
         this.id = id
         this.type = type
         this.nom = nom
