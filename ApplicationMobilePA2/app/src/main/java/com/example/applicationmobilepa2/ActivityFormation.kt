@@ -117,5 +117,11 @@ class ActivityFormation : AppCompatActivity() {
             startActivity(i)
         }
 
+        var afficheageProfil = findViewById<ImageView>(R.id.menu)
+        afficheageProfil.setOnClickListener{
+            val i = Intent(this,ActivityProfil::class.java)
+            startActivity(i)
+        }
+
     }
 }

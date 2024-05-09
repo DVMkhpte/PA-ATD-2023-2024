@@ -71,13 +71,43 @@ class ActivityMission : AppCompatActivity() {
                         var info = "${item.date}\n\nDescription : ${item.demande}"
                         popup.setMessage(info)
 
-                        popup.setNegativeButton("ok"){ dialog, wich ->
+                        popup.setNegativeButton("Valider mission"){ dialog, wich ->
                             dialog.dismiss()
+
+                            //--Validation de la mission avec le Jeton----------------------------------
+                                //--Affichage du msg-------------------------
+                            var popupValidMission = AlertDialog.Builder(this)
+                            popupValidMission.setTitle("Valider la mission  ${item.id}")
+                            var info = "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
+                            popupValidMission.setMessage(info)
+
+                            popupValidMission.setNegativeButton("Annuler"){ dialog, wich ->
+                                dialog.dismiss()
+                            }
+                            popupValidMission.setCancelable(false)
+                            popupValidMission.show()
+
+                                //--Code de lecture-------------------------------
+
+
                         }
                         popup.show()
 
                     }
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
             },
             Response.ErrorListener { error ->
                 Toast.makeText(applicationContext, "Erreur lors de la récupération", Toast.LENGTH_SHORT).show()
@@ -112,6 +142,12 @@ class ActivityMission : AppCompatActivity() {
         var afficheageEvenement = findViewById<ImageView>(R.id.evenement)
         afficheageEvenement.setOnClickListener{
             val i = Intent(this,ActivityEvenement::class.java)
+            startActivity(i)
+        }
+
+        var afficheageProfil = findViewById<ImageView>(R.id.menu)
+        afficheageProfil.setOnClickListener{
+            val i = Intent(this,ActivityProfil::class.java)
             startActivity(i)
         }
 

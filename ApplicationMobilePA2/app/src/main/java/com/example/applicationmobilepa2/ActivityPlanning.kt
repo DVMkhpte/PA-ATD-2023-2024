@@ -42,7 +42,7 @@ class ActivityPlanning : AppCompatActivity() {
         setContentView(R.layout.activity_planning)
 
 
-        //--Resuperation des infoLogin-------------------------------
+        //--Recuperation des infoLogin-------------------------------
         var infoLogin = getSharedPreferences("save", MODE_PRIVATE)
         var token  = infoLogin.getString("token", "")
         if (token != null) {
@@ -157,6 +157,12 @@ class ActivityPlanning : AppCompatActivity() {
         var afficheageEvenement = findViewById<ImageView>(R.id.evenement)
         afficheageEvenement.setOnClickListener{
             val i = Intent(this,ActivityEvenement::class.java)
+            startActivity(i)
+        }
+
+        var afficheageProfil = findViewById<ImageView>(R.id.menu)
+        afficheageProfil.setOnClickListener{
+            val i = Intent(this,ActivityProfil::class.java)
             startActivity(i)
         }
 
