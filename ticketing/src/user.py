@@ -44,14 +44,14 @@ class TicketingApp:
         self.main_color = "#005bac"
         self.text_color = "#333333"
 
-        self.logo_image = tk.PhotoImage(file="../img/logo.png")
-        self.logo_image = self.logo_image.subsample(2, 2)
+        #self.logo_image = tk.PhotoImage(file="../img/logo.png")
+        #self.logo_image = self.logo_image.subsample(2, 2)
 
-        self.main_frame = tk.Frame(self.root, bg=self.bg_color)
-        self.main_frame.pack(padx=20, pady=20)
+        #self.main_frame = tk.Frame(self.root, bg=self.bg_color)
+        #self.main_frame.pack(padx=20, pady=20)
 
-        self.logo_label = tk.Label(self.main_frame, image=self.logo_image, bg=self.bg_color)
-        self.logo_label.pack()
+        #self.logo_label = tk.Label(self.main_frame, image=self.logo_image, bg=self.bg_color)
+        #self.logo_label.pack()
 
         self.title_label = tk.Label(self.main_frame, text="Bienvenue dans notre application de Ticketing", font=("Helvetica", 16), bg=self.bg_color, fg=self.main_color)
         self.title_label.pack(pady=10)

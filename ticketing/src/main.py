@@ -2,7 +2,7 @@ import tkinter as tk
 import re
 import requests
 import json
-from PIL import Image, ImageTk
+#from PIL import Image, ImageTk
 from admin import AdminTicketingApp
 from user import TicketingApp
 from tkinter import messagebox
@@ -39,12 +39,12 @@ class LoginPage:
         y = (self.root.winfo_screenheight() // 2) - (window_height // 2)
         self.root.geometry(f"+{x}+{y}")
 
-        image_path = "../img/logo.png"
-        original_image = Image.open(image_path)
-        resized_image = original_image.resize((200, 200))
-        self.logo_image = ImageTk.PhotoImage(resized_image)
-        logo_label = tk.Label(self.main_frame, image=self.logo_image, bg=self.bg_color)
-        logo_label.pack(pady=20)
+        #image_path = "../img/logo.png"
+        #original_image = Image.open(image_path)
+        #resized_image = original_image.resize((200, 200))
+        #self.logo_image = ImageTk.PhotoImage(resized_image)
+        #logo_label = tk.Label(self.main_frame, image=self.logo_image, bg=self.bg_color)
+        #logo_label.pack(pady=20)
 
         tk.Label(self.main_frame, text="Adresse email:", bg=self.bg_color).pack()
         self.email_entry = tk.Entry(self.main_frame, bg="white")
