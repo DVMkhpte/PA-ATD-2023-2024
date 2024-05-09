@@ -1,6 +1,10 @@
 package com.example.applicationmobilepa2
 
+import android.app.PendingIntent
 import android.content.Intent
+import android.nfc.NfcAdapter
+import android.nfc.Tag
+import android.nfc.tech.Ndef
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -16,6 +20,9 @@ import org.json.JSONArray
 import java.time.LocalDate
 
 class ActivityMission : AppCompatActivity() {
+    private var nfcAdapter: NfcAdapter? = null
+    private var pendingIntent: PendingIntent? = null
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,11 +78,11 @@ class ActivityMission : AppCompatActivity() {
                         var info = "${item.date}\n\nDescription : ${item.demande}"
                         popup.setMessage(info)
 
+                        //--Validation de la mission avec le Jeton----------------------------------
                         popup.setNegativeButton("Valider mission"){ dialog, wich ->
                             dialog.dismiss()
 
-                            //--Validation de la mission avec le Jeton----------------------------------
-                                //--Affichage du msg-------------------------
+                            //--Affichage du msg-------------------------
                             var popupValidMission = AlertDialog.Builder(this)
                             popupValidMission.setTitle("Valider la mission  ${item.id}")
                             var info = "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
@@ -85,28 +92,30 @@ class ActivityMission : AppCompatActivity() {
                                 dialog.dismiss()
                             }
                             popupValidMission.setCancelable(false)
-                            popupValidMission.show()
 
-                                //--Code de lecture-------------------------------
+                            val alertDialogMission = popupValidMission.create()
+                            alertDialogMission.setOnShowListener {
+                                //--Code de lecture NFC-------------------------------
+                                val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+                                if (nfcAdapter == null) {
+                                    Toast.makeText(this, "Jeton NFC non supporté", Toast.LENGTH_SHORT).show()
+                                    dialog.dismiss()
+                                } else {
+                                    val intent = Intent(this@ActivityMission, javaClass).apply {
+                                        addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                                    }
+                                    pendingIntent = PendingIntent.getActivity(this@ActivityMission, 0, intent, 0)
+                                    nfcAdapter.enableForegroundDispatch(this@ActivityMission, pendingIntent, null, null)
 
+                                }
+                            }
 
+                            alertDialogMission.show()
                         }
                         popup.show()
 
                     }
                 }
-
-
-
-
-
-
-
-
-
-
-
-
 
             },
             Response.ErrorListener { error ->
@@ -119,6 +128,8 @@ class ActivityMission : AppCompatActivity() {
             }
         }
         queue.add(requestMission)
+
+
 
         //--Navigation--------------------------------------------------------------------
         var afficheagePlanning = findViewById<ImageView>(R.id.planning)
@@ -152,4 +163,43 @@ class ActivityMission : AppCompatActivity() {
         }
 
     }
+
+    //--Fonction de lecture NFC-------------------------
+    override fun onResume() {
+        super.onResume()
+        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, null, null)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        nfcAdapter?.disableForegroundDispatch(this)
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        if (intent.action == NfcAdapter.ACTION_TAG_DISCOVERED) {
+            // Récupération du tag NFC
+            val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
+            // Lecture des données de la balise NFC
+            readNfc(tag)
+        }
+    }
+
+    private fun readNfc(tag: Tag?) {
+        val ndef = Ndef.get(tag)
+        ndef?.connect()
+        val ndefMessage = ndef?.ndefMessage
+        ndef?.close()
+
+        if (ndefMessage != null) {
+            // Traitement des données lues depuis la balise NFC
+            val payload = ndefMessage.records[0].payload
+            val data = String(payload)
+            // Affichage des données lues
+            Toast.makeText(this, "Données NFC lues : $data", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Aucune donnée NFC trouvée", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
