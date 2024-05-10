@@ -536,7 +536,7 @@ async function addProduit(idEtagere){
 
     const addProduit = document.getElementById("entrepot_stock")
     var info =
-        "   <div  class=\"entrepot_titre\">"+
+        "   <div  class=\"entrepot_titre\">" +
         "       <h3>Nouveau Camion</h3>\n" +
         "   </div>" +
         "   <div  class='inputAdd' id='inputAdd1'>" +
@@ -548,16 +548,18 @@ async function addProduit(idEtagere){
         "       <input id='date_limite' placeholder=\"Date de perenption\" type='date' required>" +
         "   </div>" +
         "   <div  class='inputAdd' id='inputAdd4'>" +
-        "       <button class='buttonAdd' onclick='confirmNewDenree("+ idEtagere +", "+ dataEtagere.id_entrepot +")'>Ajouter</button>" +
-        "       <button class='buttonAdd' onclick='retourEtagere("+ dataEtagere.id_entrepot +")'>Retour</button>" +
+        "       <button class='buttonAdd' onclick='confirmNewDenree(" + idEtagere + ", \"" + dataEtagere.numero + "\", " + dataEtagere.id_entrepot + ")'>Ajouter</button>" +
+        "       <a href=\"#\" id=\"downloadQR\" download=\"product_qr_code.png\">Télécharger QR Code</a>" +
+        "       <button class='buttonAdd' onclick='retourEtagere(" + dataEtagere.id_entrepot + ")'>Retour</button>" +
         "   </div>" +
+        "   <div id=\"qrCodeContainer\"></div>" +
         ""
 
     addProduit.innerHTML = info
 }
 
 
-async function confirmNewDenree(idEtagere, idEntrepot){
+async function confirmNewDenree(idEtagere, numEtagere, idEntrepot){
     const nom = document.getElementById("nom").value
     const type = document.getElementById("type").value
     const date_arrivee = document.getElementById("date_arrivee").value
@@ -571,12 +573,13 @@ async function confirmNewDenree(idEtagere, idEntrepot){
         id_etagere: idEtagere
     }
 
-    console.log(formData)
 
-    await requestApi(formData, "POST", "/produits/add")
-    showAlert("Camion créé!");
+    var productData = await requestApi(formData, "POST", "/produits/add")
+    productData.id_etagere = numEtagere
+    console.log(productData)
+    showAlert("Poduit créé!");
 
-    retourEtagere(idEntrepot)
-
+    await generateQrCode(productData, idEntrepot)
 
 }
+

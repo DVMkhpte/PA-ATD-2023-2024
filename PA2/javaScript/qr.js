@@ -39,17 +39,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
+    var productData = {
+        id: "123",
+        type: "Produit",
+        nom: "NEVER GONNA GIVE YOU UP RICK ROLL EN 4K",
+        date_arrive: "2024-05-10",
+        date_limite: "2025-05-23",
+        id_etagere: "A2"
+    }
+
 
 });
-
-var productData = {
-    id: "123",
-    type: "Produit",
-    nom: "NEVER GONNA GIVE YOU UP RICK ROLL EN 4K",
-    date_arrive: "2024-05-10",
-    date_limite: "2025-05-23",
-    id_etagere: "A2"
-}
-
-
-generateQrCode(productData)

@@ -39,7 +39,6 @@
                 </div>
             </div>
         </div>
-
         <div id="container">
             <h1>Velliez selectionner un entrepot</h1>
         </div>
@@ -77,6 +76,52 @@
         });
     }
 </script>
+<script>
+    function formatProductData(productData) {
+        var formattedData = "ID: " + productData.id + "\n" +
+            "Type: " + productData.type + "\n" +
+            "Nom: " + productData.nom + "\n" +
+            "Date d'arrivee: " + productData.date_arrivee + "\n" +
+            "Date limite: " + productData.date_limite + "\n" +
+            "Numero etagere: " + productData.id_etagere;
+        return formattedData;
+    }
+
+    async function generateQrCode(productData, idEntrepot) {
+        // Fonction pour générer le QR code
+        var qr = new QRCode(document.getElementById("qrCodeContainer"), {
+            text: formatProductData(productData),
+            width: 200,
+            height: 200,
+            colorDark: "#000000",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.L // Niveau de correction d'erreur L
+        });
+
+        var qrCodeLink = document.getElementById("downloadQR")
+        qrCodeLink.style.display = "flex";
+
+        // Téléchargement du QR code lorsque le bouton est cliqué
+        document.getElementById("downloadQR").addEventListener("click", function () {
+            // Récupération de l'image du QR code
+            var qrCodeImage = document.querySelector("#qrCodeContainer img");
+            // Création d'un élément de lien pour télécharger l'image
+            var link = document.createElement('a');
+            link.download = "product_qr_code.png";
+            link.href = qrCodeImage.src;
+            // Simulation d'un clic sur le lien pour déclencher le téléchargement
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+
+
+            retourEtagere(idEntrepot)
+        });
+
+    }
+</script>
+<script src="../javaScript/QRCode.js"></script>
+<script src="../javaScript/qrcode.min.js"></script>
 <script src="../javaScript/function_api.js"></script>
 <script src="../javaScript/trajet.js"></script>
 <script src="../javaScript/stock.js"></script>
