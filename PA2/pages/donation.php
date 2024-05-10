@@ -26,7 +26,7 @@
                 <h1 data-translate="faites-un-don" class="card-title translate">Faites un don.</h1>
             </div>
             <div class="card-body">
-                <form action="../stripe/checkout.php" method="post" onsubmit="redirectToCheckout()">
+                <form action="https://buy.stripe.com/test_cN24jEeXz9zK63K3cc" method="get" target="_blank">
                     <p data-translate="texte-don" class="card-text translate">Aidez Au Temps Donne a se développer pour venir en aide aux autres.</p>
                     <img src="../img/cash.png" alt="halouf" class="logo" width="200" height="200">
 
@@ -40,12 +40,6 @@
                         </a>
                         <span data-translate="volunteer"> en tant que bénévole.</span>
                     </div>
-
-                    <div class="form-group">
-                        <label for="amount">
-                            <input type="number" min="0" step="0.01" name="amount" placeholder="0.00€" class="form-control"/>
-                        </label>
-                    </div>
                     <button data-translate="faites-un-don" type="submit" class="btn btn-primary translate" style="background-color:#38A6A7">Faites un don</button>
                 </form>
             </div>
@@ -57,6 +51,7 @@
             </div>
         </div>
     </div>
+
 
 </section>
 
