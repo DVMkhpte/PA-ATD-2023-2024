@@ -2,12 +2,16 @@ package com.example.applicationmobilepa2
 
 import android.app.PendingIntent
 import android.content.Intent
+import android.content.IntentFilter
+import android.nfc.NdefMessage
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
 import android.widget.ImageView
 import android.widget.ListView
 import android.widget.Toast
@@ -17,11 +21,15 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
+import java.io.UnsupportedEncodingException
 import java.time.LocalDate
 
 class ActivityMission : AppCompatActivity() {
     private var nfcAdapter: NfcAdapter? = null
     private var pendingIntent: PendingIntent? = null
+    private var tag: Tag? = null
+    private var writeMode: Boolean = false
+    private var writingTagFilter: Array<IntentFilter>? = null
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -96,18 +104,20 @@ class ActivityMission : AppCompatActivity() {
                             val alertDialogMission = popupValidMission.create()
                             alertDialogMission.setOnShowListener {
                                 //--Code de lecture NFC-------------------------------
-                                val nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+                                //--Code de lecture NFC-------------------------------
+
+                                nfcAdapter = NfcAdapter.getDefaultAdapter(this)
                                 if (nfcAdapter == null) {
                                     Toast.makeText(this, "Jeton NFC non supporté", Toast.LENGTH_SHORT).show()
-                                    dialog.dismiss()
-                                } else {
-                                    val intent = Intent(this@ActivityMission, javaClass).apply {
-                                        addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
-                                    }
-                                    pendingIntent = PendingIntent.getActivity(this@ActivityMission, 0, intent, 0)
-                                    nfcAdapter.enableForegroundDispatch(this@ActivityMission, pendingIntent, null, null)
-
+                                    alertDialogMission.dismiss()
                                 }
+
+                                pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+                                val tagDetected = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
+                                tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
+                                writingTagFilter = arrayOf(tagDetected)
+                                readFromIntent(intent)
+
                             }
 
                             alertDialogMission.show()
@@ -164,42 +174,82 @@ class ActivityMission : AppCompatActivity() {
 
     }
 
+
+
+
+
     //--Fonction de lecture NFC-------------------------
-    override fun onResume() {
-        super.onResume()
-        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, null, null)
+    private fun readFromIntent(intent: Intent) {
+        var action = intent.getAction()
+        if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
+            || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
+            || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)){
+            val rawMsgs: Array<Parcelable>? = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.map { it as Parcelable }?.toTypedArray()
+            var msgs: Array<NdefMessage>? = null
+            if (rawMsgs != null) {
+                msgs = Array(rawMsgs.size) { index ->
+                    rawMsgs[index] as NdefMessage
+                }
+            }
+
+            buildTagViews(msgs)
+        }
+
     }
 
-    override fun onPause() {
-        super.onPause()
-        nfcAdapter?.disableForegroundDispatch(this)
+    private fun buildTagViews(msgs: Array<NdefMessage>?) {
+        if (msgs == null || msgs.isEmpty()) return
+
+        var id = ""
+        val payload = msgs[0].records[0].payload
+        val textEncoding = if ((payload[0].toInt() and 128) == 0) "UTF-8" else "UTF-16"
+        val languageCodeLength = payload[0].toInt() and 0x3F
+
+        try {
+            id = String(payload, languageCodeLength + 1, payload.size - languageCodeLength - 1, charset(textEncoding))
+        } catch (e: UnsupportedEncodingException) {
+            Log.e("UnsupportedEncodingException", e.toString())
+        }
+
+        Toast.makeText(this, id, Toast.LENGTH_LONG).show()
+
     }
+
+
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
-        if (intent.action == NfcAdapter.ACTION_TAG_DISCOVERED) {
-            // Récupération du tag NFC
-            val tag = intent.getParcelableExtra<Tag>(NfcAdapter.EXTRA_TAG)
-            // Lecture des données de la balise NFC
-            readNfc(tag)
+        setIntent(intent)
+        readFromIntent(intent)
+        if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
+            tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag?
         }
     }
 
-    private fun readNfc(tag: Tag?) {
-        val ndef = Ndef.get(tag)
-        ndef?.connect()
-        val ndefMessage = ndef?.ndefMessage
-        ndef?.close()
 
-        if (ndefMessage != null) {
-            // Traitement des données lues depuis la balise NFC
-            val payload = ndefMessage.records[0].payload
-            val data = String(payload)
-            // Affichage des données lues
-            Toast.makeText(this, "Données NFC lues : $data", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(this, "Aucune donnée NFC trouvée", Toast.LENGTH_SHORT).show()
+    override fun onPause() {
+        super.onPause()
+        writeModeOff()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (nfcAdapter != null && pendingIntent != null && writingTagFilter != null) {
+            writeModeOn()
         }
     }
+
+    private fun writeModeOn() {
+        writeMode = true
+        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, writingTagFilter, null)
+    }
+
+    private fun writeModeOff() {
+        writeMode = false
+        nfcAdapter?.disableForegroundDispatch(this)
+    }
+
+
+
 
 }
