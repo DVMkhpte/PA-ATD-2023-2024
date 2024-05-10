@@ -11,10 +11,11 @@
 <button id="generateQR">Générer QR Code</button>
 <!-- Conteneur pour afficher le QR code -->
 <div id="qrCodeContainer"></div>
+<!-- Lien pour télécharger le QR code -->
+<a href="#" id="downloadQR" download="product_qr_code.png">Télécharger QR Code</a>
 
 <script src="QRCode.js"></script>
-
-<script src="qrcode.min.js"></script> <!-- Inclure la bibliothèque QRCode.js -->
-<script src="qr.js"></script> <!-- Inclure votre script JavaScript -->
+<script src="qrcode.min.js"></script>
+<script src="qr.js"></script>
 </body>
 </html>

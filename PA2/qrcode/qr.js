@@ -9,6 +9,20 @@ document.addEventListener("DOMContentLoaded", function() {
             colorLight: "#ffffff",
             correctLevel: QRCode.CorrectLevel.L // Niveau de correction d'erreur L
         });
+
+        // Téléchargement du QR code lorsque le bouton est cliqué
+        document.getElementById("downloadQR").addEventListener("click", function() {
+            // Récupération de l'image du QR code
+            var qrCodeImage = document.querySelector("#qrCodeContainer img");
+            // Création d'un élément de lien pour télécharger l'image
+            var link = document.createElement('a');
+            link.download = "product_qr_code.png";
+            link.href = qrCodeImage.src;
+            // Simulation d'un clic sur le lien pour déclencher le téléchargement
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
     }
 
     // Fonction pour formater les données du produit
