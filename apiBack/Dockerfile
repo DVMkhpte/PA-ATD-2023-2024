@@ -10,8 +10,8 @@ COPY . .
 
 RUN composer install && php artisan key:generate
 
-#ENTRYPOINT ["/apiback/startAPI.sh"]
+ENTRYPOINT ["/apiback/startAPI.sh"]
 
 EXPOSE 8000
 
-CMD ["php", "artisan", "serve", "--host=127.0.0.1", "--port=8000"]
+

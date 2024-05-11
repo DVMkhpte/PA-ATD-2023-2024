@@ -1,16 +1,18 @@
 #!/bin/bash
 
+# Test de la connexion à la base de données
 test_connection() {
-    php artisan migrate >/dev/null 2>/dev/null
     php artisan migrate:status >/dev/null 2>&1
 }
 
-
 # Boucle pour tester la connexion
 while ! test_connection; do
-    echo "The database connection has failed. Retry in 4 second..."
+    echo "La connexion à la base de données a échoué. Réessai dans 4 secondes..."
     sleep 4
 done
 
-php artisan db:seed
+# Génération de la clé de l'application Laravel
+php artisan key:generate
+
+# Démarrage du serveur Laravel
 php artisan serve --host=127.0.0.1 --port=8000
