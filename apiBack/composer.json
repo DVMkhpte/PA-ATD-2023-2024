@@ -13,7 +13,9 @@
         "laravel/tinker": "^2.5",
       "ext-json": "*",
       "ext-libxml": "*",
-        "ext-dom": "*"
+        "ext-dom": "*",
+      "ext-pdo": "*",
+      "ext-sqlite3": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
