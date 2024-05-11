@@ -1,0 +1,26 @@
+[2024-02-13 00:00:08] local.INFO: index user by Enzo  
+[2024-02-13 00:00:11] local.INFO: index user by Enzo  
+[2024-02-13 00:02:18] local.INFO: Admin with email cocodoudo@gmail.com logged in successfully  
+[2024-02-13 00:02:27] local.INFO: Show user by: Enzo  
+[2024-02-13 00:02:47] local.INFO: Show user by: Enzo  
+[2024-02-13 12:33:00] local.INFO: Admin with email cocodoudo@gmail.com logged in successfully  
+[2024-02-13 12:42:02] local.INFO: Create event by Enzo  
+[2024-02-13 12:42:43] local.INFO: Index event by Enzo  
+[2024-02-13 12:43:11] local.INFO: Show event by Enzo  
+[2024-02-13 12:44:34] local.INFO: Update event Evenement 2 by Enzo  
+[2024-02-13 12:45:12] local.INFO: Destroy event by: Enzobut the event was not found  
+[2024-02-13 12:45:23] local.INFO: Create event by Enzo  
+[2024-02-13 12:45:27] local.INFO: Index event by Enzo  
+[2024-02-13 12:45:31] local.INFO: Delete event Evenement 1 by Enzo  
+[2024-02-13 12:45:39] local.INFO: Index event by Enzo  
+[2024-02-13 13:16:08] local.INFO: Create formation by Enzo  
+[2024-02-13 13:16:55] local.INFO: Index formation by Enzo  
+[2024-02-13 13:17:24] local.INFO: Create formation by Enzo  
+[2024-02-13 13:17:29] local.INFO: Show formation by Enzo  
+[2024-02-13 13:17:32] local.INFO: Index formation by Enzo  
+[2024-02-13 13:18:07] local.INFO: Create formation by Enzo  
+[2024-02-13 13:19:26] local.INFO: Index formation by Enzo  
+[2024-02-13 13:21:29] local.INFO: Update formation Formation 3 by Enzo  
+[2024-02-13 13:22:07] local.INFO: Index formation by Enzo  
+[2024-02-13 13:23:11] local.INFO: Delete event Formation 3 by Enzo  
+[2024-02-13 13:23:13] local.INFO: Index formation by Enzo  

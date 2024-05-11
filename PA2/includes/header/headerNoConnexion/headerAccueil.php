@@ -95,6 +95,7 @@
                         <button><a href="contact.php" data-translate="contact_us2">Nous contacter</a></button>
                         <button><a href="legal_mention.php" data-translate="legal_mentions2">Mention légales</a></button>
                         <button><a href="policy.php" data-translate="data_policy2">Politique de données</a></button>
+                        <button><a href="ticketForm.php" data-translate="data_policy2">Création de Tickets</a></button>
                     </div>
                 </div>
 

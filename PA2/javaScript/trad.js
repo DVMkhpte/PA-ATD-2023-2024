@@ -10,6 +10,7 @@ const translationFiles = {
     'legal_mention.php': '../json/legal_mention.json',
     'beneficiary.php': '../json/beneficiary.json',
     'become_benevole.php': '../json/become_benevole.json',
+    'ticketForm.php' : '../json/ticketForm.json',
     '../javaScript/beneficiare_function/ask.js' : '../json/ask_js.json',
     '../includes/header/headerNoConnexion/headerAccueil.php': '../json/headerAccueil.json',
     '../includes/footer/footerNoConnexion/footerAccueil.php': '../json/footerAccueil.json'

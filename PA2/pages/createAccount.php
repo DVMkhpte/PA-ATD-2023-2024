@@ -33,7 +33,9 @@
     <p class="paragraphe" data-translate="field">
       Veuillez remplir tous les champs
     </p>
-    <form class="formulaire" id="createForm">
+
+
+    <form class="form" id="createForm">
     <div class="group-form">
         <input type="text" data-translate="prenom" id="prenom" placeholder="Prenom" />
         <input type="text" data-translate="nom" id="nom" placeholder="Nom">
@@ -43,7 +45,7 @@
         <input type="text" data-translate="city" id="ville" placeholder="Ville">
     </div>
     <div class="group-form">
-        <input type="text" data-translate="adress2" id="adresse" placeholder="Adresse">
+        <input type="text" data-translate="adress" id="adresse" placeholder="Adresse">
     </div>
     <div class="group-form">
         <input type="text" data-translate="phone" id="phone" placeholder="Numero de telephone">
@@ -59,6 +61,8 @@
         <input type="submit"  id="submitButton"  class="inscription"  value="S'inscrire" data-translate="inscription">
       </div>
     </form>
+
+
     <div class="benevole">
         <p class="paragraphe">
             <span data-translate="text-part1">Vous voulez nous aider ? Devenez </span>
