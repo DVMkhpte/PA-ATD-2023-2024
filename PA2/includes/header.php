@@ -77,7 +77,6 @@ header {
 </style>
 
 <header >
-  <?php session_start() ?>
     <div class="left_partH">
         <img class="img_header" src="../img/logo.png">
         
