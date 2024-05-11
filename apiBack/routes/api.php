@@ -46,8 +46,8 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::delete('/evenements/{id}',[\App\Http\Controllers\EvenementController::class,'destroy']);
 
     Route::post('/formations/add',[FormationController::class,'store'] );
-    Route::patch('/formations/{id}',[FormationController::class,'update']);
     Route::delete('/formations/{id}',[FormationController::class,'destroy']);
+    Route::patch('/formations/{id}',[FormationController::class,'update']);
 
     Route::post('/activitees/add',[\App\Http\Controllers\ActiviteController::class,'store'] );
     Route::patch('/activitees/{id}',[\App\Http\Controllers\ActiviteController::class,'update']);
@@ -66,8 +66,6 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::delete('/participea/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
     Route::delete('/missions/{id}',[App\Http\Controllers\MissionsController::class,'destroy']);
-
-    Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'destroy']);
 
     Route::post('/camions/add',[\App\Http\Controllers\CamionsController::class,'store'] );
     Route::get('/camions',[\App\Http\Controllers\CamionsController::class,'index']);
@@ -96,25 +94,34 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::patch('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'update']);
     Route::delete('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'destroy']);
 
+    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
+
 });
 
 
-Route::middleware(['auth:sanctum', 'check_admin_or_benevole'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:benevole'])->group(function () {
+    Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
+    Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
 
 
 
+    Route::get('/user/{userId}/participationsF',[App\Http\Controllers\ParticipationFController::class, 'getUserParticipations']);
+    Route::get('/user/{userId}/participationsE',[App\Http\Controllers\ParticipationEController::class, 'getUserParticipations']);
+
+    Route::get('/user/{userId}/formation',[App\Http\Controllers\FormationController::class, 'getUserFormation']);
+    Route::get('/user/{userId}/evenement',[App\Http\Controllers\EvenementController::class, 'getUserEvenement']);
+    Route::get('/user/{userId}/mission',[App\Http\Controllers\MissionsController::class, 'getUserMission']);
+
+
+    Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
 
-    Route::post('/participee/add',[App\Http\Controllers\ParticipationEController::class,'store']);
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
-    Route::post('/participef/add',[App\Http\Controllers\ParticipationFController::class,'store']);
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 
+    Route::patch('/formations/{id}',[FormationController::class,'update']);
     Route::post('/user/logout', [\App\Http\Controllers\LogoutController::class, 'store']);
 
-    Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
     Route::get('/my-demande', [\App\Http\Controllers\DemandeController::class, 'getUserDemandes']);
     Route::get('/demande', [\App\Http\Controllers\DemandeController::class, 'index']);
     Route::get('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'show']);
@@ -133,20 +140,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user/{userId}/participationsA',[App\Http\Controllers\ParticipationAController::class, 'getUserParticipations']);
     Route::delete('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'destroy']);
 
+
     Route::get('/users/{id}', [\App\Http\Controllers\UserController::class, 'show']);
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
 
-    Route::get('/user/{userId}/participationsF',[App\Http\Controllers\ParticipationFController::class, 'getUserParticipations']);
-    Route::get('/user/{userId}/participationsE',[App\Http\Controllers\ParticipationEController::class, 'getUserParticipations']);
 
-    Route::get('/user/{userId}/formation',[App\Http\Controllers\FormationController::class, 'getUserFormation']);
-    Route::get('/user/{userId}/evenement',[App\Http\Controllers\EvenementController::class, 'getUserEvenement']);
     Route::get('/user/{userId}/activite',[App\Http\Controllers\ActiviteController::class, 'getUserActivity']);
-    Route::get('/user/{userId}/mission',[App\Http\Controllers\MissionsController::class, 'getUserMission']);
 
-    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
-    Route::get('/missions/{id}',[App\Http\Controllers\MissionsController::class,'show']);
-    Route::post('/missions/add',[App\Http\Controllers\MissionsController::class,'store']);
+    Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'destroy']);
+
+    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::delete('/participee/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);

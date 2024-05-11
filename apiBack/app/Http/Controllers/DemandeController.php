@@ -73,18 +73,26 @@ class DemandeController extends Controller
 
     public function destroy($id)
     {
-    $adminUser = Auth::user();
+        $adminUser = Auth::user();
 
-    try {
-        $demande = Demandes::findOrFail($id);
-        $demande->delete();
+        try {
+            $demande = Demandes::findOrFail($id);
 
-        Log::channel('admin_activity')->info("Delete demande demande " . $id . " by " . $adminUser->name);
+            // Vérifier si l'utilisateur authentifié est autorisé à supprimer cette demande
+            if ($adminUser->id !== $demande->id_user) {
+                // Si l'utilisateur n'est pas autorisé, retourne une réponse 403 (Interdit)
+                return response()->json(['message' => 'You are not authorized to delete this demande.'], 403);
+            }
 
-        return response()->json(['message' => 'Demande delete']);
-    } catch (\Exception $e) {
-        return response()->json(['message' => 'An error occurred while deleting the demande.'], 500);
-    }
+            // Si l'utilisateur est autorisé, procède à la suppression de la demande
+            $demande->delete();
+
+            Log::channel('admin_activity')->info("Delete demande demande " . $id . " by " . $adminUser->name);
+
+            return response()->json(['message' => 'Demande delete']);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'An error occurred while deleting the demande.'], 500);
+        }
     }
 
     public function update(Request $request, $id)
