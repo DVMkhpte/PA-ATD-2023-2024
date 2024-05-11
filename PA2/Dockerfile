@@ -8,9 +8,11 @@ WORKDIR /var/www/html
 
 COPY . .
 
-WORKDIR /var/www/html/planning/src/components
+WORKDIR /var/www/html/planning/node-module
 
 RUN chmod +x react-scripts
+
+WORKDIR /var/www/html/planning/src/components
 
 EXPOSE 80
 
