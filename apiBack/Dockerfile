@@ -8,10 +8,12 @@ RUN docker-php-ext-install pdo_mysql && docker-php-ext-enable pdo_mysql
 WORKDIR /apiback
 COPY . .
 
+RUN chmod +x startAPI.sh
+
 RUN composer install && php artisan key:generate
 
 ENTRYPOINT ["/apiback/startAPI.sh"]
 
-EXPOSE 8000
+EXPOSE 8888
 
 
