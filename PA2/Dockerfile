@@ -10,7 +10,7 @@ COPY . .
 
 WORKDIR /var/www/html/planning/node_modules
 
-RUN chmod +x react-scripts
+RUN chmod 777 react-scripts
 
 WORKDIR /var/www/html/planning/src/components
 
