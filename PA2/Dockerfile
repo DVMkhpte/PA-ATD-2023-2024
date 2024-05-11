@@ -10,6 +10,8 @@ COPY . .
 
 WORKDIR /var/www/html/planning/src/components
 
+RUN chmod +x react-scripts
+
 EXPOSE 80
 
 CMD npm run start
