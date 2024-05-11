@@ -14,6 +14,6 @@ RUN composer install && php artisan key:generate
 
 ENTRYPOINT ["/apiback/startAPI.sh"]
 
-EXPOSE 8888
+EXPOSE 8000
 
 
