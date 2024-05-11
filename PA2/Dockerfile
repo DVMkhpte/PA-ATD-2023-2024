@@ -8,7 +8,7 @@ WORKDIR /var/www/html
 
 COPY . .
 
-WORKDIR /var/www/html/planning/component
+WORKDIR /var/www/html/planning/src/components
 
 EXPOSE 80
 
