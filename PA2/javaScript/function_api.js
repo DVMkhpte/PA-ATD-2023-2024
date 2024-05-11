@@ -10,7 +10,7 @@ async function requestApi(formData, method, link) {
         headers['Authorization'] = 'Bearer ' + token;
     }
 
-    const response = await fetch('http://localhost:8888/api' + link, {
+    const response = await fetch('http://172.18.0.3:8888/api' + link, {
         method: method,
         headers: headers,
         body: JSON.stringify(formData)
@@ -41,7 +41,7 @@ async function requestApiNoBody(method, link) {
         headers['Authorization'] = 'Bearer ' + token;
     }
 
-    const response = await fetch('http://localhost:8888/api' + link, {
+    const response = await fetch('http://172.18.0.3:8888/api' + link, {
         redirect: 'manual',
         method: method,
         headers: headers,
