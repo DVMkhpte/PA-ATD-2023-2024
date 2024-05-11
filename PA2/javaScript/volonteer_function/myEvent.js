@@ -15,7 +15,7 @@ async function getInfoMyEvent(data){
         "       </div>\n" +
         "   </div>"+
         "   <div class=\"option\">\n" +
-        "       <button class=\"cancel\" onclick=\"cancelEvent(" + data.id + ")\">Annuler</button>\n" +
+        "       <button class=\"cancel\" onclick=\"cancelEventP(" + data.id + ")\">Annuler</button>\n" +
         "   </div>\n" +
         "</div>\n"
     return info
@@ -57,6 +57,26 @@ async function affichageMesEvent(data){
     var affichage = filtre.concat(allInfo);
     return  affichage
 }
+
+
+
+async function cancelEventP(idE){
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
+
+    var link = "/user/"+ idU +"/participationsE"
+    var dataParticipation = await requestApiNoBody("GET", link);
+    var idP = 0
+    for(i=0; i<dataParticipation.length; i++){
+        if(dataParticipation[i].id_user === idU && dataParticipation[i].id_evenement === idE){
+            idP = dataParticipation[i].id
+        }
+    }
+    console.log(idP)
+    await requestApiNoBody("DELETE", "/participee/"+idP);
+}
+
+
 
 
 async function searchMyEvenement(){

@@ -36,8 +36,7 @@ async function affichageBeneficiaire(affichage) {
             break;
 
         case "Mes demande":
-            //var data = await requestApiNoBody();
-            strBox = await affichageMesDemande(data);
+            strBox = await affichageMesDemande();
             break;
 
         case "Mes Activité":

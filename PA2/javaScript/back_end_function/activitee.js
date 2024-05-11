@@ -21,7 +21,7 @@ async function getInfoA(data){
         "           <div class=\"option\">\n" +
         "               <button class=\"modif\" onclick=\"modifActivite(" + data.id + ")\">Modifier l'activité</button>\n" +
         "               <button class=\"voir\" onclick=\"voirParticipantA(" + data.id + ", '/participea/')\">Voir les participants</button>\n" +
-        "               <button class=\"supp\">Supprimer</button>\n" +
+        "               <button class=\"supp\" onclick='supp(\"activitees\", "+ data.id +")'>Supprimer</button>\n" +
         "           </div>\n" +
         "       </div>\n" +
         "   </div>"

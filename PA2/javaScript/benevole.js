@@ -4,14 +4,14 @@ async function affichageBenevole(affichage) {
 
     const resTitre = affichage
     gestionTitre.innerHTML = resTitre;
-    
+
     var resetStyle = document.getElementsByClassName("div_img");
-    
+
     for(var i=0; i<resetStyle.length; i++){
         resetStyle[i].style.boxShadow = "none";
         resetStyle[i].style.backgroundColor = "#38A7A6";
     }
-    
+
 
     var modifElement = document.getElementById(affichage);
     if(modifElement){
@@ -24,7 +24,7 @@ async function affichageBenevole(affichage) {
 
     var strBox = ""
     var data = []
-    
+
     switch (affichage){
         case "Formation":
             data = await requestApiNoBody("GET", "/formations");
@@ -71,8 +71,8 @@ async function affichageBenevole(affichage) {
 
     const affichageContainer = document.getElementById('container_2');
     affichageContainer.innerHTML = strBox;
-    
-    
+
+
 }
 
 
@@ -104,6 +104,10 @@ async function extractionPdf(){
 
 async function updateProfil(){
     window.location.href ="../pages/modif_profil.php"
+}
+
+async function aide(){
+    window.location.href ="../pages/ticketingForm.php"
 }
 
 

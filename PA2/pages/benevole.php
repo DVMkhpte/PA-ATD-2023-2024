@@ -11,7 +11,7 @@
 <?php  include("../includes/header.php") ?>
 
 <main>
-    
+
     <div class="container_1">
         <div class="menu">
             <div class="nav_menu">
@@ -56,13 +56,14 @@
                 <button class="modif" onclick="updateProfil()">Modifier</button>
                 <button class="deco" onclick="deconexion()">Deconnexion</button>
                 <button class="extract" onclick="extractionPdf()">Extraction profil</button>
+                <button class="aide" onclick="aide()">Aide</button>
             </div>
             <button class="voir" onclick="affichageBenevole('Mes evenement')">Mes evenement</button>
             <button class="voir" onclick="affichageBenevole('Mes missions')">Mes missions</button>
             <button class="voir" onclick="affichageBenevole('Mes Formations')">Mes Formations</button>
         </div>
 
-        
+
     </div>
 
 </main>
@@ -82,6 +83,7 @@
         verifconnection();
     });
 
+    console.log(localStorage.getItem("token"))
     async function loadProfil() {
         const idUser = localStorage.getItem("id")
         var data = await requestApiNoBody("GET", "/users/" + idUser)
@@ -101,7 +103,8 @@
             "</div>"
     }
     loadProfil()
-    affichageBenevole('Planning')
+
+    affichageBenevole('Mes missions')
 
 
 </script>

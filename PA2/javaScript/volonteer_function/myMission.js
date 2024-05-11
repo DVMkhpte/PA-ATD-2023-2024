@@ -8,6 +8,7 @@ async function getInfoMyM(data){
         "               <div class=\"fait_par\">De : " + data.realiser_par + "</div>\n" +
         "               <div class=\"pour\">Pour : " + data.user.name + "</div>\n" +
         "               <div class=\"date\">Pour le : " + data.demande.date +"</div>\n" +
+        "               <div class=\"date\">Au : " + data.demande.adresse +"</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_demande\">\n" +
         "               <p>" + data.demande.demande + "</p>\n" +
@@ -15,7 +16,7 @@ async function getInfoMyM(data){
         "           </div>\n" +
         "       </div>\n" +
         "       <div class=\"option\">\n" +
-        "           <button class=\"annuler\" onclick='cancelMyMission("+ data.id +", "+ data.demande.id +")'>Annuler</button>\n" +
+        //"           <button class=\"annuler\" onclick='cancelMyMission("+ data.id +", "+ data.demande.id +")'>Annuler</button>\n" +
         "   </div>\n" +
         "</div>"
 

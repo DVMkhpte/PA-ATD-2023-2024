@@ -94,7 +94,7 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::patch('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'update']);
     Route::delete('/commercants/{id}',[\App\Http\Controllers\CommercantController::class,'destroy']);
 
-    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
+
 
 });
 
@@ -117,7 +117,7 @@ Route::middleware(['auth:sanctum', 'role:benevole'])->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-
+    Route::get('/missions',[App\Http\Controllers\MissionsController::class,'index']);
 
     Route::patch('/formations/{id}',[FormationController::class,'update']);
     Route::post('/user/logout', [\App\Http\Controllers\LogoutController::class, 'store']);

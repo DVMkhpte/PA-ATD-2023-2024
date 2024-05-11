@@ -9,7 +9,9 @@ async function affichageDemande(){
         "           <option value=\"demande_visite\">Visite</option>\n" +
         "           <option value=\"autre\">autre</option>\n" +
         "       </select>\n" +
-        "       Pour le : <input type=\"datetime-local\" id=\"date\" placeholder=\"Date\">"+
+        "       <div class='infoSupDemande'>" +
+        "           Pour le : <input type=\"datetime-local\" id=\"date\" placeholder=\"Date\"> au <input type=\"text\" id=\"adresse\" placeholder=\"Adresse\">" +
+        "       </div>"+
         "       <textarea  class=\"input_form\" id=\"description\" type=\"text\" name=\"description\" placeholder=\"Description\" autocomplete=\"off\"></textarea>\n" +
         "       <button class=\"input_form\"  id=\"valid\" onclick=\"newAsk()\">Valider</button>\n" +
         "   </div>\n" +
@@ -21,6 +23,7 @@ async function affichageDemande(){
 async function newAsk(){
     const type = document.getElementById('type').value;
     const description = document.getElementById('description').value;
+    const adresse = document.getElementById('adresse').value;
     const date = document.getElementById('date').value;
 
     const formData = {
@@ -28,6 +31,7 @@ async function newAsk(){
         demande: description,
         permis: "0",
         etat : "en attente",
+        adresse : adresse,
         date: date
     };
     console.log(formData)
@@ -35,7 +39,7 @@ async function newAsk(){
     try {
         const response = await requestApi(formData, "POST", "/demande/add");
         showAlert("Création de la demande !");
-        //await affichageBeneficiaire("Mes demande")
+        await affichageBeneficiaire("Mes demande")
 
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
@@ -52,6 +56,7 @@ async function infoMyD(data){
         "           <div class=\"description_1\">\n" +
         "               <div class=\"type\">Type : " + data.type + "</div>\n" +
         "               <div class=\"type\">Etat : " + data.etat + "</div>\n" +
+        "               <div class=\"type\">Adresse : " + data.adresse + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description_2\">\n" +
         "               <p>" + data.demande + "</p>\n" +

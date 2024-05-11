@@ -1,4 +1,6 @@
 async function getInfoForm(data){
+    var idU = localStorage.getItem("id")
+    idU = parseInt(idU)
     var info =
         "<div class=\"info\">\n" +
         "   <div class=\"description_general\">\n" +
@@ -11,7 +13,7 @@ async function getInfoForm(data){
         "           </div>\n"
     if(data.supervise_par !== null){
         info = info.concat(
-            "<div class=\"superviser\">Supervisé par : "+ data.supervisor.nom +"</div>\n"
+            "<div class=\"superviser\">Supervisé par : "+ data.supervisor.name +"</div>\n"
         )
     }
     info = info.concat(
@@ -24,9 +26,13 @@ async function getInfoForm(data){
         "           </div>"+
         "       </div>\n" +
         "   </div>\n" +
-        "   <div class=\"option\">\n" +
-        "       <button onclick=\"joinFormation("+ data.id +")\" class=\"inscription\" >Ce positionner</button>\n"
-    )
+        "   <div class=\"option\">\n")
+    if(data.supervise_par !== idU) {
+        info = info.concat(
+            "<button onclick=\"joinFormation(" + data.id + ")\" class=\"inscription\" >Ce positionner</button>\n"
+        )
+    }
+
     if(data.supervise_par === null) {
         info = info.concat(
             "<button onclick=\"becomeSupervisorF(" + data.id + ")\" class=\"inscription\" >Superviser</button>\n"
@@ -98,13 +104,14 @@ async function becomeSupervisorF(idF){
     var data = await requestApiNoBody("GET", "/formations/"+idF);
     const newFormData = {
         nom: data.nom,
-        adresse: data.adresse,
         description: data.description,
-        nb_place: data.nb_place,
-        supervise_par: idU,
         date_debut: data.date_debut,
-        date_fin: data.date_fin
+        date_fin: data.date_fin,
+        adresse: data.adresse,
+        nb_place: data.nb_place,
+        supervise_par: idU
     };
+    console.log(newFormData)
 
     try {
         const response = await requestApi(newFormData, "PATCH", "/formations/"+idF);
@@ -112,7 +119,7 @@ async function becomeSupervisorF(idF){
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    affichageBenevole("Mes formations")
+    affichageBenevole("Mes Formations")
 }
 
 

@@ -83,16 +83,18 @@
         profil.innerHTML =
             "<h1>Profil :</h1>" +
             "<div class=\"info_profil_1\">" +
-            "    <div id=\"nom_profil\" class=\"info_profil\">" + data.nom + "</div>" +
-            "    <div id=\"prenom_profil\" class=\"info_profil\">"+ data.prenom +"</div>" +
+            "    <div id=\"nom_profil\" class=\"info_profil\">" + data.name + "</div>" +
+            "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_telephone + "</div>" +
             "</div>" +
             "<div class=\"info_profil_2\">" +
             "   <div id=\"email_profil\" class=\"info_profil\">" + data.email + "</div>" +
-            "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_telephone + "</div>" +
             "</div>" +
             "<div class=\"info_profil_3\">" +
             "    <div id=\"ville_profil\" class=\"info_profil\">" + data.adresse + ", " + data.code_postal + " " + data.ville + "</div>" +
             "</div>"
     }
     loadProfil()
+    affichageBeneficiaire('Mes demande')
+
+</script>
 
