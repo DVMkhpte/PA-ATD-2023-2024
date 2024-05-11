@@ -77,7 +77,6 @@ header {
 </style>
 
 <header >
-  
     <div class="left_partH">
         <img class="img_header" src="../img/logo.png">
         
