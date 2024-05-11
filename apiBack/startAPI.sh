@@ -15,4 +15,4 @@ done
 php artisan key:generate
 
 # Démarrage du serveur Laravel
-php artisan serve --host=127.0.0.1 --port=8888
+php artisan serve --host=0.0.0.0 --port=8000

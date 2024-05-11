@@ -77,6 +77,10 @@ header {
 </style>
 
 <header >
+<<<<<<< HEAD
+=======
+  
+>>>>>>> 35b9a3f8 (Update)
     <div class="left_partH">
         <img class="img_header" src="../img/logo.png">
         
