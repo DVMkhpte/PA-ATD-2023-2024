@@ -8,12 +8,10 @@ WORKDIR /var/www/html
 
 COPY . .
 
-WORKDIR /var/www/html/planning/node_modules
-
-RUN chmod 777 react-scripts
+RUN npm install
 
 WORKDIR /var/www/html/planning/src/components
 
 EXPOSE 80
 
-CMD npm run start
+CMD ["npm", "run", "start"]
