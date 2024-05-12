@@ -18,9 +18,11 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import org.json.JSONArray
+import org.json.JSONObject
 import java.io.UnsupportedEncodingException
 import java.time.LocalDate
 
@@ -43,6 +45,9 @@ class ActivityMission : AppCompatActivity() {
             token = token.substringAfter("|")
         }
         var id  = infoLogin.getString("id", "")
+        var idNFC = infoLogin.getString("nfcContent", "")
+
+
 
 
         //--Initialisation de l'affichage------------------------
@@ -63,15 +68,15 @@ class ActivityMission : AppCompatActivity() {
                     if (jsonGlobal.length() > 0) {
                         for (i in 0 until jsonGlobal.length()) {
                             val br = jsonGlobal.getJSONObject(i)
-                            val date = "${br.getString("date").substring(5)}, $year"
-
                             var mission: Mission = Mission(
                                 br.getInt("id"),
                                 br.getString("type"),
                                 br.getString("demande"),
                                 br.getString("etat"),
                                 br.getString("adresse"),
-                                date,
+                                br.getString("date"),
+                                br.getString("id_user"),
+                                br.getString("permis")
                             )
                             listMission.add(mission)
                         }
@@ -85,7 +90,8 @@ class ActivityMission : AppCompatActivity() {
 
                             var popup = AlertDialog.Builder(this)
                             popup.setTitle(item.type)
-                            var info = "${item.date}\n\nDescription : ${item.demande}"
+                            val cleanDate = "${item.date.substring(5)}, $year"
+                            var info = "$cleanDate\nDescription : ${item.demande}"
                             popup.setMessage(info)
 
                             //--Validation de la mission avec le Jeton----------------------------------
@@ -93,47 +99,40 @@ class ActivityMission : AppCompatActivity() {
                                 popup.setNegativeButton("Valider mission") { dialog, wich ->
                                     dialog.dismiss()
 
-                                    //--Affichage du msg-------------------------
-                                    var popupValidMission = AlertDialog.Builder(this)
-                                    popupValidMission.setTitle("Valider la mission  ${item.id}")
-                                    var info =
-                                        "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
-                                    popupValidMission.setMessage(info)
 
-                                    popupValidMission.setNegativeButton("Annuler") { dialog, wich ->
-                                        dialog.dismiss()
+                                    //--valide la mission------------------------------
+                                    if(idNFC != "0"){
+                                        Log.d("fait_par", item.faitPar)
+                                        Log.d("idNFC", idNFC.toString())
+
+                                        if(item.faitPar == idNFC){
+                                            //--met la demande en FAIT---------------
+                                            val formData = JSONObject().apply {
+                                                put("type", item.type)
+                                                put("demande", item.demande)
+                                                put( "permis", item.permis)
+                                                put("etat", "fait")
+                                                put("adresse", item.adresse)
+                                                put( "date", item.date)
+                                            }
+
+                                            val queue = Volley.newRequestQueue(applicationContext)
+                                            val url = "http://autempsdonne.com:8000/api/demande/${item.id}"
+                                            val jsonObjectRequest = JsonObjectRequest(
+                                                Method.PATCH, url, formData,
+                                                {resultat ->
+                                                    Toast.makeText(applicationContext,"Felicitation vous avez effectué votre mission mission",Toast.LENGTH_SHORT).show()
+                                                },
+                                                {error ->
+                                                    Toast.makeText(applicationContext,"Erreur lors de la validation $error",Toast.LENGTH_SHORT).show()
+                                                })
+
+                                            queue.add(jsonObjectRequest)
+
+                                        }else{
+                                            Toast.makeText(applicationContext,"Mauvaise mission",Toast.LENGTH_SHORT).show()
+                                        }
                                     }
-                                    popupValidMission.setCancelable(false)
-
-                                    val alertDialogMission = popupValidMission.create()
-
-                                    //--Code de lecture NFC-------------------------------
-                                    writeModeOn()
-                                    nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-                                    if (nfcAdapter == null) {
-                                        Toast.makeText(
-                                            this,
-                                            "Jeton NFC non supporté",
-                                            Toast.LENGTH_SHORT
-                                        ).show()
-                                        alertDialogMission.dismiss()
-                                    }
-
-                                    pendingIntent = PendingIntent.getActivity(
-                                        this,
-                                        0,
-                                        intent,
-                                        PendingIntent.FLAG_IMMUTABLE
-                                    )
-                                    val tagDetected =
-                                        IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
-                                    tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
-                                    writingTagFilter = arrayOf(tagDetected)
-                                    readFromIntent(intent)
-
-
-
-                                    alertDialogMission.show()
                                 }
                             //}
                             popup.show()
@@ -194,7 +193,6 @@ class ActivityMission : AppCompatActivity() {
 
     //--Fonction de lecture NFC-------------------------
     private fun readFromIntent(intent: Intent) {
-        Log.d("etapes1", "check")
         var action = intent.getAction()
         if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
             || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -213,7 +211,6 @@ class ActivityMission : AppCompatActivity() {
     }
 
     private fun buildTagViews(msgs: Array<NdefMessage>?) {
-        Log.d("etapes2", "check")
         if (msgs == null || msgs.isEmpty()) return
 
         var id = ""
@@ -249,15 +246,12 @@ class ActivityMission : AppCompatActivity() {
         writeModeOff()
     }
 
-    /*
     override fun onResume() {
         super.onResume()
         if (nfcAdapter != null && pendingIntent != null && writingTagFilter != null) {
-
+            writeModeOn()
         }
     }
-     */
-
 
     private fun writeModeOn() {
         writeMode = true

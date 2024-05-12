@@ -72,7 +72,7 @@ class ActivityProfil : AppCompatActivity() {
 
         var finishTask = findViewById<TextView>(R.id.logOut)
         finishTask.setOnClickListener{
-            
+
         }
 
 
