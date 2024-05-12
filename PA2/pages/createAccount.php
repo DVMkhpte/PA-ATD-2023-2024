@@ -23,7 +23,7 @@
   <div id="connexion">
     <div class="accueil">
         <img src="../img/maison.png" alt="Image d'accueil">
-        <a href="../index.php" data-translate="home"><u>Retour à l'accueil</u></a>
+        <a href="index.php" data-translate="home"><u>Retour à l'accueil</u></a>
     </div>
     <h1 class="title" data-translate="login">Connectez-vous</h1>
     <a href="login.php" class="btn-link connexion" data-translate="sign-in">Se connecter</a>
