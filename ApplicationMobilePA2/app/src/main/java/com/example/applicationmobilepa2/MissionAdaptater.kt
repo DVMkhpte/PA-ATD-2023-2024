@@ -1,11 +1,14 @@
 package com.example.applicationmobilepa2
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import androidx.annotation.RequiresApi
+import java.time.LocalDate
 
 class MissionAdaptater : BaseAdapter {
     var context: Context
@@ -29,6 +32,7 @@ class MissionAdaptater : BaseAdapter {
         return 0;
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var v: View
 
@@ -43,6 +47,10 @@ class MissionAdaptater : BaseAdapter {
         name.text = current.type
 
         var date = v.findViewById<TextView>(R.id.tv_date)
+
+        val currentDate = LocalDate.now()
+        val year = currentDate.year
+
         date.text = current.date
 
         var adresse = v.findViewById<TextView>(R.id.tv_adresse)
