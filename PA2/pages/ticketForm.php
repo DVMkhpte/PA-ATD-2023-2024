@@ -13,7 +13,7 @@
 <div id="translated-content"></div>
 <div class="container mt-5">
     <h2 data-translate ="contact">Création de Tickets</h2>
-    <form method="post" action="submit_ticket.php">
+    <form action="submit_ticket.php" method="post">
 
     <div class="form-group">
             <label for="name" data-translate ="name">Nom et Prenom :</label>

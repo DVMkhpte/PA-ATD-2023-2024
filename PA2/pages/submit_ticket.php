@@ -1,36 +1,46 @@
 <?php
-// Vérifie si le formulaire a été soumis
+// Activer l'affichage des erreurs
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Chemin vers la base de données SQLite
+$db_file = '../../ticketing/db/ticketing.db';
+
+// Connexion à la base de données SQLite
+$conn = new sqlite3($db_file);
+
+// Vérification de la connexion
+if (!$conn) {
+    die("Erreur de connexion à la base de données: " . $conn->lastErrorMsg());
+}
+
+// Vérifier si le formulaire a été soumis
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les données du formulaire
-    $client = $_POST['name'];
+    // Récupérer les valeurs du formulaire
+    $name = $_POST['name'];
     $priority = $_POST['priority'];
-    $problem= $_POST['description'];
+    $description = $_POST['description'];
 
-    // Connexion à la base de données SQLite3
-    $db = new SQLite3('ticketing.db');
+    // Requête SQL d'insertion
+    $sql = "INSERT INTO tickets (client, priority, problem, status) VALUES (:client, :priority, :problem, 'A traiter')";
 
-    // Vérifier la connexion
-    if (!$db) {
-        die("Erreur de connexion à la base de données.");
-    }
+    // Préparer la requête
+    $stmt = $conn->prepare($sql);
 
-    // Préparer la requête SQL pour insérer le ticket
-    $stmt = $db->prepare("INSERT INTO tickets (client, problem, priority, status) VALUES (?, ?, ?, ?)");
-    $stmt->bindValue(1, $client, SQLITE3_TEXT);
-    $stmt->bindValue(2, $problem, SQLITE3_TEXT);
-    $stmt->bindValue(3, $priority, SQLITE3_TEXT);
-    $stmt->bindValue(4, "Non défini", SQLITE3_TEXT);
+    // Liaison des paramètres
+    $stmt->bindParam(':client', $name);
+    $stmt->bindParam(':priority', $priority);
+    $stmt->bindParam(':problem', $description);
 
-    // Exécuter la requête
-    $result = $stmt->execute();
-
-    if ($result) {
-        echo "Ticket soumis avec succès !";
+    // Exécution de la requête
+    if ($stmt->execute()) {
+        echo "Ticket créé avec succès.";
     } else {
-        echo "Erreur lors de la soumission du ticket.";
+        echo "Erreur lors de la création du ticket: " . $conn->lastErrorMsg();
     }
 
-    // Fermer la connexion à la base de données
-    $db->close();
+    // Fermer la déclaration et la connexion
+    $stmt->close();
+    $conn->close();
 }
 ?>
