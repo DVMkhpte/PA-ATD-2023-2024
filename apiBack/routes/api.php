@@ -142,6 +142,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 
     Route::get('/users/{id}', [\App\Http\Controllers\UserController::class, 'show']);
+    Route::patch('/user/updates', [\App\Http\Controllers\UserController::class, 'updateP']);
     Route::post('/demande/add', [\App\Http\Controllers\DemandeController::class, 'store']);
 
 
@@ -155,6 +156,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
 Route::post('/user/login', [\App\Http\Controllers\LoginController::class, 'store']);
+
 
 
 

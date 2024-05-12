@@ -63,6 +63,27 @@ public function update(Request $request, $id)
         return response()->json($user);
     }
 
+    public function updateP(Request $request)
+    {
+        $user = Auth::user();
+
+        $data = $request->validate([
+            'name' => 'string|max:255',
+            'email' => 'string|email|max:255|unique:users,email,' . $user->id,
+            'code_postal'=> 'integer',
+            'ville' => 'string|max:255',
+            'adresse' => 'string|max:255',
+            'num_telephone'=> 'string|max:10',
+            'password' => 'string|min:8',
+            'role' => 'string',
+        ]);
+
+        $user->update($data);
+
+        Log::channel('user_activity')->info("Profil de l'utilisateur " . $user->email . " mis à jour par lui meme.");
+        return response()->json($user);
+    }
+
     public function destroy($id)
     {
         $adminUser = Auth::user();
