@@ -92,6 +92,10 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         verifconnection();
+        var roleUser = localStorage.getItem('role')
+        if(roleUser !== "admin"){
+            window.location.href ='index.php'
+        }
     });
 
     const toggleSidebar = () => document.body.classList.toggle("open");

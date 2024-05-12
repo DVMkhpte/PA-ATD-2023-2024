@@ -90,6 +90,10 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         verifconnection();
+        var roleUser = localStorage.getItem('role')
+        if(roleUser !== "beneficiaire"){
+            window.location.href ='index.php'
+        }
     });
 
     async function loadProfil() {

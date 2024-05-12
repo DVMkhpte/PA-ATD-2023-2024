@@ -80,6 +80,10 @@
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         verifconnection();
+        var roleUser = localStorage.getItem('role')
+        if(roleUser !== "benevole"){
+            window.location.href ='index.php'
+        }
     });
 
     console.log(localStorage.getItem("token"))
