@@ -1,5 +1,6 @@
 <?php
 
+// Votre code existant
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -29,16 +30,17 @@ try {
         $stmt->bindParam(':problem', $description);
 
         if ($stmt->execute()) {
-            echo "Ticket créé avec succès.";
+            header("Location: ticketForm.php?message=Ticket cree avec succes.");
+            exit;
         } else {
-            echo "Erreur lors de la création du ticket.";
+            header("Location: ticketForm.php?message=Erreur lors de la creation du ticket.");
+            exit;
         }
-
         $conn = null;
     }
 } catch(PDOException $e) {
-    echo "Erreur de connexion à la base de données: " . $e->getMessage();
+    header("Location: ticketForm.php?message=Erreur de connexion a la base de donnees: " . $e->getMessage());
+    exit;
 }
-
 
 ?>
