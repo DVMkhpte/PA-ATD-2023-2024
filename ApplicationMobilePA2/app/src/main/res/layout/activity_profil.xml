@@ -110,34 +110,16 @@
             >
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_weight=".5"
                 android:textColor="@color/white"
                 android:background="@color/option"
                 android:textAlignment="center"
-
                 android:padding="10dp"
-                android:layout_marginRight="10dp"
-
-                android:textSize="20dp"
-                android:text="retour"
+                android:textSize="30dp"
+                android:text="Retour"
                 android:id="@+id/retour"/>
 
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight=".5"
-                android:textColor="@color/white"
-                android:background="@color/option"
-                android:textAlignment="center"
-
-                android:padding="10dp"
-                android:layout_marginLeft="10dp"
-
-                android:textSize="20dp"
-                android:text="Deconnexion"
-                android:id="@+id/logOut"/>
 
         </LinearLayout>
 

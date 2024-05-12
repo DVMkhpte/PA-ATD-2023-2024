@@ -34,6 +34,7 @@
             android:layout_margin="15dp"
             android:padding="10dp"
             android:background="@color/white"
+            android:textColor="@color/backgroud"
             android:textSize="30dp"
             android:hint="Email"
 
@@ -46,6 +47,7 @@
             android:layout_margin="15dp"
             android:padding="10dp"
             android:background="@color/white"
+            android:textColor="@color/backgroud"
             android:hint="Mot de passe"
             android:textSize="30dp"
 
