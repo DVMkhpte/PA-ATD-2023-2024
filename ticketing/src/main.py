@@ -71,7 +71,7 @@ class LoginPage:
         print("Données du formulaire (JSON) :", form_json)
 
         try:
-            response = requests.post("http://api.autempsdonne.com/api/user/login", json=form_data)
+            response = requests.post("https://api.autempsdonne.com/api/user/login", json=form_data)
 
             print(response)
 
