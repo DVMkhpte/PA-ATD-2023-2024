@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Au Temps Donné - Accueil</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
@@ -25,18 +25,18 @@
     
     <div class="carousel-item active">
         
-      <img class="d-block w-100" src="../img/image1.jpg" alt="First slide">
+      <img class="d-block w-100" src="img/image1.jpg" alt="First slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/image2.jpg" alt="Second slide">
+      <img class="d-block w-100" src="img/image2.jpg" alt="Second slide">
     </div>
     <div class="carousel-item">
-      <img class="d-block w-100" src="../img/image3.jpg" alt="Third slide">
+      <img class="d-block w-100" src="img/image3.jpg" alt="Third slide">
     </div>
     <div class="jumbotron">
         <h1 class="display-4" data-translate="title">Au Temps Donné, plus qu'une simple association.</h1>
         <p class="lead" data-translate="date">Depuis 1987.</p>
-        <a class="btn btn-primary btn-lg" data-translate="donation" href="donation.php">Faire un don</a>
+        <a class="btn btn-primary btn-lg" data-translate="donation" href="pages/donation.php">Faire un don</a>
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
