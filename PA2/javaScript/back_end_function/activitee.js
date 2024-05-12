@@ -21,7 +21,7 @@ async function getInfoA(data){
         "           <div class=\"option\">\n" +
         "               <button class=\"modif\" onclick=\"modifActivite(" + data.id + ")\">Modifier l'activité</button>\n" +
         "               <button class=\"voir\" onclick=\"voirParticipantA(" + data.id + ", '/participea/')\">Voir les participants</button>\n" +
-        "               <button class=\"supp\" onclick='supp(\"activitees\", "+ data.id +")'>Supprimer</button>\n" +
+        "               <button class=\"supp\" onclick='suppActivity("+ data.id +")'>Supprimer</button>\n" +
         "           </div>\n" +
         "       </div>\n" +
         "   </div>"
@@ -142,6 +142,24 @@ async function validModif(id){
 
 
 
+async function suppActivity(idA){
+    var dataParticipation = await requestApiNoBody("GET", "/participea")
+    var idP = 0
+    for(i=0; i<dataParticipation.length; i++){
+        idP = dataParticipation[i].id_activite
+        if(idP === idA){
+            const responseSuppP = await requestApiNoBody("DELETE", "/participea/"+idP);
+        }
+    }
+    const responseSuppA = await requestApiNoBody("DELETE", "/activitees/"+idA);
+    showAlert("Activitée Supprimé!");
+    affichageBackEnd("Activitées")
+}
+
+
+
+
+
 async function voirParticipantA(idA){
     var data = await requestApiNoBody("GET", "/participea/");
 
@@ -159,7 +177,6 @@ async function voirParticipantA(idA){
         "           <thead>" +
         "               <tr>" +
         "                   <th>Nom</th>" +
-        "                  <th>Prenom</th>" +
         "                <th>Role</th>" +
         "                 <th>Options</th>" +
         "               </tr>" +
@@ -170,8 +187,7 @@ async function voirParticipantA(idA){
         if(data[i].id_activite === idA) {
             participant =
                 "<tr>" +
-                "   <td>"+ data[i].user.nom +"</td>" +
-                "   <td>"+ data[i].user.nom +"</td>" +
+                "   <td>"+ data[i].user.name +"</td>" +
                 "   <td>"+ data[i].user.role +"</td>" +
                 "   <td>" +
                 "       <button class='suppParticipants' onclick=\"suppParticipantsA(" + data[i].id + ","+ idA +")\">Supp</button>" +

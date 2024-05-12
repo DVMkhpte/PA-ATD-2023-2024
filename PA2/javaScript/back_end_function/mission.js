@@ -1,16 +1,20 @@
 async function getInfoM(data){
+    var idBeneficiaire = data.demande.id
+    console.log(idBeneficiaire)
+    var dataBeneficiaire = await requestApiNoBody("GET", "/users/"+idBeneficiaire);
     var info =
         "<div class=\"contener_1\">\n" +
         "   <div class=\"contener_2\">\n" +
         "       <div class=\"description_demande\">\n" +
         "           <div class=\"description1_demande\">\n" +
         "               <div class=\"type\">Type : " + data.demande.type + "</div>\n" +
-        "               <div class=\"fait_par\">De : " + data.demande.id + "</div>\n" +
+        "               <div class=\"fait_par\">De : " + dataBeneficiaire.name + "</div>\n" +
         "               <div class=\"pour\">Pour : " + data.user.name + "</div>\n" +
         "               <div class=\"date\">Pour le : " + data.demande.date + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_demande\">\n" +
         "               <p>" + data.demande.demande + "</p>\n" +
+        "               <div class=\"date\">Au : " + data.demande.adresse + "</div>\n" +
         "               <div>Statut : "+ data.demande.etat +"</div>"+
         "           </div>\n" +
         "       </div>\n" +

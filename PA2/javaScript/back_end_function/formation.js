@@ -24,7 +24,7 @@ async function getInfoF(data){
         "       <div class=\"option\">\n" +
         "           <button class=\"modif\" onclick=\"modifFormation(" + data.id + ")\">Modifier la formation</button>\n" +
         "           <button class=\"voir\" onclick=\"voirParticipantF(" + data.id + ", '/participef/')\">Voir les participants</button>\n" +
-        "           <button class=\"supp\">Supprimer</button>\n" +
+        "           <button class=\"supp\" onclick='suppFormation("+ data.id +")'>Supprimer</button>\n" +
         "       </div>\n" +
         "   </div>\n" +
         "</div>")
@@ -151,6 +151,33 @@ async function validModifF(id){
     await affichageBackEnd("Formations")
 }
 
+
+
+
+
+
+
+
+async function suppFormation(idF){
+    var dataParticipation = await requestApiNoBody("GET", "/participef")
+    var idP = 0
+    for(i=0; i<dataParticipation; i++){
+        idP = dataParticipation[i].id_formation
+        if(idP === idF){
+            //const responseSuppP = await requestApiNoBody("DELETE", "/participef/"+idP);
+        }
+    }
+    const responseSuppF = await requestApiNoBody("DELETE", "/formations/"+idF);
+    showAlert("Formation Supprimé!");
+    affichageBackEnd("Formations")
+}
+
+
+
+
+
+
+
 async function voirParticipantF(idF, ){
     var data = await requestApiNoBody("GET", "/participef");
 
@@ -168,9 +195,8 @@ async function voirParticipantF(idF, ){
         "           <thead>" +
         "               <tr>" +
         "                   <th>Nom</th>" +
-        "                  <th>Prenom</th>" +
-        "                <th>Role</th>" +
-        "                 <th>Options</th>" +
+        "                   <th>Role</th>" +
+        "                   <th>Options</th>" +
         "               </tr>" +
         "         </thead>"
     var allParticipants ="<tbody>"
@@ -179,8 +205,7 @@ async function voirParticipantF(idF, ){
         if(data[i].id_formation === idF) {
             participant =
                 "<tr>" +
-                "   <td>"+ data[i].user.nom +"</td>" +
-                "   <td>"+ data[i].user.prenom +"</td>" +
+                "   <td>"+ data[i].user.name +"</td>" +
                 "   <td>"+ data[i].user.role +"</td>" +
                 "   <td>" +
                 "       <button class='suppParticipants' onclick=\"suppParticipantsF(" + data[i].id + ","+ idF +")\">Supp</button>" +
@@ -197,7 +222,6 @@ async function voirParticipantF(idF, ){
     var affichage = head.concat(allParticipants)
     participation.innerHTML = affichage
 }
-
 
 
 async function suppParticipantsF(idP, id){
