@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk, messagebox
-import sqlite3
+import mysql.connector
 import os
 import subprocess
 
@@ -37,7 +37,12 @@ class TicketingApp:
         self.root = root
         self.root.title("Application de Ticketing")
 
-        self.conn = sqlite3.connect("../db/ticketing.db")
+        self.conn = mysql.connector.connect(
+            host = "api.autempsdonne.com",
+            user="root",
+            password="exemplepwd",
+            database="tickets"
+        )
         self.c = self.conn.cursor()
 
         self.bg_color = "#f0f0f0"
@@ -47,8 +52,8 @@ class TicketingApp:
         #self.logo_image = tk.PhotoImage(file="../img/logo.png")
         #self.logo_image = self.logo_image.subsample(2, 2)
 
-        #self.main_frame = tk.Frame(self.root, bg=self.bg_color)
-        #self.main_frame.pack(padx=20, pady=20)
+        self.main_frame = tk.Frame(self.root, bg=self.bg_color)
+        self.main_frame.pack(padx=20, pady=20)
 
         #self.logo_label = tk.Label(self.main_frame, image=self.logo_image, bg=self.bg_color)
         #self.logo_label.pack()
@@ -70,7 +75,12 @@ class TicketingApp:
         self.setup_history_tab()
 
         # Établir une connexion à la base de données
-        self.conn = sqlite3.connect("../db/ticketing.db")
+        self.conn = mysql.connector.connect(
+            host = "api.autempsdonne.com",
+            user="root",
+            password="exemplepwd",
+            database="tickets"
+        )
         self.c = self.conn.cursor()
 
     def setup_create_ticket_tab(self):
@@ -138,7 +148,7 @@ class TicketingApp:
 
     def edit_ticket(self, ticket_number):
         # Récupérer les détails du ticket depuis la base de données
-        self.c.execute("SELECT * FROM tickets WHERE id=?", (ticket_number,))
+        self.c.execute("SELECT * FROM tickets WHERE id=%s", (ticket_number,))
         ticket = self.c.fetchone()
         if ticket:
             # Créer une nouvelle fenêtre de dialogue pour la modification du ticket
@@ -167,13 +177,13 @@ class TicketingApp:
 
     def save_edited_ticket(self, ticket_number, new_client_name, new_problem_description, new_priority):
         # Mettre à jour le ticket dans la base de données
-        self.c.execute("UPDATE tickets SET client=?, problem=?, priority=? WHERE id=?", (new_client_name, new_problem_description, new_priority, ticket_number))
+        self.c.execute("UPDATE tickets SET client=%s, problem=%s, priority=%s WHERE id=%s", (new_client_name, new_problem_description, new_priority, ticket_number))
         self.conn.commit()  # Commit changes to the database
         messagebox.showinfo("Confirmation", f"Les modifications pour le ticket {ticket_number} ont été enregistrées avec succès.")
 
     def delete_ticket(self, ticket_number):
         # Supprimer le ticket correspondant de la base de données
-        self.c.execute("DELETE FROM tickets WHERE id=?", (ticket_number,))
+        self.c.execute("DELETE FROM tickets WHERE id=%s", (ticket_number,))
         self.conn.commit()  # Commit changes to the database
         messagebox.showinfo("Confirmation", f"Le ticket {ticket_number} a été supprimé avec succès.")
 
@@ -208,7 +218,7 @@ class TicketingApp:
             messagebox.showerror("Erreur", "Veuillez remplir tous les champs.")
             return
 
-        self.c.execute("INSERT INTO tickets (client, problem, priority, status) VALUES (?, ?, ?, ?)",
+        self.c.execute("INSERT INTO tickets (client, problem, priority, status) VALUES (%s, %s, %s, %s)",
                        (client_name, problem_description, priority, "Non défini"))
         self.conn.commit()
 
@@ -229,7 +239,7 @@ class TicketingApp:
         self.root.destroy()
 
     def run_chat(self):
-        subprocess.Popen(["python", "../chatbot/chat_user.py"])
+        subprocess.Popen(["python", "../chatbot/client.py"])
 
 if __name__ == "__main__":
     root = tk.Tk()

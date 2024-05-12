@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import ttk
-import sqlite3
+import mysql.connector
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.pyplot as plt
 import os
@@ -16,7 +16,12 @@ class AdminDashboard:
     def load_tickets(self):
         try:
             # Connexion à la base de données
-            self.conn = sqlite3.connect("../db/ticketing.db")
+            self.conn = mysql.connector.connect(
+            host = "api.autempsdonne.com",
+            user="root",
+            password="exemplepwd",
+            database="tickets"
+        )
             self.c = self.conn.cursor()
 
             # Récupérer les tickets depuis la base de données
