@@ -5,7 +5,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 $host = '54.36.209.115';
-$port = '3306'; // Spécifiez le port séparément
+$port = '3306';
 $dbname = 'tickets';
 $username = 'root';
 $password = 'exemplepwd';

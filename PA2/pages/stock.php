@@ -6,6 +6,7 @@
     <title>Entrepot</title>
     <link rel="stylesheet" href="../css/stock.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 <body>
 <header>
