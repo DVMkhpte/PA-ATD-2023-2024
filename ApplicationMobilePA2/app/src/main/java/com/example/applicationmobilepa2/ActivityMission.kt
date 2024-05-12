@@ -103,8 +103,6 @@ class ActivityMission : AppCompatActivity() {
 
                                     //--valide la mission------------------------------
                                     if(idNFC != "0"){
-                                        Log.d("fait_par", item.faitPar)
-                                        Log.d("idNFC", idNFC.toString())
 
                                         if(item.faitPar == idNFC){
                                             //--met la demande en FAIT---------------
@@ -116,7 +114,6 @@ class ActivityMission : AppCompatActivity() {
                                                 put("adresse", item.adresse)
                                                 put( "date", item.date)
                                             }
-                                            Log.d("formdata", formData.toString())
 
                                             val queuePatch = Volley.newRequestQueue(applicationContext)
                                             val requestPatchDemande = object : JsonObjectRequest(
@@ -203,77 +200,6 @@ class ActivityMission : AppCompatActivity() {
 
 
 
-    //--Fonction de lecture NFC-------------------------
-    private fun readFromIntent(intent: Intent) {
-        var action = intent.getAction()
-        if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
-            || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
-            || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)){
-            val rawMsgs: Array<Parcelable>? = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES)?.map { it as Parcelable }?.toTypedArray()
-            var msgs: Array<NdefMessage>? = null
-            if (rawMsgs != null) {
-                msgs = Array(rawMsgs.size) { index ->
-                    rawMsgs[index] as NdefMessage
-                }
-            }
-
-            buildTagViews(msgs)
-        }
-
-    }
-
-    private fun buildTagViews(msgs: Array<NdefMessage>?) {
-        if (msgs == null || msgs.isEmpty()) return
-
-        var id = ""
-        val payload = msgs[0].records[0].payload
-        val textEncoding = if ((payload[0].toInt() and 128) == 0) "UTF-8" else "UTF-16"
-        val languageCodeLength = payload[0].toInt() and 0x3F
-
-        try {
-            id = String(payload, languageCodeLength + 1, payload.size - languageCodeLength - 1, charset(textEncoding))
-        } catch (e: UnsupportedEncodingException) {
-            Log.e("UnsupportedEncodingException", e.toString())
-        }
-        Log.d("id", id)
-
-        Toast.makeText(this, id, Toast.LENGTH_LONG).show()
-
-    }
-
-
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        setIntent(intent)
-        readFromIntent(intent)
-        if (NfcAdapter.ACTION_NDEF_DISCOVERED == intent.action) {
-            tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG) as Tag?
-        }
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        writeModeOff()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        if (nfcAdapter != null && pendingIntent != null && writingTagFilter != null) {
-            writeModeOn()
-        }
-    }
-
-    private fun writeModeOn() {
-        writeMode = true
-        nfcAdapter?.enableForegroundDispatch(this, pendingIntent, writingTagFilter, null)
-    }
-
-    private fun writeModeOff() {
-        writeMode = false
-        nfcAdapter?.disableForegroundDispatch(this)
-    }
 
 
 

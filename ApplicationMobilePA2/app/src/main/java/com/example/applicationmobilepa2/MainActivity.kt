@@ -68,11 +68,9 @@ class MainActivity : AppCompatActivity() {
 
             val queue = Volley.newRequestQueue(applicationContext)
             val url = "http://autempsdonne.com:8000/api/user/login"
-            Log.d("url post", url)
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, formData,
                 {resultat ->
                     val jsonObject = JSONObject(resultat.toString())
-                    Log.d("retunrn ",jsonObject.toString())
 
                     if (jsonObject.has("token") ){
                         val token = jsonObject.getString("token")
@@ -142,9 +140,7 @@ class MainActivity : AppCompatActivity() {
         } catch (e: UnsupportedEncodingException) {
             Log.e("UnsupportedEncodingException", e.toString())
         }
-        Log.d("id", id)
         nfcContent = id
-        Log.d("nfcContent",nfcContent.toString())
         Toast.makeText(this, id, Toast.LENGTH_LONG).show()
 
     }

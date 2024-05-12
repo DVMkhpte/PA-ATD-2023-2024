@@ -161,7 +161,6 @@ class ActivityPlanning : AppCompatActivity() {
 
     private suspend fun requestApiPlanning(idUser: String?, tokenUser: String?, datePlanning: String, type: String): MutableList<Planning> {
 
-        Log.d("return ", "$type $tokenUser $idUser")
         return suspendCoroutine { continuation ->
             val listActivity = mutableListOf<Planning>()
 
