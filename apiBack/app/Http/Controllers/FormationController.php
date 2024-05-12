@@ -127,6 +127,8 @@ class FormationController extends Controller
             return response()->json(['message' => 'Formation not found'], 404);
         }
 
+        $formation->participations()->delete();
+
         $formation->delete();
 
         Log::channel('admin_activity')->info("Delete event " . $formation->nom . " by " . $adminUser->name);

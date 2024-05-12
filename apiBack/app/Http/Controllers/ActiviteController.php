@@ -127,6 +127,8 @@ class ActiviteController extends Controller
             return response()->json(['message' => 'Activite not found'], 404);
         }
 
+        $activite->participations()->delete();
+
         $activite->delete();
 
         Log::channel('admin_activity')->info("Delete event " . $activite->nom . " by " . $adminUser->name);

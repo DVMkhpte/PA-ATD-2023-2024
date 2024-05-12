@@ -110,6 +110,8 @@ class EvenementController extends Controller
             return response()->json(['message' => 'Event not found'], 404);
         }
 
+        $evenement->participations()->delete();
+
         $evenement->delete();
 
         Log::channel('admin_activity')->info("Delete event " . $evenement->nom . " by " . $adminUser->name);

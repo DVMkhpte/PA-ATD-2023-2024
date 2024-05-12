@@ -18780,3 +18780,4 @@ Did you mean one of these?
 [2024-05-12 10:08:02] local.INFO: API access {"ip":"127.0.0.1","url":"http://localhost:8000/api/participef/9","method":"DELETE","user_agent":"insomnia/8.6.1"} 
 [2024-05-12 10:08:35] local.INFO: API access {"ip":"127.0.0.1","url":"http://localhost:8000/api/participef/9","method":"DELETE","user_agent":"insomnia/8.6.1"} 
 [2024-05-12 10:10:07] local.INFO: API access {"ip":"127.0.0.1","url":"http://localhost:8000/api/participef/9","method":"DELETE","user_agent":"insomnia/8.6.1"} 
+[2024-05-12 10:11:22] local.INFO: API access {"ip":"127.0.0.1","url":"http://localhost:8000/api/participef","method":"GET","user_agent":"insomnia/8.6.1"} 

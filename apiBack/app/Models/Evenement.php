@@ -26,6 +26,12 @@ class Evenement extends Model
     protected $attributes = [
         'etat' => 'ouvert',
     ];
+
+
+    public function participations()
+    {
+        return $this->hasMany(ParticipeE::class, 'id_evenement');
+    }
 }
 
 ?>
