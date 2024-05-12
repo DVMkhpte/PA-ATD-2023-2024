@@ -70,11 +70,5 @@ class ActivityProfil : AppCompatActivity() {
             finish()
         }
 
-        var finishTask = findViewById<TextView>(R.id.logOut)
-        finishTask.setOnClickListener{
-
-        }
-
-
     }
 }

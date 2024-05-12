@@ -25,6 +25,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.UnsupportedEncodingException
 import java.time.LocalDate
+import kotlin.math.log
 
 class ActivityMission : AppCompatActivity() {
     private var nfcAdapter: NfcAdapter? = null
@@ -91,11 +92,11 @@ class ActivityMission : AppCompatActivity() {
                             var popup = AlertDialog.Builder(this)
                             popup.setTitle(item.type)
                             val cleanDate = "${item.date.substring(5)}, $year"
-                            var info = "$cleanDate\nDescription : ${item.demande}"
+                            var info = "${item.id} $cleanDate\nDescription : ${item.demande}"
                             popup.setMessage(info)
 
                             //--Validation de la mission avec le Jeton----------------------------------
-                            //if(item.etat == "en cours") {
+                            if(item.etat == "en cours") {
                                 popup.setNegativeButton("Valider mission") { dialog, wich ->
                                     dialog.dismiss()
 
@@ -110,31 +111,42 @@ class ActivityMission : AppCompatActivity() {
                                             val formData = JSONObject().apply {
                                                 put("type", item.type)
                                                 put("demande", item.demande)
-                                                put( "permis", item.permis)
+                                                put( "permis", "A")
                                                 put("etat", "fait")
                                                 put("adresse", item.adresse)
                                                 put( "date", item.date)
                                             }
+                                            Log.d("formdata", formData.toString())
 
-                                            val queue = Volley.newRequestQueue(applicationContext)
-                                            val url = "http://autempsdonne.com:8000/api/demande/${item.id}"
-                                            val jsonObjectRequest = JsonObjectRequest(
-                                                Method.PATCH, url, formData,
-                                                {resultat ->
-                                                    Toast.makeText(applicationContext,"Felicitation vous avez effectué votre mission mission",Toast.LENGTH_SHORT).show()
+                                            val queuePatch = Volley.newRequestQueue(applicationContext)
+                                            val requestPatchDemande = object : JsonObjectRequest(
+                                                Method.PATCH,
+                                                "http://api.autempsdonne.com/api/demande/${item.id.toString()}",
+                                                formData,
+                                                Response.Listener { resultat ->
+                                                    Toast.makeText(applicationContext, "Felicitation vous avez effectué votre mission", Toast.LENGTH_SHORT).show()
                                                 },
-                                                {error ->
-                                                    Toast.makeText(applicationContext,"Erreur lors de la validation $error",Toast.LENGTH_SHORT).show()
-                                                })
-
-                                            queue.add(jsonObjectRequest)
+                                                { error ->
+                                                    Toast.makeText(applicationContext, "Erreur lors de la validation", Toast.LENGTH_SHORT).show()
+                                                }) {
+                                                // Surcharge de la méthode getHeaders pour ajouter le token dans les en-têtes
+                                                override fun getHeaders(): MutableMap<String, String> {
+                                                    val headers = HashMap<String, String>()
+                                                    headers["Authorization"] = "Bearer $token"
+                                                    return headers
+                                                }
+                                            }
+                                            queuePatch.add(requestPatchDemande)
 
                                         }else{
                                             Toast.makeText(applicationContext,"Mauvaise mission",Toast.LENGTH_SHORT).show()
                                         }
+
+                                    }else{
+                                        Toast.makeText(applicationContext,"Pas de jeton trouvé",Toast.LENGTH_SHORT).show()
                                     }
                                 }
-                            //}
+                            }
                             popup.show()
 
                         }
