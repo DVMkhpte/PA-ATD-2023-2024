@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrepot</title>
-    <link rel="stylesheet" href="../CSS/stock.css">
+    <link rel="stylesheet" href="../css/stock.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 <header>
-    <?php session_start() ?>
     <div class="left_partH">
         <img class="img_header" src="../img/logo.png">
         <a class="nav_link_acceuil" href="back_end.php">&lt;&lt;Retour</a>
