@@ -1,52 +1,46 @@
-function redirectModifProfil(){
-    window.location.href = "modif_profil.php";
-}
 
 function modif(numId){
     var input = document.getElementById("input-"+numId);
     input.style.display="block";
 }
 
-window.onload = function affichage_start(){
-    for(var i=1; i<7; i++){
-        var modif_input = document.getElementById("input-"+i);
-        modif_input.style.display="none";
-    }
-}
 
 
 async function validModif() {
 
-    const nom = document.getElementById('input-nom').value;
-    const prenom = document.getElementById('input-prenom').value;
+    const name = document.getElementById('input-1').value;
+    const email = document.getElementById('input-2').value;
+    const codePostal = document.getElementById('input-4').value;
     const ville = document.getElementById('input-ville').value;
     const adresse = document.getElementById('input-adresse').value;
-    const codePostal = document.getElementById('input-codePostal').value;
-    const numPhone = document.getElementById('input-numPhone').value;
-    const eamil = document.getElementById('input-email').value;
+    const numPhone = document.getElementById('input-5').value;
 
     const formData = {
-        nom: nom,
-        prenom: prenom,
-        ville: ville,
-        adresse: adresse,
-        code_postal: codePostal,
-        num_phone: numPhone,
-        email: email
+        "name": name,
+        "email": email,
+        "code_postal": codePostal,
+        "ville": ville,
+        "adresse": adresse,
+        "num_phone": numPhone,
     };
 
     console.log(formData)
 
-    /*
+
     try {
-        const response = await requestApi(formData, "POST", "/activitees/add");
-        if (response.status === 200) {
-            showAlert("Création de l'activitée réussie !");
-        } else {
-            showAlert("Erreur lors de la création de l'utilisateur : " + response.status);
+        const response = await requestApi(formData, "PATCH", "/user/updates");
+        showAlert("Création de l'activitée réussie !");
+
+
+        var roleUser = localStorage.getItem('role')
+        if(roleUser === "benevole"){
+            window.location.href ='../pages/benevole.php'
+        }else if(roleUser === "beneficiaire"){
+            window.location.href ='../pages/beneficiary.php'
         }
+
     } catch (error) {
         showAlert('Erreur lors de la requête à l\'API : ' + error.message);
     }
-    */
+
 }
