@@ -19577,3 +19577,4 @@ Did you mean one of these?
 #65 C:\\Users\\Asus\\OneDrive\\Bureau\\ESGI-COURS\\2e-Année\\S2\\PA\\PA-ATD-2023-2024\\apiBack\\server.php(21): require_once('...')
 #66 {main}
 "} 
+[2024-05-12 19:40:13] local.INFO: API access {"ip":"127.0.0.1","url":"http://localhost:8000/api/user/login","method":"POST","user_agent":"insomnia/8.5.1"} 
