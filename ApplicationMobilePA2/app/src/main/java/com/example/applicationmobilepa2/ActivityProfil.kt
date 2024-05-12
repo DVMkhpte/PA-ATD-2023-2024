@@ -30,7 +30,7 @@ class ActivityProfil : AppCompatActivity() {
         val queue = Volley.newRequestQueue(applicationContext)
         val requestProfil = object : StringRequest(
             Method.GET,
-            "http://10.0.2.2:8000/api/user",
+            "http://autempsdonne.com:8000/api/user",
             Response.Listener { resultat ->
                 var infoProfil = JSONObject(resultat.toString())
 
@@ -70,18 +70,9 @@ class ActivityProfil : AppCompatActivity() {
             finish()
         }
 
-        var finishTask = findViewById<TextView>(R.id.ValideMission)
+        var finishTask = findViewById<TextView>(R.id.logOut)
         finishTask.setOnClickListener{
-            var popupValidMission = AlertDialog.Builder(this)
-            popupValidMission.setTitle("Valider mission")
-            var info = "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
-            popupValidMission.setMessage(info)
-
-            popupValidMission.setNegativeButton("Annuler"){ dialog, wich ->
-                dialog.dismiss()
-            }
-            popupValidMission.setCancelable(false)
-            popupValidMission.show()
+            
         }
 
 

@@ -42,50 +42,53 @@ class ActivityEvenement : AppCompatActivity() {
         val queue = Volley.newRequestQueue(applicationContext)
         val requestEvent = object : StringRequest(
             Method.GET,
-            "http://10.0.2.2:8000/api/user/$id/evenement",
+            "http://autempsdonne.com:8000/api/user/$id/evenement",
             Response.Listener { resultat ->
-                val jsonGlobal = JSONArray(resultat)
+                val cleanResult = resultat.replace("1", "")
+                if (cleanResult.isNotBlank() && cleanResult != "[]") {
+                    val jsonGlobal = JSONArray(cleanResult)
 
-                if (jsonGlobal.length() > 0) {
-                    for (i in 0 until jsonGlobal.length()) {
-                        val br = jsonGlobal.getJSONObject(i)
+                    if (jsonGlobal.length() > 0) {
+                        for (i in 0 until jsonGlobal.length()) {
+                            val br = jsonGlobal.getJSONObject(i)
 
-                        val date_debut = br.getString("date_debut").substring(5)
-                        val date_fin = br.getString("date_fin").substring(5)
-                        val date = "$date_debut - $date_fin, $year"
+                            val date_debut = br.getString("date_debut").substring(5)
+                            val date_fin = br.getString("date_fin").substring(5)
+                            val date = "$date_debut - $date_fin, $year"
 
-                        val ville = br.getString("ville")
-                        val adresse = br.getString("adresse")
-                        val fullAdresse = "$adresse, $ville"
+                            val ville = br.getString("ville")
+                            val adresse = br.getString("adresse")
+                            val fullAdresse = "$adresse, $ville"
 
-                        var evenement:Evenement = Evenement(
-                            br.getInt("id"),
-                            br.getString("nom"),
-                            br.getString("description"),
-                            date,
-                            br.getString("type"),
-                            fullAdresse
-                        )
-                        listEvent.add(evenement)
-                    }
-                    var lv = findViewById<ListView>(R.id.lv_evenement)
-                    var adap = EvenementAdaptater(applicationContext, listEvent)
-                    lv.adapter = adap
-
-                    lv.setOnItemClickListener{adapter,view,position,id ->
-                        var ba = adapter.adapter as EvenementAdaptater
-                        var item = ba.getItem(position) as Evenement
-
-                        var popup = AlertDialog.Builder(this)
-                        popup.setTitle(item.nom)
-                        var info = "${item.date}\n\nDescription : ${item.description}"
-                        popup.setMessage(info)
-
-                        popup.setNegativeButton("ok"){ dialog, wich ->
-                            dialog.dismiss()
+                            var evenement: Evenement = Evenement(
+                                br.getInt("id"),
+                                br.getString("nom"),
+                                br.getString("description"),
+                                date,
+                                br.getString("type"),
+                                fullAdresse
+                            )
+                            listEvent.add(evenement)
                         }
-                        popup.show()
+                        var lv = findViewById<ListView>(R.id.lv_evenement)
+                        var adap = EvenementAdaptater(applicationContext, listEvent)
+                        lv.adapter = adap
 
+                        lv.setOnItemClickListener { adapter, view, position, id ->
+                            var ba = adapter.adapter as EvenementAdaptater
+                            var item = ba.getItem(position) as Evenement
+
+                            var popup = AlertDialog.Builder(this)
+                            popup.setTitle(item.nom)
+                            var info = "${item.date}\n\nDescription : ${item.description}"
+                            popup.setMessage(info)
+
+                            popup.setNegativeButton("ok") { dialog, wich ->
+                                dialog.dismiss()
+                            }
+                            popup.show()
+
+                        }
                     }
                 }
             },

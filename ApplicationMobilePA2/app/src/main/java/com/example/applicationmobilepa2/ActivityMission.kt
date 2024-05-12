@@ -54,79 +54,93 @@ class ActivityMission : AppCompatActivity() {
         val queue = Volley.newRequestQueue(applicationContext)
         val requestMission = object : StringRequest(
             Method.GET,
-            "http://10.0.2.2:8000/api/user/$id/mission",
+            "http://autempsdonne.com:8000/api/user/$id/mission",
             Response.Listener { resultat ->
-                val jsonGlobal = JSONArray(resultat)
+                val cleanResult = resultat.replace("1", "")
+                if (cleanResult.isNotBlank() && cleanResult != "[]") {
+                    val jsonGlobal = JSONArray(cleanResult)
 
-                if (jsonGlobal.length() > 0) {
-                    for (i in 0 until jsonGlobal.length()) {
-                        val br = jsonGlobal.getJSONObject(i)
-                        val date = "${br.getString("date").substring(5)}, $year"
+                    if (jsonGlobal.length() > 0) {
+                        for (i in 0 until jsonGlobal.length()) {
+                            val br = jsonGlobal.getJSONObject(i)
+                            val date = "${br.getString("date").substring(5)}, $year"
 
-                        var mission:Mission = Mission(
-                            br.getInt("id"),
-                            br.getString("type"),
-                            br.getString("demande"),
-                            br.getString("etat"),
-                            br.getString("adresse"),
-                            date,
-                        )
-                        listMission.add(mission)
-                    }
-                    var lv = findViewById<ListView>(R.id.lv_mission)
-                    var adap = MissionAdaptater(applicationContext, listMission)
-                    lv.adapter = adap
-
-                    lv.setOnItemClickListener{adapter,view,position,id ->
-                        var ba = adapter.adapter as MissionAdaptater
-                        var item = ba.getItem(position) as Mission
-
-                        var popup = AlertDialog.Builder(this)
-                        popup.setTitle(item.type)
-                        var info = "${item.date}\n\nDescription : ${item.demande}"
-                        popup.setMessage(info)
-
-                        //--Validation de la mission avec le Jeton----------------------------------
-                        popup.setNegativeButton("Valider mission"){ dialog, wich ->
-                            dialog.dismiss()
-
-                            //--Affichage du msg-------------------------
-                            var popupValidMission = AlertDialog.Builder(this)
-                            popupValidMission.setTitle("Valider la mission  ${item.id}")
-                            var info = "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
-                            popupValidMission.setMessage(info)
-
-                            popupValidMission.setNegativeButton("Annuler"){ dialog, wich ->
-                                dialog.dismiss()
-                            }
-                            popupValidMission.setCancelable(false)
-
-                            val alertDialogMission = popupValidMission.create()
-                            alertDialogMission.setOnShowListener {
-                                //--Code de lecture NFC-------------------------------
-                                //--Code de lecture NFC-------------------------------
-
-                                nfcAdapter = NfcAdapter.getDefaultAdapter(this)
-                                if (nfcAdapter == null) {
-                                    Toast.makeText(this, "Jeton NFC non supporté", Toast.LENGTH_SHORT).show()
-                                    alertDialogMission.dismiss()
-                                }
-
-                                pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
-                                val tagDetected = IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
-                                tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
-                                writingTagFilter = arrayOf(tagDetected)
-                                readFromIntent(intent)
-
-                            }
-
-                            alertDialogMission.show()
+                            var mission: Mission = Mission(
+                                br.getInt("id"),
+                                br.getString("type"),
+                                br.getString("demande"),
+                                br.getString("etat"),
+                                br.getString("adresse"),
+                                date,
+                            )
+                            listMission.add(mission)
                         }
-                        popup.show()
+                        var lv = findViewById<ListView>(R.id.lv_mission)
+                        var adap = MissionAdaptater(applicationContext, listMission)
+                        lv.adapter = adap
 
+                        lv.setOnItemClickListener { adapter, view, position, id ->
+                            var ba = adapter.adapter as MissionAdaptater
+                            var item = ba.getItem(position) as Mission
+
+                            var popup = AlertDialog.Builder(this)
+                            popup.setTitle(item.type)
+                            var info = "${item.date}\n\nDescription : ${item.demande}"
+                            popup.setMessage(info)
+
+                            //--Validation de la mission avec le Jeton----------------------------------
+                            //if(item.etat == "en cours") {
+                                popup.setNegativeButton("Valider mission") { dialog, wich ->
+                                    dialog.dismiss()
+
+                                    //--Affichage du msg-------------------------
+                                    var popupValidMission = AlertDialog.Builder(this)
+                                    popupValidMission.setTitle("Valider la mission  ${item.id}")
+                                    var info =
+                                        "Veillez rapprochez votre telephone du jeton afin de valider votre mission"
+                                    popupValidMission.setMessage(info)
+
+                                    popupValidMission.setNegativeButton("Annuler") { dialog, wich ->
+                                        dialog.dismiss()
+                                    }
+                                    popupValidMission.setCancelable(false)
+
+                                    val alertDialogMission = popupValidMission.create()
+
+                                    //--Code de lecture NFC-------------------------------
+                                    writeModeOn()
+                                    nfcAdapter = NfcAdapter.getDefaultAdapter(this)
+                                    if (nfcAdapter == null) {
+                                        Toast.makeText(
+                                            this,
+                                            "Jeton NFC non supporté",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                        alertDialogMission.dismiss()
+                                    }
+
+                                    pendingIntent = PendingIntent.getActivity(
+                                        this,
+                                        0,
+                                        intent,
+                                        PendingIntent.FLAG_IMMUTABLE
+                                    )
+                                    val tagDetected =
+                                        IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED)
+                                    tagDetected.addCategory(Intent.CATEGORY_DEFAULT)
+                                    writingTagFilter = arrayOf(tagDetected)
+                                    readFromIntent(intent)
+
+
+
+                                    alertDialogMission.show()
+                                }
+                            //}
+                            popup.show()
+
+                        }
                     }
                 }
-
             },
             Response.ErrorListener { error ->
                 Toast.makeText(applicationContext, "Erreur lors de la récupération", Toast.LENGTH_SHORT).show()
@@ -180,6 +194,7 @@ class ActivityMission : AppCompatActivity() {
 
     //--Fonction de lecture NFC-------------------------
     private fun readFromIntent(intent: Intent) {
+        Log.d("etapes1", "check")
         var action = intent.getAction()
         if(NfcAdapter.ACTION_TAG_DISCOVERED.equals(action)
             || NfcAdapter.ACTION_TECH_DISCOVERED.equals(action)
@@ -198,6 +213,7 @@ class ActivityMission : AppCompatActivity() {
     }
 
     private fun buildTagViews(msgs: Array<NdefMessage>?) {
+        Log.d("etapes2", "check")
         if (msgs == null || msgs.isEmpty()) return
 
         var id = ""
@@ -210,6 +226,7 @@ class ActivityMission : AppCompatActivity() {
         } catch (e: UnsupportedEncodingException) {
             Log.e("UnsupportedEncodingException", e.toString())
         }
+        Log.d("id", id)
 
         Toast.makeText(this, id, Toast.LENGTH_LONG).show()
 
@@ -232,12 +249,15 @@ class ActivityMission : AppCompatActivity() {
         writeModeOff()
     }
 
+    /*
     override fun onResume() {
         super.onResume()
         if (nfcAdapter != null && pendingIntent != null && writingTagFilter != null) {
-            writeModeOn()
+
         }
     }
+     */
+
 
     private fun writeModeOn() {
         writeMode = true

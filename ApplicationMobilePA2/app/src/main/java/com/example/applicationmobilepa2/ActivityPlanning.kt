@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import java.time.LocalDate
@@ -92,6 +93,7 @@ class ActivityPlanning : AppCompatActivity() {
         var date = "$year-$monthInt-"
         var selectDate = date.plus("%02d".format(today))
 
+
         lifecycleScope.launch {
             listActivity = requestApiPlanning(id, token, selectDate, "evenement")
             listActivity += requestApiPlanning(id,token,selectDate, "formation")
@@ -104,6 +106,7 @@ class ActivityPlanning : AppCompatActivity() {
 
 
         //--Choix de la date-------------------------------------------------------------
+
         val jours = listOf(jour0, jour1, jour2, jour3, jour4, jour5, jour6)
         jours.forEachIndexed { index, button ->
             button.setOnClickListener {
@@ -157,71 +160,76 @@ class ActivityPlanning : AppCompatActivity() {
     }
 
     private suspend fun requestApiPlanning(idUser: String?, tokenUser: String?, datePlanning: String, type: String): MutableList<Planning> {
+
+        Log.d("return ", "$type $tokenUser $idUser")
         return suspendCoroutine { continuation ->
             val listActivity = mutableListOf<Planning>()
 
             val queue = Volley.newRequestQueue(applicationContext)
             val requestEvent = object : StringRequest(
                 Method.GET,
-                "http://10.0.2.2:8000/api/user/$idUser/$type",
+                "http://autempsdonne.com:8000/api/user/$idUser/$type",
                 Response.Listener { resultat ->
-                    val jsonGlobal = JSONArray(resultat)
+                    val cleanResult = resultat.replace("1", "")
+                    if (cleanResult.isNotBlank() && cleanResult != "[]") {
+                        val jsonGlobal = JSONArray(cleanResult)
 
-                    if (jsonGlobal.length() > 0) {
-                        for (i in 0 until jsonGlobal.length()) {
-                            val br = jsonGlobal.getJSONObject(i)
-                            if(type == "mission"){
+                        if (jsonGlobal.length() > 0) {
+                            for (i in 0 until jsonGlobal.length()) {
+                                val br = jsonGlobal.getJSONObject(i)
+                                if (type == "mission") {
 
-                                var dateActivity = br.getString("date")
-                                dateActivity = dateActivity.substringBefore(" ")
+                                    var dateActivity = br.getString("date")
+                                    dateActivity = dateActivity.substringBefore(" ")
 
-                                if (dateActivity == datePlanning) {
-                                    val date = br.getString("date").substring(5)
-                                    val event = Planning(
-                                        br.getInt("id"),
-                                        type,
-                                        br.getString("type"),
-                                        date,
-                                        br.getString("adresse"),
-                                        br.getString("demande")
-                                    )
-                                    listActivity.add(event)
-                                }
-
-                            }else {
-
-                                var dateActivity = br.getString("date_debut")
-                                dateActivity = dateActivity.substringBefore(" ")
-
-                                if (dateActivity == datePlanning) {
-                                    val debut = br.getString("date_debut").substring(5)
-                                    val fin = br.getString("date_fin").substring(5)
-                                    val date = "$debut \n$fin"
-
-                                    var fullAdresse = ""
-                                    if(type == "evenement"){
-                                        val ville = br.getString("ville")
-                                        val adresse = br.getString("adresse")
-                                        fullAdresse = "$adresse, $ville"
-                                    }else{
-                                        fullAdresse = br.getString("adresse")
+                                    if (dateActivity == datePlanning) {
+                                        val date = br.getString("date").substring(5)
+                                        val event = Planning(
+                                            br.getInt("id"),
+                                            type,
+                                            br.getString("type"),
+                                            date,
+                                            br.getString("adresse"),
+                                            br.getString("demande")
+                                        )
+                                        listActivity.add(event)
                                     }
 
-                                    val event = Planning(
-                                        br.getInt("id"),
-                                        type,
-                                        br.getString("nom"),
-                                        date,
-                                        fullAdresse,
-                                        br.getString("description")
-                                    )
-                                    listActivity.add(event)
-                                }
+                                } else {
 
+                                    var dateActivity = br.getString("date_debut")
+                                    dateActivity = dateActivity.substringBefore(" ")
+
+                                    if (dateActivity == datePlanning) {
+                                        val debut = br.getString("date_debut").substring(5)
+                                        val fin = br.getString("date_fin").substring(5)
+                                        val date = "$debut \n$fin"
+
+                                        var fullAdresse = ""
+                                        if (type == "evenement") {
+                                            val ville = br.getString("ville")
+                                            val adresse = br.getString("adresse")
+                                            fullAdresse = "$adresse, $ville"
+                                        } else {
+                                            fullAdresse = br.getString("adresse")
+                                        }
+
+                                        val event = Planning(
+                                            br.getInt("id"),
+                                            type,
+                                            br.getString("nom"),
+                                            date,
+                                            fullAdresse,
+                                            br.getString("description")
+                                        )
+                                        listActivity.add(event)
+                                    }
+
+                                }
                             }
                         }
+                        continuation.resume(listActivity)
                     }
-                    continuation.resume(listActivity)
                 },
                 Response.ErrorListener { error ->
                     Toast.makeText(applicationContext, "Erreur lors de la récupération", Toast.LENGTH_SHORT).show()

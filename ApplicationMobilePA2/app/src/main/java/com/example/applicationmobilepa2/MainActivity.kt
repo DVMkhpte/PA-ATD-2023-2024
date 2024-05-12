@@ -36,16 +36,18 @@ class MainActivity : AppCompatActivity() {
             */
 
             val formData = JSONObject().apply {
-                put("email", "cocodoudo@gmail.com")
+                put("email", "cocodoudo1@gmail.com")
                 put("password", "Enzo1110&")
             }
 
             val queue = Volley.newRequestQueue(applicationContext)
-            val url = "http://10.0.2.2:8000/api/user/login"
+            val url = "http://autempsdonne.com:8000/api/user/login"
             Log.d("url post", url)
             val jsonObjectRequest = JsonObjectRequest(Request.Method.POST, url, formData,
                 {resultat ->
                     val jsonObject = JSONObject(resultat.toString())
+                    Log.d("retunrn ",jsonObject.toString())
+
                     if (jsonObject.has("token") ){
                         val token = jsonObject.getString("token")
                         val role = jsonObject.getString("role")
