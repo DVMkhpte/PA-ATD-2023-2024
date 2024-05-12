@@ -79,6 +79,10 @@ class ParticipationFController extends Controller
 
             $participation = ParticipeF::findOrFail($id);
 
+            if(!$participation){
+                return response()->json(['message' => 'Participation not found'], 404);
+            }
+
             $formation = Formation::findOrFail($participation->id_formation);
 
             $participation->delete();
@@ -90,12 +94,12 @@ class ParticipationFController extends Controller
             Log::channel('admin_activity')->info("Delete formation participation " . $id . " by " . $adminUser->name);
         return response()->json(['message' => 'Formation participation delete']);
 
-
-
-    } catch (\Exception $e) {
+        } catch (\Exception $e) {
         DB::rollBack();
         return response()->json(['message' => 'An error occurred while deleting the participation.'], 500);
+
+        }
+
     }
 
-}
 }

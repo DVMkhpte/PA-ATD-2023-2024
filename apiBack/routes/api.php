@@ -55,15 +55,15 @@ Route::middleware(['auth:sanctum', 'role:admin'])->group(function () {
 
     Route::get('/participef',[App\Http\Controllers\ParticipationFController::class,'index']);
     Route::get('/participef/{id}',[App\Http\Controllers\ParticipationFController::class,'show']);
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::delete('/participef/{id}',[\App\Http\Controllers\ParticipationFController::class,'destroy']);
 
     Route::get('/participee',[App\Http\Controllers\ParticipationEController::class,'index']);
     Route::get('/participee/{id}',[App\Http\Controllers\ParticipationEController::class,'show']);
-    Route::delete('/participee/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::delete('/participee/{id}',[\App\Http\Controllers\ParticipationEController::class,'destroy']);
 
     Route::get('/participea',[App\Http\Controllers\ParticipationAController::class,'index']);
     Route::get('/participea/{id}',[App\Http\Controllers\ParticipationAController::class,'show']);
-    Route::delete('/participea/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::delete('/participea/{id}',[\App\Http\Controllers\ParticipationAController::class,'destroy']);
 
     Route::delete('/missions/{id}',[App\Http\Controllers\MissionsController::class,'destroy']);
 
@@ -149,8 +149,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::delete('/demande/{id}', [\App\Http\Controllers\DemandeController::class, 'destroy']);
 
-    Route::delete('/participef/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
-    Route::delete('/participee/{id}',[\App\Http\Controllers\ActiviteController::class,'destroy']);
+    Route::delete('/participef/{id}',[\App\Http\Controllers\ParticipationFController::class,'destroy']);
+    Route::delete('/participee/{id}',[\App\Http\Controllers\ParticipationEController::class,'destroy']);
 });
 
 Route::post('/user/create', [\App\Http\Controllers\CreateController::class, 'store']);
