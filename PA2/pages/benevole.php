@@ -78,7 +78,7 @@
 
 </main>
 
-<?php // include("../includes/footer.php") ?>
+
 
 <script src="../javaScript/function_api.js"></script>
 <script src="../javaScript/benevole.js"></script>

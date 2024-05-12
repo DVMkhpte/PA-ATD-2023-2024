@@ -2,7 +2,6 @@
 <html>
   <head>
     <title>Simple Marker</title>
-    <!-- The callback parameter is required, so we use console.debug as a noop -->
     <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCGV0C68ZFvy3tbbeOlD1u8_8DxBg_LVxU&callback=console.debug&libraries=maps,marker&v=beta">
     </script>
     <link rel="stylesheet" href="./maps.css"/>

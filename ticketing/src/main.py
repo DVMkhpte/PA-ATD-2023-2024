@@ -62,20 +62,18 @@ class LoginPage:
         email = self.email_entry.get().strip()
         password = self.password_entry.get().strip()
 
-        # Convertir les données du formulaire en JSON
         form_data = {
             "email": email,
             "password": password
         }
         form_json = json.dumps(form_data)
 
-        # Imprimer les données du formulaire au format JSON
         print("Données du formulaire (JSON) :", form_json)
 
         try:
             response = requests.post("http://api.autempsdonne.com/api/user/login", json=form_data)
 
-            print(response)  # Ajout du print pour afficher la réponse
+            print(response)
 
             if response.status_code == 200:
                 user_data = response.json()

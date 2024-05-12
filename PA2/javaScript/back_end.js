@@ -11,7 +11,6 @@ async function affichageBackEnd(affichage) {
 
     var strBox = ""
 
-    //requestApi(formData, method, link)
     switch (affichage) {
         case 'Bénévoles':
             var data = await requestApiNoBody("GET", "/users/")

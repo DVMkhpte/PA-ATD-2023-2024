@@ -16,7 +16,6 @@ async function newTrajet(origin, arrivee, tabEtapes) {
             console.log(distanceMin)
             for (j = 0; j < tabEtapes.length; j++) {
                 distance = await getDistance(depart, tabEtapes[j])
-                //Pour convertir distance en float
                 distance = parseFloat(distance.match(/[\d,\.]+/)[0].replace(",", "."));
 
                 console.log(depart, i, tabEtapes[j], distance)

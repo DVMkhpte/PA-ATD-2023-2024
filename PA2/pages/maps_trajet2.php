@@ -962,8 +962,6 @@
                   destinations.push(destinationConfig);
                   getCommutesInfo(response, destinationConfig);
                   callbackCounter++;
-                  // Update commutes panel and click event objects after getting
-                  // direction to all destinations.
                   if (callbackCounter === configuration.initialDestinations.length) {
                     destinations.sort(function(a, b) {
                       return a.label < b.label ? -1 : 1;
@@ -1091,8 +1089,6 @@
               .then((response) => {
                 if (!response) return;
                 const currentIndex = activeDestinationIndex;
-                // Remove current active direction before replacing it with updated
-                // routes.
                 removeDirectionsFromMapView(destination);
                 destinations[activeDestinationIndex] = destination;
                 getCommutesInfo(response, destination);
@@ -1162,9 +1158,7 @@
           e.preventDefault();
         });
 
-        // Trap focus in the modal so that tabbing on the last interactive element
-        // focuses on the first, and shift-tabbing on the first interactive element
-        // focuses on the last.
+
 
         const firstInteractiveElement = destinationModalEl.destinationInput;
         const lastInteractiveElements = [
@@ -1281,7 +1275,6 @@
           showModal();
           const travelModeId = destination.travelModeEnum.toLowerCase() + '-mode';
           document.forms['destination-form'][travelModeId].checked = true;
-          // Update the autocomplete widget as if it was user input.
           destinationModalEl.destinationInput.dispatchEvent(new Event('input'));
         });
       }
@@ -1297,7 +1290,6 @@
           case DestinationOperation.ADD:
             hideElement(commutesEl.initialStatePanel);
             showElement(commutesEl.destinationPanel);
-            // fall through
           case DestinationOperation.EDIT:
             buildDestinationCardTemplate(
                 destination, destinationIdx, destinationOperation);
@@ -1498,19 +1490,16 @@
        */
       function handleRouteClick(destination, destinationIdx) {
         if (activeDestinationIndex !== undefined) {
-          // Set currently active stroke to inactive
           destinations[activeDestinationIndex].polylines.innerStroke.setOptions(
               {strokeColor: STROKE_COLORS.inactive.innerStroke, zIndex: 2});
           destinations[activeDestinationIndex].polylines.outerStroke.setOptions(
               {strokeColor: STROKE_COLORS.inactive.outerStroke, zIndex: 1});
 
-          // Set current active marker to grey
           destinations[activeDestinationIndex].marker.setIcon(
               destinationMarkerIcon);
           destinations[activeDestinationIndex].marker.label.color =
               MARKER_ICON_COLORS.inactive.label;
 
-          // Remove styling of current active destination.
           const activeDestinationEl = destinationPanelEl.getActiveDestination();
           if (activeDestinationEl) {
             activeDestinationEl.classList.remove('active');
@@ -1520,14 +1509,11 @@
         activeDestinationIndex = destinationIdx;
 
         setTravelModeLayer(destination.travelModeEnum);
-        // Add active class
         const newDestinationEl = destinationPanelEl.list.querySelectorAll(
             '.destination')[destinationIdx];
         newDestinationEl.classList.add('active');
-        // Scroll into view
         newDestinationEl.scrollIntoView({behavior: 'smooth', block: 'center'});
 
-        // Make line active
         destination.polylines.innerStroke.setOptions(
             {strokeColor: STROKE_COLORS.active.innerStroke, zIndex: 101});
         destination.polylines.outerStroke.setOptions(

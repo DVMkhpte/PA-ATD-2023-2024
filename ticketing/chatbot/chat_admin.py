@@ -9,21 +9,17 @@ class ChatAdminGUI:
         self.root.geometry("500x400")
         self.root.configure(bg="#f0f0f0")
 
-        # Connexion à la base de données
         self.conn = sqlite3.connect("C:/Users/Asus/OneDrive/Bureau/ESGI-COURS/2e-Année/S2/PA/PA-ATD-2023-2024/ticketing/messages.db")
         self.c = self.conn.cursor()
         self.create_table()
 
-        # Zone de messages
         self.messages = tk.Text(self.root, wrap='word', height=15, bg="#FFFFFF", fg="#333333", font=("Arial", 12), state='disabled')
         self.messages.pack(fill="both", expand=True, padx=10, pady=10)
 
-        # Entrée utilisateur
         self.user_entry = ttk.Entry(self.root, width=50)
         self.user_entry.pack(side="left", fill="both", expand=True, padx=(10, 5), pady=(0, 10))
         self.user_entry.bind("<Return>", self.send_message)
 
-        # Bouton d'envoi
         self.send_button = ttk.Button(self.root, text="Send", command=self.send_message, style="Send.TButton")
         self.send_button.pack(side="right", padx=(0, 10), pady=(0, 10))
 
@@ -46,7 +42,7 @@ class ChatAdminGUI:
 
     def send_message(self, event=None):
         admin_message = self.user_entry.get()
-        if admin_message.strip():  # Vérifier si le message n'est pas vide
+        if admin_message.strip():
             self.user_entry.delete(0, tk.END)
             self.display_message("Admin: " + admin_message)
             self.save_message("Admin", admin_message)

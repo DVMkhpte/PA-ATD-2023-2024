@@ -7,11 +7,8 @@
 </head>
 <body>
 <h1>Générateur de QR Code</h1>
-<!-- Bouton pour générer le QR code -->
 <button id="generateQR" onclick="qrCode()">Générer QR Code</button>
-<!-- Conteneur pour afficher le QR code -->
 <div id="qrCodeContainer"></div>
-<!-- Lien pour télécharger le QR code -->
 <a href="#" id="downloadQR" download="product_qr_code.png">Télécharger QR Code</a>
 
 <script>
@@ -28,25 +25,20 @@
     }
 
     async function generateQrCode(productData) {
-        // Fonction pour générer le QR code
         var qr = new QRCode(document.getElementById("qrCodeContainer"), {
             text: formatProductData(productData),
             width: 200,
             height: 200,
             colorDark: "#000000",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.L // Niveau de correction d'erreur L
+            correctLevel: QRCode.CorrectLevel.L
         });
 
-        // Téléchargement du QR code lorsque le bouton est cliqué
         document.getElementById("downloadQR").addEventListener("click", function () {
-            // Récupération de l'image du QR code
             var qrCodeImage = document.querySelector("#qrCodeContainer img");
-            // Création d'un élément de lien pour télécharger l'image
             var link = document.createElement('a');
             link.download = "product_qr_code.png";
             link.href = qrCodeImage.src;
-            // Simulation d'un clic sur le lien pour déclencher le téléchargement
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

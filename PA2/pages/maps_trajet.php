@@ -1,19 +1,11 @@
 <!DOCTYPE html>
-<!--
- @license
- Copyright 2019 Google LLC. All Rights Reserved.
- SPDX-License-Identifier: Apache-2.0
--->
+
 <html>
   <head>
     <title>Displaying Text Directions With setPanel()</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script>
-      /**
-       * @license
-       * Copyright 2019 Google LLC. All Rights Reserved.
-       * SPDX-License-Identifier: Apache-2.0
-       */
+
       function initMap() {
         const directionsRenderer = new google.maps.DirectionsRenderer();
         const directionsService = new google.maps.DirectionsService();
@@ -64,57 +56,34 @@
           );
       }
 
-// Fonction pour ajouter une étape
 function addStop() {
   const address = document.getElementById("stop-address").value;
   const mode = document.getElementById("stop-mode").value;
 
-  // Stocker les informations de l'étape
-  // ... (code à implémenter)
 
-  // Afficher l'étape dans la liste
   const listItem = document.createElement("li");
   listItem.textContent = address + " (" + mode + ")";
   const removeButton = document.createElement("button");
   removeButton.textContent = "X";
   removeButton.addEventListener("click", () => {
-    // Supprimer l'étape
-    // ... (code à implémenter)
   });
   listItem.appendChild(removeButton);
   document.getElementById("stops").appendChild(listItem);
 
-  // Recalculer l'itinéraire
   calculateRouteWithStops();
 }
 
 document.getElementById("add-stop").addEventListener("click", addStop);
 
-// Fonction pour recalculer l'itinéraire avec les étapes multiples
 function calculateRouteWithStops() {
-  // Obtenir les informations de départ et d'arrivée
-  // ... (code à implémenter)
 
-  // Obtenir les informations des étapes
-  // ... (code à implémenter)
-
-  // Utiliser l'API Google Maps pour calculer l'itinéraire
-  // ... (code à implémenter)
-
-  // Afficher l'itinéraire sur la carte
-  // ... (code à implémenter)
 }
 
 
       window.initMap = initMap;
     </script>
     <style>
-      /**
-       * @license
-       * Copyright 2019 Google LLC. All Rights Reserved.
-       * SPDX-License-Identifier: Apache-2.0
-       */
-      /* Optional: Makes the sample page fill the window. */
+
       html,
       body {
         height: 100%;

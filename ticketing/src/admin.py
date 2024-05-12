@@ -73,7 +73,6 @@ class AdminTicketingApp:
         self.logout_button = tk.Button(self.main_frame, text="Déconnexion", command=self.logout, bg="#f44336", fg="white")
         self.logout_button.pack(pady=10)
 
-        # Lier la fonction handle_ticket_double_click au double clic sur un élément de la liste
         self.results_listbox.bind("<Double-1>", self.handle_ticket_double_click)
 
     def load_tickets(self):
@@ -116,7 +115,6 @@ class AdminTicketingApp:
         subprocess.Popen(["python", "../chatbot/chat_admin.py"])
 
     def handle_ticket_double_click(self, event):
-        # Obtenir l'index de l'élément sélectionné dans la liste
         index = self.results_listbox.curselection()
         if index:
             index = index[0]

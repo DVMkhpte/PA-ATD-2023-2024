@@ -51,10 +51,8 @@
 <script>
     async function getDistance(origin, destination) {
         return new Promise((resolve, reject) => {
-            // Initialisation du service de la matrice de distances
             var distanceMatrixService = new google.maps.DistanceMatrixService();
 
-            // Paramètres de la requête
             var request = {
                 origins: [origin],
                 destinations: [destination],
@@ -66,11 +64,10 @@
 
             distanceMatrixService.getDistanceMatrix(request, function (response, status) {
                 if (status == 'OK') {
-                    // Récupérer la distance
                     var distance = response.rows[0].elements[0].distance.text;
-                    resolve(distance); // Résoudre la promesse avec la distance
+                    resolve(distance);
                 } else {
-                    reject('Erreur:' + status); // Rejeter la promesse avec le statut d'erreur
+                    reject('Erreur:' + status);
                 }
             });
         });
@@ -88,28 +85,23 @@
     }
 
     async function generateQrCode(productData, idEntrepot) {
-        // Fonction pour générer le QR code
         var qr = new QRCode(document.getElementById("qrCodeContainer"), {
             text: formatProductData(productData),
             width: 200,
             height: 200,
             colorDark: "#000000",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.L // Niveau de correction d'erreur L
+            correctLevel: QRCode.CorrectLevel.L
         });
 
         var qrCodeLink = document.getElementById("downloadQR")
         qrCodeLink.style.display = "flex";
 
-        // Téléchargement du QR code lorsque le bouton est cliqué
         document.getElementById("downloadQR").addEventListener("click", function () {
-            // Récupération de l'image du QR code
             var qrCodeImage = document.querySelector("#qrCodeContainer img");
-            // Création d'un élément de lien pour télécharger l'image
             var link = document.createElement('a');
             link.download = "product_qr_code.png";
             link.href = qrCodeImage.src;
-            // Simulation d'un clic sur le lien pour déclencher le téléchargement
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);

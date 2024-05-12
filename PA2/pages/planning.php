@@ -9,9 +9,7 @@
     <div id="planningContainer"></div>
     <script src="../javaScript/planningo.js" type="module"></script>
     <script>
-        // Attendre que la page soit chargée
         window.onload = function() {
-            // Appelle la fonction planning et insère le contenu dans le conteneur planningContainer
             const { FullCalendar, dayGridPlugin, timeGridPlugin, interactionPlugin, bootstrap, events } = planning();
             const calendarEl = document.getElementById('planningContainer');
             new FullCalendar(calendarEl, {

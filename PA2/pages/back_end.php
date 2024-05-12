@@ -91,7 +91,7 @@
    
 </main>      
 
-<?php  //include("../includes/footer.php") ?>
+
 <script type="text/javascript">
     console.log(localStorage.getItem('token'))
 
