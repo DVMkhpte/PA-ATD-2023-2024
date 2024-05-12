@@ -135,11 +135,24 @@ button{
     border: none;
     border-radius: 10px;
 
-    height: 15%;
+    height: 30px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-
-
 }
+
+
+.profil_option{
+    width: 100%;
+}
+
+.modif, .deco, .extract, .aide{
+    width: 40%;
+    font-size: 15px;
+}
+
+.benevole {
+    font-size: 15px;
+}
+
 
 .nav_profil button:hover{
     cursor: pointer;
@@ -151,34 +164,12 @@ button{
     flex-direction: row;
 }
 
-.nav_profil .modif{
-    margin-bottom: 5%;
-    width: 50%;
-}
-
-.aide_profil button{
-    height: 80%;
-    font-size: 80%;
-
-}
-
 .a_button{
     color: white;
     text-decoration: none;
 }
 
-.aide{
-    width: 25%;
-}
 
-.benevole{
-    width: 75%;
-}
-
-.nav_profil .modif, .nav_profil .aide{
-    margin-bottom: 5%;
-    width: 50%;
-}
 
 #container_2{
     width: 100%;
@@ -366,7 +357,7 @@ select, input{
 
 .form_demande{
     width: 100%;
-    overflow: scroll; 
+    overflow: scroll;
     max-height: 60vh;
 }
 

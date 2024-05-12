@@ -45,11 +45,15 @@
         </div>
 
         <div class="nav_profil">
-            <button class="modif" onclick="modifProfil()">Modifier</button>
+            <div class="profil_option">
+                <button class="modif" onclick="updateProfil()">Modifier</button>
+                <button class="deco" onclick="deconexion()">Deconnexion</button>
+                <button class="extract" onclick="extractionPdf()">Extraction profil</button>
+                <button class="aide" onclick="aide()">Aide</button>
+            </div>
             <button class="voir" onclick="affichageBeneficiaire('Mes demande')">Mes demande</button>
             <button class="voir" onclick="affichageBeneficiaire('Mes Activité')">Mes activité</button>
             <div class="aide_profil">
-                <button class="aide" onclick="">Aides ?</button>
                 <button class="benevole" onclick=""><a href="contact.php" class="a_button">Devenir bénévole</a></button>
             </div>
         </div>

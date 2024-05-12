@@ -124,7 +124,7 @@ button{
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    
+
     padding: 1%;
 }
 
@@ -144,7 +144,7 @@ button{
     width: 100%;
 }
 
-.modif, .deco, .extract{
+.modif, .deco, .extract, .aide{
     width: 40%;
     font-size: 15px;
 }
