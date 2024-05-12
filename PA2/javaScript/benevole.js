@@ -91,10 +91,10 @@ async function deconexion(){
 async function extractionPdf(){
     var textPdf = document.getElementById("info_profil_general")
 
-    var pdfName = 'myInfo.pdf'
+
     var opt = {
         margin:  10,
-        filename:     pdfName,
+        filename:     'myInfo.pdf',
         image:        { type: 'jpeg', quality: 1 },
         html2canvas:  { scale: 2 },
         jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
@@ -107,7 +107,7 @@ async function updateProfil(){
 }
 
 async function aide(){
-    window.location.href ="../pages/ticketingForm.php"
+    window.location.href ="../pages/ticketForm.php"
 }
 
 

@@ -48,7 +48,6 @@
                 <div id="ville_profil" class="info_profil">Ville</div>
                 <div id="adresse_profil" class="info_profil">adresse</div>
             </div>
-
         </div>
 
         <div class="nav_profil">
@@ -85,8 +84,7 @@
 
     console.log(localStorage.getItem("token"))
     async function loadProfil() {
-        const idUser = localStorage.getItem("id")
-        var data = await requestApiNoBody("GET", "/users/" + idUser)
+        var data = await requestApiNoBody("GET", "/user")
 
         const profil = document.getElementById('info_profil_general');
         profil.innerHTML =

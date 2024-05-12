@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page Bénéficiaire</title>
     <link rel="stylesheet" href="../css/beneficiaire.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 
 <body>
@@ -41,7 +42,19 @@
 
     <div class="profil_part">
         <div id="info_profil_general">
-
+            <h1>Profil :</h1>
+            <div class="info_profil_1">
+                <div id="nom_profil" class="info_profil">Nom</div>
+                <div id="prenom_profil" class="info_profil">Prenom</div>
+            </div>
+            <div class="info_profil_2">
+                <div id="email_profil" class="info_profil">Email</div>
+                <div id="mdp_profil" class="info_profil">Mot de passe</div>
+            </div>
+            <div class="info_profil_3">
+                <div id="ville_profil" class="info_profil">Ville</div>
+                <div id="adresse_profil" class="info_profil">adresse</div>
+            </div>
         </div>
 
         <div class="nav_profil">
@@ -80,8 +93,7 @@
     });
 
     async function loadProfil() {
-        const idUser = localStorage.getItem("id")
-        var data = await requestApiNoBody("GET", "/users/" + idUser)
+        var data = await requestApiNoBody("GET", "/user")
 
         const profil = document.getElementById('info_profil_general');
         profil.innerHTML =
@@ -99,6 +111,7 @@
     }
     loadProfil()
     affichageBeneficiaire('Mes demande')
+
 
 </script>
 

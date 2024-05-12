@@ -56,3 +56,39 @@ async function affichageBeneficiaire(affichage) {
     
     
 }
+
+
+async function extractionPdf(){
+    var data = await requestApiNoBody("GET", "/user")
+
+    var textPdf =
+        "<h1>Profil :</h1>" +
+        "<div class=\"info_profil_1\">" +
+        "    <div id=\"nom_profil\" class=\"info_profil\">" + data.name + "</div>" +
+        "   <div id=\"num_profil\" class=\"info_profil\">" + data.num_telephone + "</div>" +
+        "</div>" +
+        "<div class=\"info_profil_2\">" +
+        "   <div id=\"email_profil\" class=\"info_profil\">" + data.email + "</div>" +
+        "</div>" +
+        "<div class=\"info_profil_3\">" +
+        "    <div id=\"ville_profil\" class=\"info_profil\">" + data.adresse + ", " + data.code_postal + " " + data.ville + "</div>" +
+        "</div>"
+
+    var opt = {
+        margin:  10,
+        filename:     'myInfo.pdf',
+        image:        { type: 'jpeg', quality: 1 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+    };
+    html2pdf().set(opt).from(textPdf).save()
+}
+
+
+async function updateProfil(){
+    window.location.href ="../pages/modif_profil.php"
+}
+
+async function aide(){
+    window.location.href ="../pages/ticketForm.php"
+}
