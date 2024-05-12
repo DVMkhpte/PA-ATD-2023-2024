@@ -18,18 +18,18 @@
         <div class="links">
           <div class="links-column">
             <h2 data-translate="slogan">Slogan de l'Association</h2>
-            <a href="login.php" data-translate="login-footer">Se connecter</a>
-            <a href="createAccount.php" data-translate="signup-footer">Creer un compte</a>
-            <a href="about_donation.php" data-translate="don-footer">Faire un don</a>
-            <a href="about.php" data-translate="about-footer">Qui somme nous</a>
+            <a href="login" data-translate="login-footer">Se connecter</a>
+            <a href="creer-un-compte" data-translate="signup-footer">Creer un compte</a>
+            <a href="pourquoi-faire-une-donation" data-translate="don-footer">Faire un don</a>
+            <a href="a-propos" data-translate="about-footer">Qui somme nous</a>
         </div>
       </section>
       <section class="bottom">
         <p class="copyright" data-translate="copyright-footer">© 2024 Au Temps Donné. Tous droits réservés</p>
         <div class="legal">
-          <a href="contact.php" data-translate="contact-footer">Contact</a>
-          <a href="legal_mention.php" data-translate="mentions-footer">Mention légales</a>
-          <a href="policy.php" data-translate="datas-footer">Politique de données</a>
+          <a href="contact" data-translate="contact-footer">Contact</a>
+          <a href="mention-legal" data-translate="mentions-footer">Mention légales</a>
+          <a href="potitique-de-confidentialite" data-translate="datas-footer">Politique de données</a>
         </div>
       </section>
     </footer>

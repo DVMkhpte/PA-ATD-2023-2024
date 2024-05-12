@@ -71,8 +71,8 @@
 
 
                     <div class="dropdown-menu">
-                        <button><a href="login.php" data-translate="login2">Se connecter</a></button>
-                        <button><a href="createAccount.php" data-translate="create_account2">Creer un compte</a></button>
+                        <button><a href="login" data-translate="login2">Se connecter</a></button>
+                        <button><a href="creer-un-compte" data-translate="create_account2">Creer un compte</a></button>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -81,9 +81,9 @@
                         <img src="../includes/header/headerNoConnexion/chevron.svg" />
                     </button>
                     <div class="dropdown-menu">
-                        <button><a href="donation.php" data-translate="make_donation2">Faire un don</a></button>
-                        <button><a href="about_donation.php" data-translate="why_help2">Pourquoi nous aider ?</a></button>
-                        <button><a href="about.php" data-translate="who_we_are2">Qui sommes-nous ?</a></button>
+                        <button><a href="donation" data-translate="make_donation2">Faire un don</a></button>
+                        <button><a href="pourquoi-faire-une-donation" data-translate="why_help2">Pourquoi nous aider ?</a></button>
+                        <button><a href="a-propos" data-translate="who_we_are2">Qui sommes-nous ?</a></button>
                     </div>
                 </div>
                 <div class="dropdown">
@@ -92,10 +92,10 @@
                         <img src="../includes/header/headerNoConnexion/chevron.svg" />
                     </button>
                     <div class="dropdown-menu">
-                        <button><a href="contact.php" data-translate="contact_us2">Nous contacter</a></button>
-                        <button><a href="legal_mention.php" data-translate="legal_mentions2">Mention légales</a></button>
-                        <button><a href="policy.php" data-translate="data_policy2">Politique de données</a></button>
-                        <button><a href="ticketForm.php" data-translate="data_policy2">Création de Tickets</a></button>
+                        <button><a href="contact" data-translate="contact_us2">Nous contacter</a></button>
+                        <button><a href="mention-legal" data-translate="legal_mentions2">Mention légales</a></button>
+                        <button><a href="potitique-de-confidentialite" data-translate="data_policy2">Politique de données</a></button>
+                        <button><a href="faire-un-ticket$" data-translate="data_policy2">Création de Tickets</a></button>
                     </div>
                 </div>
 
