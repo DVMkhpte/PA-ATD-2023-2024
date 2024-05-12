@@ -67,6 +67,10 @@
             <img src="../img/evenement.png" />
             <span style="animation-delay: 0.3s">Evenement</span>
           </button>
+            <button type="button" onclick="affichageBackEnd('Commercant')">
+                <img src="../img/commercant.png"/>
+                <span style="animation-delay: 0.3s">Commerçant</span>
+            </button>
           <button type="button" onclick="affichageBackEnd('Stock')">
             <img src="../img/stock.png"/>
           <span style="animation-delay: 0.3s">Stock</span>
@@ -110,6 +114,7 @@
 <script src="../javaScript/back_end_function/demande.js" ></script>
 <script src="../javaScript/back_end_function/mission.js" ></script>
 <script src="../javaScript/back_end_function/evenement.js" ></script>
+<script src="../javaScript/back_end_function/commercant.js" ></script>
 <script>
     affichageBackEnd('Formations')
 </script>

@@ -164,7 +164,7 @@ async function suppFormation(idF){
     for(i=0; i<dataParticipation; i++){
         idP = dataParticipation[i].id_formation
         if(idP === idF){
-            //const responseSuppP = await requestApiNoBody("DELETE", "/participef/"+idP);
+            const responseSuppP = await requestApiNoBody("DELETE", "/participef/"+idP);
         }
     }
     const responseSuppF = await requestApiNoBody("DELETE", "/formations/"+idF);

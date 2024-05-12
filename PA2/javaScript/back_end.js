@@ -56,6 +56,11 @@ async function affichageBackEnd(affichage) {
             strBox = await affichageEvenement(data);
             break;
 
+        case "Commercant":
+            var data = await requestApiNoBody("GET", "/commercants/");
+            strBox = await affichageCommercant(data);
+            break;
+
         case "Stock" :
             window.location.href ="../pages/stock.php"
             break;
