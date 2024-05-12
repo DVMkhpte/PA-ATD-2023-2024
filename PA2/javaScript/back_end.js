@@ -130,7 +130,5 @@ async function  getAllUserNameByRole(role){
 }
 
 
-async function supp(link, id){
 
-}
 

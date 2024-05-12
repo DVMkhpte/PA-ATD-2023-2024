@@ -179,6 +179,23 @@ async function validModifE(id){
 }
 
 
+
+
+async function suppEvent(idE){
+    var dataParticipation = await requestApiNoBody("GET", "/participee")
+    var idP = 0
+    for(i=0; i<dataParticipation.length; i++){
+        idP = dataParticipation[i].id_evenement
+        if(idP === idE){
+            const responseSuppP = await requestApiNoBody("DELETE", "/participee/"+idP);
+        }
+    }
+    const responseSuppA = await requestApiNoBody("DELETE", "/evenements/"+idE);
+    showAlert("Evenement Supprimé!");
+    affichageBackEnd("Evenement")
+}
+
+
 async function voirParticipantE(idA){
     var data = await requestApiNoBody("GET", "/participee/");
 

@@ -6,7 +6,8 @@ async function getInfoD(data) {
         "           <div class=\"description1_demande\">\n" +
         "               <div class=\"type\">Type : " + data.type + "</div>\n" +
         "               <div class=\"fait_par\">De : " + data.user.name + "</div>\n" +
-        "               <div class=\"date\">Pour le :  " + data.created_at + "</div>\n" +
+        "               <div class=\"date\">Pour le :  " + data.date + "</div>\n" +
+        "               <div class=\"date\">Au :  " + data.adresse + "</div>\n" +
         "           </div>\n" +
         "           <div class=\"description2_demande\">\n" +
         "               <div>" + data.demande + "</div>\n" +
