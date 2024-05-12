@@ -6,7 +6,7 @@ $erreur = $_GET['erreur'];
 
 <div id="main">
     <div class="fof">
-        <h1>Error <?php echo $erreur ?></h1>
+        <h1>Error <?php echo $erreur ?> </h1>
         <h2><a href="pages/index.php">---->    Back to home    <----</a></h2>
     </div>
 </div>
