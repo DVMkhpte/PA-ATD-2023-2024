@@ -6,6 +6,17 @@
     <title>Page Bénéficiaire</title>
     <link rel="stylesheet" href="../css/beneficiaire.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(function(OneSignal) {
+            OneSignal.init({
+                appId: "1dfaa878-05eb-4597-acb4-ae4366122434",
+            });
+        });
+    </script>
+
 </head>
 
 <body>
