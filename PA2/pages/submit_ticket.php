@@ -1,46 +1,44 @@
 <?php
-// Activer l'affichage des erreurs
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Chemin vers la base de données SQLite
-$db_file = '../../ticketing/db/ticketing.db';
+$host = '54.36.209.115';
+$port = '3306'; // Spécifiez le port séparément
+$dbname = 'tickets';
+$username = 'root';
+$password = 'exemplepwd';
 
-// Connexion à la base de données SQLite
-$conn = new sqlite3($db_file);
+try {
+    $conn = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $username, $password);
 
-// Vérification de la connexion
-if (!$conn) {
-    die("Erreur de connexion à la base de données: " . $conn->lastErrorMsg());
-}
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// Vérifier si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupérer les valeurs du formulaire
-    $name = $_POST['name'];
-    $priority = $_POST['priority'];
-    $description = $_POST['description'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    // Requête SQL d'insertion
-    $sql = "INSERT INTO tickets (client, priority, problem, status) VALUES (:client, :priority, :problem, 'A traiter')";
+        $name = $_POST['name'];
+        $priority = $_POST['priority'];
+        $description = $_POST['description'];
 
-    // Préparer la requête
-    $stmt = $conn->prepare($sql);
+        $sql = "INSERT INTO tickets (client, priority, problem, status) VALUES (:client, :priority, :problem, 'A traiter')";
 
-    // Liaison des paramètres
-    $stmt->bindParam(':client', $name);
-    $stmt->bindParam(':priority', $priority);
-    $stmt->bindParam(':problem', $description);
+        $stmt = $conn->prepare($sql);
 
-    // Exécution de la requête
-    if ($stmt->execute()) {
-        echo "Ticket créé avec succès.";
-    } else {
-        echo "Erreur lors de la création du ticket: " . $conn->lastErrorMsg();
+        $stmt->bindParam(':client', $name);
+        $stmt->bindParam(':priority', $priority);
+        $stmt->bindParam(':problem', $description);
+
+        if ($stmt->execute()) {
+            echo "Ticket créé avec succès.";
+        } else {
+            echo "Erreur lors de la création du ticket.";
+        }
+
+        $conn = null;
     }
-
-    // Fermer la déclaration et la connexion
-    $stmt->close();
-    $conn->close();
+} catch(PDOException $e) {
+    echo "Erreur de connexion à la base de données: " . $e->getMessage();
 }
+
+
 ?>
