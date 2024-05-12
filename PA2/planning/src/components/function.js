@@ -32,7 +32,7 @@ async function requestApiNoBody(method, link) {
             headers['Authorization'] = 'Bearer ' + token;
         }
 
-        const response = await fetch('http://localhost:8000/api' + link, {
+        const response = await fetch('http://autempsdonne.com:8000/api' + link, {
             redirect: 'manual',
             method: method,
             headers: headers,
